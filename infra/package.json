@@ -11,7 +11,7 @@
     "cdk": "cdk"
   },
   "devDependencies": {
-    "@elevator-robot/cdk-s3-site": "^1.0.12",
+    "@elevator-robot/cdk-s3-site": "^1.0.15",
     "@types/jest": "^29.2.3",
     "@types/node": "18.11.9",
     "aws-cdk": "2.54.0",
