@@ -1,15 +1,19 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { HostedSite } from '@elevator-robot/cdk-s3-site';
-// import { HostedSite } from '../../../cdk-s3-site/src/index'
+
+interface InfraStackProps extends cdk.StackProps {
+  domainName: string;
+  webAssetPath: string;
+}
 
 export class InfraStack extends cdk.Stack {
-  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+  constructor(scope: Construct, id: string, props: InfraStackProps) {
     super(scope, id, props);
 
     new HostedSite(this, 'DotCom', {
-      domainName: 'elevator-robot.com',
-      webAssetPath: '../out',
+      domainName: props.domainName,
+      webAssetPath: props.webAssetPath,
     });
 
   }

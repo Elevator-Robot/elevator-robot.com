@@ -9,5 +9,6 @@ new InfraStack(app, 'DotCom', {
     account: '764114738171',
     region: 'us-east-1'
   },
-
+  domainName: 'elevator-robot.com',
+  webAssetPath: '../out'
 });
