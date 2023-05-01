@@ -1,5 +1,6 @@
 import Head from "next/head";
 import LoginWindow from './componants/LoginWindow'
+import Chat from './componants/Chat'
 
 export default function Home() {
   return (
@@ -11,7 +12,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {/* create a login window in the center of the screen */}
-      <LoginWindow />
+      <Chat />
       </>
   );
 }
