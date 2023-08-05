@@ -1,30 +1,44 @@
 {
-  "name": "elevator-robot.com",
-  "version": "0.1.0",
+  "name": "merdok",
+  "version": "1.0.0",
   "private": true,
+  "description": "merdok",
+  "author": "billy",
+  "keywords": [
+    "gatsby"
+  ],
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "static": "next export"
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@types/node": "18.11.18",
-    "@types/react": "18.0.26",
-    "@types/react-dom": "18.0.10",
-    "eslint": "8.32.0",
-    "eslint-config-next": "13.1.2",
-    "next": "13.1.2",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "typescript": "4.9.4"
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "gatsby": "^5.9.1",
+    "gatsby-cli": "^5.9.0",
+    "gatsby-plugin-emotion": "^8.9.0",
+    "gatsby-plugin-image": "^3.9.0",
+    "gatsby-plugin-sharp": "^5.9.0",
+    "gatsby-source-contentful": "^8.9.1",
+    "gatsby-transformer-sharp": "^5.9.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "serverless-finch": "^4.0.3"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.13",
-    "postcss": "^8.4.21",
-    "prettier": "^2.8.3",
-    "prettier-plugin-tailwindcss": "^0.2.1",
-    "tailwindcss": "^3.2.4"
+    "@types/node": "^18.16.5",
+    "@types/react": "^18.2.5",
+    "@types/react-dom": "^18.2.4",
+    "autoprefixer": "^10.4.14",
+    "gatsby-plugin-postcss": "^6.9.0",
+    "postcss": "^8.4.23",
+    "serverless-certificate-creator": "^1.6.0",
+    "serverless-s3-sync": "^3.1.0",
+    "tailwindcss": "^3.3.2",
+    "typescript": "^5.0.4"
   }
 }
