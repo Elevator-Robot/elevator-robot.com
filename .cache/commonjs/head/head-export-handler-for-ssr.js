@@ -31,6 +31,7 @@ const {
 const {
   parse
 } = require(`node-html-parser`);
+const styleToOjbect = require(`style-to-object`);
 function applyHtmlAndBodyAttributesSSR(htmlAndBodyAttributes, {
   setHtmlAttributes,
   setBodyAttributes
@@ -60,10 +61,23 @@ function getValidHeadNodesAndAttributesSSR(rootNode, htmlAndBodyAttributes = {
     if (!isElementType(node)) continue;
     if (isValidNodeName(rawTagName)) {
       if (rawTagName === `html` || rawTagName === `body`) {
+        const {
+          style,
+          ...nonStyleAttributes
+        } = node.attributes;
         htmlAndBodyAttributes[rawTagName] = {
           ...htmlAndBodyAttributes[rawTagName],
-          ...node.attributes
+          ...nonStyleAttributes
         };
+
+        // Unfortunately renderToString converts inline styles to a string, so we have to convert them back to an object
+        if (style) {
+          var _htmlAndBodyAttribute;
+          htmlAndBodyAttributes[rawTagName].style = {
+            ...((_htmlAndBodyAttribute = htmlAndBodyAttributes[rawTagName]) === null || _htmlAndBodyAttribute === void 0 ? void 0 : _htmlAndBodyAttribute.style),
+            ...styleToOjbect(style)
+          };
+        }
       } else {
         let element;
         const attributes = {

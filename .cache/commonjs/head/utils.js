@@ -127,13 +127,24 @@ function getValidHeadNodesAndAttributes(rootNode, htmlAndBodyAttributes = {
     const id = (_node$attributes = node.attributes) === null || _node$attributes === void 0 ? void 0 : (_node$attributes$id = _node$attributes.id) === null || _node$attributes$id === void 0 ? void 0 : _node$attributes$id.value;
     if (!isElementType(node)) continue;
     if (isValidNodeName(nodeName)) {
-      // <html> and <body> tags are treated differently, in that we don't  render them, we only  extract the attributes and apply them separetely
+      // <html> and <body> tags are treated differently, in that we don't render them, we only extract the attributes and apply them separetely
       if (nodeName === `html` || nodeName === `body`) {
         for (const attribute of node.attributes) {
+          const isStyleAttribute = attribute.name === `style`;
+
+          // Merge attributes for same nodeName from previous loop iteration
           htmlAndBodyAttributes[nodeName] = {
-            ...htmlAndBodyAttributes[nodeName],
-            [attribute.name]: attribute.value
+            ...htmlAndBodyAttributes[nodeName]
           };
+          if (!isStyleAttribute) {
+            htmlAndBodyAttributes[nodeName][attribute.name] = attribute.value;
+          }
+
+          // If there is already a style attribute, we need to merge them as otherwise the last one will "win"
+          if (isStyleAttribute) {
+            var _htmlAndBodyAttribute;
+            htmlAndBodyAttributes[nodeName].style = `${(_htmlAndBodyAttribute = htmlAndBodyAttributes[nodeName]) !== null && _htmlAndBodyAttribute !== void 0 && _htmlAndBodyAttribute.style ? htmlAndBodyAttributes[nodeName].style : ``}${attribute.value} `;
+          }
         }
       } else {
         let clonedNode = node.cloneNode(true);

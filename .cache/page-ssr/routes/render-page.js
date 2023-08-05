@@ -8,7 +8,7 @@
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
-  "tZ": () => (/* binding */ jsx)
+  tZ: () => (/* binding */ jsx)
 });
 
 // UNUSED EXPORTS: CacheProvider, ClassNames, Global, ThemeContext, ThemeProvider, __unsafe_useEmotionCache, createElement, css, keyframes, useTheme, withEmotionCache, withTheme
@@ -2239,7 +2239,7 @@ var hoist_non_react_statics_cjs = __webpack_require__(8679);
 
 var pkg = {
 	name: "@emotion/react",
-	version: "11.11.0",
+	version: "11.11.1",
 	main: "dist/emotion-react.cjs.js",
 	module: "dist/emotion-react.esm.js",
 	browser: {
@@ -2678,31 +2678,31 @@ __webpack_require__.r(__webpack_exports__);
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
-  "TemplateTag": () => (/* reexport */ TemplateTag_TemplateTag),
-  "codeBlock": () => (/* reexport */ html_html),
-  "commaLists": () => (/* reexport */ commaLists_commaLists),
-  "commaListsAnd": () => (/* reexport */ commaListsAnd_commaListsAnd),
-  "commaListsOr": () => (/* reexport */ commaListsOr_commaListsOr),
-  "html": () => (/* reexport */ html_html),
-  "inlineArrayTransformer": () => (/* reexport */ inlineArrayTransformer_inlineArrayTransformer),
-  "inlineLists": () => (/* reexport */ inlineLists_inlineLists),
-  "oneLine": () => (/* reexport */ oneLine_oneLine),
-  "oneLineCommaLists": () => (/* reexport */ oneLineCommaLists_oneLineCommaLists),
-  "oneLineCommaListsAnd": () => (/* reexport */ oneLineCommaListsAnd_oneLineCommaListsAnd),
-  "oneLineCommaListsOr": () => (/* reexport */ oneLineCommaListsOr_oneLineCommaListsOr),
-  "oneLineInlineLists": () => (/* reexport */ oneLineInlineLists_oneLineInlineLists),
-  "oneLineTrim": () => (/* reexport */ oneLineTrim_oneLineTrim),
-  "removeNonPrintingValuesTransformer": () => (/* reexport */ removeNonPrintingValuesTransformer_removeNonPrintingValuesTransformer),
-  "replaceResultTransformer": () => (/* reexport */ replaceResultTransformer_replaceResultTransformer),
-  "replaceStringTransformer": () => (/* reexport */ replaceStringTransformer_replaceStringTransformer),
-  "replaceSubstitutionTransformer": () => (/* reexport */ replaceSubstitutionTransformer_replaceSubstitutionTransformer),
-  "safeHtml": () => (/* reexport */ safeHtml_safeHtml),
-  "source": () => (/* reexport */ html_html),
-  "splitStringTransformer": () => (/* reexport */ splitStringTransformer_splitStringTransformer),
-  "stripIndent": () => (/* reexport */ stripIndent_stripIndent),
-  "stripIndentTransformer": () => (/* reexport */ stripIndentTransformer_stripIndentTransformer),
-  "stripIndents": () => (/* reexport */ stripIndents_stripIndents),
-  "trimResultTransformer": () => (/* reexport */ trimResultTransformer_trimResultTransformer)
+  TemplateTag: () => (/* reexport */ TemplateTag_TemplateTag),
+  codeBlock: () => (/* reexport */ html_html),
+  commaLists: () => (/* reexport */ commaLists_commaLists),
+  commaListsAnd: () => (/* reexport */ commaListsAnd_commaListsAnd),
+  commaListsOr: () => (/* reexport */ commaListsOr_commaListsOr),
+  html: () => (/* reexport */ html_html),
+  inlineArrayTransformer: () => (/* reexport */ inlineArrayTransformer_inlineArrayTransformer),
+  inlineLists: () => (/* reexport */ inlineLists_inlineLists),
+  oneLine: () => (/* reexport */ oneLine_oneLine),
+  oneLineCommaLists: () => (/* reexport */ oneLineCommaLists_oneLineCommaLists),
+  oneLineCommaListsAnd: () => (/* reexport */ oneLineCommaListsAnd_oneLineCommaListsAnd),
+  oneLineCommaListsOr: () => (/* reexport */ oneLineCommaListsOr_oneLineCommaListsOr),
+  oneLineInlineLists: () => (/* reexport */ oneLineInlineLists_oneLineInlineLists),
+  oneLineTrim: () => (/* reexport */ oneLineTrim_oneLineTrim),
+  removeNonPrintingValuesTransformer: () => (/* reexport */ removeNonPrintingValuesTransformer_removeNonPrintingValuesTransformer),
+  replaceResultTransformer: () => (/* reexport */ replaceResultTransformer_replaceResultTransformer),
+  replaceStringTransformer: () => (/* reexport */ replaceStringTransformer_replaceStringTransformer),
+  replaceSubstitutionTransformer: () => (/* reexport */ replaceSubstitutionTransformer_replaceSubstitutionTransformer),
+  safeHtml: () => (/* reexport */ safeHtml_safeHtml),
+  source: () => (/* reexport */ html_html),
+  splitStringTransformer: () => (/* reexport */ splitStringTransformer_splitStringTransformer),
+  stripIndent: () => (/* reexport */ stripIndent_stripIndent),
+  stripIndentTransformer: () => (/* reexport */ stripIndentTransformer_stripIndentTransformer),
+  stripIndents: () => (/* reexport */ stripIndents_stripIndents),
+  trimResultTransformer: () => (/* reexport */ trimResultTransformer_trimResultTransformer)
 });
 
 ;// CONCATENATED MODULE: ./node_modules/common-tags/es/TemplateTag/TemplateTag.js
@@ -4636,12 +4636,12 @@ __webpack_require__.r(__webpack_exports__);
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
-  "AttributeAction": () => (/* reexport */ AttributeAction),
-  "IgnoreCaseMode": () => (/* reexport */ IgnoreCaseMode),
-  "SelectorType": () => (/* reexport */ SelectorType),
-  "isTraversal": () => (/* reexport */ isTraversal),
-  "parse": () => (/* reexport */ parse),
-  "stringify": () => (/* reexport */ stringify)
+  AttributeAction: () => (/* reexport */ AttributeAction),
+  IgnoreCaseMode: () => (/* reexport */ IgnoreCaseMode),
+  SelectorType: () => (/* reexport */ SelectorType),
+  isTraversal: () => (/* reexport */ isTraversal),
+  parse: () => (/* reexport */ parse),
+  stringify: () => (/* reexport */ stringify)
 });
 
 ;// CONCATENATED MODULE: ./node_modules/css-what/lib/es/types.js
@@ -8032,7 +8032,7 @@ function getForwards(collectedScripts) {
 /***/ 5418:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-exports.components={"component---src-pages-404-tsx":()=>__webpack_require__.e(/* import() | component---src-pages-404-tsx */ 218).then(__webpack_require__.bind(__webpack_require__, 2513)),"component---src-pages-index-tsx":()=>__webpack_require__.e(/* import() | component---src-pages-index-tsx */ 691).then(__webpack_require__.bind(__webpack_require__, 7200))};
+exports.components={"component---src-pages-404-tsx":()=>__webpack_require__.e(/* import() | component---src-pages-404-tsx */ 218).then(__webpack_require__.bind(__webpack_require__, 2513)),"component---src-pages-index-tsx":()=>Promise.all(/* import() | component---src-pages-index-tsx */[__webpack_require__.e(515), __webpack_require__.e(691)]).then(__webpack_require__.bind(__webpack_require__, 7200))};
 
 /***/ }),
 
@@ -8042,8 +8042,8 @@ exports.components={"component---src-pages-404-tsx":()=>__webpack_require__.e(/*
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "apiRunner": () => (/* binding */ apiRunner),
-/* harmony export */   "apiRunnerAsync": () => (/* binding */ apiRunnerAsync)
+/* harmony export */   apiRunner: () => (/* binding */ apiRunner),
+/* harmony export */   apiRunnerAsync: () => (/* binding */ apiRunnerAsync)
 /* harmony export */ });
 var plugins=[{name:'gatsby-plugin-image',plugin:__webpack_require__(2588),options:{"plugins":[]}},{name:'partytown',plugin:__webpack_require__(5292),options:{"plugins":[]}}];/* global plugins */ // During bootstrap, we write requires at top of this file which looks like:
 // var plugins = [
@@ -8290,11 +8290,11 @@ __webpack_require__.r(__webpack_exports__);
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
-  "cleanPath": () => (/* binding */ cleanPath),
-  "findMatchPath": () => (/* binding */ findMatchPath),
-  "findPath": () => (/* binding */ findPath),
-  "grabMatchParams": () => (/* binding */ grabMatchParams),
-  "setMatchPaths": () => (/* binding */ setMatchPaths)
+  cleanPath: () => (/* binding */ cleanPath),
+  findMatchPath: () => (/* binding */ findMatchPath),
+  findPath: () => (/* binding */ findPath),
+  grabMatchParams: () => (/* binding */ grabMatchParams),
+  setMatchPaths: () => (/* binding */ setMatchPaths)
 });
 
 // EXTERNAL MODULE: ./node_modules/@gatsbyjs/reach-router/dist/index.modern.mjs
@@ -8363,24 +8363,24 @@ __webpack_require__.r(__webpack_exports__);
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
-  "Link": () => (/* reexport */ E),
-  "PageRenderer": () => (/* reexport */ (public_page_renderer_default())),
-  "Script": () => (/* reexport */ dist_index_modern.Script),
-  "ScriptStrategy": () => (/* reexport */ dist_index_modern.ScriptStrategy),
-  "Slice": () => (/* reexport */ Slice),
-  "StaticQuery": () => (/* reexport */ StaticQuery),
-  "StaticQueryContext": () => (/* reexport */ StaticQueryContext),
-  "collectedScriptsByPage": () => (/* reexport */ dist_index_modern.collectedScriptsByPage),
-  "graphql": () => (/* binding */ graphql),
-  "navigate": () => (/* reexport */ g),
-  "parsePath": () => (/* reexport */ a),
-  "prefetchPathname": () => (/* binding */ prefetchPathname),
-  "scriptCache": () => (/* reexport */ dist_index_modern.scriptCache),
-  "scriptCallbackCache": () => (/* reexport */ dist_index_modern.scriptCallbackCache),
-  "useScrollRestoration": () => (/* reexport */ gatsby_react_router_scroll/* useScrollRestoration */.p2),
-  "useStaticQuery": () => (/* reexport */ useStaticQuery),
-  "withAssetPrefix": () => (/* reexport */ v),
-  "withPrefix": () => (/* reexport */ f)
+  Link: () => (/* reexport */ E),
+  PageRenderer: () => (/* reexport */ (public_page_renderer_default())),
+  Script: () => (/* reexport */ dist_index_modern.Script),
+  ScriptStrategy: () => (/* reexport */ dist_index_modern.ScriptStrategy),
+  Slice: () => (/* reexport */ Slice),
+  StaticQuery: () => (/* reexport */ StaticQuery),
+  StaticQueryContext: () => (/* reexport */ StaticQueryContext),
+  collectedScriptsByPage: () => (/* reexport */ dist_index_modern.collectedScriptsByPage),
+  graphql: () => (/* binding */ graphql),
+  navigate: () => (/* reexport */ g),
+  parsePath: () => (/* reexport */ a),
+  prefetchPathname: () => (/* binding */ prefetchPathname),
+  scriptCache: () => (/* reexport */ dist_index_modern.scriptCache),
+  scriptCallbackCache: () => (/* reexport */ dist_index_modern.scriptCallbackCache),
+  useScrollRestoration: () => (/* reexport */ gatsby_react_router_scroll/* useScrollRestoration */.p2),
+  useStaticQuery: () => (/* reexport */ useStaticQuery),
+  withAssetPrefix: () => (/* reexport */ v),
+  withPrefix: () => (/* reexport */ f)
 });
 
 // EXTERNAL MODULE: ./node_modules/react-server-dom-webpack/index.js
@@ -8655,15 +8655,16 @@ const prefetchPathname=loader.enqueue;function graphql(){throw new Error(`It app
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "applyHtmlAndBodyAttributesSSR": () => (/* binding */ applyHtmlAndBodyAttributesSSR),
-/* harmony export */   "getValidHeadNodesAndAttributesSSR": () => (/* binding */ getValidHeadNodesAndAttributesSSR),
-/* harmony export */   "headHandlerForSSR": () => (/* binding */ headHandlerForSSR)
+/* harmony export */   applyHtmlAndBodyAttributesSSR: () => (/* binding */ applyHtmlAndBodyAttributesSSR),
+/* harmony export */   getValidHeadNodesAndAttributesSSR: () => (/* binding */ getValidHeadNodesAndAttributesSSR),
+/* harmony export */   headHandlerForSSR: () => (/* binding */ headHandlerForSSR)
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7462);
 /* harmony import */ var _api_runner_ssr__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4067);
 /* harmony import */ var _emotion_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3240);
-const React=__webpack_require__(7021);const{grabMatchParams}=__webpack_require__(9755);const{StaticQueryContext}=__webpack_require__(7076);const{headExportValidator,filterHeadProps,isElementType,isValidNodeName,warnForInvalidTag}=__webpack_require__(9706);const{ServerLocation,Router}=__webpack_require__(7896);const{renderToString}=__webpack_require__(4179);const{parse}=__webpack_require__(698);function applyHtmlAndBodyAttributesSSR(htmlAndBodyAttributes,{setHtmlAttributes,setBodyAttributes}){if(!htmlAndBodyAttributes)return;const{html,body}=htmlAndBodyAttributes;setHtmlAttributes(html);setBodyAttributes(body);}function getValidHeadNodesAndAttributesSSR(rootNode,htmlAndBodyAttributes={html:{},body:{}}){const seenIds=new Map();const validHeadNodes=[];// Filter out non-element nodes before looping since we don't care about them
-for(const node of rootNode.childNodes){var _node$attributes;const{rawTagName}=node;const id=(_node$attributes=node.attributes)===null||_node$attributes===void 0?void 0:_node$attributes.id;if(!isElementType(node))continue;if(isValidNodeName(rawTagName)){if(rawTagName===`html`||rawTagName===`body`){htmlAndBodyAttributes[rawTagName]={...htmlAndBodyAttributes[rawTagName],...node.attributes};}else{let element;const attributes={...node.attributes,"data-gatsby-head":true};if(rawTagName===`script`||rawTagName===`style`){element=(0,_emotion_react__WEBPACK_IMPORTED_MODULE_1__/* .jsx */ .tZ)(node.rawTagName,(0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)({},attributes,{dangerouslySetInnerHTML:{__html:node.text}}));}else{element=node.textContent.length>0?(0,_emotion_react__WEBPACK_IMPORTED_MODULE_1__/* .jsx */ .tZ)(node.rawTagName,attributes,node.textContent):(0,_emotion_react__WEBPACK_IMPORTED_MODULE_1__/* .jsx */ .tZ)(node.rawTagName,attributes);}if(id){if(!seenIds.has(id)){validHeadNodes.push(element);seenIds.set(id,validHeadNodes.length-1);}else{const indexOfPreviouslyInsertedNode=seenIds.get(id);validHeadNodes[indexOfPreviouslyInsertedNode]=element;}}else{validHeadNodes.push(element);}}}else{warnForInvalidTag(rawTagName);}if(node.childNodes.length){validHeadNodes.push(...getValidHeadNodesAndAttributesSSR(node,htmlAndBodyAttributes).validHeadNodes);}}return{validHeadNodes,htmlAndBodyAttributes};}function headHandlerForSSR({pageComponent,setHeadComponents,setHtmlAttributes,setBodyAttributes,staticQueryContext,pageData,pagePath}){if(pageComponent!==null&&pageComponent!==void 0&&pageComponent.Head){headExportValidator(pageComponent.Head);function HeadRouteHandler(props){var _pageData$result,_pageData$result$page;const _props={...props,...pageData.result,params:{...grabMatchParams(props.location.pathname),...(((_pageData$result=pageData.result)===null||_pageData$result===void 0?void 0:(_pageData$result$page=_pageData$result.pageContext)===null||_pageData$result$page===void 0?void 0:_pageData$result$page.__params)||{})}};const HeadElement=(0,_emotion_react__WEBPACK_IMPORTED_MODULE_1__/* .jsx */ .tZ)(pageComponent.Head,filterHeadProps(_props));const headWithWrapRootElement=(0,_api_runner_ssr__WEBPACK_IMPORTED_MODULE_0__.apiRunner)(`wrapRootElement`,{element:HeadElement},HeadElement,({result})=>{return{element:result};}).pop();return headWithWrapRootElement;}const routerElement=(0,_emotion_react__WEBPACK_IMPORTED_MODULE_1__/* .jsx */ .tZ)(StaticQueryContext.Provider,{value:staticQueryContext},(0,_emotion_react__WEBPACK_IMPORTED_MODULE_1__/* .jsx */ .tZ)(ServerLocation,{url:`${""}${pagePath}`},(0,_emotion_react__WEBPACK_IMPORTED_MODULE_1__/* .jsx */ .tZ)(Router,{baseuri:"",component:({children})=>(0,_emotion_react__WEBPACK_IMPORTED_MODULE_1__/* .jsx */ .tZ)(React.Fragment,null,children)},(0,_emotion_react__WEBPACK_IMPORTED_MODULE_1__/* .jsx */ .tZ)(HeadRouteHandler,{path:"/*"}))));const rawString=renderToString(routerElement);const rootNode=parse(rawString);const{validHeadNodes,htmlAndBodyAttributes}=getValidHeadNodesAndAttributesSSR(rootNode);applyHtmlAndBodyAttributesSSR(htmlAndBodyAttributes,{setHtmlAttributes,setBodyAttributes});setHeadComponents(validHeadNodes);}}
+const React=__webpack_require__(7021);const{grabMatchParams}=__webpack_require__(9755);const{StaticQueryContext}=__webpack_require__(7076);const{headExportValidator,filterHeadProps,isElementType,isValidNodeName,warnForInvalidTag}=__webpack_require__(9706);const{ServerLocation,Router}=__webpack_require__(7896);const{renderToString}=__webpack_require__(4179);const{parse}=__webpack_require__(698);const styleToOjbect=__webpack_require__(7848);function applyHtmlAndBodyAttributesSSR(htmlAndBodyAttributes,{setHtmlAttributes,setBodyAttributes}){if(!htmlAndBodyAttributes)return;const{html,body}=htmlAndBodyAttributes;setHtmlAttributes(html);setBodyAttributes(body);}function getValidHeadNodesAndAttributesSSR(rootNode,htmlAndBodyAttributes={html:{},body:{}}){const seenIds=new Map();const validHeadNodes=[];// Filter out non-element nodes before looping since we don't care about them
+for(const node of rootNode.childNodes){var _node$attributes;const{rawTagName}=node;const id=(_node$attributes=node.attributes)===null||_node$attributes===void 0?void 0:_node$attributes.id;if(!isElementType(node))continue;if(isValidNodeName(rawTagName)){if(rawTagName===`html`||rawTagName===`body`){const{style,...nonStyleAttributes}=node.attributes;htmlAndBodyAttributes[rawTagName]={...htmlAndBodyAttributes[rawTagName],...nonStyleAttributes};// Unfortunately renderToString converts inline styles to a string, so we have to convert them back to an object
+if(style){var _htmlAndBodyAttribute;htmlAndBodyAttributes[rawTagName].style={...((_htmlAndBodyAttribute=htmlAndBodyAttributes[rawTagName])===null||_htmlAndBodyAttribute===void 0?void 0:_htmlAndBodyAttribute.style),...styleToOjbect(style)};}}else{let element;const attributes={...node.attributes,"data-gatsby-head":true};if(rawTagName===`script`||rawTagName===`style`){element=(0,_emotion_react__WEBPACK_IMPORTED_MODULE_1__/* .jsx */ .tZ)(node.rawTagName,(0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)({},attributes,{dangerouslySetInnerHTML:{__html:node.text}}));}else{element=node.textContent.length>0?(0,_emotion_react__WEBPACK_IMPORTED_MODULE_1__/* .jsx */ .tZ)(node.rawTagName,attributes,node.textContent):(0,_emotion_react__WEBPACK_IMPORTED_MODULE_1__/* .jsx */ .tZ)(node.rawTagName,attributes);}if(id){if(!seenIds.has(id)){validHeadNodes.push(element);seenIds.set(id,validHeadNodes.length-1);}else{const indexOfPreviouslyInsertedNode=seenIds.get(id);validHeadNodes[indexOfPreviouslyInsertedNode]=element;}}else{validHeadNodes.push(element);}}}else{warnForInvalidTag(rawTagName);}if(node.childNodes.length){validHeadNodes.push(...getValidHeadNodesAndAttributesSSR(node,htmlAndBodyAttributes).validHeadNodes);}}return{validHeadNodes,htmlAndBodyAttributes};}function headHandlerForSSR({pageComponent,setHeadComponents,setHtmlAttributes,setBodyAttributes,staticQueryContext,pageData,pagePath}){if(pageComponent!==null&&pageComponent!==void 0&&pageComponent.Head){headExportValidator(pageComponent.Head);function HeadRouteHandler(props){var _pageData$result,_pageData$result$page;const _props={...props,...pageData.result,params:{...grabMatchParams(props.location.pathname),...(((_pageData$result=pageData.result)===null||_pageData$result===void 0?void 0:(_pageData$result$page=_pageData$result.pageContext)===null||_pageData$result$page===void 0?void 0:_pageData$result$page.__params)||{})}};const HeadElement=(0,_emotion_react__WEBPACK_IMPORTED_MODULE_1__/* .jsx */ .tZ)(pageComponent.Head,filterHeadProps(_props));const headWithWrapRootElement=(0,_api_runner_ssr__WEBPACK_IMPORTED_MODULE_0__.apiRunner)(`wrapRootElement`,{element:HeadElement},HeadElement,({result})=>{return{element:result};}).pop();return headWithWrapRootElement;}const routerElement=(0,_emotion_react__WEBPACK_IMPORTED_MODULE_1__/* .jsx */ .tZ)(StaticQueryContext.Provider,{value:staticQueryContext},(0,_emotion_react__WEBPACK_IMPORTED_MODULE_1__/* .jsx */ .tZ)(ServerLocation,{url:`${""}${pagePath}`},(0,_emotion_react__WEBPACK_IMPORTED_MODULE_1__/* .jsx */ .tZ)(Router,{baseuri:"",component:({children})=>(0,_emotion_react__WEBPACK_IMPORTED_MODULE_1__/* .jsx */ .tZ)(React.Fragment,null,children)},(0,_emotion_react__WEBPACK_IMPORTED_MODULE_1__/* .jsx */ .tZ)(HeadRouteHandler,{path:"/*"}))));const rawString=renderToString(routerElement);const rootNode=parse(rawString);const{validHeadNodes,htmlAndBodyAttributes}=getValidHeadNodesAndAttributesSSR(rootNode);applyHtmlAndBodyAttributesSSR(htmlAndBodyAttributes,{setHtmlAttributes,setBodyAttributes});setHeadComponents(validHeadNodes);}}
 
 /***/ }),
 
@@ -8676,17 +8677,17 @@ __webpack_require__.r(__webpack_exports__);
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
-  "applyHtmlAndBodyAttributes": () => (/* binding */ applyHtmlAndBodyAttributes),
-  "diffNodes": () => (/* binding */ diffNodes),
-  "filterHeadProps": () => (/* binding */ filterHeadProps),
-  "getValidHeadNodesAndAttributes": () => (/* binding */ getValidHeadNodesAndAttributes),
-  "headExportValidator": () => (/* binding */ headExportValidator),
-  "isElementType": () => (/* binding */ isElementType),
-  "isEqualNode": () => (/* binding */ isEqualNode),
-  "isValidNodeName": () => (/* binding */ isValidNodeName),
-  "removeHtmlAndBodyAttributes": () => (/* binding */ removeHtmlAndBodyAttributes),
-  "removePrevHeadElements": () => (/* binding */ removePrevHeadElements),
-  "warnForInvalidTag": () => (/* binding */ warnForInvalidTag)
+  applyHtmlAndBodyAttributes: () => (/* binding */ applyHtmlAndBodyAttributes),
+  diffNodes: () => (/* binding */ diffNodes),
+  filterHeadProps: () => (/* binding */ filterHeadProps),
+  getValidHeadNodesAndAttributes: () => (/* binding */ getValidHeadNodesAndAttributes),
+  headExportValidator: () => (/* binding */ headExportValidator),
+  isElementType: () => (/* binding */ isElementType),
+  isEqualNode: () => (/* binding */ isEqualNode),
+  isValidNodeName: () => (/* binding */ isValidNodeName),
+  removeHtmlAndBodyAttributes: () => (/* binding */ removeHtmlAndBodyAttributes),
+  removePrevHeadElements: () => (/* binding */ removePrevHeadElements),
+  warnForInvalidTag: () => (/* binding */ warnForInvalidTag)
 });
 
 ;// CONCATENATED MODULE: ./.cache/head/constants.js
@@ -8720,8 +8721,10 @@ const constants_VALID_NODE_NAMES=[`link`,`meta`,`style`,`title`,`base`,`noscript
 if(nonce&&!oldTag.getAttribute(`nonce`)){const cloneTag=newTag.cloneNode(true);cloneTag.setAttribute(`nonce`,``);cloneTag.nonce=nonce;return nonce===oldTag.nonce&&oldTag.isEqualNode(cloneTag);}}return oldTag.isEqualNode(newTag);}function diffNodes({oldNodes,newNodes,onStale,onNew}){for(const existingHeadElement of oldNodes){const indexInNewNodes=newNodes.findIndex(e=>isEqualNode(e,existingHeadElement));if(indexInNewNodes===-1){onStale(existingHeadElement);}else{// this node is re-created as-is, so we keep old node, and remove it from list of new nodes (as we handled it already here)
 newNodes.splice(indexInNewNodes,1);}}// remaing new nodes didn't have matching old node, so need to be added
 for(const newNode of newNodes){onNew(newNode);}}function getValidHeadNodesAndAttributes(rootNode,htmlAndBodyAttributes={html:{},body:{}}){const seenIds=new Map();const validHeadNodes=[];// Filter out non-element nodes before looping since we don't care about them
-for(const node of rootNode.childNodes){var _node$attributes,_node$attributes$id;const nodeName=node.nodeName.toLowerCase();const id=(_node$attributes=node.attributes)===null||_node$attributes===void 0?void 0:(_node$attributes$id=_node$attributes.id)===null||_node$attributes$id===void 0?void 0:_node$attributes$id.value;if(!isElementType(node))continue;if(isValidNodeName(nodeName)){// <html> and <body> tags are treated differently, in that we don't  render them, we only  extract the attributes and apply them separetely
-if(nodeName===`html`||nodeName===`body`){for(const attribute of node.attributes){htmlAndBodyAttributes[nodeName]={...htmlAndBodyAttributes[nodeName],[attribute.name]:attribute.value};}}else{let clonedNode=node.cloneNode(true);clonedNode.setAttribute(`data-gatsby-head`,true);// // This is hack to make script tags work
+for(const node of rootNode.childNodes){var _node$attributes,_node$attributes$id;const nodeName=node.nodeName.toLowerCase();const id=(_node$attributes=node.attributes)===null||_node$attributes===void 0?void 0:(_node$attributes$id=_node$attributes.id)===null||_node$attributes$id===void 0?void 0:_node$attributes$id.value;if(!isElementType(node))continue;if(isValidNodeName(nodeName)){// <html> and <body> tags are treated differently, in that we don't render them, we only extract the attributes and apply them separetely
+if(nodeName===`html`||nodeName===`body`){for(const attribute of node.attributes){const isStyleAttribute=attribute.name===`style`;// Merge attributes for same nodeName from previous loop iteration
+htmlAndBodyAttributes[nodeName]={...htmlAndBodyAttributes[nodeName]};if(!isStyleAttribute){htmlAndBodyAttributes[nodeName][attribute.name]=attribute.value;}// If there is already a style attribute, we need to merge them as otherwise the last one will "win"
+if(isStyleAttribute){var _htmlAndBodyAttribute;htmlAndBodyAttributes[nodeName].style=`${(_htmlAndBodyAttribute=htmlAndBodyAttributes[nodeName])!==null&&_htmlAndBodyAttribute!==void 0&&_htmlAndBodyAttribute.style?htmlAndBodyAttributes[nodeName].style:``}${attribute.value} `;}}}else{let clonedNode=node.cloneNode(true);clonedNode.setAttribute(`data-gatsby-head`,true);// // This is hack to make script tags work
 if(clonedNode.nodeName.toLowerCase()===`script`){clonedNode=massageScript(clonedNode);}// Duplicate ids are not allowed in the head, so we need to dedupe them
 if(id){if(!seenIds.has(id)){validHeadNodes.push(clonedNode);seenIds.set(id,validHeadNodes.length-1);}else{var _validHeadNodes$index;const indexOfPreviouslyInsertedNode=seenIds.get(id);(_validHeadNodes$index=validHeadNodes[indexOfPreviouslyInsertedNode].parentNode)===null||_validHeadNodes$index===void 0?void 0:_validHeadNodes$index.removeChild(validHeadNodes[indexOfPreviouslyInsertedNode]);validHeadNodes[indexOfPreviouslyInsertedNode]=clonedNode;}}else{validHeadNodes.push(clonedNode);}}}else{warnForInvalidTag(nodeName);}if(node.childNodes.length){validHeadNodes.push(...getValidHeadNodesAndAttributes(node,htmlAndBodyAttributes).validHeadNodes);}}return{validHeadNodes,htmlAndBodyAttributes};}function massageScript(node){const script=document.createElement(`script`);for(const attr of node.attributes){script.setAttribute(attr.name,attr.value);}script.innerHTML=node.innerHTML;return script;}function isValidNodeName(nodeName){return constants_VALID_NODE_NAMES.includes(nodeName);}/*
  * For Head, we only care about element nodes(type = 1), so this util is used to skip over non-element nodes
@@ -8745,7 +8748,7 @@ const preferDefault=m=>m&&m.default||m;if(false){}else if(false){}else{module.ex
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "RouteAnnouncerProps": () => (/* binding */ RouteAnnouncerProps)
+/* harmony export */   RouteAnnouncerProps: () => (/* binding */ RouteAnnouncerProps)
 /* harmony export */ });
 // This is extracted to separate module because it's shared
 // between browser and SSR code
@@ -8759,7 +8762,7 @@ const RouteAnnouncerProps={id:`gatsby-announcer`,style:{position:`absolute`,top:
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "WritableAsPromise": () => (/* binding */ WritableAsPromise)
+/* harmony export */   WritableAsPromise: () => (/* binding */ WritableAsPromise)
 /* harmony export */ });
 /* harmony import */ var stream__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8311);
 /* harmony import */ var stream__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(stream__WEBPACK_IMPORTED_MODULE_0__);
@@ -8774,10 +8777,10 @@ then(resolve,reject){return this._deferred.promise.then(resolve,reject);}}
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "SlicesContext": () => (/* binding */ SlicesContext),
-/* harmony export */   "SlicesMapContext": () => (/* binding */ SlicesMapContext),
-/* harmony export */   "SlicesPropsContext": () => (/* binding */ SlicesPropsContext),
-/* harmony export */   "SlicesResultsContext": () => (/* binding */ SlicesResultsContext)
+/* harmony export */   SlicesContext: () => (/* binding */ SlicesContext),
+/* harmony export */   SlicesMapContext: () => (/* binding */ SlicesMapContext),
+/* harmony export */   SlicesPropsContext: () => (/* binding */ SlicesPropsContext),
+/* harmony export */   SlicesResultsContext: () => (/* binding */ SlicesResultsContext)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7021);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
@@ -8791,7 +8794,7 @@ const SlicesResultsContext=/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___defau
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ServerSliceRenderer": () => (/* binding */ ServerSliceRenderer)
+/* harmony export */   ServerSliceRenderer: () => (/* binding */ ServerSliceRenderer)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7021);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
@@ -9257,6 +9260,274 @@ function hoistNonReactStatics(targetComponent, sourceComponent, blacklist) {
 }
 
 module.exports = hoistNonReactStatics;
+
+
+/***/ }),
+
+/***/ 8139:
+/***/ ((module) => {
+
+// http://www.w3.org/TR/CSS21/grammar.html
+// https://github.com/visionmedia/css-parse/pull/49#issuecomment-30088027
+var COMMENT_REGEX = /\/\*[^*]*\*+([^/*][^*]*\*+)*\//g;
+
+var NEWLINE_REGEX = /\n/g;
+var WHITESPACE_REGEX = /^\s*/;
+
+// declaration
+var PROPERTY_REGEX = /^(\*?[-#/*\\\w]+(\[[0-9a-z_-]+\])?)\s*/;
+var COLON_REGEX = /^:\s*/;
+var VALUE_REGEX = /^((?:'(?:\\'|.)*?'|"(?:\\"|.)*?"|\([^)]*?\)|[^};])+)/;
+var SEMICOLON_REGEX = /^[;\s]*/;
+
+// https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String/Trim#Polyfill
+var TRIM_REGEX = /^\s+|\s+$/g;
+
+// strings
+var NEWLINE = '\n';
+var FORWARD_SLASH = '/';
+var ASTERISK = '*';
+var EMPTY_STRING = '';
+
+// types
+var TYPE_COMMENT = 'comment';
+var TYPE_DECLARATION = 'declaration';
+
+/**
+ * @param {String} style
+ * @param {Object} [options]
+ * @return {Object[]}
+ * @throws {TypeError}
+ * @throws {Error}
+ */
+module.exports = function(style, options) {
+  if (typeof style !== 'string') {
+    throw new TypeError('First argument must be a string');
+  }
+
+  if (!style) return [];
+
+  options = options || {};
+
+  /**
+   * Positional.
+   */
+  var lineno = 1;
+  var column = 1;
+
+  /**
+   * Update lineno and column based on `str`.
+   *
+   * @param {String} str
+   */
+  function updatePosition(str) {
+    var lines = str.match(NEWLINE_REGEX);
+    if (lines) lineno += lines.length;
+    var i = str.lastIndexOf(NEWLINE);
+    column = ~i ? str.length - i : column + str.length;
+  }
+
+  /**
+   * Mark position and patch `node.position`.
+   *
+   * @return {Function}
+   */
+  function position() {
+    var start = { line: lineno, column: column };
+    return function(node) {
+      node.position = new Position(start);
+      whitespace();
+      return node;
+    };
+  }
+
+  /**
+   * Store position information for a node.
+   *
+   * @constructor
+   * @property {Object} start
+   * @property {Object} end
+   * @property {undefined|String} source
+   */
+  function Position(start) {
+    this.start = start;
+    this.end = { line: lineno, column: column };
+    this.source = options.source;
+  }
+
+  /**
+   * Non-enumerable source string.
+   */
+  Position.prototype.content = style;
+
+  var errorsList = [];
+
+  /**
+   * Error `msg`.
+   *
+   * @param {String} msg
+   * @throws {Error}
+   */
+  function error(msg) {
+    var err = new Error(
+      options.source + ':' + lineno + ':' + column + ': ' + msg
+    );
+    err.reason = msg;
+    err.filename = options.source;
+    err.line = lineno;
+    err.column = column;
+    err.source = style;
+
+    if (options.silent) {
+      errorsList.push(err);
+    } else {
+      throw err;
+    }
+  }
+
+  /**
+   * Match `re` and return captures.
+   *
+   * @param {RegExp} re
+   * @return {undefined|Array}
+   */
+  function match(re) {
+    var m = re.exec(style);
+    if (!m) return;
+    var str = m[0];
+    updatePosition(str);
+    style = style.slice(str.length);
+    return m;
+  }
+
+  /**
+   * Parse whitespace.
+   */
+  function whitespace() {
+    match(WHITESPACE_REGEX);
+  }
+
+  /**
+   * Parse comments.
+   *
+   * @param {Object[]} [rules]
+   * @return {Object[]}
+   */
+  function comments(rules) {
+    var c;
+    rules = rules || [];
+    while ((c = comment())) {
+      if (c !== false) {
+        rules.push(c);
+      }
+    }
+    return rules;
+  }
+
+  /**
+   * Parse comment.
+   *
+   * @return {Object}
+   * @throws {Error}
+   */
+  function comment() {
+    var pos = position();
+    if (FORWARD_SLASH != style.charAt(0) || ASTERISK != style.charAt(1)) return;
+
+    var i = 2;
+    while (
+      EMPTY_STRING != style.charAt(i) &&
+      (ASTERISK != style.charAt(i) || FORWARD_SLASH != style.charAt(i + 1))
+    ) {
+      ++i;
+    }
+    i += 2;
+
+    if (EMPTY_STRING === style.charAt(i - 1)) {
+      return error('End of comment missing');
+    }
+
+    var str = style.slice(2, i - 2);
+    column += 2;
+    updatePosition(str);
+    style = style.slice(i);
+    column += 2;
+
+    return pos({
+      type: TYPE_COMMENT,
+      comment: str
+    });
+  }
+
+  /**
+   * Parse declaration.
+   *
+   * @return {Object}
+   * @throws {Error}
+   */
+  function declaration() {
+    var pos = position();
+
+    // prop
+    var prop = match(PROPERTY_REGEX);
+    if (!prop) return;
+    comment();
+
+    // :
+    if (!match(COLON_REGEX)) return error("property missing ':'");
+
+    // val
+    var val = match(VALUE_REGEX);
+
+    var ret = pos({
+      type: TYPE_DECLARATION,
+      property: trim(prop[0].replace(COMMENT_REGEX, EMPTY_STRING)),
+      value: val
+        ? trim(val[0].replace(COMMENT_REGEX, EMPTY_STRING))
+        : EMPTY_STRING
+    });
+
+    // ;
+    match(SEMICOLON_REGEX);
+
+    return ret;
+  }
+
+  /**
+   * Parse declarations.
+   *
+   * @return {Object[]}
+   */
+  function declarations() {
+    var decls = [];
+
+    comments(decls);
+
+    // declarations
+    var decl;
+    while ((decl = declaration())) {
+      if (decl !== false) {
+        decls.push(decl);
+        comments(decls);
+      }
+    }
+
+    return decls;
+  }
+
+  whitespace();
+  return declarations();
+};
+
+/**
+ * Trim `str`.
+ *
+ * @param {String} str
+ * @return {String}
+ */
+function trim(str) {
+  return str ? str.replace(TRIM_REGEX, EMPTY_STRING) : EMPTY_STRING;
+}
 
 
 /***/ }),
@@ -12393,6 +12664,56 @@ if (true) {
 
 /***/ }),
 
+/***/ 7848:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var parse = __webpack_require__(8139);
+
+/**
+ * Parses inline style to object.
+ *
+ * @example
+ * // returns { 'line-height': '42' }
+ * StyleToObject('line-height: 42;');
+ *
+ * @param  {String}      style      - The inline style.
+ * @param  {Function}    [iterator] - The iterator function.
+ * @return {null|Object}
+ */
+function StyleToObject(style, iterator) {
+  var output = null;
+  if (!style || typeof style !== 'string') {
+    return output;
+  }
+
+  var declaration;
+  var declarations = parse(style);
+  var hasIterator = typeof iterator === 'function';
+  var property;
+  var value;
+
+  for (var i = 0, len = declarations.length; i < len; i++) {
+    declaration = declarations[i];
+    property = declaration.property;
+    value = declaration.value;
+
+    if (hasIterator) {
+      iterator(property, value, declaration);
+    } else if (value) {
+      output || (output = {});
+      output[property] = value;
+    }
+  }
+
+  return output;
+}
+
+module.exports = StyleToObject;
+module.exports["default"] = StyleToObject; // ESM support
+
+
+/***/ }),
+
 /***/ 3896:
 /***/ ((module) => {
 
@@ -12570,7 +12891,7 @@ module.exports = _setPrototypeOf, module.exports.__esModule = true, module.expor
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 
-const PartytownSnippet = "/* Partytown 0.7.5 - MIT builder.io */\n!function(t,e,n,i,r,o,a,d,s,c,p,l){function u(){l||(l=1,\"/\"==(a=(o.lib||\"/~partytown/\")+(o.debug?\"debug/\":\"\"))[0]&&(s=e.querySelectorAll('script[type=\"text/partytown\"]'),i!=t?i.dispatchEvent(new CustomEvent(\"pt1\",{detail:t})):(d=setTimeout(f,1e4),e.addEventListener(\"pt0\",w),r?h(1):n.serviceWorker?n.serviceWorker.register(a+(o.swPath||\"partytown-sw.js\"),{scope:a}).then((function(t){t.active?h():t.installing&&t.installing.addEventListener(\"statechange\",(function(t){\"activated\"==t.target.state&&h()}))}),console.error):f())))}function h(t){c=e.createElement(t?\"script\":\"iframe\"),t||(c.setAttribute(\"style\",\"display:block;width:0;height:0;border:0;visibility:hidden\"),c.setAttribute(\"aria-hidden\",!0)),c.src=a+\"partytown-\"+(t?\"atomics.js?v=0.7.5\":\"sandbox-sw.html?\"+Date.now()),e.body.appendChild(c)}function f(n,r){for(w(),i==t&&(o.forward||[]).map((function(e){delete t[e.split(\".\")[0]]})),n=0;n<s.length;n++)(r=e.createElement(\"script\")).innerHTML=s[n].innerHTML,e.head.appendChild(r);c&&c.parentNode.removeChild(c)}function w(){clearTimeout(d)}o=t.partytown||{},i==t&&(o.forward||[]).map((function(e){p=t,e.split(\".\").map((function(e,n,i){p=p[i[n]]=n+1<i.length?\"push\"==i[n+1]?[]:p[i[n]]||{}:function(){(t._ptf=t._ptf||[]).push(i,arguments)}}))})),\"complete\"==e.readyState?u():(t.addEventListener(\"DOMContentLoaded\",u),t.addEventListener(\"load\",u))}(window,document,navigator,top,window.crossOriginIsolated);";
+const PartytownSnippet = "/* Partytown 0.7.6 - MIT builder.io */\n!function(t,e,n,i,r,o,a,d,s,c,p,l){function u(){l||(l=1,\"/\"==(a=(o.lib||\"/~partytown/\")+(o.debug?\"debug/\":\"\"))[0]&&(s=e.querySelectorAll('script[type=\"text/partytown\"]'),i!=t?i.dispatchEvent(new CustomEvent(\"pt1\",{detail:t})):(d=setTimeout(f,1e4),e.addEventListener(\"pt0\",w),r?h(1):n.serviceWorker?n.serviceWorker.register(a+(o.swPath||\"partytown-sw.js\"),{scope:a}).then((function(t){t.active?h():t.installing&&t.installing.addEventListener(\"statechange\",(function(t){\"activated\"==t.target.state&&h()}))}),console.error):f())))}function h(t){c=e.createElement(t?\"script\":\"iframe\"),t||(c.setAttribute(\"style\",\"display:block;width:0;height:0;border:0;visibility:hidden\"),c.setAttribute(\"aria-hidden\",!0)),c.src=a+\"partytown-\"+(t?\"atomics.js?v=0.7.6\":\"sandbox-sw.html?\"+Date.now()),e.body.appendChild(c)}function f(n,r){for(w(),i==t&&(o.forward||[]).map((function(e){delete t[e.split(\".\")[0]]})),n=0;n<s.length;n++)(r=e.createElement(\"script\")).innerHTML=s[n].innerHTML,e.head.appendChild(r);c&&c.parentNode.removeChild(c)}function w(){clearTimeout(d)}o=t.partytown||{},i==t&&(o.forward||[]).map((function(e){p=t,e.split(\".\").map((function(e,n,i){p=p[i[n]]=n+1<i.length?\"push\"==i[n+1]?[]:p[i[n]]||{}:function(){(t._ptf=t._ptf||[]).push(i,arguments)}}))})),\"complete\"==e.readyState?u():(t.addEventListener(\"DOMContentLoaded\",u),t.addEventListener(\"load\",u))}(window,document,navigator,top,window.crossOriginIsolated);";
 
 const createSnippet = (config, snippetCode) => {
     const { forward = [], ...filteredConfig } = config || {};
@@ -12624,7 +12945,7 @@ exports.partytownSnippet = partytownSnippet;
 
 "use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Z": () => (/* binding */ _extends)
+/* harmony export */   Z: () => (/* binding */ _extends)
 /* harmony export */ });
 function _extends() {
   _extends = Object.assign ? Object.assign.bind() : function (target) {
@@ -12650,34 +12971,34 @@ function _extends() {
 var react__WEBPACK_IMPORTED_MODULE_0___namespace_cache;
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "BaseContext": () => (/* binding */ m),
-/* harmony export */   "Link": () => (/* binding */ A),
-/* harmony export */   "Location": () => (/* binding */ G),
-/* harmony export */   "LocationContext": () => (/* binding */ d),
-/* harmony export */   "LocationProvider": () => (/* binding */ z),
-/* harmony export */   "Match": () => (/* binding */ Q),
-/* harmony export */   "Redirect": () => (/* binding */ R),
-/* harmony export */   "Router": () => (/* binding */ oe),
-/* harmony export */   "ServerLocation": () => (/* binding */ J),
-/* harmony export */   "createHistory": () => (/* binding */ i),
-/* harmony export */   "createMemorySource": () => (/* binding */ c),
-/* harmony export */   "globalHistory": () => (/* binding */ l),
-/* harmony export */   "insertParams": () => (/* binding */ P),
-/* harmony export */   "isRedirect": () => (/* binding */ g),
-/* harmony export */   "match": () => (/* binding */ x),
-/* harmony export */   "navigate": () => (/* binding */ p),
-/* harmony export */   "pick": () => (/* binding */ w),
-/* harmony export */   "redirectTo": () => (/* binding */ v),
-/* harmony export */   "resolve": () => (/* binding */ k),
-/* harmony export */   "shallowCompare": () => (/* binding */ D),
-/* harmony export */   "startsWith": () => (/* binding */ C),
-/* harmony export */   "useBaseContext": () => (/* binding */ f),
-/* harmony export */   "useLocation": () => (/* binding */ se),
-/* harmony export */   "useLocationContext": () => (/* binding */ y),
-/* harmony export */   "useMatch": () => (/* binding */ ue),
-/* harmony export */   "useNavigate": () => (/* binding */ ie),
-/* harmony export */   "useParams": () => (/* binding */ ce),
-/* harmony export */   "validateRedirect": () => (/* binding */ T)
+/* harmony export */   BaseContext: () => (/* binding */ m),
+/* harmony export */   Link: () => (/* binding */ A),
+/* harmony export */   Location: () => (/* binding */ G),
+/* harmony export */   LocationContext: () => (/* binding */ d),
+/* harmony export */   LocationProvider: () => (/* binding */ z),
+/* harmony export */   Match: () => (/* binding */ Q),
+/* harmony export */   Redirect: () => (/* binding */ R),
+/* harmony export */   Router: () => (/* binding */ oe),
+/* harmony export */   ServerLocation: () => (/* binding */ J),
+/* harmony export */   createHistory: () => (/* binding */ i),
+/* harmony export */   createMemorySource: () => (/* binding */ c),
+/* harmony export */   globalHistory: () => (/* binding */ l),
+/* harmony export */   insertParams: () => (/* binding */ P),
+/* harmony export */   isRedirect: () => (/* binding */ g),
+/* harmony export */   match: () => (/* binding */ x),
+/* harmony export */   navigate: () => (/* binding */ p),
+/* harmony export */   pick: () => (/* binding */ w),
+/* harmony export */   redirectTo: () => (/* binding */ v),
+/* harmony export */   resolve: () => (/* binding */ k),
+/* harmony export */   shallowCompare: () => (/* binding */ D),
+/* harmony export */   startsWith: () => (/* binding */ C),
+/* harmony export */   useBaseContext: () => (/* binding */ f),
+/* harmony export */   useLocation: () => (/* binding */ se),
+/* harmony export */   useLocationContext: () => (/* binding */ y),
+/* harmony export */   useMatch: () => (/* binding */ ue),
+/* harmony export */   useNavigate: () => (/* binding */ ie),
+/* harmony export */   useParams: () => (/* binding */ ce),
+/* harmony export */   validateRedirect: () => (/* binding */ T)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7021);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5697);
@@ -12694,11 +13015,11 @@ function o(){return o=Object.assign?Object.assign.bind():function(e){for(var t=1
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Script": () => (/* binding */ f),
-/* harmony export */   "ScriptStrategy": () => (/* binding */ c),
-/* harmony export */   "collectedScriptsByPage": () => (/* binding */ l),
-/* harmony export */   "scriptCache": () => (/* binding */ u),
-/* harmony export */   "scriptCallbackCache": () => (/* binding */ d)
+/* harmony export */   Script: () => (/* binding */ f),
+/* harmony export */   ScriptStrategy: () => (/* binding */ c),
+/* harmony export */   collectedScriptsByPage: () => (/* binding */ l),
+/* harmony export */   scriptCache: () => (/* binding */ u),
+/* harmony export */   scriptCallbackCache: () => (/* binding */ d)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7021);
 /* harmony import */ var _gatsbyjs_reach_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7896);
@@ -12745,7 +13066,7 @@ module.exports = JSON.parse('{"amp":"&","apos":"\'","gt":">","lt":"<","quot":"\\
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"name":"gatsby","description":"Blazing fast modern site generator for React","version":"5.9.1","author":"Kyle Mathews <mathews.kyle@gmail.com>","bin":{"gatsby":"./cli.js"},"bugs":{"url":"https://github.com/gatsbyjs/gatsby/issues"},"dependencies":{"@babel/code-frame":"^7.18.6","@babel/core":"^7.20.12","@babel/eslint-parser":"^7.19.1","@babel/helper-plugin-utils":"^7.20.2","@babel/parser":"^7.20.13","@babel/runtime":"^7.20.13","@babel/traverse":"^7.20.13","@babel/types":"^7.20.7","@builder.io/partytown":"^0.7.5","@gatsbyjs/reach-router":"^2.0.1","@gatsbyjs/webpack-hot-middleware":"^2.25.3","@graphql-codegen/add":"^3.2.3","@graphql-codegen/core":"^2.6.8","@graphql-codegen/plugin-helpers":"^2.7.2","@graphql-codegen/typescript":"^2.8.7","@graphql-codegen/typescript-operations":"^2.5.12","@graphql-tools/code-file-loader":"^7.3.16","@graphql-tools/load":"^7.8.10","@jridgewell/trace-mapping":"^0.3.17","@nodelib/fs.walk":"^1.2.8","@parcel/cache":"2.8.3","@parcel/core":"2.8.3","@pmmmwh/react-refresh-webpack-plugin":"^0.5.10","@types/http-proxy":"^1.17.9","@typescript-eslint/eslint-plugin":"^5.57.0","@typescript-eslint/parser":"^5.57.0","@vercel/webpack-asset-relocator-loader":"^1.7.3","acorn-loose":"^8.3.0","acorn-walk":"^8.2.0","address":"1.2.2","anser":"^2.1.1","autoprefixer":"^10.4.13","axios":"^0.21.1","babel-jsx-utils":"^1.1.0","babel-loader":"^8.3.0","babel-plugin-add-module-exports":"^1.0.4","babel-plugin-dynamic-import-node":"^2.3.3","babel-plugin-lodash":"^3.3.4","babel-plugin-remove-graphql-queries":"^5.9.0","babel-preset-gatsby":"^3.9.0","better-opn":"^2.1.1","bluebird":"^3.7.2","browserslist":"^4.21.4","cache-manager":"^2.11.1","chalk":"^4.1.2","chokidar":"^3.5.3","common-tags":"^1.8.2","compression":"^1.7.4","cookie":"^0.5.0","core-js":"^3.22.3","cors":"^2.8.5","css-loader":"^5.2.7","css-minimizer-webpack-plugin":"^2.0.0","css.escape":"^1.5.1","date-fns":"^2.29.3","debug":"^4.3.4","deepmerge":"^4.3.0","detect-port":"^1.5.1","devcert":"^1.2.2","dotenv":"^8.6.0","enhanced-resolve":"^5.12.0","error-stack-parser":"^2.1.4","eslint":"^7.32.0","eslint-config-react-app":"^6.0.0","eslint-plugin-flowtype":"^5.10.0","eslint-plugin-import":"^2.27.5","eslint-plugin-jsx-a11y":"^6.7.1","eslint-plugin-react":"^7.32.2","eslint-plugin-react-hooks":"^4.6.0","eslint-webpack-plugin":"^2.7.0","event-source-polyfill":"1.0.31","execa":"^5.1.1","express":"^4.18.2","express-http-proxy":"^1.6.3","fastest-levenshtein":"^1.0.16","fastq":"^1.15.0","file-loader":"^6.2.0","find-cache-dir":"^3.3.2","fs-exists-cached":"1.0.0","fs-extra":"^11.1.1","gatsby-cli":"^5.9.0","gatsby-core-utils":"^4.9.0","gatsby-graphiql-explorer":"^3.9.0","gatsby-legacy-polyfills":"^3.9.0","gatsby-link":"^5.9.0","gatsby-page-utils":"^3.9.0","gatsby-parcel-config":"1.9.0","gatsby-plugin-page-creator":"^5.9.0","gatsby-plugin-typescript":"^5.9.0","gatsby-plugin-utils":"^4.9.0","gatsby-react-router-scroll":"^6.9.0","gatsby-script":"^2.9.0","gatsby-telemetry":"^4.9.0","gatsby-worker":"^2.9.0","glob":"^7.2.3","globby":"^11.1.0","got":"^11.8.6","graphql":"^16.6.0","graphql-compose":"^9.0.10","graphql-http":"^1.13.0","graphql-tag":"^2.12.6","hasha":"^5.2.2","invariant":"^2.2.4","is-relative":"^1.0.0","is-relative-url":"^3.0.0","joi":"^17.7.0","json-loader":"^0.5.7","latest-version":"^7.0.0","lmdb":"2.5.3","lodash":"^4.17.21","meant":"^1.0.3","memoizee":"^0.4.15","micromatch":"^4.0.5","mime":"^3.0.0","mini-css-extract-plugin":"1.6.2","mitt":"^1.2.0","moment":"^2.29.4","multer":"^1.4.5-lts.1","node-fetch":"^2.6.8","node-html-parser":"^5.4.2","normalize-path":"^3.0.0","null-loader":"^4.0.1","opentracing":"^0.14.7","p-defer":"^3.0.0","parseurl":"^1.3.3","physical-cpu-count":"^2.0.0","platform":"^1.3.6","postcss":"^8.4.21","postcss-flexbugs-fixes":"^5.0.2","postcss-loader":"^5.3.0","prompts":"^2.4.2","prop-types":"^15.8.1","query-string":"^6.14.1","raw-loader":"^4.0.2","react-dev-utils":"^12.0.1","react-refresh":"^0.14.0","react-server-dom-webpack":"0.0.0-experimental-c8b778b7f-20220825","redux":"4.2.1","redux-thunk":"^2.4.2","resolve-from":"^5.0.0","semver":"^7.3.8","shallow-compare":"^1.2.2","signal-exit":"^3.0.7","slugify":"^1.6.5","socket.io":"4.5.4","socket.io-client":"4.5.4","stack-trace":"^0.0.10","string-similarity":"^1.2.2","strip-ansi":"^6.0.1","style-loader":"^2.0.0","terser-webpack-plugin":"^5.3.6","tmp":"^0.2.1","true-case-path":"^2.2.1","type-of":"^2.0.1","url-loader":"^4.1.1","uuid":"^8.3.2","webpack":"^5.75.0","webpack-dev-middleware":"^4.3.0","webpack-merge":"^5.8.0","webpack-stats-plugin":"^1.1.1","webpack-virtual-modules":"^0.5.0","xstate":"^4.35.3","yaml-loader":"^0.8.0"},"devDependencies":{"@babel/cli":"^7.20.7","@babel/helper-plugin-utils":"^7.20.2","@babel/register":"^7.18.9","@types/babel-core":"^6.25.7","@types/eslint":"^8.37.0","@types/estree":"^1.0.0","@types/express":"^4.17.17","@types/express-http-proxy":"^1.6.3","@types/micromatch":"^4.0.2","@types/normalize-path":"^3.0.0","@types/reach__router":"^1.3.11","@types/react-dom":"^18.0.11","@types/semver":"^7.3.13","@types/sharp":"^0.31.1","@types/signal-exit":"^3.0.1","@types/string-similarity":"^4.0.0","@types/tmp":"^0.2.3","@types/webpack-virtual-modules":"^0.1.1","babel-preset-gatsby-package":"^3.9.0","copyfiles":"^2.4.1","cross-env":"^7.0.3","documentation":"^13.2.5","react":"^18.2.0","react-dom":"^18.2.0","rimraf":"^3.0.2","typescript":"^5.0.3","xhr-mock":"^2.5.1","zipkin":"^0.22.0","zipkin-javascript-opentracing":"^3.0.0","zipkin-transport-http":"^0.22.0"},"optionalDependencies":{"gatsby-sharp":"^1.9.0"},"engines":{"node":">=18.0.0"},"files":["apis.json","ipc.json","cache-dir/","cli.js","dist/","graphql.js","graphql.d.ts","reporter.js","reporter.d.ts","index.d.ts","scripts/postinstall.js","utils.js","internal.js","internal.d.ts","webpack.js","webpack.d.ts","!**/__tests__/"],"homepage":"https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby#readme","keywords":["blog","generator","jekyll","markdown","react","ssg","website"],"license":"MIT","main":"cache-dir/commonjs/gatsby-browser-entry.js","module":"cache-dir/gatsby-browser-entry.js","peerDependencies":{"react":"^18.0.0 || ^0.0.0","react-dom":"^18.0.0 || ^0.0.0"},"repository":{"type":"git","url":"git+https://github.com/gatsbyjs/gatsby.git"},"resolutions":{"graphql":"^16.6.0"},"scripts":{"build":"npm run build:types && npm run build:src && npm run build:internal-plugins && npm run build:rawfiles && npm run build:cjs","postbuild":"node scripts/output-api-file.js","build:internal-plugins":"copyfiles -u 1 src/internal-plugins/**/package.json dist","build:rawfiles":"copyfiles -u 1 src/internal-plugins/**/raw_* dist","build:cjs":"babel cache-dir --out-dir cache-dir/commonjs --ignore \\"**/__tests__\\" --ignore \\"**/__mocks__\\" && copyfiles -u 1 cache-dir/**/*.json cache-dir/commonjs","build:src":"babel src --out-dir dist --source-maps --verbose --ignore \\"**/gatsby-cli.js,src/internal-plugins/dev-404-page/raw_dev-404-page.js,**/__tests__,**/__mocks__\\" --extensions \\".ts,.tsx,.js\\"","build:types":"tsc --emitDeclarationOnly --declaration --declarationDir dist && node scripts/check-declaration.js","clean-test-bundles":"find test/ -type f -name bundle.js* -exec rm -rf {} +","prebuild":"rimraf dist && rimraf cache-dir/commonjs","postinstall":"node scripts/postinstall.js","prepare":"cross-env NODE_ENV=production npm run build","watch":"rimraf dist && mkdir dist && npm run build:internal-plugins && npm run build:rawfiles && npm run build:src -- --watch","version":"node ../../scripts/pin-version.js","typecheck":"tsc --noEmit"},"types":"index.d.ts","yargs":{"boolean-negation":false},"gitHead":"774313bf9400c4cc817b5e078388bba55997269a"}');
+module.exports = JSON.parse('{"name":"gatsby","description":"Blazing fast modern site generator for React","version":"5.11.0","author":"Kyle Mathews <mathews.kyle@gmail.com>","bin":{"gatsby":"./cli.js"},"bugs":{"url":"https://github.com/gatsbyjs/gatsby/issues"},"dependencies":{"@babel/code-frame":"^7.18.6","@babel/core":"^7.20.12","@babel/eslint-parser":"^7.19.1","@babel/helper-plugin-utils":"^7.20.2","@babel/parser":"^7.20.13","@babel/runtime":"^7.20.13","@babel/traverse":"^7.20.13","@babel/types":"^7.20.7","@builder.io/partytown":"^0.7.5","@gatsbyjs/reach-router":"^2.0.1","@gatsbyjs/webpack-hot-middleware":"^2.25.3","@graphql-codegen/add":"^3.2.3","@graphql-codegen/core":"^2.6.8","@graphql-codegen/plugin-helpers":"^2.7.2","@graphql-codegen/typescript":"^2.8.8","@graphql-codegen/typescript-operations":"^2.5.13","@graphql-tools/code-file-loader":"^7.3.23","@graphql-tools/load":"^7.8.14","@jridgewell/trace-mapping":"^0.3.18","@nodelib/fs.walk":"^1.2.8","@parcel/cache":"2.8.3","@parcel/core":"2.8.3","@pmmmwh/react-refresh-webpack-plugin":"^0.5.10","@types/http-proxy":"^1.17.11","@typescript-eslint/eslint-plugin":"^5.59.8","@typescript-eslint/parser":"^5.59.8","@vercel/webpack-asset-relocator-loader":"^1.7.3","acorn-loose":"^8.3.0","acorn-walk":"^8.2.0","address":"1.2.2","anser":"^2.1.1","autoprefixer":"^10.4.14","axios":"^0.21.1","babel-jsx-utils":"^1.1.0","babel-loader":"^8.3.0","babel-plugin-add-module-exports":"^1.0.4","babel-plugin-dynamic-import-node":"^2.3.3","babel-plugin-lodash":"^3.3.4","babel-plugin-remove-graphql-queries":"^5.11.0","babel-preset-gatsby":"^3.11.0","better-opn":"^2.1.1","bluebird":"^3.7.2","browserslist":"^4.21.7","cache-manager":"^2.11.1","chalk":"^4.1.2","chokidar":"^3.5.3","common-tags":"^1.8.2","compression":"^1.7.4","cookie":"^0.5.0","core-js":"^3.30.2","cors":"^2.8.5","css-loader":"^5.2.7","css-minimizer-webpack-plugin":"^2.0.0","css.escape":"^1.5.1","date-fns":"^2.30.0","debug":"^4.3.4","deepmerge":"^4.3.1","detect-port":"^1.5.1","devcert":"^1.2.2","dotenv":"^8.6.0","enhanced-resolve":"^5.14.1","error-stack-parser":"^2.1.4","eslint":"^7.32.0","eslint-config-react-app":"^6.0.0","eslint-plugin-flowtype":"^5.10.0","eslint-plugin-import":"^2.27.5","eslint-plugin-jsx-a11y":"^6.7.1","eslint-plugin-react":"^7.32.2","eslint-plugin-react-hooks":"^4.6.0","eslint-webpack-plugin":"^2.7.0","event-source-polyfill":"1.0.31","execa":"^5.1.1","express":"^4.18.2","express-http-proxy":"^1.6.3","fastest-levenshtein":"^1.0.16","fastq":"^1.15.0","file-loader":"^6.2.0","find-cache-dir":"^3.3.2","fs-exists-cached":"1.0.0","fs-extra":"^11.1.1","gatsby-cli":"^5.11.0","gatsby-core-utils":"^4.11.0","gatsby-graphiql-explorer":"^3.11.0","gatsby-legacy-polyfills":"^3.11.0","gatsby-link":"^5.11.0","gatsby-page-utils":"^3.11.0","gatsby-parcel-config":"^1.11.0","gatsby-plugin-page-creator":"^5.11.0","gatsby-plugin-typescript":"^5.11.0","gatsby-plugin-utils":"^4.11.0","gatsby-react-router-scroll":"^6.11.0","gatsby-script":"^2.11.0","gatsby-telemetry":"^4.11.0","gatsby-worker":"^2.11.0","glob":"^7.2.3","globby":"^11.1.0","got":"^11.8.6","graphql":"^16.6.0","graphql-compose":"^9.0.10","graphql-http":"^1.18.0","graphql-tag":"^2.12.6","hasha":"^5.2.2","invariant":"^2.2.4","is-relative":"^1.0.0","is-relative-url":"^3.0.0","joi":"^17.9.2","json-loader":"^0.5.7","latest-version":"^7.0.0","lmdb":"2.5.3","lodash":"^4.17.21","meant":"^1.0.3","memoizee":"^0.4.15","micromatch":"^4.0.5","mime":"^3.0.0","mini-css-extract-plugin":"1.6.2","mitt":"^1.2.0","moment":"^2.29.4","multer":"^1.4.5-lts.1","node-fetch":"^2.6.11","node-html-parser":"^5.4.2","normalize-path":"^3.0.0","null-loader":"^4.0.1","opentracing":"^0.14.7","p-defer":"^3.0.0","parseurl":"^1.3.3","physical-cpu-count":"^2.0.0","platform":"^1.3.6","postcss":"^8.4.24","postcss-flexbugs-fixes":"^5.0.2","postcss-loader":"^5.3.0","prompts":"^2.4.2","prop-types":"^15.8.1","query-string":"^6.14.1","raw-loader":"^4.0.2","react-dev-utils":"^12.0.1","react-refresh":"^0.14.0","react-server-dom-webpack":"0.0.0-experimental-c8b778b7f-20220825","redux":"4.2.1","redux-thunk":"^2.4.2","resolve-from":"^5.0.0","semver":"^7.5.1","shallow-compare":"^1.2.2","signal-exit":"^3.0.7","slugify":"^1.6.6","socket.io":"4.6.1","socket.io-client":"4.6.1","stack-trace":"^0.0.10","string-similarity":"^1.2.2","strip-ansi":"^6.0.1","style-loader":"^2.0.0","style-to-object":"^0.4.1","terser-webpack-plugin":"^5.3.9","tmp":"^0.2.1","true-case-path":"^2.2.1","type-of":"^2.0.1","url-loader":"^4.1.1","uuid":"^8.3.2","webpack":"^5.85.0","webpack-dev-middleware":"^4.3.0","webpack-merge":"^5.9.0","webpack-stats-plugin":"^1.1.1","webpack-virtual-modules":"^0.5.0","xstate":"^4.37.2","yaml-loader":"^0.8.0"},"devDependencies":{"@babel/cli":"^7.20.7","@babel/helper-plugin-utils":"^7.20.2","@babel/register":"^7.18.9","@types/babel-core":"^6.25.7","@types/eslint":"^8.40.0","@types/estree":"^1.0.1","@types/express":"^4.17.17","@types/express-http-proxy":"^1.6.3","@types/micromatch":"^4.0.2","@types/normalize-path":"^3.0.0","@types/reach__router":"^1.3.11","@types/react-dom":"^18.2.4","@types/semver":"^7.5.0","@types/signal-exit":"^3.0.1","@types/string-similarity":"^4.0.0","@types/tmp":"^0.2.3","@types/webpack-virtual-modules":"^0.1.1","babel-preset-gatsby-package":"^3.11.0","copyfiles":"^2.4.1","cross-env":"^7.0.3","documentation":"^13.2.5","react":"^18.2.0","react-dom":"^18.2.0","rimraf":"^3.0.2","typescript":"^5.0.4","xhr-mock":"^2.5.1","zipkin":"^0.22.0","zipkin-javascript-opentracing":"^3.0.0","zipkin-transport-http":"^0.22.0"},"optionalDependencies":{"gatsby-sharp":"^1.11.0"},"engines":{"node":">=18.0.0"},"files":["apis.json","ipc.json","cache-dir/","cli.js","dist/","graphql.js","graphql.d.ts","reporter.js","reporter.d.ts","index.d.ts","scripts/postinstall.js","utils.js","internal.js","internal.d.ts","webpack.js","webpack.d.ts","!**/__tests__/"],"homepage":"https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby#readme","keywords":["blog","generator","jekyll","markdown","react","ssg","website"],"license":"MIT","main":"cache-dir/commonjs/gatsby-browser-entry.js","module":"cache-dir/gatsby-browser-entry.js","peerDependencies":{"react":"^18.0.0 || ^0.0.0","react-dom":"^18.0.0 || ^0.0.0"},"repository":{"type":"git","url":"git+https://github.com/gatsbyjs/gatsby.git"},"resolutions":{"graphql":"^16.6.0"},"scripts":{"build":"npm run build:types && npm run build:src && npm run build:internal-plugins && npm run build:rawfiles && npm run build:cjs","postbuild":"node scripts/output-api-file.js","build:internal-plugins":"copyfiles -u 1 src/internal-plugins/**/package.json dist","build:rawfiles":"copyfiles -u 1 src/internal-plugins/**/raw_* dist","build:cjs":"babel cache-dir --out-dir cache-dir/commonjs --ignore \\"**/__tests__\\" --ignore \\"**/__mocks__\\" && copyfiles -u 1 cache-dir/**/*.json cache-dir/commonjs","build:src":"babel src --out-dir dist --source-maps --verbose --ignore \\"**/gatsby-cli.js,src/internal-plugins/dev-404-page/raw_dev-404-page.js,**/__tests__,**/__mocks__\\" --extensions \\".ts,.tsx,.js\\"","build:types":"tsc --emitDeclarationOnly --declaration --declarationDir dist && node scripts/check-declaration.js","clean-test-bundles":"find test/ -type f -name bundle.js* -exec rm -rf {} +","prebuild":"rimraf dist && rimraf cache-dir/commonjs","postinstall":"node scripts/postinstall.js","prepare":"cross-env NODE_ENV=production npm run build","watch":"rimraf dist && mkdir dist && npm run build:internal-plugins && npm run build:rawfiles && npm run build:src -- --watch","version":"node ../../scripts/pin-version.js","typecheck":"tsc --noEmit"},"types":"index.d.ts","yargs":{"boolean-negation":false},"gitHead":"0130d6a4a182e9daaaf3cd8cb28d30a7b48c70ed"}');
 
 /***/ })
 
@@ -12854,7 +13175,7 @@ module.exports = JSON.parse('{"name":"gatsby","description":"Blazing fast modern
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "" + {"218":"component---src-pages-404-tsx","691":"component---src-pages-index-tsx"}[chunkId] + ".js";
+/******/ 			return "" + ({"218":"component---src-pages-404-tsx","691":"component---src-pages-index-tsx"}[chunkId] || chunkId) + ".js";
 /******/ 		};
 /******/ 	})();
 /******/ 	
@@ -12932,14 +13253,14 @@ var __webpack_exports__ = {};
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "React": () => (/* binding */ React),
-/* harmony export */   "StaticQueryContext": () => (/* binding */ StaticQueryContext),
+/* harmony export */   React: () => (/* binding */ React),
+/* harmony export */   StaticQueryContext: () => (/* binding */ StaticQueryContext),
 /* harmony export */   "default": () => (/* binding */ staticPage),
-/* harmony export */   "getPageChunk": () => (/* binding */ getPageChunk),
-/* harmony export */   "renderSlice": () => (/* binding */ renderSlice),
-/* harmony export */   "renderToPipeableStream": () => (/* reexport safe */ react_server_dom_webpack_writer_node_server__WEBPACK_IMPORTED_MODULE_2__.renderToPipeableStream),
-/* harmony export */   "reorderHeadComponents": () => (/* binding */ reorderHeadComponents),
-/* harmony export */   "sanitizeComponents": () => (/* binding */ sanitizeComponents)
+/* harmony export */   getPageChunk: () => (/* binding */ getPageChunk),
+/* harmony export */   renderSlice: () => (/* binding */ renderSlice),
+/* harmony export */   renderToPipeableStream: () => (/* reexport safe */ react_server_dom_webpack_writer_node_server__WEBPACK_IMPORTED_MODULE_2__.renderToPipeableStream),
+/* harmony export */   reorderHeadComponents: () => (/* binding */ reorderHeadComponents),
+/* harmony export */   sanitizeComponents: () => (/* binding */ sanitizeComponents)
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7462);
 /* harmony import */ var _emotion_react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3240);
@@ -12974,7 +13295,7 @@ headHandlerForSSR({pageComponent,setHeadComponents,setHtmlAttributes,setBodyAttr
 if(script.shouldGenerateLink){headComponents.push((0,_emotion_react__WEBPACK_IMPORTED_MODULE_0__/* .jsx */ .tZ)("link",{as:"script",rel:script.rel,key:script.name,href:`${""}/${script.name}`}));}});reversedStyles.forEach(style=>{// Add <link>s for styles that should be prefetched
 // otherwise, inline as a <style> tag
 if(style.rel===`prefetch`){headComponents.push((0,_emotion_react__WEBPACK_IMPORTED_MODULE_0__/* .jsx */ .tZ)("link",{as:"style",rel:style.rel,key:style.name,href:`${""}/${style.name}`}));}else{headComponents.unshift((0,_emotion_react__WEBPACK_IMPORTED_MODULE_0__/* .jsx */ .tZ)("style",{"data-href":`${""}/${style.name}`,"data-identity":`gatsby-global-css`,dangerouslySetInnerHTML:{__html:style.content}}));}});// Add page metadata for the current page
-const windowPageData=`/*<![CDATA[*/window.pagePath="${pagePath}";${ true?``:0}${inlinePageData?`window.pageData=${JSON.stringify(pageData)};`:``}/*]]>*/`;postBodyComponents.push((0,_emotion_react__WEBPACK_IMPORTED_MODULE_0__/* .jsx */ .tZ)("script",{key:`script-loader`,id:`gatsby-script-loader`,dangerouslySetInnerHTML:{__html:windowPageData}}));if(true){postBodyComponents.push(createElement(ServerSliceRenderer,{sliceId:`_gatsby-scripts`}));}else{}headComponents=reorderHeadComponents(headComponents);apiRunner(`onPreRenderHTML`,{getHeadComponents,replaceHeadComponents,getPreBodyComponents,replacePreBodyComponents,getPostBodyComponents,replacePostBodyComponents,pathname:pagePath,pathPrefix:""});let htmlElement=(0,_emotion_react__WEBPACK_IMPORTED_MODULE_0__/* .jsx */ .tZ)(Html,(0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z)({},bodyProps,{headComponents:headComponents,htmlAttributes:htmlAttributes,bodyAttributes:bodyAttributes,preBodyComponents:preBodyComponents,postBodyComponents:postBodyComponents,body:bodyHtml,path:pagePath}));if(true){htmlElement=(0,_emotion_react__WEBPACK_IMPORTED_MODULE_0__/* .jsx */ .tZ)(SlicesContext.Provider,{value:slicesContext},htmlElement);}const html=`<!DOCTYPE html>${renderToStaticMarkup(htmlElement)}`;return{html,unsafeBuiltinsUsage:global.unsafeBuiltinUsage,sliceData:sliceProps};}catch(e){e.unsafeBuiltinsUsage=global.unsafeBuiltinUsage;throw e;}}function getPageChunk({componentChunkName}){return asyncRequires.components[componentChunkName]();}async function renderSlice({slice,staticQueryContext,props={}}){const{default:SliceComponent}=await getPageChunk(slice);const slicesContext={// we are not yet supporting using <Slice /> placeholders within slice components
+const windowPageData=`/*<![CDATA[*/window.pagePath=${JSON.stringify(pagePath)};${ true?``:0}${inlinePageData?`window.pageData=${JSON.stringify(pageData)};`:``}/*]]>*/`;postBodyComponents.push((0,_emotion_react__WEBPACK_IMPORTED_MODULE_0__/* .jsx */ .tZ)("script",{key:`script-loader`,id:`gatsby-script-loader`,dangerouslySetInnerHTML:{__html:windowPageData}}));if(true){postBodyComponents.push(createElement(ServerSliceRenderer,{sliceId:`_gatsby-scripts`}));}else{}headComponents=reorderHeadComponents(headComponents);apiRunner(`onPreRenderHTML`,{getHeadComponents,replaceHeadComponents,getPreBodyComponents,replacePreBodyComponents,getPostBodyComponents,replacePostBodyComponents,pathname:pagePath,pathPrefix:""});let htmlElement=(0,_emotion_react__WEBPACK_IMPORTED_MODULE_0__/* .jsx */ .tZ)(Html,(0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z)({},bodyProps,{headComponents:headComponents,htmlAttributes:htmlAttributes,bodyAttributes:bodyAttributes,preBodyComponents:preBodyComponents,postBodyComponents:postBodyComponents,body:bodyHtml,path:pagePath}));if(true){htmlElement=(0,_emotion_react__WEBPACK_IMPORTED_MODULE_0__/* .jsx */ .tZ)(SlicesContext.Provider,{value:slicesContext},htmlElement);}const html=`<!DOCTYPE html>${renderToStaticMarkup(htmlElement)}`;return{html,unsafeBuiltinsUsage:global.unsafeBuiltinUsage,sliceData:sliceProps};}catch(e){e.unsafeBuiltinsUsage=global.unsafeBuiltinUsage;throw e;}}function getPageChunk({componentChunkName}){return asyncRequires.components[componentChunkName]();}async function renderSlice({slice,staticQueryContext,props={}}){const{default:SliceComponent}=await getPageChunk(slice);const slicesContext={// we are not yet supporting using <Slice /> placeholders within slice components
 // setting this renderEnvironemnt to throw meaningful error on `<Slice />` usage
 // `slices` renderEnvironment should be removed once we support nested `<Slice />` placeholders
 renderEnvironment:`slices`,sliceRoot:slice};const sliceElement=(0,_emotion_react__WEBPACK_IMPORTED_MODULE_0__/* .jsx */ .tZ)(SliceComponent,(0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z)({sliceContext:slice.context},props));const sliceWrappedWithWrapRootElement=apiRunner(`wrapRootElement`,{element:sliceElement},sliceElement,({result})=>{return{element:result};}).pop();const sliceWrappedWithWrapRootElementAndContexts=(0,_emotion_react__WEBPACK_IMPORTED_MODULE_0__/* .jsx */ .tZ)(SlicesContext.Provider,{value:slicesContext},(0,_emotion_react__WEBPACK_IMPORTED_MODULE_0__/* .jsx */ .tZ)(StaticQueryContext.Provider,{value:staticQueryContext},sliceWrappedWithWrapRootElement));const writableStream=new WritableAsPromise();const{pipe}=renderToPipeableStream(sliceWrappedWithWrapRootElementAndContexts,{onAllReady(){pipe(writableStream);},onError(error){writableStream.destroy(error);}});return await writableStream;}
