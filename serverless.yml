@@ -1,0 +1,71 @@
+org: aphexlog
+app: merdok
+service: merdok
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.9
+  stage: ${opt:stage, 'dev'}
+  stackName: ${self:service}-${self:provider.stage}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: !GetAtt ConversationsTable.Arn
+
+package: # Packaging configuration
+  individually: true
+  include:
+    - "lambda/**/*"
+  exclude:
+    - "**/*"
+
+
+custom:
+  client:
+    bucketName: merdok-client
+    distributionFolder: client/public
+  DYNAMODB_TABLE_NAME: ${self:service}-${opt:stage, self:provider.stage}
+
+functions:
+  hello:
+    handler: handler.hello
+    # events:
+    #   - websocket:
+    #       route: $connect
+    environment:
+      # OPENAI_API_KEY: ${self:custom.OPENAI_API_KEY}
+      DYNAMODB_TABLE_NAME: ${self:custom.DYNAMODB_TABLE_NAME}
+
+resources:
+  Resources:
+    ConversationsTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Delete
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: userId
+            AttributeType: S
+          - AttributeName: conversationId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: userId
+            KeyType: HASH
+          - AttributeName: conversationId
+            KeyType: RANGE
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:custom.DYNAMODB_TABLE_NAME}
+
+
+plugins:
+  - serverless-python-requirements
+  - serverless-finch
