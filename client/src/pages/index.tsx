@@ -12,8 +12,38 @@ const sendButtonStyles = "rounded-lg px-4 py-2 bg-blue-500 text-white font-bold 
 const sendButtonPressedStyles = "transform scale-95";
 
 const IndexPage: React.FC<PageProps> = () => {
-  const [messages, setMessages] = useState<{ message: string; user: string }[]>([]);
+  const [messages, setMessages] = useState<{ message: string; user: string; id: string }[]>([]);
   const [chatInput, setChatInput] = useState<string>("");
+  const [ws, setWs] = useState<WebSocket | null>(null);  // WebSocket instance in state
+  
+  useEffect(() => {
+    const wsInstance = new WebSocket("wss://y6mnwf96w8.execute-api.us-east-1.amazonaws.com/dev");
+    setWs(wsInstance);  // Store WebSocket instance in state
+
+    wsInstance.onopen = () => {
+      console.log("WebSocket connection opened.");
+    };
+
+    wsInstance.onmessage = (event) => {
+      try {
+        const data = JSON.parse(event.data);
+        if (data.message) {
+          setMessages((oldMessages) => [...oldMessages, { message: data.message, user: "assistant", id: Date.now().toString() }]);
+        }
+      } catch (error) {
+        console.error("An error occurred:", error);
+        setMessages((oldMessages) => [...oldMessages, { message: "An error occurred", user: "system", id: Date.now().toString() }]);
+      }
+    };
+
+    wsInstance.onerror = (event) => {
+      console.error("WebSocket error observed:", event);
+    };
+
+    return () => {
+      wsInstance.close();
+    };
+  }, []);
 
   useEffect(() => {
     const chatContainer = document.getElementById("chatContainer");
@@ -22,42 +52,25 @@ const IndexPage: React.FC<PageProps> = () => {
     }
   }, [messages]);
 
-  async function handleChatInputSubmit(event: React.FormEvent) {
+  function handleChatInputSubmit(event: React.FormEvent) {
     event.preventDefault();
 
-    if (chatInput) {
-      const userMessage = { message: chatInput, user: "user" };
-      setMessages((oldMessages) => [...oldMessages, userMessage]);
-      setChatInput(""); // Clear the input field immediately after sending the message
-
-      const response = await fetch('https://dcwzi4igl1.execute-api.us-east-1.amazonaws.com', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(userMessage)
-      });
-
-      const data = await response.json();
-
-      if (data.message) {
-        setMessages((oldMessages) => [...oldMessages, { message: data.message, user: "assistant" }]);
-      }
+    if (chatInput && ws) {  // Check if WebSocket instance exists
+      ws.send(JSON.stringify({ message: chatInput, user: "user" }));
+      setMessages((oldMessages) => [...oldMessages, { message: chatInput, user: "user", id: Date.now().toString() }]);  // Added unique id
+      setChatInput("");
     }
   }
-
-
 
   return (
     <main className={containerStyles}>
       <div className={`border border-gray-300 p-2 rounded-lg mb-4 ${chatContainerStyles}`} id="chatContainer">
-        {messages.map((messageObj, index) => (
-          <div key={index} className={messageObj.user === "user" ? `${messageContainerStyles} ${messageStyles}` : botMessageStyles}>
+        {messages.map((messageObj) => (
+          <div key={messageObj.id} className={messageObj.user === "user" ? `${messageContainerStyles} ${messageStyles}` : botMessageStyles}>
             {messageObj.message}
           </div>
         ))}
       </div>
-
       <form onSubmit={handleChatInputSubmit} className={formStyles}>
         <input
           type="text"
@@ -68,7 +81,6 @@ const IndexPage: React.FC<PageProps> = () => {
         <button
           type="submit"
           className={sendButtonStyles}
-          onClick={() => console.log("Button pressed")} // Replace with your logic
         >
           Enter
         </button>

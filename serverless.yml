@@ -9,6 +9,8 @@ provider:
   runtime: python3.9
   stage: ${opt:stage, 'dev'}
   stackName: ${self:service}-${self:provider.stage}
+  environment:
+    DYNAMODB_TABLE_NAME: ${self:custom.DYNAMODB_TABLE_NAME}
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -20,29 +22,23 @@ provider:
         - dynamodb:DeleteItem
       Resource: !GetAtt ConversationsTable.Arn
 
-package: # Packaging configuration
-  individually: true
-  include:
-    - "lambda/**/*"
-  exclude:
-    - "**/*"
-
-
-custom:
-  client:
-    bucketName: merdok-client
-    distributionFolder: client/public
-  DYNAMODB_TABLE_NAME: ${self:service}-${opt:stage, self:provider.stage}
-
 functions:
-  hello:
-    handler: handler.hello
-    # events:
-    #   - websocket:
-    #       route: $connect
-    environment:
-      # OPENAI_API_KEY: ${self:custom.OPENAI_API_KEY}
-      DYNAMODB_TABLE_NAME: ${self:custom.DYNAMODB_TABLE_NAME}
+  connect:
+    handler: lambdas/handler.connect  # Updated the path to your Python file and function
+    events:
+      - websocket:
+          route: $connect
+  disconnect:
+    handler: lambdas/handler.disconnect  # Updated the path to your Python file and function
+    events:
+      - websocket:
+          route: $disconnect
+  sendMessage:
+    handler: lambdas/handler.sendMessage  # Updated the path to your Python file and function
+    events:
+      - websocket:
+          route: sendMessage
+
 
 resources:
   Resources:
@@ -65,6 +61,18 @@ resources:
           WriteCapacityUnits: 1
         TableName: ${self:custom.DYNAMODB_TABLE_NAME}
 
+package:
+  individually: true
+  include:
+    - "lambda/**/*"
+  exclude:
+    - "**/*"
+
+custom:
+  DYNAMODB_TABLE_NAME: ${self:service}-${opt:stage, self:provider.stage}
+  client:
+    bucketName: ${self:service}-client-${opt:stage, self:provider.stage}
+    distributionFolder: client/public
 
 plugins:
   - serverless-python-requirements
