@@ -30,6 +30,9 @@ custom:
   client:
     bucketName: ${self:custom.DOMAIN_NAME}
     distributionFolder: client/public
+  pythonRequirements:
+    layer: true
+    fileName: lambdas/requirements.txt
 
 package:
   individually: true
@@ -45,24 +48,31 @@ package:
     - "client/**"
     - "package-lock.json"
     - "package.json"
-
+    - "README.md"
 functions:
   connect:
     handler: lambdas/handler.connect
+    layers:
+      - { Ref: PythonRequirementsLambdaLayer }
     events:
       - websocket:
           route: $connect
   disconnect:
     handler: lambdas/handler.disconnect
+    layers:
+      - { Ref: PythonRequirementsLambdaLayer }
     events:
       - websocket:
           route: $disconnect
   sendMessage:
     handler: lambdas/handler.sendMessage
+    layers:
+      - { Ref: PythonRequirementsLambdaLayer }
     events:
       - websocket:
           route: sendMessage
           routeResponseSelectionExpression: $default
+
 
 resources:
   Resources:
