@@ -22,23 +22,42 @@ provider:
         - dynamodb:DeleteItem
       Resource: !GetAtt ConversationsTable.Arn
 
+custom:
+  DYNAMODB_TABLE_NAME: ${self:service}-${opt:stage, self:provider.stage}
+  DOMAIN_NAME: elevator-robot.com
+  client:
+    bucketName: ${self:custom.DOMAIN_NAME}
+    distributionFolder: client/public
+
+package:
+  individually: true
+  include:
+    - "lambdas/"
+    - "!*/**" # TODO: this fixes an issue .. look into it
+  exclude:
+    - "node_modules/**"
+    - "test/**"
+    - ".git/**"
+    - ".serverless/**"
+    - ".venv/**"
+    - "serverless_sdk/**"
+
 functions:
   connect:
-    handler: lambdas/handler.connect  # Updated the path to your Python file and function
+    handler: lambdas/handler.connect
     events:
       - websocket:
           route: $connect
   disconnect:
-    handler: lambdas/handler.disconnect  # Updated the path to your Python file and function
+    handler: lambdas/handler.disconnect
     events:
       - websocket:
           route: $disconnect
   sendMessage:
-    handler: lambdas/handler.sendMessage  # Updated the path to your Python file and function
+    handler: lambdas/handler.sendMessage
     events:
       - websocket:
           route: sendMessage
-
 
 resources:
   Resources:
@@ -60,19 +79,15 @@ resources:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
         TableName: ${self:custom.DYNAMODB_TABLE_NAME}
-
-package:
-  individually: true
-  include:
-    - "lambda/**/*"
-  exclude:
-    - "**/*"
-
-custom:
-  DYNAMODB_TABLE_NAME: ${self:service}-${opt:stage, self:provider.stage}
-  client:
-    bucketName: ${self:service}-client-${opt:stage, self:provider.stage}
-    distributionFolder: client/public
+    # ElevatorRobotRecordSet:
+    #   Type: "AWS::Route53::RecordSet"
+    #   Properties: 
+    #     HostedZoneName: "${self:custom.DOMAIN_NAME}."
+    #     Name: "${self:custom.DOMAIN_NAME}."
+    #     Type: A
+    #     AliasTarget:
+    #       HostedZoneId: "Z0809465328WIUFUDSAKZ"
+    #       DNSName:  "s3-website-us-east-1.amazonaws.com"
 
 plugins:
   - serverless-python-requirements
