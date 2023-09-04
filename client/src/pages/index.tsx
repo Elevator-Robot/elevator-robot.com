@@ -15,9 +15,9 @@ const IndexPage: React.FC<PageProps> = () => {
   const [messages, setMessages] = useState<{ message: string; user: string; id: string }[]>([]);
   const [chatInput, setChatInput] = useState<string>("");
   const [ws, setWs] = useState<WebSocket | null>(null);  // WebSocket instance in state
-  
+
   useEffect(() => {
-    const wsInstance = new WebSocket("wss://y6mnwf96w8.execute-api.us-east-1.amazonaws.com/dev");
+    const wsInstance = new WebSocket("wss://67dlawkul8.execute-api.us-east-1.amazonaws.com/dev");
     setWs(wsInstance);  // Store WebSocket instance in state
 
     wsInstance.onopen = () => {
@@ -54,13 +54,19 @@ const IndexPage: React.FC<PageProps> = () => {
 
   function handleChatInputSubmit(event: React.FormEvent) {
     event.preventDefault();
-
+  
     if (chatInput && ws) {  // Check if WebSocket instance exists
-      ws.send(JSON.stringify({ message: chatInput, user: "user" }));
+      const messageData = {
+        action: "sendMessage", // Add an action key
+        message: chatInput,
+        user: "user",
+      };
+      ws.send(JSON.stringify(messageData));
       setMessages((oldMessages) => [...oldMessages, { message: chatInput, user: "user", id: Date.now().toString() }]);  // Added unique id
       setChatInput("");
     }
   }
+
 
   return (
     <main className={containerStyles}>

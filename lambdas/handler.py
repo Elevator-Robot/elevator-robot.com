@@ -3,20 +3,39 @@ import json
 import openai
 import boto3
 
-dynamodb_table_name = os.getenv("DYNAMODB_TABLE_NAME")
+# from lambda_powertools import Logger
+
 dynamodb = boto3.resource("dynamodb")
-table = dynamodb.Table(dynamodb_table_name)
+conversations_table = dynamodb.Table(
+    os.getenv("DYNAMODB_CONVERSATIONS_TABLE_NAME")
+)
+websocket_connections_table = dynamodb.Table(
+    os.getenv("DYNAMODB_WEBSOCKET_TABLE_NAME")
+)
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
 def connect(event, context):
     connection_id = event["requestContext"]["connectionId"]
-    table.put_item(Item={"connectionId": connection_id, "type": "connection"})
+    user_id = event.get("queryStringParameters", {}).get(
+        "userId", "defaultUserId"
+    )
+    websocket_connections_table.put_item(
+        Item={
+            "connectionId": connection_id,  # Add this line
+            "userId": user_id,
+            "conversationId": connection_id,
+            "type": "connection",
+        }
+    )
     return {"statusCode": 200}
 
 
 def disconnect(event, context):
     connection_id = event["requestContext"]["connectionId"]
-    table.delete_item(Key={"connectionId": connection_id})
+    websocket_connections_table.delete_item(
+        Key={"connectionId": connection_id}
+    )
     return {"statusCode": 200}
 
 
@@ -27,7 +46,7 @@ def sendMessage(event, context):
     user_message = event.get("body", {})
 
     # Retrieve the existing conversation for this user from DynamoDB
-    response = table.get_item(
+    response = conversations_table.get_item(
         Key={"userId": user_id, "conversationId": "defaultConversationId"}
     )
     conversation = response.get("Item", {}).get("messages", [])
@@ -56,7 +75,7 @@ def sendMessage(event, context):
     conversation.append({"role": "assistant", "content": generated_message})
 
     # Update the conversation in DynamoDB
-    table.update_item(
+    conversations_table.update_item(
         Key={"userId": user_id, "conversationId": "defaultConversationId"},
         UpdateExpression="SET messages = :val1",
         ExpressionAttributeValues={":val1": conversation},

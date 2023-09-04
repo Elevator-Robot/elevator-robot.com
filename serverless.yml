@@ -12,7 +12,9 @@ provider:
   websocketsApiRouteSelectionExpression: $request.body.action
   websocketsDescription: Custom Serverless Websockets
   environment:
-    DYNAMODB_TABLE_NAME: ${self:custom.DYNAMODB_TABLE_NAME}
+    DYNAMODB_CONVERSATIONS_TABLE_NAME: ${self:service}-${self:provider.stage}-conversations
+    DYNAMODB_WEBSOCKET_TABLE_NAME: ${self:service}-${self:provider.stage}-websockets
+    OPENAI_API_KEY: ${env:OPENAI_API_KEY}
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -22,17 +24,21 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-      Resource: !GetAtt ConversationsTable.Arn
+      Resource: 
+        - !GetAtt ConversationsTable.Arn
+        - !GetAtt WebsocketConnectionsTable.Arn
+        - !Sub 'arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/*'
 
 custom:
-  DYNAMODB_TABLE_NAME: ${self:service}-${opt:stage, self:provider.stage}
   DOMAIN_NAME: elevator-robot.com
   client:
-    bucketName: ${self:custom.DOMAIN_NAME}
+    bucketName: ${self:provider.environment.DYNAMODB_CONVERSATIONS_TABLE_NAME}
     distributionFolder: client/public
   pythonRequirements:
     layer: true
     fileName: lambdas/requirements.txt
+    dockerizePip: true
+    noDeploy: []
 
 package:
   individually: true
@@ -49,6 +55,7 @@ package:
     - "package-lock.json"
     - "package.json"
     - "README.md"
+
 functions:
   connect:
     handler: lambdas/handler.connect
@@ -71,7 +78,6 @@ functions:
     events:
       - websocket:
           route: sendMessage
-          routeResponseSelectionExpression: $default
 
 
 resources:
@@ -93,7 +99,21 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: ${self:custom.DYNAMODB_TABLE_NAME}
+        TableName: ${self:provider.environment.DYNAMODB_CONVERSATIONS_TABLE_NAME}
+    WebsocketConnectionsTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Delete
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: connectionId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: connectionId
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:service}-${self:provider.stage}-websockets
     # ElevatorRobotRecordSet:
     #   Type: "AWS::Route53::RecordSet"
     #   Properties: 
