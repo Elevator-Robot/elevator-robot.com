@@ -8,26 +8,26 @@ from database_operations import (
 )
 from openai_interface import generate_message, format_prompt
 
-
 logger = Logger(service="assistant")
 
 
 def connect(event, context):
+    """Handle connection event."""
     connection_id = event["requestContext"]["connectionId"]
-    user_id = event.get("queryStringParameters", {}).get(
-        "userId", "defaultUserId"
-    )
+    user_id = event.get("queryStringParameters", {}).get("userId", "defaultUserId")
     store_connection(connection_id, user_id)
     return {"statusCode": 200}
 
 
 def disconnect(event, context):
+    """Handle disconnection event."""
     connection_id = event["requestContext"]["connectionId"]
     delete_connection(connection_id)
     return {"statusCode": 200}
 
 
 def sendMessage(event, context):
+    """Handle sendMessage event."""
     user_id = event.get("userId", "defaultUserId")
     body = json.loads(event.get("body", "") or "{}")
     user_message = body.get("message", "")
@@ -41,9 +41,7 @@ def sendMessage(event, context):
     ]
     conversation = retrieve_conversation(user_id, default_conversation)
     conversation.append({"role": "user", "content": user_message})
-    prompt = format_prompt(
-        conversation
-    )  # Define your format_prompt function based on your logic
+    prompt = format_prompt(conversation)  # Define your format_prompt function based on your logic
 
     generated_message = generate_message(prompt)
     conversation.append({"role": "assistant", "content": generated_message})
@@ -51,7 +49,5 @@ def sendMessage(event, context):
 
     return {
         "statusCode": 200,
-        "body": json.dumps(
-            {"message": generated_message, "conversation": conversation}
-        ),
+        "body": json.dumps({"message": generated_message, "conversation": conversation}),
     }
