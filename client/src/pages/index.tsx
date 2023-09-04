@@ -57,7 +57,6 @@ const IndexPage: React.FC<PageProps> = () => {
   
     if (chatInput && ws) {  // Check if WebSocket instance exists
       const messageData = {
-        // action: "sendMessage", // Add an action key
         message: chatInput,
         user: "user",
       };

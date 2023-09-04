@@ -1,9 +1,9 @@
-import os
-import json
-import openai
 import boto3
 
-# from lambda_powertools import Logger
+# from boto3 import Session
+import json
+import os
+import openai
 
 dynamodb = boto3.resource("dynamodb")
 conversations_table = dynamodb.Table(
@@ -12,6 +12,7 @@ conversations_table = dynamodb.Table(
 websocket_connections_table = dynamodb.Table(
     os.getenv("DYNAMODB_WEBSOCKET_TABLE_NAME")
 )
+
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
@@ -40,42 +41,50 @@ def disconnect(event, context):
 
 
 def sendMessage(event, context):
+    # Environment variables
+    openai.api_key = os.getenv("OPENAI_API_KEY")
+    dynamodb_table_name = os.getenv("DYNAMODB_CONVERSATIONS_TABLE_NAME")
+
+    table = dynamodb.Table(dynamodb_table_name)
+
+    # Get user ID and message from event
     user_id = event.get("queryStringParameters", {}).get(
         "userId", "defaultUserId"
     )
-    user_message = event.get("body", {})
+    body = json.loads(event.get("body", "") or "{}")
+    user_message = body.get("message", "")
 
-    # Retrieve the existing conversation for this user from DynamoDB
-    response = conversations_table.get_item(
+    # Retrieve existing conversation from DynamoDB
+    response = table.get_item(
         Key={"userId": user_id, "conversationId": "defaultConversationId"}
     )
     conversation = response.get("Item", {}).get("messages", [])
 
-    # Add the new user message to the conversation
+    # Add new user message to the conversation
     conversation.append({"role": "user", "content": user_message})
 
-    # Format the conversation for the prompt
+    # Format conversation for the prompt
     prompt = ""
     for message in conversation:
         role = message["role"].capitalize()
         content = message["content"]
         prompt += f"{role}: {content}\n"
 
-    # Call the OpenAI API with the conversation history
+    # Call OpenAI API with the conversation history
     response = openai.Completion.create(
         engine="text-davinci-003",
         prompt=prompt,
         max_tokens=150,
     )
 
-    # Extract the generated message from the API response
+    # Extract generated message from API response
     generated_message = response.choices[0].text.strip()
 
-    # Add the assistant's response to the conversation
+    # Add assistant's response to conversation
     conversation.append({"role": "assistant", "content": generated_message})
 
-    # Update the conversation in DynamoDB
-    conversations_table.update_item(
+    # Update conversation in DynamoDB
+    table.update_item(
         Key={"userId": user_id, "conversationId": "defaultConversationId"},
         UpdateExpression="SET messages = :val1",
         ExpressionAttributeValues={":val1": conversation},
