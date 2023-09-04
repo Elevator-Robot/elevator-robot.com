@@ -27,7 +27,6 @@ provider:
       Resource: 
         - !GetAtt ConversationsTable.Arn
         - !GetAtt WebsocketConnectionsTable.Arn
-        - !Sub 'arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/*'
 
 custom:
   DOMAIN_NAME: elevator-robot.com
