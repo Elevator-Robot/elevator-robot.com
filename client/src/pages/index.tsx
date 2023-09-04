@@ -47,6 +47,7 @@ const IndexPage: React.FC<PageProps> = () => {
             },
           ]);
         }
+        setIsLoading(false); // Show loader
       } catch (error) {
         console.error("An error occurred:", error);
         setMessages((oldMessages) => [
@@ -63,7 +64,6 @@ const IndexPage: React.FC<PageProps> = () => {
     wsInstance.onerror = (event) => {
       console.error("WebSocket error observed:", event);
     };
-
     return () => {
       wsInstance.close();
     };
@@ -78,9 +78,8 @@ const IndexPage: React.FC<PageProps> = () => {
 
   function handleChatInputSubmit(event: React.FormEvent) {
     event.preventDefault();
-
+    setIsLoading(true); // Show loader
     if (chatInput && ws) {
-      setIsLoading(true); // Show loader
       // Check if WebSocket instance exists
       const messageData = {
         message: chatInput,
@@ -92,7 +91,6 @@ const IndexPage: React.FC<PageProps> = () => {
         { message: chatInput, user: "user", id: Date.now().toString() },
       ]); // Added unique id
       setChatInput("");
-      setIsLoading(false); // hide loader
     }
   }
 
@@ -125,11 +123,11 @@ const IndexPage: React.FC<PageProps> = () => {
             >
               <g
                 fill="none"
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 transform="translate(1 1)"
-                stroke-width="2"
+                strokeWidth="2"
               >
-                <circle cx="22" cy="22" r="6" stroke-opacity="0">
+                <circle cx="22" cy="22" r="6" strokeOpacity="0">
                   <animate
                     attributeName="r"
                     begin="1.5s"
@@ -155,7 +153,7 @@ const IndexPage: React.FC<PageProps> = () => {
                     repeatCount="indefinite"
                   />
                 </circle>
-                <circle cx="22" cy="22" r="6" stroke-opacity="0">
+                <circle cx="22" cy="22" r="6" strokeOpacity="0">
                   <animate
                     attributeName="r"
                     begin="3s"
@@ -173,7 +171,7 @@ const IndexPage: React.FC<PageProps> = () => {
                     repeatCount="indefinite"
                   />
                   <animate
-                    attributeName="stroke-width"
+                    attributeName="strokeWidth"
                     begin="3s"
                     dur="3s"
                     values="2;0"
