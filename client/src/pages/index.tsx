@@ -80,7 +80,7 @@ const IndexPage: React.FC<PageProps> = () => {
     event.preventDefault();
 
     if (chatInput && ws) {
-      setIsLoading(true);
+      setIsLoading(true); // Show loader
       // Check if WebSocket instance exists
       const messageData = {
         message: chatInput,
@@ -92,7 +92,7 @@ const IndexPage: React.FC<PageProps> = () => {
         { message: chatInput, user: "user", id: Date.now().toString() },
       ]); // Added unique id
       setChatInput("");
-      setIsLoading(false);
+      setIsLoading(false); // hide loader
     }
   }
 
