@@ -27,7 +27,6 @@ provider:
       Resource: 
         - !GetAtt ConversationsTable.Arn
         - !GetAtt WebsocketConnectionsTable.Arn
-        - !Sub 'arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/*'
 
 custom:
   DOMAIN_NAME: elevator-robot.com
@@ -37,12 +36,12 @@ custom:
     distributionFolder: client/public
   pythonRequirements:
     layer: true
-    fileName: lambdas/requirements.txt
+    fileName: api/requirements.txt
 
 package:
   individually: true
   include:
-    - "lambdas/"
+    - "api/"
   exclude:
     - "node_modules/**"
     - "test/**"
@@ -57,21 +56,21 @@ package:
 
 functions:
   connect:
-    handler: lambdas/handler.connect
+    handler: api/handler.connect
     layers:
       - { Ref: PythonRequirementsLambdaLayer }
     events:
       - websocket:
           route: $connect
   disconnect:
-    handler: lambdas/handler.disconnect
+    handler: api/handler.disconnect
     layers:
       - { Ref: PythonRequirementsLambdaLayer }
     events:
       - websocket:
           route: $disconnect
   sendMessage:
-    handler: lambdas/handler.sendMessage
+    handler: api/handler.sendMessage
     layers:
       - { Ref: PythonRequirementsLambdaLayer }
     events:
