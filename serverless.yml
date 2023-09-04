@@ -32,13 +32,12 @@ provider:
 custom:
   DOMAIN_NAME: elevator-robot.com
   client:
-    bucketName: ${self:provider.environment.DYNAMODB_CONVERSATIONS_TABLE_NAME}
+  # bucketName should be the domain name of your website
+    bucketName: ${self:custom.DOMAIN_NAME}
     distributionFolder: client/public
   pythonRequirements:
     layer: true
     fileName: lambdas/requirements.txt
-    dockerizePip: true
-    noDeploy: []
 
 package:
   individually: true
