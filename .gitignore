@@ -16,6 +16,7 @@ var/
 .installed.cfg
 *.egg
 .next/
+next-*
 
 # Serverless directories
 .serverless
