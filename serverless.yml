@@ -121,6 +121,28 @@ resources:
     #     AliasTarget:
     #       HostedZoneId: "Z0809465328WIUFUDSAKZ"
     #       DNSName:  "s3-website-us-east-1.amazonaws.com"
+    CognitoUserPool:
+      Type: AWS::Cognito::UserPool
+      Properties:
+        UserPoolName: ${self:service}-${self:provider.stage}-user-pool
+        UsernameAttributes:
+          - email
+        AutoVerifiedAttributes:
+          - email
+        Policies:
+          PasswordPolicy:
+            MinimumLength: 8
+            RequireLowercase: False
+            RequireNumbers: False
+            RequireSymbols: False
+            RequireUppercase: False
+        Schema:
+          - AttributeDataType: String
+            Name: email
+            Required: true
+          - AttributeDataType: String
+            Name: name
+            Required: true
 
 plugins:
   - serverless-python-requirements
