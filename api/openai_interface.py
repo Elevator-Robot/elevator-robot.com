@@ -1,3 +1,4 @@
+"""This module contains the interface to OpenAI's API."""
 import os
 import openai
 
@@ -5,6 +6,7 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
 def format_prompt(conversation):
+    """Format the conversation into a prompt for the API."""
     prompt = ""
     for message in conversation:
         role = message["role"].capitalize()
@@ -15,7 +17,7 @@ def format_prompt(conversation):
 
 
 def generate_message(prompt):
-    # formatted_prompt = format_prompt(prompt)  # Remove this line
+    """Generate a message from the prompt."""
     response = openai.Completion.create(
         engine="text-davinci-003",
         prompt=prompt,  # Use prompt directly
@@ -23,5 +25,5 @@ def generate_message(prompt):
     )
     generated_message = response.choices[0].text.strip()
     if generated_message.startswith("Assistant:"):
-        generated_message = generated_message[len("Assistant:") :].strip()
+        generated_message = generated_message[len("Assistant:") :].strip()  # noqa: E203
     return generated_message
