@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { PageProps } from "gatsby";
+import { Amplify } from "aws-amplify";
+import amplifyConfig from "../../amplify-config";
+import LoginComponent from './LoginComponent';
+
+Amplify.configure(amplifyConfig);
 
 const containerStyles = "flex flex-col items-center justify-center h-screen p-16 bg-blue-200";
 const chatContainerStyles = "bg-white rounded-lg p-7 w-full max-w-xl overflow-y-auto mb-8 shadow-lg";
@@ -10,11 +15,13 @@ const formStyles = "flex flex-col w-full max-w-xl";
 const inputStyles = "rounded-lg p-4 mb-4";
 const sendButtonStyles = "rounded-lg px-4 py-2 bg-blue-500 text-white font-bold transition-transform duration-200 transform";
 const sendButtonPressedStyles = "transform scale-95";
+const toolbarStyles = "flex justify-between items-center bg-blue-500 text-white p-4";
 
 const IndexPage: React.FC<PageProps> = () => {
   const [messages, setMessages] = useState<{ message: string; user: string; id: string }[]>([]);
   const [chatInput, setChatInput] = useState<string>("");
-  const [ws, setWs] = useState<WebSocket | null>(null);  // WebSocket instance in state
+  const [ws, setWs] = useState<WebSocket | null>(null);
+
 
   useEffect(() => {
     const wsInstance = new WebSocket("wss://67dlawkul8.execute-api.us-east-1.amazonaws.com/dev");
@@ -66,32 +73,60 @@ const IndexPage: React.FC<PageProps> = () => {
     }
   }
 
+  // use the LoginComponent here
+  const Toolbar = () => {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [userProfile, setUserProfile] = useState<any>(null);
+    const [showLoginModal, setShowLoginModal] = useState(false);
+
+    return (
+      <div className={toolbarStyles}>
+        <h1 className="text-2xl">Chatbot</h1>
+        <button
+          className="rounded-lg px-4 py-2 bg-blue-500 text-white font-bold transition-transform duration-200 transform hover:scale-105"
+          onClick={() => setShowLoginModal(true)}
+        >
+          Login
+        </button>
+        {showLoginModal && (
+          <LoginComponent
+            setIsLoggedIn={setIsLoggedIn}
+            setUserProfile={setUserProfile}
+            setShowLoginModal={setShowLoginModal}
+          />
+        )}
+      </div>
+    );
+  }
 
   return (
-    <main className={containerStyles}>
-      <div className={`border border-gray-300 p-2 rounded-lg mb-4 ${chatContainerStyles}`} id="chatContainer">
-        {messages.map((messageObj) => (
-          <div key={messageObj.id} className={messageObj.user === "user" ? `${messageContainerStyles} ${messageStyles}` : botMessageStyles}>
-            {messageObj.message}
-          </div>
-        ))}
-      </div>
-      <form onSubmit={handleChatInputSubmit} className={formStyles}>
-        <input
-          type="text"
-          value={chatInput}
-          onChange={(e) => setChatInput(e.target.value)}
-          className={inputStyles}
-        />
-        <button
-          type="submit"
-          className={sendButtonStyles}
-        >
-          Enter
-        </button>
-      </form>
-    </main>
+    <>
+      <Toolbar />
+      <main className={containerStyles}>
+        <div className={`border border-gray-300 p-2 rounded-lg mb-4 ${chatContainerStyles}`} id="chatContainer">
+          {messages.map((messageObj) => (
+            <div key={messageObj.id} className={messageObj.user === "user" ? `${messageContainerStyles} ${messageStyles}` : botMessageStyles}>
+              {messageObj.message}
+            </div>
+          ))}
+        </div>
+        <form onSubmit={handleChatInputSubmit} className={formStyles}>
+          <input
+            type="text"
+            value={chatInput}
+            onChange={(e) => setChatInput(e.target.value)}
+            className={inputStyles}
+          />
+          <button
+            type="submit"
+            className={sendButtonStyles}
+          >
+            Enter
+          </button>
+        </form>
+      </main>
+    </>
   );
-};
+}
 
 export default IndexPage;
