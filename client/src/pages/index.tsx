@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { PageProps } from "gatsby";
 import { Amplify } from "aws-amplify";
 import amplifyConfig from "../../amplify-config";
-import LoginComponent from './LoginComponent';
-import ToolBarComponent from './ToolBarComponent';
+import AvatarButton from "./AvatarButton";
+import LoginModal from "./LoginModal";
 
 Amplify.configure(amplifyConfig);
 
@@ -15,14 +15,25 @@ const botMessageStyles = "bg-gray-200 text-black p-4 rounded-lg mb-4 self-start"
 const formStyles = "flex flex-col w-full max-w-xl";
 const inputStyles = "rounded-lg p-4 mb-4";
 const sendButtonStyles = "rounded-lg px-4 py-2 bg-blue-500 text-white font-bold transition-transform duration-200 transform";
-const sendButtonPressedStyles = "transform scale-95";
-const toolbarStyles = "flex justify-between items-center bg-blue-500 text-white p-4";
 
 
 const IndexPage: React.FC<PageProps> = () => {
   const [messages, setMessages] = useState<{ message: string; user: string; id: string }[]>([]);
   const [chatInput, setChatInput] = useState<string>("");
   const [ws, setWs] = useState<WebSocket | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [showModal, setShowModal] = useState(true);
+
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
+
+    // Assume handleAuthentication is a function that gets called when the user is authenticated successfully
+    const handleAuthentication = () => {
+      setIsAuthenticated(true);
+      toggleModal();
+    };
+  
 
 
   useEffect(() => {
@@ -77,30 +88,35 @@ const IndexPage: React.FC<PageProps> = () => {
 
   return (
     <>
-      <ToolBarComponent />
-      <main className={containerStyles}>
-        <div className={`border border-gray-300 p-2 rounded-lg mb-4 ${chatContainerStyles}`} id="chatContainer">
-          {messages.map((messageObj) => (
-            <div key={messageObj.id} className={messageObj.user === "user" ? `${messageContainerStyles} ${messageStyles}` : botMessageStyles}>
-              {messageObj.message}
-            </div>
-          ))}
+      {isAuthenticated ? (
+        <main className={containerStyles}>
+          <div className={`border border-gray-300 p-2 rounded-lg mb-4 ${chatContainerStyles}`} id="chatContainer">
+            {messages.map((messageObj) => (
+              <div key={messageObj.id} className={messageObj.user === "user" ? `${messageContainerStyles} ${messageStyles}` : botMessageStyles}>
+                {messageObj.message}
+              </div>
+            ))}
+          </div>
+          <form onSubmit={handleChatInputSubmit} className={formStyles}>
+            <input
+              type="text"
+              value={chatInput}
+              onChange={(e) => setChatInput(e.target.value)}
+              className={inputStyles}
+            />
+            <button
+              type="submit"
+              className={sendButtonStyles}
+            >
+              Enter
+            </button>
+          </form>
+        </main>
+      ) : (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <LoginModal showModal={showModal} toggleModal={toggleModal} handleAuthentication={handleAuthentication} />
         </div>
-        <form onSubmit={handleChatInputSubmit} className={formStyles}>
-          <input
-            type="text"
-            value={chatInput}
-            onChange={(e) => setChatInput(e.target.value)}
-            className={inputStyles}
-          />
-          <button
-            type="submit"
-            className={sendButtonStyles}
-          >
-            Enter
-          </button>
-        </form>
-      </main>
+      )}
     </>
   );
 }
