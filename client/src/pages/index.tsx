@@ -3,6 +3,7 @@ import { PageProps } from "gatsby";
 import { Amplify } from "aws-amplify";
 import amplifyConfig from "../../amplify-config";
 import LoginComponent from './LoginComponent';
+import ToolBarComponent from './ToolBarComponent';
 
 Amplify.configure(amplifyConfig);
 
@@ -16,6 +17,7 @@ const inputStyles = "rounded-lg p-4 mb-4";
 const sendButtonStyles = "rounded-lg px-4 py-2 bg-blue-500 text-white font-bold transition-transform duration-200 transform";
 const sendButtonPressedStyles = "transform scale-95";
 const toolbarStyles = "flex justify-between items-center bg-blue-500 text-white p-4";
+
 
 const IndexPage: React.FC<PageProps> = () => {
   const [messages, setMessages] = useState<{ message: string; user: string; id: string }[]>([]);
@@ -73,35 +75,9 @@ const IndexPage: React.FC<PageProps> = () => {
     }
   }
 
-  // use the LoginComponent here
-  const Toolbar = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [userProfile, setUserProfile] = useState<any>(null);
-    const [showLoginModal, setShowLoginModal] = useState(false);
-
-    return (
-      <div className={toolbarStyles}>
-        <h1 className="text-2xl">Chatbot</h1>
-        <button
-          className="rounded-lg px-4 py-2 bg-blue-500 text-white font-bold transition-transform duration-200 transform hover:scale-105"
-          onClick={() => setShowLoginModal(true)}
-        >
-          Login
-        </button>
-        {showLoginModal && (
-          <LoginComponent
-            setIsLoggedIn={setIsLoggedIn}
-            setUserProfile={setUserProfile}
-            setShowLoginModal={setShowLoginModal}
-          />
-        )}
-      </div>
-    );
-  }
-
   return (
     <>
-      <Toolbar />
+      <ToolBarComponent />
       <main className={containerStyles}>
         <div className={`border border-gray-300 p-2 rounded-lg mb-4 ${chatContainerStyles}`} id="chatContainer">
           {messages.map((messageObj) => (
