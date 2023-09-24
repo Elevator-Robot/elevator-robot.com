@@ -34,20 +34,24 @@ const LoginComponent: React.FC<Props> = ({ onAuthChange }) => {
 	return (
 		<div>
 			<div>
-				<input
-					type="text"
-					placeholder="Username"
-					className='rounded-lg p-4 mb-4'
-					value={username}
-					onChange={(e) => setUsername(e.target.value)}
-				/>
-				<input
-					type="password"
-					placeholder="Password"
-					className='rounded-lg p-4 mb-4'
-					value={password}
-					onChange={(e) => setPassword(e.target.value)}
-				/>
+				<div>
+					<input
+						type="text"
+						placeholder="Username"
+						className='rounded-lg p-4 mb-4'
+						value={username}
+						onChange={(e) => setUsername(e.target.value)}
+					/>
+				</div>
+				<div>
+					<input
+						type="password"
+						placeholder="Password"
+						className='rounded-lg p-4 mb-4'
+						value={password}
+						onChange={(e) => setPassword(e.target.value)}
+					/>
+				</div>
 				<button onClick={handleSignIn} className='rounded-lg p-4 mb-4 bg-white'>Sign In</button>
 			</div>
 		</div>
