@@ -15,6 +15,8 @@ provider:
     DYNAMODB_CONVERSATIONS_TABLE_NAME: ${self:service}-${self:provider.stage}-conversations
     DYNAMODB_WEBSOCKET_TABLE_NAME: ${self:service}-${self:provider.stage}-websockets
     OPENAI_API_KEY: ${env:OPENAI_API_KEY}
+    USER_POOL_ID: !Ref CognitoUserPool
+    CLIENT_ID: !GetAtt CognitoUserPool.ClientId
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -70,12 +72,39 @@ functions:
       - websocket:
           route: $disconnect
   sendMessage:
-    handler: api/handler.sendMessage
+    handler: api/handler.send_message
     layers:
       - { Ref: PythonRequirementsLambdaLayer }
     events:
       - websocket:
           route: sendMessage
+  login:
+    handler: api/handler.login
+    layers:
+      - { Ref: PythonRequirementsLambdaLayer }
+    events:
+      - http:
+          path: login
+          method: post
+          cors: true
+  signup:
+    handler: api/handler.create_user
+    layers:
+      - { Ref: PythonRequirementsLambdaLayer }
+    events:
+      - http:
+          path: signup
+          method: post
+          cors: true
+  getConversations:
+    handler: api/handler.get_conversations
+    layers:
+      - { Ref: PythonRequirementsLambdaLayer }
+    events:
+      - http:
+          path: conversations
+          method: get
+          cors: true
 
 
 resources:
@@ -112,15 +141,28 @@ resources:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
         TableName: ${self:service}-${self:provider.stage}-websockets
-    # ElevatorRobotRecordSet:
-    #   Type: "AWS::Route53::RecordSet"
-    #   Properties: 
-    #     HostedZoneName: "${self:custom.DOMAIN_NAME}."
-    #     Name: "${self:custom.DOMAIN_NAME}."
-    #     Type: A
-    #     AliasTarget:
-    #       HostedZoneId: "Z0809465328WIUFUDSAKZ"
-    #       DNSName:  "s3-website-us-east-1.amazonaws.com"
+    CognitoUserPool:
+      Type: AWS::Cognito::UserPool
+      Properties:
+        UserPoolName: ${self:service}-${self:provider.stage}-user-pool
+        UsernameAttributes:
+          - email
+        AutoVerifiedAttributes:
+          - email
+        Policies:
+          PasswordPolicy:
+            MinimumLength: 8
+            RequireLowercase: False
+            RequireNumbers: False
+            RequireSymbols: False
+            RequireUppercase: False
+        Schema:
+          - AttributeDataType: String
+            Name: email
+            Required: true
+          - AttributeDataType: String
+            Name: name
+            Required: true
 
 plugins:
   - serverless-python-requirements
