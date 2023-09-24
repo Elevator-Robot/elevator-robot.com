@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, FormEvent } from 'react';
 import { Auth } from 'aws-amplify';
 
 interface LoginModalProps {
@@ -11,7 +11,14 @@ const LoginModal: FC<LoginModalProps> = ({ showModal, toggleModal, handleAuthent
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
-    const handleSignIn = async () => {
+    const keyPressHandler = async (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter') {
+            await handleSignIn(e as any);
+        }
+    };
+
+    const handleSignIn = async (e: FormEvent) => {
+        e.preventDefault();
         try {
             const user = await Auth.signIn(username, password);
             console.log(user);
@@ -22,9 +29,9 @@ const LoginModal: FC<LoginModalProps> = ({ showModal, toggleModal, handleAuthent
     };
 
     return (
-        <div className={`fixed inset-0 flex items-center justify-center bg-opacity-60 bg-black ${showModal ? 'block' : 'hidden'}`}>
+        <div className={`bg-blue-200 fixed inset-0 flex items-center justify-center ${showModal ? 'block' : 'hidden'}`}>
             <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-                <h1 className="text-2xl font-semibold mb-4 text-center">Sign In</h1>
+                <h1 className="text-2xl font-semibold mb-4 text-center">Login</h1>
                 <div className="mb-4">
                     <label className="block text-sm font-medium text-gray-600">Username</label>
                     <input
@@ -33,6 +40,7 @@ const LoginModal: FC<LoginModalProps> = ({ showModal, toggleModal, handleAuthent
                         className="mt-1 p-2 w-full rounded-md border"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
+                        onKeyDown={keyPressHandler} // respond to Enter key
                     />
                 </div>
                 <div className="mb-4">
@@ -43,6 +51,7 @@ const LoginModal: FC<LoginModalProps> = ({ showModal, toggleModal, handleAuthent
                         className="mt-1 p-2 w-full rounded-md border"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        onKeyDown={keyPressHandler}  // respond to Enter key
                     />
                 </div>
                 <button
