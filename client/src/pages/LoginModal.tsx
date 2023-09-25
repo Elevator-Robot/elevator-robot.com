@@ -28,9 +28,26 @@ const LoginModal: FC<LoginModalProps> = ({ showModal, toggleModal, handleAuthent
         }
     };
 
+    const handleSignUp = async (e: FormEvent) => {
+        e.preventDefault();
+        try {
+            const user = await Auth.signUp({
+                username,
+                password,
+                attributes: {
+                    email: username,
+                },
+            });
+            console.log(user);
+            toggleModal();
+        } catch (error) {
+            console.log('error signing up', error);
+        }
+    }
+
     return (
         <div className={`bg-blue-200 fixed inset-0 flex items-center justify-center ${showModal ? 'block' : 'hidden'}`}>
-            <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+            <div className="bg-white p-6 rounded-3xl shadow-2xl w-96 shadow-black right-4">
                 <h1 className="text-2xl font-semibold mb-4 text-center">Login</h1>
                 <div className="mb-4">
                     <label className="block text-sm font-medium text-gray-600">Username</label>
@@ -60,6 +77,12 @@ const LoginModal: FC<LoginModalProps> = ({ showModal, toggleModal, handleAuthent
                 >
                     Sign In
                 </button>
+                {/* <button
+                    onClick={handleSignUp}
+                    className="w-full p-2 rounded-md bg-blue-500 text-white font-semibold mt-2"
+                >
+                    Sign Up
+                </button> */}
             </div>
         </div>
     );
