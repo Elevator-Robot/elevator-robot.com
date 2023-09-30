@@ -15,8 +15,6 @@ provider:
     DYNAMODB_CONVERSATIONS_TABLE_NAME: ${self:service}-${self:provider.stage}-conversations
     DYNAMODB_WEBSOCKET_TABLE_NAME: ${self:service}-${self:provider.stage}-websockets
     OPENAI_API_KEY: ${env:OPENAI_API_KEY}
-    USER_POOL_ID: !Ref CognitoUserPool
-    CLIENT_ID: !GetAtt CognitoUserPool.ClientId
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -78,33 +76,6 @@ functions:
     events:
       - websocket:
           route: sendMessage
-  login:
-    handler: api/handler.login
-    layers:
-      - { Ref: PythonRequirementsLambdaLayer }
-    events:
-      - http:
-          path: login
-          method: post
-          cors: true
-  signup:
-    handler: api/handler.create_user
-    layers:
-      - { Ref: PythonRequirementsLambdaLayer }
-    events:
-      - http:
-          path: signup
-          method: post
-          cors: true
-  getConversations:
-    handler: api/handler.get_conversations
-    layers:
-      - { Ref: PythonRequirementsLambdaLayer }
-    events:
-      - http:
-          path: conversations
-          method: get
-          cors: true
 
 
 resources:
@@ -166,4 +137,3 @@ resources:
 
 plugins:
   - serverless-python-requirements
-  - serverless-finch
