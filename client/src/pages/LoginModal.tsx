@@ -1,4 +1,4 @@
-import React, { FC, useState, FormEvent } from 'react';
+import React, { FC, useState, FormEvent, useEffect } from 'react';
 import { Auth } from 'aws-amplify';
 
 interface LoginModalProps {
@@ -41,8 +41,8 @@ const LoginModal: FC<LoginModalProps> = ({ showModal, toggleModal, handleAuthent
             console.log(user);
             toggleModal();
         } catch (error) {
-            console.log('error signing up', error);
-        }
+            console.log('error signing up:', error);
+        }        
     }
 
     return (
@@ -71,18 +71,24 @@ const LoginModal: FC<LoginModalProps> = ({ showModal, toggleModal, handleAuthent
                         onKeyDown={keyPressHandler}  // respond to Enter key
                     />
                 </div>
-                <button
-                    onClick={handleSignIn}
-                    className="w-full p-2 rounded-md bg-blue-500 text-white font-semibold"
-                >
-                    Sign In
-                </button>
-                {/* <button
-                    onClick={handleSignUp}
-                    className="w-full p-2 rounded-md bg-blue-500 text-white font-semibold mt-2"
-                >
-                    Sign Up
-                </button> */}
+                <div className="flex justify-between items-center mb-4">
+                    <button
+                        onClick={handleSignIn}
+                        className="w-full p-2 rounded-md bg-blue-500 text-white font-semibold"
+                        disabled={username.length === 0 || password.length === 0}
+                    >
+                        Sign In
+                    </button>
+                </div>
+                <div className="flex justify-between items-center mb-4">
+                    <button
+                        onClick={handleSignUp}
+                        className="w-full p-2 rounded-md bg-blue-500 text-white font-semibold"
+                        disabled={username.length === 0 || password.length === 0}
+                    >
+                        Sign Up
+                    </button>
+                </div>
             </div>
         </div>
     );

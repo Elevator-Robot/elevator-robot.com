@@ -4,6 +4,7 @@ import { Amplify } from "aws-amplify";
 import amplifyConfig from "../../amplify-config";
 import AvatarButton from "./AvatarButton";
 import LoginModal from "./LoginModal";
+import { Auth } from "aws-amplify";
 
 Amplify.configure(amplifyConfig);
 
@@ -21,7 +22,7 @@ const IndexPage: React.FC<PageProps> = () => {
   const [messages, setMessages] = useState<{ message: string; user: string; id: string }[]>([]);
   const [chatInput, setChatInput] = useState<string>("");
   const [ws, setWs] = useState<WebSocket | null>(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
   const [showModal, setShowModal] = useState(true);
 
   const toggleModal = () => {
@@ -33,7 +34,13 @@ const IndexPage: React.FC<PageProps> = () => {
       setIsAuthenticated(true);
       toggleModal();
     };
-  
+
+  // if the user has already authenticated, render the chat window
+  useEffect(() => {
+    Auth.currentAuthenticatedUser()
+      .then(() => setIsAuthenticated(true))
+      .catch(() => setIsAuthenticated(true));
+  }, [ ]);
 
 
   useEffect(() => {
@@ -86,36 +93,33 @@ const IndexPage: React.FC<PageProps> = () => {
     }
   }
 
+  // create a login modal where the user will retain their login state even if they refresh the page
   return (
     <>
       {isAuthenticated ? (
         <main className={containerStyles}>
           <div className={`border border-gray-300 p-2 rounded-lg mb-4 ${chatContainerStyles}`} id="chatContainer">
-            {messages.map((messageObj) => (
-              <div key={messageObj.id} className={messageObj.user === "user" ? `${messageContainerStyles} ${messageStyles}` : botMessageStyles}>
-                {messageObj.message}
+            {messages.map((message) => (
+              <div key={message.id} className={message.user === "assistant" ? messageStyles : botMessageStyles}>
+                {message.message}
               </div>
             ))}
           </div>
-          <form onSubmit={handleChatInputSubmit} className={formStyles}>
+          <form className={formStyles} onSubmit={handleChatInputSubmit}>
             <input
               type="text"
-              value={chatInput}
-              onChange={(e) => setChatInput(e.target.value)}
+              placeholder="Type a message..."
               className={inputStyles}
+              value={chatInput}
+              onChange={(event) => setChatInput(event.target.value)}
             />
-            <button
-              type="submit"
-              className={sendButtonStyles}
-            >
-              Enter
+            <button type="submit" className={sendButtonStyles}>
+              Send
             </button>
           </form>
         </main>
       ) : (
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
-          <LoginModal showModal={showModal} toggleModal={toggleModal} handleAuthentication={handleAuthentication} />
-        </div>
+        <LoginModal showModal={showModal} toggleModal={toggleModal} handleAuthentication={handleAuthentication} />
       )}
     </>
   );
