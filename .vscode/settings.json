@@ -1,6 +1,4 @@
 {
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "typescript.enablePromptUseWorkspaceTsdk": true,
   "python.defaultInterpreterPath": "python",
   "python.envFile": "${workspaceFolder}/.env",
   "vsintellicode.features.python.deepLearning": "enabled",

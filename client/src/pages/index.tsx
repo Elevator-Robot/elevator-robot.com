@@ -22,34 +22,35 @@ const IndexPage: React.FC<PageProps> = () => {
   const [messages, setMessages] = useState<{ message: string; user: string; id: string }[]>([]);
   const [chatInput, setChatInput] = useState<string>("");
   const [ws, setWs] = useState<WebSocket | null>(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [showModal, setShowModal] = useState(true);
 
   const toggleModal = () => {
     setShowModal(!showModal);
   };
 
-    // Assume handleAuthentication is a function that gets called when the user is authenticated successfully
-    const handleAuthentication = () => {
-      setIsAuthenticated(true);
-      toggleModal();
-    };
-
-  // if the user has already authenticated, render the chat window
-  useEffect(() => {
-    Auth.currentAuthenticatedUser()
-      .then(() => setIsAuthenticated(true))
-      .catch(() => setIsAuthenticated(true));
-  }, [ ]);
-
+  // Assume handleAuthentication is a function that gets called when the user is authenticated successfully
+  const handleAuthentication = () => {
+    setIsAuthenticated(true);
+    toggleModal();
+  };
 
   useEffect(() => {
     const wsInstance = new WebSocket("wss://67dlawkul8.execute-api.us-east-1.amazonaws.com/dev");
-    setWs(wsInstance);  // Store WebSocket instance in state
+    setWs(wsInstance);
 
-    wsInstance.onopen = () => {
-      console.log("WebSocket connection opened.");
+    const checkUserAuthentication = async () => {
+      try {
+        await Auth.currentAuthenticatedUser();
+        setIsAuthenticated(true);
+      } catch (error) {
+        console.error("No authenticated user", error);
+        setIsAuthenticated(false);
+      }
     };
+
+    // Call the function to set authentication status
+    checkUserAuthentication();
 
     wsInstance.onmessage = (event) => {
       try {
