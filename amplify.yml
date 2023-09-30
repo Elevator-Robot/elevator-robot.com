@@ -4,6 +4,8 @@ applications:
       phases:
         preBuild:
           commands:
+            - nvm install 18.0.0
+            - nvm use 18.0.0
             - yarn install
         build:
           commands:
