@@ -13,45 +13,32 @@ const LoginModal: FC<LoginModalProps> = ({ showModal, toggleModal, handleAuthent
 
     const keyPressHandler = async (e: React.KeyboardEvent) => {
         if (e.key === 'Enter') {
-            await handleSignIn(e as any);
+            await handleSignIn(username, password);
         }
     };
 
-    const handleSignIn = async (e: FormEvent) => {
-        e.preventDefault();
+    const handleSignIn = async (username: string, password: string) => {
         try {
-            const user = await Auth.signIn(username, password);
-            console.log(user);
-            handleAuthentication();
+            await Auth.signIn(username, password);
+            handleAuthentication(); // This should update isAuthenticated to true
         } catch (error) {
-            console.log('error signing in', error);
+            console.error("Authentication error:", error);
         }
     };
 
-    // const handleSignIn = async (username: string, password: string) => {
-    //     try {
-    //         await Auth.signIn(username, password);
-    //         handleAuthentication(); // This should update isAuthenticated to true
-    //     } catch (error) {
-    //         console.error("Authentication error:", error);
-    //     }
-    // };
-
-    const handleSignUp = async (e: FormEvent) => {
-        e.preventDefault();
+    const handleSignUp = async (username: string, password: string) => {
         try {
-            const user = await Auth.signUp({
+            await Auth.signUp({
                 username,
                 password,
                 attributes: {
                     email: username,
                 },
             });
-            console.log(user);
-            toggleModal();
+            await handleSignIn(username, password);
         } catch (error) {
-            console.log('error signing up:', error);
-        }        
+            console.error("Authentication error:", error);
+        }
     }
 
     return (
@@ -82,7 +69,7 @@ const LoginModal: FC<LoginModalProps> = ({ showModal, toggleModal, handleAuthent
                 </div>
                 <div className="flex justify-between items-center mb-4">
                     <button
-                        onClick={handleSignIn}
+                        onClick={() => handleSignIn(username, password)}
                         className="w-full p-2 rounded-md bg-blue-500 text-white font-semibold"
                         disabled={username.length === 0 || password.length === 0}
                     >
@@ -91,7 +78,7 @@ const LoginModal: FC<LoginModalProps> = ({ showModal, toggleModal, handleAuthent
                 </div>
                 <div className="flex justify-between items-center mb-4">
                     <button
-                        onClick={handleSignUp}
+                        onClick={() => handleSignUp(username, password)}
                         className="w-full p-2 rounded-md bg-blue-500 text-white font-semibold"
                         disabled={username.length === 0 || password.length === 0}
                     >
