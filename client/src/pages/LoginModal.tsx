@@ -13,18 +13,29 @@ const LoginModal: FC<LoginModalProps> = ({ showModal, toggleModal, handleAuthent
 
     const keyPressHandler = async (e: React.KeyboardEvent) => {
         if (e.key === 'Enter') {
-            await handleSignIn(username, password);
+            await handleSignIn(e as any);
         }
     };
 
-    const handleSignIn = async (username: string, password: string) => {
+    const handleSignIn = async (e: FormEvent) => {
+        e.preventDefault();
         try {
-            await Auth.signIn(username, password);
-            handleAuthentication(); // This should update isAuthenticated to true
+            const user = await Auth.signIn(username, password);
+            console.log(user);
+            handleAuthentication();
         } catch (error) {
-            console.error("Authentication error:", error);
+            console.log('error signing in', error);
         }
     };
+
+    // const handleSignIn = async (username: string, password: string) => {
+    //     try {
+    //         await Auth.signIn(username, password);
+    //         handleAuthentication(); // This should update isAuthenticated to true
+    //     } catch (error) {
+    //         console.error("Authentication error:", error);
+    //     }
+    // };
 
     const handleSignUp = async (e: FormEvent) => {
         e.preventDefault();
