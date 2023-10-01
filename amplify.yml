@@ -4,6 +4,7 @@ applications:
       phases:
         preBuild:
           commands:
+            - ./fetch-secrets.sh
             - yarn install
         build:
           commands:

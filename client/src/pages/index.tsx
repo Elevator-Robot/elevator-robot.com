@@ -37,7 +37,7 @@ const IndexPage: React.FC<PageProps> = () => {
 
   // take websocket url from env variable
   useEffect(() => {
-    const wsInstance = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL || "wss://67dlawkul8.execute-api.us-east-1.amazonaws.com/dev");
+    const wsInstance = new WebSocket(process.env.GATSBY_APP_WEBSOCKET_URL || "wss://67dlawkul8.execute-api.us-east-1.amazonaws.com/dev");
     setWs(wsInstance);
 
     const checkUserAuthentication = async () => {

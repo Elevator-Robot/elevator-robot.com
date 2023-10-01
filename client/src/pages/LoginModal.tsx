@@ -26,21 +26,19 @@ const LoginModal: FC<LoginModalProps> = ({ showModal, toggleModal, handleAuthent
         }
     };
 
-    const handleSignUp = async (e: FormEvent) => {
-        e.preventDefault();
+    const handleSignUp = async (username: string, password: string) => {
         try {
-            const user = await Auth.signUp({
+            await Auth.signUp({
                 username,
                 password,
                 attributes: {
                     email: username,
                 },
             });
-            console.log(user);
-            toggleModal();
+            await handleSignIn(username, password);
         } catch (error) {
-            console.log('error signing up:', error);
-        }        
+            console.error("Authentication error:", error);
+        }
     }
 
     return (
@@ -71,7 +69,7 @@ const LoginModal: FC<LoginModalProps> = ({ showModal, toggleModal, handleAuthent
                 </div>
                 <div className="flex justify-between items-center mb-4">
                     <button
-                        onClick={handleSignIn}
+                        onClick={() => handleSignIn(username, password)}
                         className="w-full p-2 rounded-md bg-blue-500 text-white font-semibold"
                         disabled={username.length === 0 || password.length === 0}
                     >
@@ -80,7 +78,7 @@ const LoginModal: FC<LoginModalProps> = ({ showModal, toggleModal, handleAuthent
                 </div>
                 <div className="flex justify-between items-center mb-4">
                     <button
-                        onClick={handleSignUp}
+                        onClick={() => handleSignUp(username, password)}
                         className="w-full p-2 rounded-md bg-blue-500 text-white font-semibold"
                         disabled={username.length === 0 || password.length === 0}
                     >
