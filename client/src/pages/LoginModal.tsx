@@ -1,4 +1,4 @@
-import React, { FC, useState, FormEvent, useEffect } from 'react';
+import React, { FC, useState } from 'react';
 import { Auth } from 'aws-amplify';
 
 interface LoginModalProps {
@@ -15,6 +15,17 @@ const LoginModal: FC<LoginModalProps> = ({ showModal, toggleModal, handleAuthent
     const [verificationCode, setVerificationCode] = useState<string>('');
     const [showVerificationInput, setShowVerificationInput] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const [showPopup, setShowPopup] = useState<boolean>(false);
+    const [popupMessage, setPopupMessage] = useState<string>('');
+
+    const displayPopup = (message: string) => {
+        setPopupMessage(message);
+        setShowPopup(true);
+        setTimeout(() => {
+            setShowPopup(false);
+        }, 3000); // This will hide the popup after 3 seconds
+    }
+    
 
 
 
@@ -74,6 +85,7 @@ const LoginModal: FC<LoginModalProps> = ({ showModal, toggleModal, handleAuthent
                 attributes: { email },
             });
             setShowVerificationInput(true);
+            displayPopup("Verification email sent"); // Display the popup after successful sign-up
         } catch (error : any) {
             if (error.code === 'UserNotConfirmedException') {
                 setShowVerificationInput(true);
@@ -147,53 +159,64 @@ const LoginModal: FC<LoginModalProps> = ({ showModal, toggleModal, handleAuthent
                     </>
                 )}
 
-                {showVerificationInput && (
-                    <>
-                        <div className="mb-4">
-                            <label className="block text-sm font-medium text-gray-600">Verification Code</label>
-                            <input
-                                type="text"
-                                placeholder="Enter Verification Code"
-                                className="mt-1 p-2 w-full rounded-md border"
-                                value={verificationCode}
-                                onChange={(e) => setVerificationCode(e.target.value)}
-                            />
-                        </div>
-                        <div className="mb-4">
-                            <button
-                                onClick={() => confirmSignUp(email, verificationCode)}
-                                className="w-full p-2 rounded-md bg-blue-500 text-white font-semibold"
-                                disabled={verificationCode.length === 0}
-                            >
-                                Confirm Code
-                            </button>
-                        </div>
-                    </>
-                )}
-
-                {/* Error Message Display */}
-                {errorMessage && (
-                    <div className="mb-4 text-red-500 bg-red-100 p-2 rounded-md">
-                        {errorMessage}
+{showVerificationInput && (
+                <>
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium text-gray-600">Verification Code</label>
+                        <input
+                            type="text"
+                            placeholder="Enter Verification Code"
+                            className="mt-1 p-2 w-full rounded-md border"
+                            value={verificationCode}
+                            onChange={(e) => setVerificationCode(e.target.value)}
+                        />
                     </div>
-                )}
+                </>
+            )}
 
+            {/* Action Button (either for Confirm Code, Sign Up, or Sign In) */}
+            <div className="flex justify-between items-center mb-4">
+                <button
+                    onClick={
+                        showVerificationInput 
+                        ? () => confirmSignUp(email, verificationCode) 
+                        : isSignUp 
+                        ? () => handleSignUp(email, password) 
+                        : () => handleSignIn(email, password)
+                    }
+                    className="w-full p-2 rounded-md bg-blue-500 text-white font-semibold"
+                    disabled={showVerificationInput ? verificationCode.length === 0 : email.length === 0 || password.length === 0}
+                >
+                    {showVerificationInput ? 'Confirm Code' : isSignUp ? 'Sign Up' : 'Sign In'}
+                </button>
+            </div>
 
-        <div className="flex justify-between items-center mb-4">
-            <button
-                onClick={isSignUp ? () => handleSignUp(email, password) : () => handleSignIn(email, password)}
-                className="w-full p-2 rounded-md bg-blue-500 text-white font-semibold"
-                disabled={email.length === 0 || password.length === 0}
-            >
-            {isSignUp ? 'Sign Up' : 'Sign In'}
-            </button>
-        </div>
+            {/* Error Message Display */}
+            {errorMessage && (
+                <div className="mb-4 text-red-500 bg-red-100 p-2 rounded-md">
+                    {errorMessage}
+                </div>
+            )}
 
-
+            {/* Popup Message */}
+            {showPopup && (
+                <div style={{
+                    position: 'fixed',
+                    top: '10px',
+                    right: '10px',
+                    background: 'rgba(0, 128, 0, 0.7)', // Semi-transparent green
+                    color: 'white',
+                    padding: '10px',
+                    borderRadius: '5px',
+                    zIndex: 1000, // Ensure it's above other items
+                }}>
+                    {popupMessage}
+                </div>
+            )}
         </div>
     </div>
-    );
-};
+);
+}
 
 
 export default LoginModal;
