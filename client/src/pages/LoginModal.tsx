@@ -11,7 +11,8 @@ const LoginModal: FC<LoginModalProps> = ({ showModal, toggleModal, handleAuthent
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [isSignUp, setIsSignUp] = useState<boolean>(false);
-    const [extraField, setExtraField] = useState<string>('');
+    const [verifyPassword, setVerifyPassword] = useState<string>('');
+
 
     const keyPressHandler = async (e: React.KeyboardEvent) => {
         if (e.key === 'Enter') {
@@ -29,14 +30,17 @@ const LoginModal: FC<LoginModalProps> = ({ showModal, toggleModal, handleAuthent
     };
 
     const handleSignUp = async (username: string, password: string) => {
+        if(password !== verifyPassword) {
+            console.error("Passwords do not match!");
+            return;
+        }
+
         try {
             await Auth.signUp({
                 username,
                 password,
                 attributes: {
                     email: username,
-                    // trim the trailing @ from the user
-                    name: username.substring(0, username.indexOf('@')),
                 },
             });
             await handleSignIn(username, password);
@@ -86,42 +90,33 @@ const LoginModal: FC<LoginModalProps> = ({ showModal, toggleModal, handleAuthent
                     />
                 </div>
                 {isSignUp && (
-            <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-600">Extra Field</label>
-                <input
-                type="text"
-                placeholder="Extra Field"
-                className="mt-1 p-2 w-full rounded-md border"
-                value={extraField}
-                onChange={(e) => setExtraField(e.target.value)}
-                />
-            </div>
-        )}
+                    <>
+                        <div className="mb-4">
+                            <label className="block text-sm font-medium text-gray-600">Verify Password</label>
+                            <input
+                                type="password"
+                                placeholder="Verify Password"
+                                className="mt-1 p-2 w-full rounded-md border"
+                                value={verifyPassword}
+                                onChange={(e) => setVerifyPassword(e.target.value)}
+                            />
+                        </div>
+                    </>
+                )}
 
         <div className="flex justify-between items-center mb-4">
             <button
-                onClick={() => handleSignIn(username, password)}
+                onClick={isSignUp ? () => handleSignUp(username, password) : () => handleSignIn(username, password)}
                 className="w-full p-2 rounded-md bg-blue-500 text-white font-semibold"
                 disabled={username.length === 0 || password.length === 0}
             >
-            Sign In
+            {isSignUp ? 'Sign Up' : 'Sign In'}
             </button>
         </div>
 
-        {isSignUp && (
-            <div className="flex justify-between items-center mb-4">
-            <button
-                onClick={() => handleSignUp(username, password)}
-                className="w-full p-2 rounded-md bg-blue-500 text-white font-semibold"
-                disabled={username.length === 0 || password.length === 0}
-            >
-                Sign Up
-            </button>
-            </div>
-        )}
         </div>
     </div>
-  );
+    );
 };
 
 
