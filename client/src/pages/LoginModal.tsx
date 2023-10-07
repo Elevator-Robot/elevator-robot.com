@@ -8,22 +8,29 @@ interface LoginModalProps {
 }
 
 const LoginModal: FC<LoginModalProps> = ({ showModal, toggleModal, handleAuthentication }) => {
-    const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [isSignUp, setIsSignUp] = useState<boolean>(false);
     const [verifyPassword, setVerifyPassword] = useState<string>('');
     const [verificationCode, setVerificationCode] = useState<string>('');
     const [showVerificationInput, setShowVerificationInput] = useState<boolean>(false);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
 
 
     const confirmSignUp = async (email: string, code: string) => {
+        setErrorMessage(null);
         try {
             await Auth.confirmSignUp(email, code);
             setShowVerificationInput(false); // Hide the verification input once completed
             console.log('Code accepted.');
-        } catch (error) {
-            console.error('Error confirming sign up', error);
+        } catch (error : any) {
+            if (error.code === 'UserNotConfirmedException') {
+                setShowVerificationInput(true);
+            } else {
+                setErrorMessage(error.message || "An unexpected error occurred.");
+                console.error("Authentication error:", error);
+            }
         }
     }
     
@@ -35,17 +42,18 @@ const LoginModal: FC<LoginModalProps> = ({ showModal, toggleModal, handleAuthent
     };
 
     const handleSignIn = async (email: string, password: string) => {
+        setErrorMessage(null);
         try {
             await Auth.signIn({
                 username: email, // Use email for signing in.
                 password
             });
             handleAuthentication(); // This should update isAuthenticated to true
-        } catch (error) {
-            if (error.code === "UserNotConfirmedException") {
-                // User is not confirmed, show verification input
+        } catch (error : any) {
+            if (error.code === 'UserNotConfirmedException') {
                 setShowVerificationInput(true);
             } else {
+                setErrorMessage(error.message || "An unexpected error occurred.");
                 console.error("Authentication error:", error);
             }
         }
@@ -54,10 +62,11 @@ const LoginModal: FC<LoginModalProps> = ({ showModal, toggleModal, handleAuthent
 
     const handleSignUp = async (email: string, password: string) => {
         if(password !== verifyPassword) {
-            console.error("Passwords do not match!");
+            setErrorMessage("Passwords do not match!"); // Set the error message for mismatched passwords
             return;
         }
     
+        setErrorMessage(null);
         try {
             await Auth.signUp({
                 username: email,
@@ -65,8 +74,13 @@ const LoginModal: FC<LoginModalProps> = ({ showModal, toggleModal, handleAuthent
                 attributes: { email },
             });
             setShowVerificationInput(true);
-        } catch (error) {
-            console.error("Authentication error:", error);
+        } catch (error : any) {
+            if (error.code === 'UserNotConfirmedException') {
+                setShowVerificationInput(true);
+            } else {
+                setErrorMessage(error.message || "An unexpected error occurred.");
+                console.error("Authentication error:", error);
+            }
         }
     }
     
@@ -78,16 +92,23 @@ const LoginModal: FC<LoginModalProps> = ({ showModal, toggleModal, handleAuthent
                 {/* Tabs for Login and Signup */}
                 <div className="flex justify-center space-x-4 mb-4">
                     <button 
-                        onClick={() => setIsSignUp(false)} 
+                        onClick={() => {
+                            setIsSignUp(false);
+                            setErrorMessage(null); // Clear the error message when switching to Login
+                        }}
                         className={`px-4 py-2 ${!isSignUp ? 'font-bold text-lg border-b-4 border-blue-500' : ''}`}>
                         Login
                     </button>
                     <button 
-                        onClick={() => setIsSignUp(true)} 
+                        onClick={() => {
+                            setIsSignUp(true);
+                            setErrorMessage(null); // Clear the error message when switching to Signup
+                        }}
                         className={`px-4 py-2 ${isSignUp ? 'font-bold text-lg border-b-4 border-blue-500' : ''}`}>
                         Signup
                     </button>
                 </div>
+
 
                 <div className="mb-4">
                     <label className="block text-sm font-medium text-gray-600">Email</label>
@@ -149,6 +170,14 @@ const LoginModal: FC<LoginModalProps> = ({ showModal, toggleModal, handleAuthent
                         </div>
                     </>
                 )}
+
+                {/* Error Message Display */}
+                {errorMessage && (
+                    <div className="mb-4 text-red-500 bg-red-100 p-2 rounded-md">
+                        {errorMessage}
+                    </div>
+                )}
+
 
         <div className="flex justify-between items-center mb-4">
             <button
