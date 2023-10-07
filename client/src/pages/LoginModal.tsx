@@ -10,8 +10,8 @@ interface LoginModalProps {
 const LoginModal: FC<LoginModalProps> = ({ showModal, toggleModal, handleAuthentication }) => {
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
-    const [isSignUp, setIsSignUp] = useState<boolean>(false);  // New state
-    const [extraField, setExtraField] = useState<string>('');   // New state for extra field
+    const [isSignUp, setIsSignUp] = useState<boolean>(false);
+    const [extraField, setExtraField] = useState<string>('');
 
     const keyPressHandler = async (e: React.KeyboardEvent) => {
         if (e.key === 'Enter') {
@@ -48,7 +48,21 @@ const LoginModal: FC<LoginModalProps> = ({ showModal, toggleModal, handleAuthent
     return (
         <div className={`bg-blue-200 fixed inset-0 flex items-center justify-center ${showModal ? 'block' : 'hidden'}`}>
             <div className={`bg-white p-6 rounded-3xl shadow-2xl w-96 ${isSignUp ? 'w-128' : 'w-96'} shadow-black right-4`}>
-                <h1 className="text-2xl font-semibold mb-4 text-center">Login</h1>
+
+                {/* Tabs for Login and Signup */}
+                <div className="flex justify-center space-x-4 mb-4">
+                    <button 
+                        onClick={() => setIsSignUp(false)} 
+                        className={`px-4 py-2 ${!isSignUp ? 'font-bold text-lg border-b-4 border-blue-500' : ''}`}>
+                        Login
+                    </button>
+                    <button 
+                        onClick={() => setIsSignUp(true)} 
+                        className={`px-4 py-2 ${isSignUp ? 'font-bold text-lg border-b-4 border-blue-500' : ''}`}>
+                        Signup
+                    </button>
+                </div>
+
                 <div className="mb-4">
                     <label className="block text-sm font-medium text-gray-600">Username</label>
                     <input
@@ -91,15 +105,6 @@ const LoginModal: FC<LoginModalProps> = ({ showModal, toggleModal, handleAuthent
                 disabled={username.length === 0 || password.length === 0}
             >
             Sign In
-            </button>
-        </div>
-
-        <div className="flex justify-between items-center mb-4">
-            <button
-                onClick={() => { setIsSignUp(!isSignUp); }} // Toggle Sign Up mode
-                className="w-full p-2 rounded-md bg-blue-500 text-white font-semibold"
-            >
-            {isSignUp ? 'Switch to Sign In' : 'Switch to Sign Up'}
             </button>
         </div>
 
