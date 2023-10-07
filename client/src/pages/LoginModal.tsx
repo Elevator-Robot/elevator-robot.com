@@ -40,12 +40,17 @@ const LoginModal: FC<LoginModalProps> = ({ showModal, toggleModal, handleAuthent
                 username: email, // Use email for signing in.
                 password
             });
-            
             handleAuthentication(); // This should update isAuthenticated to true
         } catch (error) {
-            console.error("Authentication error:", error);
+            if (error.code === "UserNotConfirmedException") {
+                // User is not confirmed, show verification input
+                setShowVerificationInput(true);
+            } else {
+                console.error("Authentication error:", error);
+            }
         }
     };
+    
 
     const handleSignUp = async (email: string, password: string) => {
         if(password !== verifyPassword) {
