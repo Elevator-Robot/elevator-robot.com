@@ -101,8 +101,8 @@ const IndexPage: React.FC<PageProps> = () => {
 	return (
 		<>
 		{isAuthenticated ? (
-		<body id="main" className="bg-blue-200 h-screen">
-			<div className="p-14 text-right">
+		<body id="main" className="bg-blue-200 h-screen flex flex-col">
+			<div className="p-14 text-right text-ellipsis">
 			<button id="menuButton"
 					className="font-bold
 						text-lg border-b-4
@@ -114,7 +114,7 @@ const IndexPage: React.FC<PageProps> = () => {
 						duration-200"
 					onClick={handleLogout}>Logout</button>
         </div>
-		<div id="chatContainer" className="flex flex-col items-center justify-center h-screen p-16 bg-blue-200">
+		<div id="chatContainer" className="flex flex-col items-center justify-center flex-grow p-16">
 			<div className="bg-white rounded-lg p-7 w-full max-w-xl overflow-y-auto mb-8 shadow-lg">
 			{messages.map((message) => (
 				<div key={message.id} className={message.user === "assistant" ? messageStyles : botMessageStyles}>
