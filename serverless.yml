@@ -141,6 +141,41 @@ resources:
         GenerateSecret: false
         UserPoolId:
           Ref: CognitoUserPool
+    gatsbyAppAwsRegion:
+      Type: AWS::SSM::Parameter
+      Properties:
+        Name: gatsby_app_aws_region
+        Type: String
+        Value: !Ref 'AWS::Region'
+    gatsbyAppUserPoolId:
+      Type: AWS::SSM::Parameter
+      Properties:
+        Name: gatsby_app_user_pool_id
+        Type: String
+        Value:
+          Ref: CognitoUserPool
+    gatsbyAppUserPoolWebClientId:
+      Type: AWS::SSM::Parameter
+      Properties:
+        Name: gatsby_app_user_pool_web_client_id
+        Type: String
+        Value:
+          Ref: CognitoUserPoolClient
+    gatsbyAppWebsocketUrl:
+      Type: AWS::SSM::Parameter
+      Properties:
+        Name: gatsby_app_websocket_url
+        Type: String
+        Value:
+          Fn::Join:
+            - ''
+            - - 'wss://'
+              - !Ref WebsocketsApi
+              - '.execute-api.'
+              - !Ref 'AWS::Region'
+              - '.'
+              - !Ref 'AWS::URLSuffix'
+              - '/${self:provider.stage}'
 
 plugins:
   - serverless-python-requirements

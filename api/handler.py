@@ -7,7 +7,8 @@ from database_operations import (
     update_conversation,
 )
 from openai_interface import generate_message, format_prompt
-from cognito_user_profile import UserProfile
+
+# from cognito_user_profile import UserProfile
 
 logger = Logger(service="assistant", level="DEBUG")
 logger.inject_lambda_context()
