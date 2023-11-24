@@ -176,6 +176,28 @@ resources:
               - '.'
               - !Ref 'AWS::URLSuffix'
               - '/${self:provider.stage}'
+    amplifySsmRole:
+      Type: AWS::IAM::Role
+      Properties:
+        AssumeRolePolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Principal:
+                Service:
+                  - 'amplify.amazonaws.com'
+              Action:
+                - 'sts:AssumeRole'
+        Policies:
+          - PolicyName: amplify-ssm-policy
+            PolicyDocument:
+              Version: '2012-10-17'
+              Statement:
+                - Effect: Allow
+                  Action:
+                    - 'ssm:GetParameters'
+                    - 'ssm:GetParameter'
+                  Resource: '*'
 
 plugins:
   - serverless-python-requirements
