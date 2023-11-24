@@ -6,6 +6,10 @@ applications:
           commands:
             - ./fetch-secrets.sh
             - yarn install
+            - export GATSBY_APP_AWS_REGION=$(aws ssm get-parameter --name gatsby_app_aws_region --query Parameter.Value --output text --with-decryption)
+            - export GATSBY_APP_USER_POOL_ID=$(aws ssm get-parameter --name gatsby_app_user_pool_id --query Parameter.Value --output text --with-decryption)
+            - export GATSBY_APP_USER_POOL_WEB_CLIENT_ID=$(aws ssm get-parameter --name gatsby_app_user_pool_web_client_id --query Parameter.Value --output text --with-decryption)
+            - export GATSBY_APP_WEBSOCKET_URL=$(aws ssm get-parameter --name gatsby_app_websocket_url --query Parameter.Value --output text --with-decryption)
         build:
           commands:
             - yarn run build
