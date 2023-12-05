@@ -1,5 +1,48 @@
 {
+  "name": "elevator-robot.com",
+  "version": "1.0.0",
+  "private": true,
+  "description": "elevator-robot.com",
+  "author": "Aaron West",
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@aws-amplify/ui-react": "^5.3.0",
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "aws-amplify": "^5.3.11",
+    "gatsby": "^5.9.1",
+    "gatsby-cli": "^5.9.0",
+    "gatsby-plugin-emotion": "^8.9.0",
+    "gatsby-plugin-image": "^3.9.0",
+    "gatsby-plugin-sharp": "^5.9.0",
+    "gatsby-source-contentful": "^8.9.1",
+    "gatsby-transformer-sharp": "^5.9.0",
+    "joi": "^17.9.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
   "devDependencies": {
-    "serverless-python-requirements": "^6.0.0"
+    "@types/node": "^18.16.5",
+    "@types/react": "^18.2.5",
+    "@types/react-dom": "^18.2.4",
+    "autoprefixer": "^10.4.14",
+    "gatsby-plugin-postcss": "^6.9.0",
+    "postcss": "^8.4.23",
+    "serverless-certificate-creator": "^1.6.0",
+    "serverless-finch": "^4.0.3",
+    "serverless-python-requirements": "^6.0.0",
+    "serverless-s3-sync": "^3.1.0",
+    "tailwindcss": "^3.3.2",
+    "typescript": "^5.0.4"
   }
 }

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { PageProps } from "gatsby";
 import { Amplify } from "aws-amplify";
 import amplifyConfig from "../../amplify-config";
-// import AvatarButton from "./AvatarButton";
 import LoginModal from "./LoginModal";
 import { Auth } from "aws-amplify";
 
