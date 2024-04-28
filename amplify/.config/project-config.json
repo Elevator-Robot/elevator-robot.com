@@ -1,7 +1,5 @@
 {
-  "providers": [
-    "awscloudformation"
-  ],
+  "providers": ["awscloudformation"],
   "projectName": "elevatorrobotcom",
   "version": "3.1",
   "frontend": "javascript",
@@ -11,7 +9,7 @@
       "SourceDir": "src",
       "DistributionDir": "dist",
       "BuildCommand": "npm run build",
-      "StartCommand": "npm ren preview"
+      "StartCommand": "npm run preview"
     }
   }
 }
