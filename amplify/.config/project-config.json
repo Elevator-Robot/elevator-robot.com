@@ -10,8 +10,8 @@
     "config": {
       "SourceDir": "src",
       "DistributionDir": "dist",
-      "BuildCommand": "npm run-script build",
-      "StartCommand": " npm run-script preview"
+      "BuildCommand": "npm run build",
+      "StartCommand": "npm ren preview"
     }
   }
 }
