@@ -1,10 +1,20 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0)
+import { withAuthenticator, Button, Heading } from "@aws-amplify/ui-react";
+import "@aws-amplify/ui-react/styles.css";
+import { type AuthUser } from "@aws-amplify/auth";
+import { type UseAuthenticator } from "@aws-amplify/ui-react-core";
+
+type AppProps = {
+  signOut?: UseAuthenticator["signOut"];
+  user?: AuthUser;
+};
+
+const App: React.FC<AppProps> = ({ signOut, user }) => {
+  const [count, setCount] = useState(0);
 
   return (
     <>
@@ -28,8 +38,12 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+      <div>
+        <Heading level={1}>Hello, {user?.username}</Heading>
+        <Button onClick={signOut}>Sign Out</Button>
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default App
+export default withAuthenticator(App);

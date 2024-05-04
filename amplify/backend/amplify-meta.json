@@ -48,7 +48,7 @@
         "IdentityPoolName": "testAuthIdentityPool__dev",
         "UserPoolName": "elevatorrobotcom"
       },
-      "lastPushTimeStamp": "2024-04-28T16:58:29.255Z",
+      "lastPushTimeStamp": "2024-05-04T18:45:07.669Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-elevatorrobotcom-dev-112625-deployment/amplify-cfn-templates/auth/elevatorrobotcom-cloudformation-template.json",
         "logicalId": "authelevatorrobotcom"
