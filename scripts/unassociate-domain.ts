@@ -1,5 +1,7 @@
 import AWS from 'aws-sdk';
 
+// Configure AWS SDK
+AWS.config.update({ region: 'us-east-1' }); // Replace with your region if different
 const amplify = new AWS.Amplify();
 
 async function unassociateDomain() {
