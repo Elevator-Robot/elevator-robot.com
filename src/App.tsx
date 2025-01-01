@@ -2,12 +2,16 @@ import { useEffect, useState } from "react";
 import type { Schema } from "../amplify/data/resource";
 import { useAuthenticator } from '@aws-amplify/ui-react';
 import { generateClient } from "aws-amplify/data";
+import { fetchUserAttributes } from "aws-amplify/auth";
+
+const userAttributes = await fetchUserAttributes();
 
 const client = generateClient<Schema>();
 
 function App() {
 
-  const { user, signOut } = useAuthenticator();
+
+  const { signOut } = useAuthenticator();
 
   function deleteTodo(id: string) {
     client.models.Todo.delete({ id })
@@ -29,7 +33,7 @@ function App() {
 
   return (
     <main>
-      <h1>{user?.attributes?.nickname || user?.signInDetails?.loginId}'s todos</h1>
+      <h1>{userAttributes?.nickname}'s todos</h1>
       <button onClick={createTodo}>+ new</button>
       <ul>
         {todos.map((todo) => (
