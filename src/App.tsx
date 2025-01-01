@@ -13,6 +13,8 @@ function App() {
     client.models.Todo.delete({ id })
   }
 
+  // const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
+  // use the users nickname as the title
   const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
 
   useEffect(() => {
