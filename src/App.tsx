@@ -7,6 +7,7 @@ import { fetchUserAttributes } from "aws-amplify/auth";
 const client = generateClient<Schema>();
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
   const [userAttributes, setUserAttributes] = useState<Record<string, string | undefined> | undefined>();
 
 
@@ -29,10 +30,10 @@ function App() {
       if (nickname) {
         document.title = `${nickname}'s todos`;
       }
+      setIsLoading(false);
     }
     getUserAttributes();
-  }
-    , []);
+  }, []);
 
   useEffect(() => {
     client.models.Todo.observeQuery().subscribe({
@@ -42,6 +43,10 @@ function App() {
 
   function createTodo() {
     client.models.Todo.create({ content: window.prompt("Todo content") });
+  }
+
+  if (isLoading) {
+    return null;
   }
 
   return (
