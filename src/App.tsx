@@ -24,9 +24,15 @@ function App() {
     async function getUserAttributes() {
       const attributes = await fetchUserAttributes();
       setUserAttributes(attributes);
+
+      const nickname = attributes?.nickname;
+      if (nickname) {
+        document.title = `${nickname}'s todos`;
+      }
     }
     getUserAttributes();
-  }, []);
+  }
+    , []);
 
   useEffect(() => {
     client.models.Todo.observeQuery().subscribe({
@@ -40,7 +46,7 @@ function App() {
 
   return (
     <main>
-      <h1>{userAttributes?.nickname ?? 'Loading...'}'s todos</h1>
+      <h1>{userAttributes?.nickname}'s todos</h1>
       <button onClick={createTodo}>+ new</button>
       <ul>
         {todos.map((todo) => (
