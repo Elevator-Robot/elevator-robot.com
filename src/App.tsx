@@ -7,7 +7,7 @@ import { fetchUserAttributes } from "aws-amplify/auth";
 const client = generateClient<Schema>();
 
 function App() {
-  const [userAttributes, setUserAttributes] = useState<Record<string, string> | undefined>();
+  const [userAttributes, setUserAttributes] = useState<Record<string, string | undefined> | undefined>();
 
 
   const { signOut } = useAuthenticator();
