@@ -48,8 +48,8 @@ function App() {
   return (
     <div className="flex flex-col h-screen bg-gray-100">
       {/* Header */}
-      <header className="bg-white shadow p-4">
-        <div className="flex justify-between items-center container mx-auto">
+      <header className="bg-white shadow p-4 w-full">
+        <div className="flex justify-between items-center px-4">
           <h1 className="text-xl font-bold">Elevator Robot Chat</h1>
           <button 
             onClick={signOut}
@@ -61,7 +61,7 @@ function App() {
       </header>
 
       {/* Chat Container */}
-      <main className="flex-1 overflow-auto p-4 container mx-auto w-full">
+      <main className="flex-1 overflow-auto p-4 w-full">
         <div className="space-y-4">
           {messages.map((message, index) => (
             <div
@@ -86,7 +86,7 @@ function App() {
       <div className="bg-white border-t p-4">
         <form 
           onSubmit={handleSubmit}
-          className="container mx-auto flex gap-4"
+          className="flex gap-4 px-4"
         >
           <input
             type="text"
