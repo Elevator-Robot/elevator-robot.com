@@ -48,24 +48,41 @@ function App() {
   }
 
   return (
-    <main>
-      <h1>{userAttributes?.nickname}'s todos</h1>
-      <button onClick={createTodo}>+ new</button>
-      <ul>
+    <main className="flex flex-col items-stretch">
+      <h1 className="text-2xl font-bold mb-4">{userAttributes?.nickname}'s todos</h1>
+      <button 
+        onClick={createTodo}
+        className="rounded-lg border border-transparent px-4 py-2 text-base font-medium bg-gray-900 text-white hover:border-indigo-500 transition-colors"
+      >
+        + new
+      </button>
+      <ul className="my-2 flex flex-col gap-px bg-black border border-black rounded-lg overflow-auto">
         {todos.map((todo) => (
           <li
             onClick={() => deleteTodo(todo.id)}
-            key={todo.id}>{todo.content}</li>
+            key={todo.id}
+            className="bg-white p-2 hover:bg-indigo-50 cursor-pointer"
+          >
+            {todo.content}
+          </li>
         ))}
       </ul>
-      <div>
+      <div className="text-center my-4">
         🥳 App successfully hosted. Try creating a new todo.
         <br />
-        <a href="https://docs.amplify.aws/react/start/quickstart/#make-frontend-updates">
+        <a 
+          href="https://docs.amplify.aws/react/start/quickstart/#make-frontend-updates"
+          className="font-bold text-indigo-600 hover:text-indigo-800"
+        >
           Review next step of this tutorial.
         </a>
       </div>
-      <button onClick={signOut}>Sign out</button>
+      <button 
+        onClick={signOut}
+        className="rounded-lg border border-transparent px-4 py-2 text-base font-medium bg-gray-900 text-white hover:border-indigo-500 transition-colors"
+      >
+        Sign out
+      </button>
     </main>
   );
 }
