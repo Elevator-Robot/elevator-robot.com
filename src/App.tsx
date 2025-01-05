@@ -29,12 +29,12 @@ function App() {
 
     // Add user message
     setMessages(prev => [...prev, { role: 'user', content: inputMessage }]);
-    
+
     // Simulate assistant response (replace with actual API call later)
     setTimeout(() => {
-      setMessages(prev => [...prev, { 
-        role: 'assistant', 
-        content: `This is a mock response to: "${inputMessage}"` 
+      setMessages(prev => [...prev, {
+        role: 'assistant',
+        content: `This is a mock response to: "${inputMessage}"`
       }]);
     }, 1000);
 
@@ -46,12 +46,12 @@ function App() {
   }
 
   return (
-    <div className="flex flex-col h-screen bg-gray-100">
+    <div className="flex flex-col w-full">
       {/* Header */}
       <header className="bg-white shadow p-4 w-full">
         <div className="flex justify-between items-center px-4">
           <h1 className="text-xl font-bold">Elevator Robot Chat</h1>
-          <button 
+          <button
             onClick={signOut}
             className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800"
           >
@@ -61,7 +61,7 @@ function App() {
       </header>
 
       {/* Chat Container */}
-      <main className="flex-1 overflow-auto p-4 w-full">
+      <main className="flex-1 overflow-auto p-4 w-full max-w-4xl mx-auto">
         <div className="space-y-4">
           {messages.map((message, index) => (
             <div
@@ -69,11 +69,10 @@ function App() {
               className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
             >
               <div
-                className={`max-w-[80%] rounded-lg p-4 ${
-                  message.role === 'user'
-                    ? 'bg-blue-500 text-white'
-                    : 'bg-white text-gray-800'
-                }`}
+                className={`max-w-[80%] rounded-lg p-4 ${message.role === 'user'
+                  ? 'bg-blue-500 text-white'
+                  : 'bg-white text-gray-800'
+                  }`}
               >
                 {message.content}
               </div>
@@ -84,9 +83,9 @@ function App() {
 
       {/* Input Form */}
       <div className="bg-white border-t p-4">
-        <form 
+        <form
           onSubmit={handleSubmit}
-          className="flex gap-4 px-4"
+          className="flex gap-4"
         >
           <input
             type="text"
