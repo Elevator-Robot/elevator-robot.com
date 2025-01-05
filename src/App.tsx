@@ -2,18 +2,38 @@ import { useEffect, useState } from "react";
 import type { Schema } from "../amplify/data/resource";
 import { useAuthenticator } from '@aws-amplify/ui-react';
 import { generateClient } from "aws-amplify/data";
+import { fetchUserAttributes } from "aws-amplify/auth";
 
 const client = generateClient<Schema>();
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [userAttributes, setUserAttributes] = useState<Record<string, string | undefined> | undefined>();
 
-  const { user, signOut } = useAuthenticator();
+
+  const { signOut } = useAuthenticator();
 
   function deleteTodo(id: string) {
     client.models.Todo.delete({ id })
   }
 
+  // const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
+  // use the users nickname as the title
   const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
+
+  useEffect(() => {
+    async function getUserAttributes() {
+      const attributes = await fetchUserAttributes();
+      setUserAttributes(attributes);
+
+      const nickname = attributes?.nickname;
+      if (nickname) {
+        document.title = `${nickname}'s todos`;
+      }
+      setIsLoading(false);
+    }
+    getUserAttributes();
+  }, []);
 
   useEffect(() => {
     client.models.Todo.observeQuery().subscribe({
@@ -25,9 +45,13 @@ function App() {
     client.models.Todo.create({ content: window.prompt("Todo content") });
   }
 
+  if (isLoading) {
+    return null;
+  }
+
   return (
     <main>
-      <h1>{user?.signInDetails?.loginId}'s todos</h1>
+      <h1>{userAttributes?.nickname}'s todos</h1>
       <button onClick={createTodo}>+ new</button>
       <ul>
         {todos.map((todo) => (
