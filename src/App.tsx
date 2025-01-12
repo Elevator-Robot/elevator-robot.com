@@ -14,6 +14,7 @@ function App() {
   const [inputMessage, setInputMessage] = useState('');
   const { signOut } = useAuthenticator();
 
+  console.log(userAttributes);
   useEffect(() => {
     async function getUserAttributes() {
       const attributes = await fetchUserAttributes();
@@ -48,7 +49,7 @@ function App() {
   return (
     <div className="flex flex-col w-full">
       {/* Header */}
-      <header className="bg-white shadow p-4 w-full">
+      <header className="bg-white shadow p-4 w-full rounded-lg">
         <div className="flex justify-between items-center px-4">
           <h1 className="text-xl font-bold">Elevator Robot Chat</h1>
           <button
@@ -82,7 +83,7 @@ function App() {
       </main>
 
       {/* Input Form */}
-      <div className="bg-white border-t p-4">
+      <div className="bg-white border-t p-4 rounded-lg">
         <form
           onSubmit={handleSubmit}
           className="flex gap-4"
