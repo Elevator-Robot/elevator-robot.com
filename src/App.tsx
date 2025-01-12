@@ -14,6 +14,7 @@ function App() {
   const [inputMessage, setInputMessage] = useState('');
   const { signOut } = useAuthenticator();
 
+  console.log(userAttributes);
   useEffect(() => {
     async function getUserAttributes() {
       const attributes = await fetchUserAttributes();
