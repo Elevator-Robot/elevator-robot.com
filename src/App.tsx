@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { useAuthenticator } from '@aws-amplify/ui-react';
-import { fetchUserAttributes } from "aws-amplify/auth";
 
 interface Message {
   role: 'user' | 'assistant';
@@ -8,21 +6,10 @@ interface Message {
 }
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [userAttributes, setUserAttributes] = useState<Record<string, string | undefined> | undefined>();
+  const [isLoading] = useState(true);
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputMessage, setInputMessage] = useState('');
-  const { signOut } = useAuthenticator();
 
-  console.log(userAttributes);
-  useEffect(() => {
-    async function getUserAttributes() {
-      const attributes = await fetchUserAttributes();
-      setUserAttributes(attributes);
-      setIsLoading(false);
-    }
-    getUserAttributes();
-  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -52,12 +39,6 @@ function App() {
       <header className="bg-white shadow p-4 w-full rounded-lg">
         <div className="flex justify-between items-center px-4">
           <h1 className="text-xl font-bold">Elevator Robot Chat</h1>
-          <button
-            onClick={signOut}
-            className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800"
-          >
-            Sign out
-          </button>
         </div>
       </header>
 
