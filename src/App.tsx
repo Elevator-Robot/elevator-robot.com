@@ -1,108 +1,117 @@
-import { useEffect, useState } from "react";
-import { useAuthenticator } from '@aws-amplify/ui-react';
-import { fetchUserAttributes } from "aws-amplify/auth";
-
-interface Message {
-  role: 'user' | 'assistant';
-  content: string;
-}
+import { useState } from "react";
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [userAttributes, setUserAttributes] = useState<Record<string, string | undefined> | undefined>();
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [inputMessage, setInputMessage] = useState('');
-  const { signOut } = useAuthenticator();
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
 
-  console.log(userAttributes);
-  useEffect(() => {
-    async function getUserAttributes() {
-      const attributes = await fetchUserAttributes();
-      setUserAttributes(attributes);
-      setIsLoading(false);
-    }
-    getUserAttributes();
-  }, []);
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!inputMessage.trim()) return;
-
-    // Add user message
-    setMessages(prev => [...prev, { role: 'user', content: inputMessage }]);
-
-    // Simulate assistant response (replace with actual API call later)
-    setTimeout(() => {
-      setMessages(prev => [...prev, {
-        role: 'assistant',
-        content: `This is a mock response to: "${inputMessage}"`
-      }]);
-    }, 1000);
-
-    setInputMessage('');
+    // Add your form submission logic here
+    console.log('Form submitted:', formData);
   };
 
-  if (isLoading) {
-    return null;
-  }
-
   return (
-    <div className="flex flex-col w-full">
+    <div className="min-h-screen bg-gray-light">
       {/* Header */}
-      <header className="bg-white shadow p-4 w-full rounded-lg">
-        <div className="flex justify-between items-center px-4">
-          <h1 className="text-xl font-bold">Elevator Robot Chat</h1>
-          <button
-            onClick={signOut}
-            className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800"
-          >
-            Sign out
-          </button>
+      <header className="shadow-lg font-bold w-full z-10 sticky top-0 bg-white">
+        <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex justify-between items-center">
+          <h1 className="text-2xl font-bold text-primary">Elevator Robot</h1>
+          <nav>
+            <ul className="flex space-x-6">
+              <li><a href="#about" className="text-gray-dark hover:text-primary transition">About</a></li>
+              <li><a href="#services" className="text-gray-dark hover:text-primary transition">Services</a></li>
+              <li><a href="#contact" className="text-gray-dark hover:text-primary transition">Contact</a></li>
+            </ul>
+          </nav>
         </div>
       </header>
 
-      {/* Chat Container */}
-      <main className="flex-1 overflow-auto p-4 w-full max-w-4xl mx-auto">
-        <div className="space-y-4">
-          {messages.map((message, index) => (
-            <div
-              key={index}
-              className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
-            >
-              <div
-                className={`max-w-[80%] rounded-lg p-4 ${message.role === 'user'
-                  ? 'bg-blue-500 text-white'
-                  : 'bg-white text-gray-800'
-                  }`}
-              >
-                {message.content}
-              </div>
-            </div>
-          ))}
+      {/* Hero Section */}
+      <section className="pt-20 pb-12 bg-gradient-to-r from-primary to-primary-light">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <div className="text-center">
+            <h2 className="text-4xl font-bold text-white mb-4">Welcome to Elevator Robot</h2>
+            <p className="text-xl text-white">Elevating your business through innovative solutions</p>
+          </div>
         </div>
-      </main>
+      </section>
 
-      {/* Input Form */}
-      <div className="bg-white border-t p-4 rounded-lg">
-        <form
-          onSubmit={handleSubmit}
-          className="flex gap-4"
-        >
-          <input
-            type="text"
-            value={inputMessage}
-            onChange={(e) => setInputMessage(e.target.value)}
-            placeholder="Type your message..."
-            className="flex-1 rounded-lg border border-gray-300 p-2 focus:outline-none focus:border-blue-500"
-          />
-          <button
-            type="submit"
-            className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
-          >
-            Send
-          </button>
-        </form>
-      </div>
+      {/* About Section */}
+      <section id="about" className="py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-gray-dark mb-8">About Us</h2>
+          <p className="text-lg text-gray">
+            We specialize in building innovative AWS-based solutions tailored to your business needs.
+          </p>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section id="services" className="py-16 bg-gray-light">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-gray-dark mb-8">Our Services</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition-transform duration-200">
+              <h3 className="text-xl font-bold text-gray-dark mb-2">Service 1</h3>
+              <p className="text-gray">Description of service 1</p>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition-transform duration-200">
+              <h3 className="text-xl font-bold text-gray-dark mb-2">Service 2</h3>
+              <p className="text-gray">Description of service 2</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-gray-dark mb-8">Contact Us</h2>
+          <form className="max-w-lg mx-auto" onSubmit={handleFormSubmit}>
+            <div className="space-y-6">
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-gray-dark">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  className="mt-1 block w-full rounded-md border-gray shadow-sm focus:border-primary focus:ring-primary"
+                />
+              </div>
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-dark">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="mt-1 block w-full rounded-md border-gray shadow-sm focus:border-primary focus:ring-primary"
+                />
+              </div>
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium text-gray-dark">Message</label>
+                <textarea
+                  id="message"
+                  rows={4}
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  className="mt-1 block w-full rounded-md border-gray shadow-sm focus:border-primary focus:ring-primary"
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                className="w-full bg-primary text-white font-bold py-3 px-6 rounded-md hover:bg-primary-light transition-colors"
+              >
+                Send Message
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
     </div>
   );
 }

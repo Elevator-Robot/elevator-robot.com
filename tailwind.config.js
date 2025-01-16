@@ -7,15 +7,20 @@ export default {
   ],
   theme: {
     extend: {
-      container: {
-        center: true,
-        padding: '2rem',
-        screens: {
-          sm: '640px',
-          md: '768px',
-          lg: '1024px',
-          xl: '1280px',
-          '2xl': '1536px',
+      colors: {
+        primary: {
+          light: '#082f49',
+          DEFAULT: '#1A73E8',
+        },
+        accent: {
+          light: '#FEDD00',
+          DEFAULT: '#F9A826',
+          dark: '#E38A1D',
+        },
+        gray: {
+          light: '#F5F5F5',
+          DEFAULT: '#E0E0E0',
+          dark: '#333333',
         },
       },
     },
