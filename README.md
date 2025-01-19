@@ -2,11 +2,11 @@
 
 ## What am I?
 
-This is the Elevator Robot landing page built to display our projects and services.
+I'm a landing page designated to showcase the products and services offered by Elevator Robot LLC. Visit me at [elevator-robot.com](https://elevator-robot.com).
 
 ## Local Dev
 
-Spin up the frontend from you computer by running:
+Spin up the front end from you computer by running:
 
 ```bash
 npm run deve
