@@ -60,7 +60,7 @@ function App() {
                 <>
                   <h3 className="text-2xl font-bold text-gray-dark mb-4">Get in Touch</h3>
                   <form onSubmit={handleFormSubmit}>
-                    <div className="space-y-4">
+                    <div className="space-y-4 text-gray-dark">
                       <div>
                         <label htmlFor="name" className="block text-sm font-medium text-gray-dark">
                           Name
@@ -104,7 +104,7 @@ function App() {
               {section === "about" && (
                 <>
                   <h3 className="text-2xl font-bold text-gray-dark mb-4">About Us</h3>
-                  <p className="text-gray text-lg">
+                  <p className="text-gray-dark text-lg">
                     We specialize in building innovative AWS-based solutions tailored to your business needs.
                   </p>
                 </>
@@ -112,7 +112,7 @@ function App() {
               {section === "services" && (
                 <>
                   <h3 className="text-2xl font-bold text-gray-dark mb-4">Our Services</h3>
-                  <ul className="text-gray text-lg list-disc list-inside">
+                  <ul className="text-gray-dark text-lg list-disc list-inside">
                     <li>Custom software development</li>
                     <li>Cloud infrastructure solutions</li>
                     <li>AI and machine learning integration</li>
