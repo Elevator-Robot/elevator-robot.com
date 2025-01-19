@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 function App() {
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -14,7 +15,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-light">
+    <div className="min-h-screen">
       {/* Header */}
       <header className="shadow-lg font-bold w-full z-10 sticky top-0 bg-white">
         <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex justify-between items-center">
@@ -30,13 +31,16 @@ function App() {
       </header>
 
       {/* Hero Section */}
-      <section className="pt-20 pb-12 bg-gradient-to-r from-primary to-primary-light">
+      <section className="pt-20 pb-12 bg-gradient-to-r from-primary to-primary-light h-screen">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          <div className="text-center">
-            <h2 className="text-4xl font-bold text-white mb-4">Welcome to Elevator Robot</h2>
-            <p className="text-xl text-white">Elevating your business through innovative solutions</p>
+          <div className="text-left">
+            <h2 className="text-4xl font-bold text-white mb-4">Bring Your Vision to Life</h2>
+            <p className="text-xl text-white">Transform your ideas into innovative, scalable solutions designed to make an impact.</p>
+          </div>
+          <div className="text-left">
           </div>
         </div>
+
       </section>
 
       {/* About Section */}
@@ -50,7 +54,7 @@ function App() {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-16 bg-gray-light">
+      <section id="services" className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-gray-dark mb-8">Our Services</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -65,6 +69,7 @@ function App() {
           </div>
         </div>
       </section>
+
 
       {/* Contact Section */}
       <section id="contact" className="py-16">
@@ -112,6 +117,55 @@ function App() {
           </form>
         </div>
       </section>
+
+
+      {/* Contact Section */}
+      <section id="contact" className="py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-gray-dark mb-8">Contact Us</h2>
+          <form className="max-w-lg mx-auto" onSubmit={handleFormSubmit}>
+            <div className="space-y-6">
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-gray-dark">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  className="mt-1 block w-full rounded-md border-gray shadow-sm focus:border-primary focus:ring-primary"
+                />
+              </div>
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-dark">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="mt-1 block w-full rounded-md border-gray shadow-sm focus:border-primary focus:ring-primary"
+                />
+              </div>
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium text-gray-dark">Message</label>
+                <textarea
+                  id="message"
+                  rows={4}
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  className="mt-1 block w-full rounded-md border-gray shadow-sm focus:border-primary focus:ring-primary"
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                className="w-full bg-primary text-white font-bold py-3 px-6 rounded-md hover:bg-primary-light transition-colors"
+              >
+                Send Message
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+
     </div>
   );
 }
