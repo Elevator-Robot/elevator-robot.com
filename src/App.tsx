@@ -52,15 +52,17 @@ function App() {
         {["contact", "about", "services"].map((section) => (
           <div
             key={section}
-            className={`mt-4 w-full max-w-lg bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-300 ${visibleSection === section ? "max-h-[500px] opacity-100 visible" : "max-h-0 opacity-0 invisible"
+            className={` mt-4 w-full max-w-lg bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-300 ${visibleSection === section
+              ? "max-h-[700px] opacity-100 visible"
+              : "max-h-1 opacity-0 invisible"
               }`}
           >
-            <div className="p-6">
+            <div className="p-3 border-spacing-48 border-b-orange-50"> {/* Increased padding for cleaner formatting */}
               {section === "contact" && (
                 <>
-                  <h3 className="text-2xl font-bold text-gray-dark mb-4">Get in Touch</h3>
+                  <h3 className="text-2xl font-bold text-gray-dark mb-6">Get in Touch</h3>
                   <form onSubmit={handleFormSubmit}>
-                    <div className="space-y-4 text-gray-dark">
+                    <div className="space-y-6 text-gray-dark">
                       <div>
                         <label htmlFor="name" className="block text-sm font-medium text-gray-dark">
                           Name
@@ -68,7 +70,7 @@ function App() {
                         <input
                           type="text"
                           id="name"
-                          className="mt-1 block w-full rounded-md border-gray shadow-sm focus:border-primary focus:ring-primary"
+                          className="mt-2 block w-full rounded-md border-gray-100 shadow-sm focus:border-primary focus:ring-primary px-4 py-2 border-4"
                         />
                       </div>
                       <div>
@@ -78,7 +80,7 @@ function App() {
                         <input
                           type="email"
                           id="email"
-                          className="mt-1 block w-full rounded-md border-gray shadow-sm focus:border-primary focus:ring-primary"
+                          className="mt-2 block w-full rounded-md border-gray-100 shadow-sm focus:border-primary focus:ring-primary px-4 py-2 border-4"
                         />
                       </div>
                       <div>
@@ -88,12 +90,12 @@ function App() {
                         <textarea
                           id="message"
                           rows={4}
-                          className="mt-1 block w-full rounded-md border-gray shadow-sm focus:border-primary focus:ring-primary"
+                          className="mt-2 block w-full rounded-md border-gray-100 shadow-sm focus:border-primary focus:ring-primary px-4 py-2 border-4"
                         ></textarea>
                       </div>
                       <button
                         type="submit"
-                        className="w-full bg-primary text-white font-bold py-3 px-6 rounded-md hover:bg-primary-light transition-colors"
+                        className="w-full bg-primary text-white font-bold py-4 px-8 rounded-md hover:bg-primary-light transition-colors"
                       >
                         Send Message
                       </button>
@@ -103,16 +105,16 @@ function App() {
               )}
               {section === "about" && (
                 <>
-                  <h3 className="text-2xl font-bold text-gray-dark mb-4">About Us</h3>
-                  <p className="text-gray-dark text-lg">
+                  <h3 className="text-2xl font-bold text-gray-dark mb-6">About Us</h3>
+                  <p className="text-gray-dark text-lg leading-relaxed">
                     We specialize in building innovative AWS-based solutions tailored to your business needs.
                   </p>
                 </>
               )}
               {section === "services" && (
                 <>
-                  <h3 className="text-2xl font-bold text-gray-dark mb-4">Our Services</h3>
-                  <ul className="text-gray-dark text-lg list-disc list-inside">
+                  <h3 className="text-2xl font-bold text-gray-dark mb-6">Our Services</h3>
+                  <ul className="text-gray-dark text-lg leading-relaxed list-disc list-inside space-y-2">
                     <li>Custom software development</li>
                     <li>Cloud infrastructure solutions</li>
                     <li>AI and machine learning integration</li>
