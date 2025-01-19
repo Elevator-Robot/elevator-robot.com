@@ -15,8 +15,7 @@ function App() {
   return (
     <div className="min-h-screen">
       {/* Header */}
-      <header className="shadow-lg font-bold w-full z-10 sticky top-0 bg-white">
-        <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex justify-between items-center">
+      <header className="shadow-lg font-bold w-full z-10 sticky top-0 bg-white text">
           <h1 className="text-2xl font-bold text-primary">Elevator Robot</h1>
         </div>
       </header>
