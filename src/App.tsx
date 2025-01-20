@@ -15,7 +15,7 @@ function App() {
   return (
     <div className="min-h-screen">
       {/* Header */}
-      <header className="shadow-lg font-bold w-full z-10 sticky top-0 bg-white text">
+      <header className="shadow-lg font-bold w-full z-10 sticky top-0 bg-primary-alt text">
         <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex justify-between items-center">
           <h1 className="text-2xl font-bold text-primary text-center">Elevator Robot</h1>
         </div>
@@ -28,22 +28,22 @@ function App() {
           <p className="text-xl mb-6">Transform your ideas into innovative, scalable solutions designed to make an impact.</p>
           <div className="flex space-x-4 justify-center">
             <button
-              className="bg-white text-primary font-bold py-3 px-6 rounded-md hover:bg-gray-100 transition"
-              onClick={() => toggleSection("contact")}
-            >
-              Contact Us ➔
-            </button>
-            <button
-              className="bg-white text-primary font-bold py-3 px-6 rounded-md hover:bg-gray-100 transition"
+              className="bg-primary-alt text-primary font-bold py-3 px-6 rounded-md hover:bg-gray-100 transition"
               onClick={() => toggleSection("about")}
             >
               About Us ➔
             </button>
             <button
-              className="bg-white text-primary font-bold py-3 px-6 rounded-md hover:bg-gray-100 transition"
+              className="bg-primary-alt text-primary font-bold py-3 px-6 rounded-md hover:bg-gray-100 transition"
               onClick={() => toggleSection("services")}
             >
               Services ➔
+            </button>
+            <button
+              className="bg-primary-alt text-primary font-bold py-3 px-6 rounded-md hover:bg-gray-100 transition"
+              onClick={() => toggleSection("contact")}
+            >
+              Contact Us ➔
             </button>
           </div>
         </div>
@@ -52,7 +52,7 @@ function App() {
         {["contact", "about", "services"].map((section) => (
           <div
             key={section}
-            className={` mt-4 w-full max-w-lg bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-300 ${visibleSection === section
+            className={` mt-4 w-full max-w-lg bg-primary-alt rounded-lg shadow-lg overflow-hidden transition-all duration-300 ${visibleSection === section
               ? "max-h-[700px] opacity-100 visible"
               : "max-h-1 opacity-0 invisible"
               }`}
