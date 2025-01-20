@@ -22,7 +22,7 @@ function App() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-primary to-primary-light h-screen flex flex-col justify-center items-center text-center text-white">
+      <section className="relative bg-gradient-to-r from-primary to-primary-dark h-screen flex flex-col justify-center items-center text-center text-white">
         <div>
           <h2 className="text-4xl font-bold mb-4">Bring Your Vision to Life</h2>
           <p className="text-xl mb-6">Transform your ideas into innovative, scalable solutions designed to make an impact.</p>
