@@ -106,8 +106,8 @@ function App() {
               {section === "about" && (
                 <>
                   <h3 className="text-2xl font-bold text-gray-dark mb-6">About Us</h3>
-                  <p className="text-gray-dark text-lg leading-relaxed">
-                    We specialize in building innovative AWS-based solutions tailored to your business needs.
+                  <p className="text-gray-dark text-lg leading-relaxed text-left">
+                    We are your partners in innovation — working quickly and efficiently to bring your ideas to life without the slowdowns of large, cumbersome organizations. Whether you need a sleek application, robust APIs, or intelligent systems, we collaborate with you every step of the way. From brainstorming and development to education and guidance, we help you move fast, stay informed, and turn your vision into something extraordinary.
                   </p>
                 </>
               )}
