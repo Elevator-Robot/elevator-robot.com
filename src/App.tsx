@@ -25,7 +25,7 @@ function App() {
       <section className="relative bg-gradient-to-r from-primary to-primary-dark h-screen flex flex-col justify-center items-center text-center text-white">
         <div>
           <h2 className="text-4xl font-bold mb-4">Bring Your Vision to Life</h2>
-          <p className="text-xl mb-6">Transform your ideas into innovative, scalable solutions designed to make an impact.</p>
+          <p className="text-xl mb-6">Your partners in innovation, we build your Applications and you build your business.</p>
           <div className="flex space-x-4 justify-center">
             <button
               className="bg-secondary-light text-primary font-bold py-3 px-6 rounded-md hover:bg-gray-100 transition"
@@ -107,17 +107,26 @@ function App() {
                 <>
                   <h3 className="text-2xl font-bold text-gray-dark mb-6">About Us</h3>
                   <p className="text-gray-dark text-lg leading-relaxed text-justify p-2">
-                    We are your partners in innovation — working quickly and efficiently to bring your ideas to life without the slowdowns of large, cumbersome organizations. Whether you need a sleek application, robust APIs, or intelligent systems, we collaborate with you every step of the way. From brainstorming and development to education and guidance, we help you move fast, stay informed, and turn your vision into something extraordinary.
+                    At Elevator Robot, we specialize in crafting comprehensive digital solutions tailored to your unique needs. Our expertise spans the development of full-stack websites, robust backend APIs, and cutting-edge AI/ML applications, including generative AI chatbots. We are committed to delivering innovative and efficient solutions that drive success for your business.
+
+
                   </p>
+
                 </>
               )}
               {section === "services" && (
                 <>
-                  <h3 className="text-2xl font-bold text-gray-dark mb-6">Our Services</h3>
-                  <ul className="text-gray-dark text-lg leading-relaxed list-disc list-inside space-y-2 text-justify p-2">
-                    <li>Custom software development</li>
-                    <li>Cloud infrastructure solutions</li>
-                    <li>AI and machine learning integration</li>
+                  <h3 className="text-2xl font-bold text-gray-dark mb-6">Our Expertise</h3>
+                  <ul className="text-gray-dark text-lg text-left leading-relaxed list-disc list-inside space-y-2 p-2">
+                    <li>
+                      <strong>Custom Software Development:</strong> Crafting tailored applications that meet your unique business needs.
+                    </li>
+                    <li>
+                      <strong>Cloud Infrastructure Solutions:</strong> Designing and managing scalable, secure cloud environments.
+                    </li>
+                    <li>
+                      <strong>AI and Machine Learning Integration:</strong> Implementing intelligent systems to enhance decision-making and efficiency.
+                    </li>
                   </ul>
                 </>
               )}
