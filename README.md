@@ -9,5 +9,5 @@ I'm a landing page designated to showcase the products and services offered by E
 Spin up the front end from you computer by running:
 
 ```bash
-npm run deve
+npm run dev
 ```
