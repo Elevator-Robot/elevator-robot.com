@@ -14,7 +14,7 @@ function App() {
   const handleFormSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setSubmitStatus('loading');
-    
+
     try {
       const response = await post({
         apiName: 'api',
@@ -107,10 +107,6 @@ function App() {
                           type="text"
                           id="name"
                           className="mt-2 block w-full rounded-md border-gray-100 shadow-sm focus:border-primary focus:ring-primary px-4 py-2 border-4 bg-accent-light"
-                          value={formData.message}
-                          onChange={handleInputChange}
-                          value={formData.email}
-                          onChange={handleInputChange}
                           value={formData.name}
                           onChange={handleInputChange}
                         />
@@ -123,6 +119,8 @@ function App() {
                           type="email"
                           id="email"
                           className="mt-2 block w-full rounded-md border-gray-100 shadow-sm focus:border-primary focus:ring-primary px-4 py-2 border-4 bg-accent-light"
+                          value={formData.email}
+                          onChange={handleInputChange}
                         />
                       </div>
                       <div>
@@ -133,6 +131,9 @@ function App() {
                           id="message"
                           rows={4}
                           className="mt-2 block w-full rounded-md border-gray-100 shadow-sm focus:border-primary focus:ring-primary px-4 py-2 border-4 bg-accent-light"
+                          value={formData.message}
+                          onChange={handleInputChange}
+
                         ></textarea>
                       </div>
                       <button

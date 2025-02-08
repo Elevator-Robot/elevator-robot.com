@@ -12,9 +12,9 @@
   },
   "dependencies": {
     "@aws-amplify/ui-react": "^6.5.5",
-    "aws-amplify": "^6.12.1",
-    "aws-sdk": "^2.1692.0",
     "@aws-sdk/client-ses": "^3.0.0",
+    "aws-amplify": "^6.12.3",
+    "aws-sdk": "^2.1692.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tailwindcss": "^3.4.17"
