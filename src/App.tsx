@@ -1,6 +1,5 @@
 import { useState, FormEvent } from "react";
 import { post } from 'aws-amplify/api';
-import { Schema } from '../amplify/functions/send-email/resource';
 
 function App() {
   const [visibleSection, setVisibleSection] = useState(""); // Tracks which section is visible
