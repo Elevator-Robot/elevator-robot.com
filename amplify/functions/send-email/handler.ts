@@ -32,9 +32,9 @@ export const handler: Handler = async (event) => {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "*"
       },
-      body: JSON.stringify({ 
+      body: JSON.stringify({
         message: 'Email sent successfully',
-        messageId: result.MessageId 
+        messageId: result.MessageId
       }),
     };
   } catch (error) {
@@ -45,7 +45,7 @@ export const handler: Handler = async (event) => {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "*"
       },
-      body: JSON.stringify({ 
+      body: JSON.stringify({
         message: 'Failed to send email',
         error: error instanceof Error ? error.message : 'Unknown error'
       }),

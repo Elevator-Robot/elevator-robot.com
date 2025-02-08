@@ -1,5 +1,11 @@
 import { useState, FormEvent } from "react";
 import { post } from 'aws-amplify/api';
+import { generateClient } from "aws-amplify/api";
+import type { Schema } from "../amplify/data/resource";
+
+const client = generateClient<Schema>();
+client.queries.sendMessage({ name: "John Doe", email: "1990west@gmail.com", message: "Hello, World!" });
+
 
 function App() {
   const [visibleSection, setVisibleSection] = useState(""); // Tracks which section is visible
@@ -16,7 +22,7 @@ function App() {
 
     try {
       const response = await post({
-        apiName: 'send-email',
+        apiName: 'api',
         path: '/send-email',
         options: {
           body: formData
