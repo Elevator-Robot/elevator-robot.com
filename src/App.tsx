@@ -1,11 +1,47 @@
-import { useState } from "react";
+import { useState, FormEvent } from "react";
+import { post } from 'aws-amplify/api';
+import { Schema } from '../amplify/functions/send-email/resource';
 
 function App() {
   const [visibleSection, setVisibleSection] = useState(""); // Tracks which section is visible
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: ""
+  });
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted");
+    setSubmitStatus('loading');
+    
+    try {
+      const response = await post({
+        apiName: 'api',
+        path: '/send-email',
+        options: {
+          body: formData
+        }
+      }).response;
+
+      if (response.statusCode === 200) {
+        setSubmitStatus('success');
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        throw new Error('Failed to send email');
+      }
+    } catch (error) {
+      console.error('Error sending email:', error);
+      setSubmitStatus('error');
+    }
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { id, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [id]: value
+    }));
   };
 
   const toggleSection = (section: string) => {
@@ -71,6 +107,12 @@ function App() {
                           type="text"
                           id="name"
                           className="mt-2 block w-full rounded-md border-gray-100 shadow-sm focus:border-primary focus:ring-primary px-4 py-2 border-4 bg-accent-light"
+                          value={formData.message}
+                          onChange={handleInputChange}
+                          value={formData.email}
+                          onChange={handleInputChange}
+                          value={formData.name}
+                          onChange={handleInputChange}
                         />
                       </div>
                       <div>
@@ -97,8 +139,14 @@ function App() {
                         type="submit"
                         className="w-full bg-primary text-white font-bold py-4 px-8 rounded-md hover:bg-primary-light transition-colors"
                       >
-                        Send Message
+                        {submitStatus === 'loading' ? 'Sending...' : 'Send Message'}
                       </button>
+                      {submitStatus === 'success' && (
+                        <p className="mt-4 text-green-600 font-medium">Message sent successfully!</p>
+                      )}
+                      {submitStatus === 'error' && (
+                        <p className="mt-4 text-red-600 font-medium">Failed to send message. Please try again.</p>
+                      )}
                     </div>
                   </form>
                 </>
