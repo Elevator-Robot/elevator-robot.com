@@ -16,10 +16,8 @@ const schema = a.schema({
       message: a.string(),
     })
     .returns(a.string())
-    .authorization([
-      a.allow.public()
-    ])
-    .handler(a.handler.function(sendEmail)),
+    .handler(a.handler.function(sendEmail))
+    .authorization()// cannot by type string
 });
 
 export type Schema = ClientSchema<typeof schema>;
