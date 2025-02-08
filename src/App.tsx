@@ -1,10 +1,10 @@
 import { useState, FormEvent } from "react";
 import { post } from 'aws-amplify/api';
-import { generateClient } from "aws-amplify/api";
-import type { Schema } from "../amplify/data/resource";
+// import { generateClient } from "aws-amplify/api";
+// import type { Schema } from "../amplify/data/resource";
 
-const client = generateClient<Schema>();
-client.queries.sendMessage({ name: "John Doe", email: "1990west@gmail.com", message: "Hello, World!" });
+// const client = generateClient<Schema>();
+// client.queries.sendMessage({ name: "John Doe", email: "1990west@gmail.com", message: "Hello, World!" });
 
 
 function App() {

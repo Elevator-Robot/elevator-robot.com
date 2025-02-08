@@ -17,7 +17,7 @@ const schema = a.schema({
     })
     .returns(a.string())
     .authorization(allow => [
-      allow.public()
+      allow.guest()
     ])
     .handler(a.handler.function(sendEmail))
 });
