@@ -16,7 +16,7 @@ function App() {
 
     try {
       const response = await post({
-        apiName: 'api',
+        apiName: 'sendEmail',
         path: '/send-email',
         options: {
           body: formData
