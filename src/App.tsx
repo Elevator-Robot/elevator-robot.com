@@ -1,10 +1,10 @@
 import { useState, FormEvent } from "react";
-import { post } from 'aws-amplify/api';
-// import { generateClient } from "aws-amplify/api";
-// import type { Schema } from "../amplify/data/resource";
+import { generateClient } from 'aws-amplify/api';
+import { GraphQLQuery } from '@aws-amplify/api';
+import * as mutations from './graphql/mutations';
+import { SendMessageMutation } from './graphql/API';
 
-// const client = generateClient<Schema>();
-// client.queries.sendMessage({ name: "John Doe", email: "1990west@gmail.com", message: "Hello, World!" });
+const client = generateClient();
 
 
 function App() {
@@ -21,19 +21,20 @@ function App() {
     setSubmitStatus('loading');
 
     try {
-      const response = await post({
-        apiName: 'api',
-        path: '/send-email',
-        options: {
-          body: formData
+      const response = await client.graphql<GraphQLQuery<SendMessageMutation>>({
+        query: mutations.sendMessage,
+        variables: {
+          name: formData.name,
+          email: formData.email,
+          message: formData.message
         }
-      }).response;
+      });
 
-      if (response.statusCode === 200) {
+      if (response.data?.sendMessage) {
         setSubmitStatus('success');
         setFormData({ name: "", email: "", message: "" });
       } else {
-        throw new Error('Failed to send email');
+        throw new Error('Failed to send message');
       }
     } catch (error) {
       console.error('Error sending email:', error);
