@@ -20,7 +20,7 @@ function App() {
     setSubmitStatus('loading');
 
     try {
-      const { data } = await client.graphql<SendMessageMutation>({
+      const response = await client.graphql<SendMessageMutation>({
         query: mutations.sendMessage,
         variables: {
           name: formData.name,
@@ -29,7 +29,7 @@ function App() {
         }
       });
 
-      if (data?.sendMessage) {
+      if ('data' in response && response.data?.sendMessage) {
         setSubmitStatus('success');
         setFormData({ name: "", email: "", message: "" });
       } else {
