@@ -1,6 +1,7 @@
 import { useState, FormEvent } from "react";
 import { generateClient } from 'aws-amplify/api';
 import * as mutations from './graphql/mutations';
+import { SendMessageMutation } from './graphql/API';
 
 const client = generateClient();
 
@@ -19,18 +20,16 @@ function App() {
     setSubmitStatus('loading');
 
     try {
-      const response = await client.graphql({
+      const response = await client.graphql<SendMessageMutation>({
         query: mutations.sendMessage,
         variables: {
-          input: {
-            name: formData.name,
-            email: formData.email,
-            message: formData.message
-          }
+          name: formData.name,
+          email: formData.email,
+          message: formData.message
         }
       });
 
-      if (response.data?.sendMessage) {
+      if (response?.data?.sendMessage) {
         setSubmitStatus('success');
         setFormData({ name: "", email: "", message: "" });
       } else {
