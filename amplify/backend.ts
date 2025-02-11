@@ -11,7 +11,10 @@ const backend = defineBackend({ auth, data, sendEmail });
 
 const customResourceStack = backend.createStack('CustomEmailResources');
 
-const emailIdentity = new ses.EmailIdentity(customResourceStack, 'EmailIdentity', {
+const environment = process.env.ENV || 'dev';
+
+new ses.EmailIdentity(customResourceStack, `EmailIdentity-${environment}`, {
   identity: ses.Identity.email('aphexlog@gmail.com'),
 });
 
+export default backend;

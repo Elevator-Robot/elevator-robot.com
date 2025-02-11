@@ -26,7 +26,8 @@ function App() {
           name: formData.name,
           email: formData.email,
           message: formData.message
-        }
+        },
+        authMode: 'userPool'
       });
 
       if ('data' in response && response.data?.sendMessage) {

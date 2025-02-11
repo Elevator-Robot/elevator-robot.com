@@ -30,4 +30,8 @@ const schema = a
 
 export type Schema = ClientSchema<typeof schema>;
 
-export const data = defineData({ schema });
+export const data = defineData({
+  schema, authorizationModes: {
+    defaultAuthorizationMode: "identityPool"
+  }
+});
