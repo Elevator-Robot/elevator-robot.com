@@ -13,7 +13,7 @@ const schema = a
       name: a.string().required(),
       email: a.string().required(),
       message: a.string().required(),
-    }),
+    }).authorization((allow) => [allow.guest()]),
 
     // Define the sendMessage mutation
     sendMessage: a
