@@ -1,6 +1,5 @@
 import { a, defineData, defineFunction, ClientSchema } from '@aws-amplify/backend';
 
-// Define the Lambda function
 const sendEmail = defineFunction({
   name: 'sendEmail',
   entry: '../functions/send-email/handler.ts',
@@ -8,14 +7,12 @@ const sendEmail = defineFunction({
 
 const schema = a
   .schema({
-    // Define the Message model
     Message: a.model({
       name: a.string().required(),
       email: a.string().required(),
       message: a.string().required(),
-    }).authorization((allow) => [allow.guest()]),
+    }).authorization((allow) => [allow.publicApiKey()]),
 
-    // Define the sendMessage mutation
     sendMessage: a
       .mutation()
       .arguments({
@@ -25,13 +22,17 @@ const schema = a
       })
       .returns(a.string())
       .handler(a.handler.function(sendEmail))
-      .authorization((allow) => [allow.guest()]),
+      .authorization((allow) => [allow.publicApiKey()]),
   })
 
 export type Schema = ClientSchema<typeof schema>;
 
 export const data = defineData({
-  schema, authorizationModes: {
-    defaultAuthorizationMode: "identityPool"
+  schema,
+  authorizationModes: {
+    defaultAuthorizationMode: 'apiKey',
+    apiKeyAuthorizationMode: {
+      expiresInDays: 365,
+    }
   }
 });
