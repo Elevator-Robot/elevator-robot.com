@@ -4,19 +4,6 @@ import type { Handler } from 'aws-lambda';
 const sesClient = new SESClient({ region: 'us-east-1' });
 
 export const handler: Handler = async (event, context) => {
-  // Verify authorization header is present
-  if (!event.headers?.authorization) {
-    return {
-      statusCode: 401,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "*"
-      },
-      body: JSON.stringify({
-        message: 'Unauthorized request'
-      })
-    };
-  }
   const { name, email, message } = JSON.parse(event.body);
 
   const params = {

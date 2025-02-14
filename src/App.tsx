@@ -27,7 +27,7 @@ function App() {
           email: formData.email,
           message: formData.message
         },
-        authMode: 'userPool'
+        authMode: 'apiKey'
       });
 
       if ('data' in response && response.data?.sendMessage) {
