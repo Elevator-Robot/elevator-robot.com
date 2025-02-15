@@ -30,15 +30,11 @@ function App() {
         authMode: 'apiKey'
       });
 
-      if (response.errors) {
-        console.error('GraphQL Errors:', response.errors);
-        throw new Error(response.errors[0].message || 'Failed to send message');
-      }
-
-      if (response.data?.sendMessage) {
+      if ('data' in response && response.data?.sendMessage) {
         setSubmitStatus('success');
         setFormData({ name: "", email: "", message: "" });
       } else {
+        console.error('GraphQL Response:', response);
         throw new Error('Failed to send message - no data returned');
       }
     } catch (error) {
