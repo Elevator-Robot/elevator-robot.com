@@ -17,6 +17,7 @@ function App() {
 
   const handleFormSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    console.log('Form submitted with data:', formData);
     setSubmitStatus('loading');
 
     try {
@@ -65,10 +66,11 @@ function App() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
+    const updatedData = {
+      ...formData,
       [id]: value
-    }));
+    };
+    setFormData(updatedData);
   };
 
   const toggleSection = (section: string) => {
