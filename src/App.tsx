@@ -37,8 +37,28 @@ function App() {
         console.error('GraphQL Response:', response);
         throw new Error('Failed to send message - no data returned');
       }
-    } catch (error) {
-      console.error('Error sending email:', error);
+    } catch (error: any) {
+      // Log detailed error information
+      const errorDetails = {
+        message: error.message,
+        graphqlErrors: error?.errors,
+        networkError: error?.networkError,
+        response: error?.response
+      };
+      
+      console.error('Error details:', errorDetails);
+      
+      // Try to get the most relevant error message
+      let errorMessage = 'Failed to send message';
+      if (error?.errors?.[0]?.message) {
+        errorMessage = error.errors[0].message;
+      } else if (error?.networkError?.message) {
+        errorMessage = error.networkError.message;
+      } else if (error?.message) {
+        errorMessage = error.message;
+      }
+      
+      console.error('Error sending email:', errorMessage);
       setSubmitStatus('error');
     }
   };
