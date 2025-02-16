@@ -4,7 +4,7 @@ import type { Handler } from 'aws-lambda';
 const sesClient = new SESClient({ region: 'us-east-1' });
 
 export const handler: Handler = async (event, context) => {
-  const { name, email, message } = JSON.parse(event.body);
+  const { name, email, message } = event.arguments;
 
   const params = {
     Source: 'aphexlog@gmail.com',
