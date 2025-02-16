@@ -11,8 +11,6 @@ import { PolicyStatement } from 'aws-cdk-lib/aws-iam';
  */
 const backend = defineBackend({ auth, data, sendEmail });
 
-const sendemailFunction = backend.sendEmail.resources.lambda
-
 const customResourceStack = backend.createStack('CustomEmailResources');
 
 const environment = process.env.ENV || 'dev';
@@ -21,13 +19,15 @@ const emailIdentity = new ses.EmailIdentity(customResourceStack, `EmailIdentity-
   identity: ses.Identity.email('aphexlog@gmail.com'),
 });
 
+const sendEmailFunction = backend.sendEmail.resources.lambda;
+
 const statement = new PolicyStatement({
   sid: 'AllowSendEmail',
   actions: ['SES:SendEmail'],
   resources: [emailIdentity.emailIdentityArn],
 });
 
-sendemailFunction.addToRolePolicy(statement);
+sendEmailFunction.addToRolePolicy(statement);
 
 
 export default backend;
