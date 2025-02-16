@@ -12,6 +12,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
+    "sourceMap": true,
+    "sourceRoot": "/",
     "jsx": "react-jsx",
 
     /* Linting */
