@@ -29,5 +29,4 @@ const statement = new PolicyStatement({
 
 sendemailFunction.addToRolePolicy(statement);
 
-
 export default backend;
