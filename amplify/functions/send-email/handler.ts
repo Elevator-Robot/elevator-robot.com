@@ -9,7 +9,7 @@ export const handler: Handler = async (event, context) => {
   const params = {
     Source: 'aphexlog@gmail.com',
     Destination: {
-      ToAddresses: ['recipient@example.com'],
+      ToAddresses: ['aphexlog@gmail.com'],
     },
     Message: {
       Subject: {
