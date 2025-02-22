@@ -185,7 +185,7 @@ function App() {
                 <>
                   <h3 className="text-2xl font-bold text-gray-dark mb-6">About Us</h3>
                   <p className="text-gray-dark text-lg leading-relaxed text-justify p-2">
-                    At Elevator Robot, we are dedicated to developing cutting-edge AI applications that revolutionize the way businesses operate. We specialize in crafting intelligent, adaptive systems that seamlessly integrate with your existing infrastructure. From advanced machine learning models to intuitive natural language interfaces, we bring your vision to life, empowering you to make data-driven decisions and unlock new opportunities for growth.
+                    At Elevator Robot, we are dedicated to developing cutting-edge AI applications that revolutionize the way businesses operate. We specialize in building intelligent, adaptive systems from the ground up, tailored to your unique needs and goals. From advanced machine learning models to intuitive natural language interfaces, we bring your vision to life, empowering you to make data-driven decisions and unlock new opportunities for growth.
                   </p>
 
                 </>
