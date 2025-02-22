@@ -46,9 +46,9 @@ function App() {
         networkError: error?.networkError,
         response: error?.response
       };
-      
+
       console.error('Error details:', errorDetails);
-      
+
       // Try to get the most relevant error message
       let errorMessage = 'Failed to send message';
       if (error?.errors?.[0]?.message) {
@@ -58,7 +58,7 @@ function App() {
       } else if (error?.message) {
         errorMessage = error.message;
       }
-      
+
       console.error('Error sending email:', errorMessage);
       setSubmitStatus('error');
     }
@@ -89,8 +89,8 @@ function App() {
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-primary to-primary-dark h-screen flex flex-col justify-center items-center text-center text-white">
         <div>
-          <h2 className="text-4xl font-bold mb-4">Bring Your Vision to Life</h2>
-          <p className="text-xl mb-6">Your partners in innovation, we build your Applications and you build your business.</p>
+          <h2 className="text-4xl font-bold mb-4">Elevate Your Business with Intelligent AI Solutions</h2>
+          <p className="text-xl mb-6">Unlock the power of artificial intelligence to drive innovation, efficiency, and growth.</p>
           <div className="flex space-x-4 justify-center">
             <button
               className="bg-secondary-light text-primary font-bold py-3 px-6 rounded-md hover:bg-gray-100 transition"
@@ -185,9 +185,7 @@ function App() {
                 <>
                   <h3 className="text-2xl font-bold text-gray-dark mb-6">About Us</h3>
                   <p className="text-gray-dark text-lg leading-relaxed text-justify p-2">
-                    At Elevator Robot, we specialize in crafting comprehensive digital solutions tailored to your unique needs. Our expertise spans the development of full-stack websites, robust backend APIs, and cutting-edge AI/ML applications, including generative AI chatbots. We are committed to delivering innovative and efficient solutions that drive success for your business.
-
-
+                    At Elevator Robot, we are dedicated to developing cutting-edge AI applications that revolutionize the way businesses operate. We specialize in building intelligent, adaptive systems from the ground up, tailored to your unique needs and goals. From advanced machine learning models to intuitive natural language interfaces, we bring your vision to life, empowering you to make data-driven decisions and unlock new opportunities for growth.
                   </p>
 
                 </>
@@ -200,10 +198,13 @@ function App() {
                       <strong>Custom Software Development:</strong> Crafting tailored applications that meet your unique business needs.
                     </li>
                     <li>
-                      <strong>Cloud Infrastructure Solutions:</strong> Designing and managing scalable, secure cloud environments.
+                      <strong>AI-Powered Solutions:</strong> Harnessing the power of artificial intelligence to create intelligent, adaptive systems that drive innovation and efficiency across your organization.
                     </li>
                     <li>
-                      <strong>AI and Machine Learning Integration:</strong> Implementing intelligent systems to enhance decision-making and efficiency.
+                      <strong>Machine Learning and Data Analytics:</strong> Leveraging advanced algorithms and data science techniques to uncover valuable insights and optimize your business processes.
+                    </li>
+                    <li>
+                      <strong>Natural Language Processing and Chatbots:</strong> Developing sophisticated conversational interfaces that enable seamless, human-like interactions between your customers and your brand.
                     </li>
                   </ul>
                 </>
