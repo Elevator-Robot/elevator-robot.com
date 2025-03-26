@@ -32,16 +32,6 @@ We're not a traditional agency. We're a band of builders with a bias toward acti
 
 ---
 
-## 🧪 Projects (in progress & past)
-
-- **Terraform Cost Compass** – A GenAI-powered CLI + web app that predicts infrastructure costs before you deploy.
-- **DungeonBot** – An AI Dungeon Master powered by LLMs and AWS Bedrock.
-- **YeetCode** – A CLI for pulling LeetCode problems into your local environment for real-world dev workflows.
-
-(And a few secret things we're not quite ready to talk about yet.)
-
----
-
 ## 💼 Work With Us
 
 We're available for freelance engagements and project partnerships. If you're building something ambitious in AI/ML, and you want people who can execute fast and smart—reach out.
