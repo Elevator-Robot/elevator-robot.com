@@ -156,13 +156,13 @@ function App() {
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-blue-300/15 dark:bg-blue-500/15 rounded-full animate-pulse delay-500"></div>
         </div>
         
-        {/* Floating Robot Mascot - Top Right */}
-        <div className="fixed top-24 right-6 md:right-12 lg:right-16 z-20 opacity-90 hover:opacity-100 transition-all duration-300">
+        {/* Robot Mascot - Top Right (stays in hero section) */}
+        <div className="absolute top-24 right-6 md:right-12 lg:right-16 z-20 opacity-90 hover:opacity-100 transition-all duration-300">
           <div className="transform hover:scale-110 hover:rotate-3 transition-all duration-500 filter drop-shadow-2xl">
             <RobotSVG 
-              className="w-28 h-21 md:w-40 md:h-30 lg:w-52 lg:h-39" 
-              width={208}
-              height={156}
+              className="w-20 h-15 md:w-28 md:h-21 lg:w-36 lg:h-27" 
+              width={144}
+              height={108}
             />
           </div>
         </div>
