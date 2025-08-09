@@ -1,4 +1,5 @@
 import { useState, FormEvent, useEffect } from "react";
+import RobotSVG from "./components/RobotSVG";
 import { generateClient } from 'aws-amplify/api';
 import * as mutations from './graphql/mutations';
 import { SendMessageMutation } from './graphql/API';
@@ -153,6 +154,17 @@ function App() {
           <div className="absolute -top-40 -right-40 w-80 h-80 bg-white/10 dark:bg-blue-400/10 rounded-full animate-pulse"></div>
           <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-cyan-300/20 dark:bg-cyan-500/20 rounded-full animate-pulse delay-1000"></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-blue-300/15 dark:bg-blue-500/15 rounded-full animate-pulse delay-500"></div>
+        </div>
+
+        {/* Robot SVG positioned to complement the bubbles */}
+        <div className="absolute top-16 right-8 md:top-20 md:right-16 lg:right-24 z-5 opacity-90 hover:opacity-100 transition-all duration-300">
+          <div className="transform hover:scale-110 transition-transform duration-300 filter drop-shadow-lg">
+            <RobotSVG 
+              className="w-24 h-18 md:w-32 md:h-24 lg:w-40 lg:h-30" 
+              width={160}
+              height={120}
+            />
+          </div>
         </div>
         
         <div className="relative z-10 max-w-4xl mx-auto px-4">
