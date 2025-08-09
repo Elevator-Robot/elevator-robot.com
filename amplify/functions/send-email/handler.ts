@@ -3,7 +3,7 @@ import type { Handler } from 'aws-lambda';
 
 const sesClient = new SESClient({ region: 'us-east-1' });
 
-export const handler: Handler = async (event, context) => {
+export const handler: Handler = async (event) => {
   const { name, email, message } = event.arguments;
 
   const params = {
