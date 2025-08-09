@@ -1,5 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+/** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx,css}",
@@ -9,30 +11,37 @@ export default {
     extend: {
       colors: {
         primary: {
-          light: '#0A66C2',
-          DEFAULT: '#0A66C2',
-          dark: '#042F2E',
+          light: '#3B82F6', // Bright blue
+          DEFAULT: '#1E40AF', // Deep blue
+          dark: '#1E3A8A', // Darker blue
         },
         secondary: {
-          light: '#E4E4E7',
-          DEFAULT: '#E1E1E1',
-          dark: '#7C7C8B',
+          light: '#E0F2FE', // Very light cyan
+          DEFAULT: '#0891B2', // Cyan
+          dark: '#164E63', // Dark cyan
         },
         accent: {
-          light: '#FFFFFF',
-          DEFAULT: '#727272',
-          dark: '#000000',
+          light: '#F0F9FF', // Almost white with blue tint
+          DEFAULT: '#0EA5E9', // Sky blue
+          dark: '#0C4A6E', // Dark sky blue
         },
         gray: {
-          light: '#F5F5F5',
-          DEFAULT: '#E0E0E0',
-          dark: '#333333',
+          light: '#F8FAFC',
+          DEFAULT: '#64748B',
+          dark: '#1E293B',
         },
         blue: {
-          light: '#E3F2FD',
-          DEFAULT: '#2196F3',
-          dark: '#0D47A1',
+          light: '#DBEAFE', // Light blue
+          DEFAULT: '#3B82F6', // Blue
+          dark: '#1D4ED8', // Dark blue
         },
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'blue-gradient': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        'ocean-gradient': 'linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)',
+        'sky-gradient': 'linear-gradient(135deg, #74b9ff 0%, #0984e3 50%, #74b9ff 100%)',
       },
     },
   },
