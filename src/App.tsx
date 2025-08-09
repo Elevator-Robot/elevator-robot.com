@@ -155,14 +155,14 @@ function App() {
           <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-cyan-300/20 dark:bg-cyan-500/20 rounded-full animate-pulse delay-1000"></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-blue-300/15 dark:bg-blue-500/15 rounded-full animate-pulse delay-500"></div>
         </div>
-
-        {/* Robot SVG positioned to complement the bubbles */}
-        <div className="absolute top-16 right-8 md:top-20 md:right-16 lg:right-24 z-5 opacity-90 hover:opacity-100 transition-all duration-300">
-          <div className="transform hover:scale-110 transition-transform duration-300 filter drop-shadow-lg">
+        
+        {/* Floating Robot Mascot - Top Right */}
+        <div className="fixed top-24 right-6 md:right-12 lg:right-16 z-20 opacity-90 hover:opacity-100 transition-all duration-300">
+          <div className="transform hover:scale-110 hover:rotate-3 transition-all duration-500 filter drop-shadow-2xl">
             <RobotSVG 
-              className="w-24 h-18 md:w-32 md:h-24 lg:w-40 lg:h-30" 
-              width={160}
-              height={120}
+              className="w-28 h-21 md:w-40 md:h-30 lg:w-52 lg:h-39" 
+              width={208}
+              height={156}
             />
           </div>
         </div>
