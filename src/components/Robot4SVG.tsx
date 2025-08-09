@@ -1,0 +1,106 @@
+import React from 'react';
+
+interface Robot4SVGProps {
+  className?: string;
+  width?: number;
+  height?: number;
+}
+
+const Robot4SVG: React.FC<Robot4SVGProps> = ({ 
+  className = "", 
+  width = 300, 
+  height = 220 
+}) => {
+  return (
+    <svg 
+      id="bot4SVG" 
+      xmlns="http://www.w3.org/2000/svg" 
+      viewBox="0 0 300 220" 
+      role="img" 
+      aria-labelledby="bot4Title bot4Desc"
+      width={width}
+      height={height}
+      className={`cursor-pointer ${className}`}
+    >
+      <title id="bot4Title">Angular Robot</title>
+      <desc id="bot4Desc">Angular robot that glitches when clicked!</desc>
+
+      <defs>
+        <filter id="softShadow4" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="2" stdDeviation="2" floodOpacity="0.25"/>
+        </filter>
+        <style>
+          {`
+            .stroke4 { stroke: #334155; }
+            .body4 { fill: #fce7f3; }
+            .accent4 { fill: #ec4899; }
+            .eyeWhite4 { fill: #ffffff; stroke: #1f2937; }
+            .pupil4 { fill: #1f2937; }
+          `}
+        </style>
+      </defs>
+
+      {/* Background circle */}
+      <circle cx="150" cy="110" r="92" fill="#ec4899" opacity="0.15"/>
+
+      {/* Main body group that glitches */}
+      <g id="glitchingBody">
+        <animateTransform
+          attributeName="transform"
+          type="translate"
+          values="0 0;-2 1;3 -1;-1 2;2 -2;0 0"
+          dur="0.3s"
+          begin="bot4SVG.click"
+          repeatCount="3"
+        />
+        
+        {/* Multiple angular antennas */}
+        <g className="stroke4" strokeWidth="2" strokeLinecap="square" filter="url(#softShadow4)">
+          <polyline points="140,60 135,45 130,35" fill="none"/>
+          <rect x="128" y="33" width="4" height="4" className="accent4"/>
+          <polyline points="160,60 165,45 170,35" fill="none"/>
+          <rect x="168" y="33" width="4" height="4" className="accent4"/>
+          <polyline points="150,55 150,40 155,30" fill="none"/>
+          <rect x="153" y="28" width="4" height="4" className="accent4"/>
+        </g>
+
+        {/* Angular hexagonal head */}
+        <g id="head4" filter="url(#softShadow4)">
+          <polygon points="150,60 180,75 180,105 150,120 120,105 120,75" className="body4" stroke="#334155" strokeWidth="3"/>
+          <line x1="125" y1="80" x2="175" y2="80" stroke="#334155" strokeWidth="1" opacity="0.35"/>
+        </g>
+
+        {/* Angular eyes */}
+        <g id="eyes4">
+          <polygon points="135,85 145,80 145,90" className="eyeWhite4" strokeWidth="2"/>
+          <polygon points="165,85 155,80 155,90" className="eyeWhite4" strokeWidth="2"/>
+          
+          {/* Digital pupils that flicker */}
+          <rect x="138" y="83" width="4" height="4" className="accent4">
+            <animate attributeName="opacity" values="1;0;1;0;1" dur="0.3s" begin="bot4SVG.click" repeatCount="3"/>
+          </rect>
+          <rect x="158" y="83" width="4" height="4" className="accent4">
+            <animate attributeName="opacity" values="1;0;1;0;1" dur="0.3s" begin="bot4SVG.click" repeatCount="3"/>
+          </rect>
+        </g>
+
+        {/* Digital mouth */}
+        <rect x="140" y="95" width="20" height="3" className="accent4">
+          <animate attributeName="width" values="20;10;20;5;20" dur="0.3s" begin="bot4SVG.click" repeatCount="3"/>
+        </rect>
+
+        {/* Angular body */}
+        <polygon points="150,120 190,135 185,175 115,175 110,135" className="body4" stroke="#334155" strokeWidth="3" filter="url(#softShadow4)"/>
+        
+        {/* Circuit patterns */}
+        <g stroke="#ec4899" strokeWidth="2" fill="none" opacity="0.7">
+          <polyline points="130,145 140,145 145,155 155,155 160,145 170,145"/>
+          <circle cx="135" cy="160" r="3" fill="#ec4899"/>
+          <circle cx="165" cy="160" r="3" fill="#ec4899"/>
+        </g>
+      </g>
+    </svg>
+  );
+};
+
+export default Robot4SVG;

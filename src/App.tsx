@@ -1,5 +1,8 @@
 import { useState, FormEvent, useEffect } from "react";
 import RobotSVG from "./components/RobotSVG";
+import Robot2SVG from "./components/Robot2SVG";
+import Robot3SVG from "./components/Robot3SVG";
+import Robot4SVG from "./components/Robot4SVG";
 import { generateClient } from 'aws-amplify/api';
 import * as mutations from './graphql/mutations';
 import { SendMessageMutation } from './graphql/API';
@@ -156,16 +159,53 @@ function App() {
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-blue-300/15 dark:bg-blue-500/15 rounded-full animate-pulse delay-500"></div>
         </div>
         
-        {/* Robot Mascot - Top Right (stays in hero section) */}
-        <div className="absolute top-24 right-6 md:right-12 lg:right-16 z-20 opacity-90 hover:opacity-100 transition-all duration-300">
+        {/* Robot Army - Scattered around hero section */}
+        
+        {/* Original Robot - Top Right */}
+        <div className="absolute top-24 right-6 md:right-12 lg:right-16 xl:right-20 z-20 opacity-90 hover:opacity-100 transition-all duration-300">
           <div className="transform hover:scale-110 hover:rotate-3 transition-all duration-500 filter drop-shadow-2xl">
             <RobotSVG 
-              className="w-20 h-15 md:w-28 md:h-21 lg:w-36 lg:h-27" 
-              width={144}
-              height={108}
+              className="w-24 h-18 md:w-36 md:h-27 lg:w-48 lg:h-36 xl:w-64 xl:h-48" 
+              width={256}
+              height={192}
             />
           </div>
         </div>
+
+        {/* Spinning Robot - Top Left */}
+        <div className="absolute top-32 left-8 md:left-16 lg:left-20 xl:left-24 z-20 opacity-85 hover:opacity-100 transition-all duration-300">
+          <div className="transform hover:scale-105 hover:-rotate-2 transition-all duration-500 filter drop-shadow-xl">
+            <Robot2SVG 
+              className="w-20 h-15 md:w-28 md:h-21 lg:w-40 lg:h-30 xl:w-52 xl:h-39" 
+              width={208}
+              height={156}
+            />
+          </div>
+        </div>
+
+        {/* Bouncy Robot - Middle Right */}
+        <div className="absolute top-1/2 right-4 md:right-8 lg:right-12 xl:right-16 transform -translate-y-1/2 z-20 opacity-80 hover:opacity-100 transition-all duration-300">
+          <div className="transform hover:scale-110 hover:rotate-1 transition-all duration-500 filter drop-shadow-lg">
+            <Robot3SVG 
+              className="w-22 h-17 md:w-32 md:h-24 lg:w-44 lg:h-33 xl:w-56 xl:h-42" 
+              width={224}
+              height={168}
+            />
+          </div>
+        </div>
+
+        {/* Nervous Robot - Bottom Left */}
+        <div className="absolute bottom-32 left-12 md:left-20 lg:left-24 xl:left-28 z-20 opacity-75 hover:opacity-100 transition-all duration-300">
+          <div className="transform hover:scale-105 hover:rotate-2 transition-all duration-500 filter drop-shadow-lg">
+            <Robot4SVG 
+              className="w-20 h-15 md:w-30 md:h-23 lg:w-40 lg:h-30 xl:w-52 xl:h-39" 
+              width={208}
+              height={156}
+            />
+          </div>
+        </div>
+
+
         
         <div className="relative z-10 max-w-4xl mx-auto px-4">
           <h2 className="text-5xl md:text-6xl font-bold mb-6 text-white dark:text-gray-100 leading-tight">
