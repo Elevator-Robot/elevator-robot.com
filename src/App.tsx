@@ -167,6 +167,15 @@ function App() {
               role="img" 
               aria-labelledby="botTitle botDesc"
               className="w-24 h-18 md:w-36 md:h-27 lg:w-48 lg:h-36 xl:w-64 xl:h-48 cursor-pointer"
+              onClick={() => {
+                const svg = document.getElementById('botSVG');
+                if (svg) {
+                  const animations = svg.querySelectorAll('animate');
+                  animations.forEach(anim => {
+                    (anim as any).beginElement();
+                  });
+                }
+              }}
             >
               <title id="botTitle">Robot</title>
               <desc id="botDesc">Friendly robot icon with click-to-blink eyes.</desc>
@@ -209,19 +218,19 @@ function App() {
                 <g id="leftEye">
                   <circle cx="130" cy="98" r="16" className="eyeWhite" strokeWidth="3"/>
                   <circle id="pupilLeft" cx="130" cy="98" r="6" className="pupil">
-                    <animate attributeName="opacity" values="1;0;1" dur="0.22s" begin="1s;click"/>
+                    <animate attributeName="opacity" values="1;0;1" dur="0.22s" begin="1s"/>
                   </circle>
                   <rect x="114" y="82" width="32" height="0" fill="#e8eef7">
-                    <animate attributeName="height" values="0;32;0" keyTimes="0;0.5;1" dur="0.22s" begin="1s;click" calcMode="spline" keySplines="0.25 0.1 0.25 1;0.25 0.1 0.25 1"/>
+                    <animate attributeName="height" values="0;32;0" keyTimes="0;0.5;1" dur="0.22s" begin="1s" calcMode="spline" keySplines="0.25 0.1 0.25 1;0.25 0.1 0.25 1"/>
                   </rect>
                 </g>
                 <g id="rightEye">
                   <circle cx="170" cy="98" r="16" className="eyeWhite" strokeWidth="3"/>
                   <circle id="pupilRight" cx="170" cy="98" r="6" className="pupil">
-                    <animate attributeName="opacity" values="1;0;1" dur="0.22s" begin="1s;click"/>
+                    <animate attributeName="opacity" values="1;0;1" dur="0.22s" begin="1s"/>
                   </circle>
                   <rect x="154" y="82" width="32" height="0" fill="#e8eef7">
-                    <animate attributeName="height" values="0;32;0" keyTimes="0;0.5;1" dur="0.22s" begin="1s;click" calcMode="spline" keySplines="0.25 0.1 0.25 1;0.25 0.1 0.25 1"/>
+                    <animate attributeName="height" values="0;32;0" keyTimes="0;0.5;1" dur="0.22s" begin="1s" calcMode="spline" keySplines="0.25 0.1 0.25 1;0.25 0.1 0.25 1"/>
                   </rect>
                 </g>
                 <circle cx="133" cy="95" r="2" fill="#ffffff" opacity="0.85"/>
@@ -288,17 +297,17 @@ function App() {
                 
                 <g filter="url(#softShadow2)">
                   <line x1="125" y1="65" x2="115" y2="40" className="stroke2" strokeLinecap="round">
-                    <animate attributeName="strokeWidth" values="2;4;2" dur="0.8s" begin="2s"/>
+                    <animate attributeName="strokeWidth" values="2;4;2" dur="0.8s" begin="2s;click"/>
                   </line>
                   <line x1="175" y1="65" x2="185" y2="40" className="stroke2" strokeLinecap="round">
-                    <animate attributeName="strokeWidth" values="2;4;2" dur="0.8s" begin="2s"/>
+                    <animate attributeName="strokeWidth" values="2;4;2" dur="0.8s" begin="2s;click"/>
                   </line>
                   
                   <circle cx="115" cy="40" r="8" className="accent2" stroke="#374151" strokeWidth="2">
-                    <animate attributeName="r" values="8;12;8" dur="0.8s" begin="2s"/>
+                    <animate attributeName="r" values="8;12;8" dur="0.8s" begin="2s;click"/>
                   </circle>
                   <circle cx="185" cy="40" r="8" className="accent2" stroke="#374151" strokeWidth="2">
-                    <animate attributeName="r" values="8;12;8" dur="0.8s" begin="2s"/>
+                    <animate attributeName="r" values="8;12;8" dur="0.8s" begin="2s;click"/>
                   </circle>
                   
                   <circle cx="118" cy="37" r="3" className="highlight2"/>
@@ -333,7 +342,7 @@ function App() {
                   <circle cx="176" cy="96" r="1.5" className="highlight2"/>
                   
                   <g stroke="#fbbf24" strokeWidth="2" fill="none" opacity="0">
-                    <animate attributeName="opacity" values="0;1;0.5;1;0" dur="0.8s" begin="2s"/>
+                    <animate attributeName="opacity" values="0;1;0.5;1;0" dur="0.8s" begin="2s;click"/>
                     <path d="M105 85 Q100 80 95 85 Q90 90 95 95"/>
                     <path d="M195 85 Q200 80 205 85 Q210 90 205 95"/>
                   </g>
@@ -355,7 +364,7 @@ function App() {
                 </g>
 
                 <g opacity="0">
-                  <animate attributeName="opacity" values="0;1;0.7;1;0" dur="0.8s" begin="2s"/>
+                  <animate attributeName="opacity" values="0;1;0.7;1;0" dur="0.8s" begin="2s;click"/>
                   <text x="220" y="70" fill="url(#accentGradient2)" fontSize="24" fontWeight="bold">!</text>
                   <text x="60" y="80" fill="url(#accentGradient2)" fontSize="20" fontWeight="bold">!</text>
                 </g>
@@ -420,17 +429,17 @@ function App() {
                   <circle cx="165" cy="85" r="12" className="eyeWhite3" strokeWidth="3"/>
                   
                   <circle cx="135" cy="85" r="5" className="pupil3">
-                    <animate attributeName="r" values="5;8;5" dur="0.8s" begin="3s"/>
+                    <animate attributeName="r" values="5;8;5" dur="0.8s" begin="3s;click"/>
                   </circle>
                   <circle cx="165" cy="85" r="5" className="pupil3">
-                    <animate attributeName="r" values="5;8;5" dur="0.8s" begin="3s"/>
+                    <animate attributeName="r" values="5;8;5" dur="0.8s" begin="3s;click"/>
                   </circle>
                   
                   <circle cx="140" cy="80" r="1" fill="#22c55e" opacity="0">
-                    <animate attributeName="opacity" values="0;1;0" dur="0.8s" begin="3s"/>
+                    <animate attributeName="opacity" values="0;1;0" dur="0.8s" begin="3s;click"/>
                   </circle>
                   <circle cx="160" cy="80" r="1" fill="#22c55e" opacity="0">
-                    <animate attributeName="opacity" values="0;1;0" dur="0.8s" begin="3s"/>
+                    <animate attributeName="opacity" values="0;1;0" dur="0.8s" begin="3s;click"/>
                   </circle>
                 </g>
 
@@ -504,15 +513,15 @@ function App() {
                   <polygon points="165,85 155,80 155,90" className="eyeWhite4" strokeWidth="2"/>
                   
                   <rect x="138" y="83" width="4" height="4" className="accent4">
-                    <animate attributeName="opacity" values="1;0;1;0;1" dur="0.3s" begin="4s" repeatCount="3"/>
+                    <animate attributeName="opacity" values="1;0;1;0;1" dur="0.3s" begin="4s;click" repeatCount="3"/>
                   </rect>
                   <rect x="158" y="83" width="4" height="4" className="accent4">
-                    <animate attributeName="opacity" values="1;0;1;0;1" dur="0.3s" begin="4s" repeatCount="3"/>
+                    <animate attributeName="opacity" values="1;0;1;0;1" dur="0.3s" begin="4s;click" repeatCount="3"/>
                   </rect>
                 </g>
 
                 <rect x="140" y="95" width="20" height="3" className="accent4">
-                  <animate attributeName="width" values="20;10;20;5;20" dur="0.3s" begin="4s" repeatCount="3"/>
+                  <animate attributeName="width" values="20;10;20;5;20" dur="0.3s" begin="4s;click" repeatCount="3"/>
                 </rect>
 
                 <polygon points="150,120 190,135 185,175 115,175 110,135" className="body4" stroke="#334155" strokeWidth="3" filter="url(#softShadow4)"/>
