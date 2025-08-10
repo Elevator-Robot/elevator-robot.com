@@ -23,8 +23,8 @@ const sendEmailFunction = backend.sendEmail.resources.lambda;
 
 const statement = new PolicyStatement({
   sid: 'AllowSendEmail',
-  actions: ['SES:SendEmail'],
-  resources: [emailIdentity.emailIdentityArn],
+  actions: ['SES:SendEmail', 'SES:SendRawEmail'],
+  resources: ['*'],
 });
 
 sendEmailFunction.addToRolePolicy(statement);
