@@ -15,14 +15,14 @@ const RobotDecoration: React.FC<RobotDecorationProps> = ({ type, position }) => 
       case 'blinking':
         return (
           <svg 
-            id="botSVG" 
+            id="friendlyRobotSVG" 
             xmlns="http://www.w3.org/2000/svg" 
             viewBox="0 0 300 220" 
             role="img" 
-            aria-labelledby="botTitle botDesc"
+            aria-labelledby="friendlyRobotTitle friendlyRobotDesc"
             className="robot-svg"
             onClick={() => {
-              const svg = document.getElementById('botSVG');
+              const svg = document.getElementById('friendlyRobotSVG');
               if (svg) {
                 const animations = svg.querySelectorAll('animate');
                 animations.forEach(anim => {
@@ -31,8 +31,8 @@ const RobotDecoration: React.FC<RobotDecorationProps> = ({ type, position }) => 
               }
             }}
           >
-            <title id="botTitle">Robot</title>
-            <desc id="botDesc">Friendly robot icon with click-to-blink eyes.</desc>
+            <title id="friendlyRobotTitle">Friendly Robot</title>
+            <desc id="friendlyRobotDesc">Friendly robot with click-to-blink eyes and welcoming smile.</desc>
 
             <defs>
               <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
@@ -101,14 +101,14 @@ const RobotDecoration: React.FC<RobotDecorationProps> = ({ type, position }) => 
       case 'shocked':
         return (
           <svg 
-            id="bot2SVG" 
+            id="surprisedRobotSVG" 
             xmlns="http://www.w3.org/2000/svg" 
             viewBox="0 0 300 220" 
             role="img" 
-            aria-labelledby="bot2Title bot2Desc"
+            aria-labelledby="surprisedRobotTitle surprisedRobotDesc"
             className="robot-svg"
             onClick={() => {
-              const svg = document.getElementById('bot2SVG');
+              const svg = document.getElementById('surprisedRobotSVG');
               if (svg) {
                 const animations = svg.querySelectorAll('animate, animateTransform');
                 animations.forEach(anim => {
@@ -117,8 +117,8 @@ const RobotDecoration: React.FC<RobotDecorationProps> = ({ type, position }) => 
               }
             }}
           >
-            <title id="bot2Title">Premium Robot</title>
-            <desc id="bot2Desc">High-quality robot with sophisticated shocked reaction!</desc>
+            <title id="surprisedRobotTitle">Surprised Robot</title>
+            <desc id="surprisedRobotDesc">Surprised robot with golden finish and dramatic shocked reaction!</desc>
 
             <defs>
               <filter id="softShadow2" x="-20%" y="-20%" width="140%" height="140%">
@@ -235,14 +235,14 @@ const RobotDecoration: React.FC<RobotDecorationProps> = ({ type, position }) => 
       case 'bouncy':
         return (
           <svg 
-            id="bot3SVG" 
+            id="chubbyRobotSVG" 
             xmlns="http://www.w3.org/2000/svg" 
             viewBox="0 0 300 220" 
             role="img" 
-            aria-labelledby="bot3Title bot3Desc"
+            aria-labelledby="chubbyRobotTitle chubbyRobotDesc"
             className="robot-svg"
             onClick={() => {
-              const svg = document.getElementById('bot3SVG');
+              const svg = document.getElementById('chubbyRobotSVG');
               if (svg) {
                 const animations = svg.querySelectorAll('animate, animateTransform');
                 animations.forEach(anim => {
@@ -251,8 +251,8 @@ const RobotDecoration: React.FC<RobotDecorationProps> = ({ type, position }) => 
               }
             }}
           >
-            <title id="bot3Title">Round Chubby Robot</title>
-            <desc id="bot3Desc">Chubby robot that jiggles when clicked!</desc>
+            <title id="chubbyRobotTitle">Chubby Robot</title>
+            <desc id="chubbyRobotDesc">Chubby robot that jiggles when clicked!</desc>
 
             <defs>
               <filter id="softShadow3" x="-20%" y="-20%" width="140%" height="140%">
@@ -416,14 +416,14 @@ const RobotDecoration: React.FC<RobotDecorationProps> = ({ type, position }) => 
       case 'squid':
         return (
           <svg 
-            id="bot4SVG" 
+            id="squidRobotSVG" 
             xmlns="http://www.w3.org/2000/svg" 
             viewBox="0 0 300 220" 
             role="img" 
-            aria-labelledby="bot4Title bot4Desc"
+            aria-labelledby="squidRobotTitle squidRobotDesc"
             className="robot-svg"
             onClick={() => {
-              const svg = document.getElementById('bot4SVG');
+              const svg = document.getElementById('squidRobotSVG');
               if (svg) {
                 const animations = svg.querySelectorAll('animate, animateTransform');
                 animations.forEach(anim => {
@@ -432,8 +432,8 @@ const RobotDecoration: React.FC<RobotDecorationProps> = ({ type, position }) => 
               }
             }}
           >
-            <title id="bot4Title">Squid Robot</title>
-            <desc id="bot4Desc">Squid robot with flowing tentacles that dance when clicked!</desc>
+            <title id="squidRobotTitle">Squid Robot</title>
+            <desc id="squidRobotDesc">Squid robot with flowing tentacles that dance when clicked!</desc>
 
             <defs>
               <filter id="softShadow4" x="-20%" y="-20%" width="140%" height="140%">
