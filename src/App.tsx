@@ -158,7 +158,7 @@ function App() {
         {/* Robot Army - Scattered around hero section */}
         
         {/* Original Robot - Top Right */}
-        <div className="absolute top-24 right-6 md:right-12 lg:right-16 xl:right-20 z-20 opacity-90 hover:opacity-100 transition-all duration-300">
+        <div className="absolute top-24 right-2 md:right-6 lg:right-12 xl:right-16 z-10 opacity-90 hover:opacity-100 transition-all duration-300">
           <div className="transform hover:scale-110 hover:rotate-3 transition-all duration-500 filter drop-shadow-2xl">
             <svg 
               id="botSVG" 
@@ -246,7 +246,7 @@ function App() {
         </div>
 
         {/* Premium Shocked Robot - Top Left */}
-        <div className="absolute top-32 left-8 md:left-16 lg:left-20 xl:left-24 z-20 opacity-85 hover:opacity-100 transition-all duration-300">
+        <div className="absolute top-32 left-2 md:left-8 lg:left-16 xl:left-20 z-10 opacity-85 hover:opacity-100 transition-all duration-300">
           <div className="transform hover:scale-105 hover:-rotate-2 transition-all duration-500 filter drop-shadow-xl">
             <svg 
               id="bot2SVG" 
@@ -300,22 +300,22 @@ function App() {
                   type="translate"
                   values="0 0;-8 -15;0 0"
                   dur="0.5s"
-                  begin="2s;click"
+                  begin="click"
                 />
                 
                 <g filter="url(#softShadow2)">
                   <line x1="125" y1="65" x2="115" y2="40" className="stroke2" strokeLinecap="round">
-                    <animate attributeName="strokeWidth" values="2;4;2" dur="0.8s" begin="2s;click"/>
+                    <animate attributeName="strokeWidth" values="2;4;2" dur="0.8s" begin="click"/>
                   </line>
                   <line x1="175" y1="65" x2="185" y2="40" className="stroke2" strokeLinecap="round">
-                    <animate attributeName="strokeWidth" values="2;4;2" dur="0.8s" begin="2s;click"/>
+                    <animate attributeName="strokeWidth" values="2;4;2" dur="0.8s" begin="click"/>
                   </line>
                   
                   <circle cx="115" cy="40" r="8" className="accent2" stroke="#374151" strokeWidth="2">
-                    <animate attributeName="r" values="8;12;8" dur="0.8s" begin="2s;click"/>
+                    <animate attributeName="r" values="8;12;8" dur="0.8s" begin="click"/>
                   </circle>
                   <circle cx="185" cy="40" r="8" className="accent2" stroke="#374151" strokeWidth="2">
-                    <animate attributeName="r" values="8;12;8" dur="0.8s" begin="2s;click"/>
+                    <animate attributeName="r" values="8;12;8" dur="0.8s" begin="click"/>
                   </circle>
                   
                   <circle cx="118" cy="37" r="3" className="highlight2"/>
@@ -333,24 +333,24 @@ function App() {
                   <rect x="165" y="90" width="20" height="16" rx="8" fill="#1f2937" stroke="#374151" strokeWidth="2"/>
                   
                   <circle cx="125" cy="98" r="16" className="eyeWhite2" strokeWidth="3">
-                    <animate attributeName="r" values="16;24;16" dur="0.5s" begin="2s;click"/>
+                    <animate attributeName="r" values="16;24;16" dur="0.5s" begin="click"/>
                   </circle>
                   <circle cx="175" cy="98" r="16" className="eyeWhite2" strokeWidth="3">
-                    <animate attributeName="r" values="16;24;16" dur="0.5s" begin="2s;click"/>
+                    <animate attributeName="r" values="16;24;16" dur="0.5s" begin="click"/>
                   </circle>
                   
                   <circle cx="125" cy="98" r="6" fill="#1f2937">
-                    <animate attributeName="r" values="6;2;6" dur="0.5s" begin="2s;click"/>
+                    <animate attributeName="r" values="6;2;6" dur="0.5s" begin="click"/>
                   </circle>
                   <circle cx="175" cy="98" r="6" fill="#1f2937">
-                    <animate attributeName="r" values="6;2;6" dur="0.5s" begin="2s;click"/>
+                    <animate attributeName="r" values="6;2;6" dur="0.5s" begin="click"/>
                   </circle>
                   
                   <circle cx="126" cy="96" r="1.5" className="highlight2"/>
                   <circle cx="176" cy="96" r="1.5" className="highlight2"/>
                   
                   <g stroke="#fbbf24" strokeWidth="2" fill="none" opacity="0">
-                    <animate attributeName="opacity" values="0;1;0.5;1;0" dur="0.8s" begin="2s;click"/>
+                    <animate attributeName="opacity" values="0;1;0.5;1;0" dur="0.8s" begin="click"/>
                     <path d="M105 85 Q100 80 95 85 Q90 90 95 95"/>
                     <path d="M195 85 Q200 80 205 85 Q210 90 205 95"/>
                   </g>
@@ -358,8 +358,8 @@ function App() {
 
                 <g>
                   <ellipse cx="150" cy="120" rx="0" ry="0" fill="#374151">
-                    <animate attributeName="rx" values="0;15;0" dur="0.5s" begin="2s;click"/>
-                    <animate attributeName="ry" values="0;20;0" dur="0.5s" begin="2s;click"/>
+                    <animate attributeName="rx" values="0;15;0" dur="0.5s" begin="click"/>
+                    <animate attributeName="ry" values="0;20;0" dur="0.5s" begin="click"/>
                   </ellipse>
                 </g>
 
@@ -372,7 +372,7 @@ function App() {
                 </g>
 
                 <g opacity="0">
-                  <animate attributeName="opacity" values="0;1;0.7;1;0" dur="0.8s" begin="2s;click"/>
+                  <animate attributeName="opacity" values="0;1;0.7;1;0" dur="0.8s" begin="click"/>
                   <text x="220" y="70" fill="url(#accentGradient2)" fontSize="24" fontWeight="bold">!</text>
                   <text x="60" y="80" fill="url(#accentGradient2)" fontSize="20" fontWeight="bold">!</text>
                 </g>
@@ -382,7 +382,7 @@ function App() {
         </div>
 
         {/* Chubby Robot - Lower Right */}
-        <div className="absolute top-[70%] right-16 md:right-24 lg:right-32 xl:right-40 transform -translate-y-1/2 z-20 opacity-80 hover:opacity-100 transition-all duration-300">
+        <div className="absolute top-[75%] right-4 md:right-16 lg:right-24 xl:right-32 transform -translate-y-1/2 z-10 opacity-80 hover:opacity-100 transition-all duration-300">
           <div className="transform hover:scale-110 hover:rotate-1 transition-all duration-500 filter drop-shadow-lg">
             <svg 
               id="bot3SVG" 
@@ -391,6 +391,15 @@ function App() {
               role="img" 
               aria-labelledby="bot3Title bot3Desc"
               className="w-29 h-22 md:w-43 md:h-32 lg:w-60 lg:h-44 xl:w-78 xl:h-58 cursor-pointer"
+              onClick={() => {
+                const svg = document.getElementById('bot3SVG');
+                if (svg) {
+                  const animations = svg.querySelectorAll('animate, animateTransform');
+                  animations.forEach(anim => {
+                    (anim as any).beginElement();
+                  });
+                }
+              }}
             >
               <title id="bot3Title">Round Chubby Robot</title>
               <desc id="bot3Desc">Chubby robot that jiggles when clicked!</desc>
@@ -566,7 +575,7 @@ function App() {
         </div>
 
         {/* Squid Robot - Middle Left */}
-        <div className="absolute top-1/2 left-12 md:left-20 lg:left-24 xl:left-28 transform -translate-y-1/2 z-20 opacity-75 hover:opacity-100 transition-all duration-300">
+        <div className="absolute top-[45%] left-4 md:left-12 lg:left-20 xl:left-24 transform -translate-y-1/2 z-10 opacity-75 hover:opacity-100 transition-all duration-300">
           <div className="transform hover:scale-105 hover:rotate-2 transition-all duration-500 filter drop-shadow-lg">
             <svg 
               id="bot4SVG" 
