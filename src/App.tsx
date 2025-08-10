@@ -1,8 +1,4 @@
 import { useState, FormEvent, useEffect } from "react";
-import RobotSVG from "./components/RobotSVG";
-import Robot2SVG from "./components/Robot2SVG";
-import Robot3SVG from "./components/Robot3SVG";
-import Robot4SVG from "./components/Robot4SVG";
 import { generateClient } from 'aws-amplify/api';
 import * as mutations from './graphql/mutations';
 import { SendMessageMutation } from './graphql/API';
@@ -164,44 +160,370 @@ function App() {
         {/* Original Robot - Top Right */}
         <div className="absolute top-24 right-6 md:right-12 lg:right-16 xl:right-20 z-20 opacity-90 hover:opacity-100 transition-all duration-300">
           <div className="transform hover:scale-110 hover:rotate-3 transition-all duration-500 filter drop-shadow-2xl">
-            <RobotSVG 
-              className="w-24 h-18 md:w-36 md:h-27 lg:w-48 lg:h-36 xl:w-64 xl:h-48" 
-              width={256}
-              height={192}
-            />
+            <svg 
+              id="botSVG" 
+              xmlns="http://www.w3.org/2000/svg" 
+              viewBox="0 0 300 220" 
+              role="img" 
+              aria-labelledby="botTitle botDesc"
+              className="w-24 h-18 md:w-36 md:h-27 lg:w-48 lg:h-36 xl:w-64 xl:h-48 cursor-pointer"
+            >
+              <title id="botTitle">Robot</title>
+              <desc id="botDesc">Friendly robot icon with click-to-blink eyes.</desc>
+
+              <defs>
+                <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feDropShadow dx="0" dy="2" stdDeviation="2" floodOpacity="0.25"/>
+                </filter>
+                <style>
+                  {`
+                    .stroke { stroke: #334155; }
+                    .body { fill: #e8eef7; }
+                    .accent { fill: #7aa2ff; }
+                    .eyeWhite { fill: #ffffff; stroke: #1f2937; }
+                    .pupil { fill: #1f2937; }
+                  `}
+                </style>
+              </defs>
+
+              <circle cx="150" cy="110" r="92" fill="#67b7f7" opacity="0.18"/>
+
+              <g className="stroke" strokeWidth="3" strokeLinecap="round" filter="url(#softShadow)">
+                <line x1="118" y1="58" x2="98" y2="35"/>
+                <circle cx="98" cy="35" r="6" className="accent" stroke="#334155"/>
+                <line x1="182" y1="58" x2="202" y2="32"/>
+                <circle cx="202" cy="32" r="6" className="accent" stroke="#334155"/>
+              </g>
+
+              <g filter="url(#softShadow)">
+                <rect x="78" y="85" width="16" height="34" rx="6" className="body" stroke="#334155" strokeWidth="3"/>
+                <rect x="206" y="85" width="16" height="34" rx="6" className="body" stroke="#334155" strokeWidth="3"/>
+              </g>
+
+              <g id="head" filter="url(#softShadow)">
+                <rect x="90" y="60" width="120" height="90" rx="18" className="body" stroke="#334155" strokeWidth="3"/>
+                <line x1="96" y1="76" x2="204" y2="76" stroke="#334155" strokeWidth="2" opacity="0.35"/>
+              </g>
+
+              <g id="eyes">
+                <g id="leftEye">
+                  <circle cx="130" cy="98" r="16" className="eyeWhite" strokeWidth="3"/>
+                  <circle id="pupilLeft" cx="130" cy="98" r="6" className="pupil">
+                    <animate attributeName="opacity" values="1;0;1" dur="0.22s" begin="1s;click"/>
+                  </circle>
+                  <rect x="114" y="82" width="32" height="0" fill="#e8eef7">
+                    <animate attributeName="height" values="0;32;0" keyTimes="0;0.5;1" dur="0.22s" begin="1s;click" calcMode="spline" keySplines="0.25 0.1 0.25 1;0.25 0.1 0.25 1"/>
+                  </rect>
+                </g>
+                <g id="rightEye">
+                  <circle cx="170" cy="98" r="16" className="eyeWhite" strokeWidth="3"/>
+                  <circle id="pupilRight" cx="170" cy="98" r="6" className="pupil">
+                    <animate attributeName="opacity" values="1;0;1" dur="0.22s" begin="1s;click"/>
+                  </circle>
+                  <rect x="154" y="82" width="32" height="0" fill="#e8eef7">
+                    <animate attributeName="height" values="0;32;0" keyTimes="0;0.5;1" dur="0.22s" begin="1s;click" calcMode="spline" keySplines="0.25 0.1 0.25 1;0.25 0.1 0.25 1"/>
+                  </rect>
+                </g>
+                <circle cx="133" cy="95" r="2" fill="#ffffff" opacity="0.85"/>
+                <circle cx="173" cy="95" r="2" fill="#ffffff" opacity="0.85"/>
+              </g>
+
+              <path d="M128 118 Q150 132 172 118" fill="none" stroke="#334155" strokeWidth="4" strokeLinecap="round"/>
+
+              <rect x="140" y="150" width="20" height="10" rx="3" className="body" stroke="#334155" strokeWidth="3"/>
+              <rect x="90" y="160" width="120" height="40" rx="16" className="body" stroke="#334155" strokeWidth="3"/>
+            </svg>
           </div>
         </div>
 
-        {/* Spinning Robot - Top Left */}
+        {/* Premium Shocked Robot - Top Left */}
         <div className="absolute top-32 left-8 md:left-16 lg:left-20 xl:left-24 z-20 opacity-85 hover:opacity-100 transition-all duration-300">
           <div className="transform hover:scale-105 hover:-rotate-2 transition-all duration-500 filter drop-shadow-xl">
-            <Robot2SVG 
-              className="w-20 h-15 md:w-28 md:h-21 lg:w-40 lg:h-30 xl:w-52 xl:h-39" 
-              width={208}
-              height={156}
-            />
+            <svg 
+              id="bot2SVG" 
+              xmlns="http://www.w3.org/2000/svg" 
+              viewBox="0 0 300 220" 
+              role="img" 
+              aria-labelledby="bot2Title bot2Desc"
+              className="w-20 h-15 md:w-28 md:h-21 lg:w-40 lg:h-30 xl:w-52 xl:h-39 cursor-pointer"
+
+            >
+              <title id="bot2Title">Premium Robot</title>
+              <desc id="bot2Desc">High-quality robot with sophisticated shocked reaction!</desc>
+
+              <defs>
+                <filter id="softShadow2" x="-20%" y="-20%" width="140%" height="140%">
+                  <feDropShadow dx="0" dy="3" stdDeviation="3" floodOpacity="0.3"/>
+                </filter>
+                <linearGradient id="bodyGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style={{stopColor:'#fef3c7', stopOpacity:1}} />
+                  <stop offset="50%" style={{stopColor:'#fde68a', stopOpacity:1}} />
+                  <stop offset="100%" style={{stopColor:'#f59e0b', stopOpacity:0.8}} />
+                </linearGradient>
+                <linearGradient id="accentGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style={{stopColor:'#fbbf24', stopOpacity:1}} />
+                  <stop offset="100%" style={{stopColor:'#d97706', stopOpacity:1}} />
+                </linearGradient>
+                <style>
+                  {`
+                    .stroke2 { stroke: #374151; stroke-width: 2; }
+                    .body2 { fill: url(#bodyGradient2); }
+                    .accent2 { fill: url(#accentGradient2); }
+                    .eyeWhite2 { fill: #ffffff; stroke: #1f2937; }
+                    .highlight2 { fill: #ffffff; opacity: 0.6; }
+                  `}
+                </style>
+              </defs>
+
+              <circle cx="150" cy="110" r="92" fill="url(#accentGradient2)" opacity="0.12"/>
+
+              <g id="sophisticatedShock">
+                <animateTransform
+                  attributeName="transform"
+                  type="translate"
+                  values="0 0;-8 -15;0 0"
+                  dur="0.5s"
+                  begin="2s;click"
+                />
+                
+                <g filter="url(#softShadow2)">
+                  <line x1="125" y1="65" x2="115" y2="40" className="stroke2" strokeLinecap="round">
+                    <animate attributeName="strokeWidth" values="2;4;2" dur="0.8s" begin="2s"/>
+                  </line>
+                  <line x1="175" y1="65" x2="185" y2="40" className="stroke2" strokeLinecap="round">
+                    <animate attributeName="strokeWidth" values="2;4;2" dur="0.8s" begin="2s"/>
+                  </line>
+                  
+                  <circle cx="115" cy="40" r="8" className="accent2" stroke="#374151" strokeWidth="2">
+                    <animate attributeName="r" values="8;12;8" dur="0.8s" begin="2s"/>
+                  </circle>
+                  <circle cx="185" cy="40" r="8" className="accent2" stroke="#374151" strokeWidth="2">
+                    <animate attributeName="r" values="8;12;8" dur="0.8s" begin="2s"/>
+                  </circle>
+                  
+                  <circle cx="118" cy="37" r="3" className="highlight2"/>
+                  <circle cx="188" cy="37" r="3" className="highlight2"/>
+                </g>
+
+                <g filter="url(#softShadow2)">
+                  <rect x="95" y="65" width="110" height="80" rx="25" className="body2" stroke="#374151" strokeWidth="3"/>
+                  <rect x="100" y="70" width="100" height="70" rx="20" fill="none" stroke="#ffffff" strokeWidth="1" opacity="0.3"/>
+                  <ellipse cx="150" cy="80" rx="45" ry="8" className="highlight2"/>
+                </g>
+
+                <g id="premiumEyes">
+                  <rect x="115" y="90" width="20" height="16" rx="8" fill="#1f2937" stroke="#374151" strokeWidth="2"/>
+                  <rect x="165" y="90" width="20" height="16" rx="8" fill="#1f2937" stroke="#374151" strokeWidth="2"/>
+                  
+                  <circle cx="125" cy="98" r="16" className="eyeWhite2" strokeWidth="3">
+                    <animate attributeName="r" values="16;24;16" dur="0.5s" begin="2s;click"/>
+                  </circle>
+                  <circle cx="175" cy="98" r="16" className="eyeWhite2" strokeWidth="3">
+                    <animate attributeName="r" values="16;24;16" dur="0.5s" begin="2s;click"/>
+                  </circle>
+                  
+                  <circle cx="125" cy="98" r="6" fill="#1f2937">
+                    <animate attributeName="r" values="6;2;6" dur="0.5s" begin="2s;click"/>
+                  </circle>
+                  <circle cx="175" cy="98" r="6" fill="#1f2937">
+                    <animate attributeName="r" values="6;2;6" dur="0.5s" begin="2s;click"/>
+                  </circle>
+                  
+                  <circle cx="126" cy="96" r="1.5" className="highlight2"/>
+                  <circle cx="176" cy="96" r="1.5" className="highlight2"/>
+                  
+                  <g stroke="#fbbf24" strokeWidth="2" fill="none" opacity="0">
+                    <animate attributeName="opacity" values="0;1;0.5;1;0" dur="0.8s" begin="2s"/>
+                    <path d="M105 85 Q100 80 95 85 Q90 90 95 95"/>
+                    <path d="M195 85 Q200 80 205 85 Q210 90 205 95"/>
+                  </g>
+                </g>
+
+                <g>
+                  <ellipse cx="150" cy="120" rx="0" ry="0" fill="#374151">
+                    <animate attributeName="rx" values="0;15;0" dur="0.5s" begin="2s;click"/>
+                    <animate attributeName="ry" values="0;20;0" dur="0.5s" begin="2s;click"/>
+                  </ellipse>
+                </g>
+
+                <g filter="url(#softShadow2)">
+                  <rect x="95" y="145" width="110" height="50" rx="20" className="body2" stroke="#374151" strokeWidth="3"/>
+                  <rect x="130" y="160" width="40" height="20" rx="8" fill="#1f2937" stroke="#374151" strokeWidth="2"/>
+                  <circle cx="140" cy="170" r="3" className="accent2"/>
+                  <circle cx="150" cy="170" r="3" className="accent2"/>
+                  <circle cx="160" cy="170" r="3" className="accent2"/>
+                </g>
+
+                <g opacity="0">
+                  <animate attributeName="opacity" values="0;1;0.7;1;0" dur="0.8s" begin="2s"/>
+                  <text x="220" y="70" fill="url(#accentGradient2)" fontSize="24" fontWeight="bold">!</text>
+                  <text x="60" y="80" fill="url(#accentGradient2)" fontSize="20" fontWeight="bold">!</text>
+                </g>
+              </g>
+            </svg>
           </div>
         </div>
 
-        {/* Bouncy Robot - Middle Right */}
+        {/* Chubby Robot - Middle Right */}
         <div className="absolute top-1/2 right-4 md:right-8 lg:right-12 xl:right-16 transform -translate-y-1/2 z-20 opacity-80 hover:opacity-100 transition-all duration-300">
           <div className="transform hover:scale-110 hover:rotate-1 transition-all duration-500 filter drop-shadow-lg">
-            <Robot3SVG 
-              className="w-22 h-17 md:w-32 md:h-24 lg:w-44 lg:h-33 xl:w-56 xl:h-42" 
-              width={224}
-              height={168}
-            />
+            <svg 
+              id="bot3SVG" 
+              xmlns="http://www.w3.org/2000/svg" 
+              viewBox="0 0 300 220" 
+              role="img" 
+              aria-labelledby="bot3Title bot3Desc"
+              className="w-22 h-17 md:w-32 md:h-24 lg:w-44 lg:h-33 xl:w-56 xl:h-42 cursor-pointer"
+            >
+              <title id="bot3Title">Round Chubby Robot</title>
+              <desc id="bot3Desc">Chubby robot that jiggles when clicked!</desc>
+
+              <defs>
+                <filter id="softShadow3" x="-20%" y="-20%" width="140%" height="140%">
+                  <feDropShadow dx="0" dy="2" stdDeviation="2" floodOpacity="0.25"/>
+                </filter>
+                <style>
+                  {`
+                    .stroke3 { stroke: #334155; }
+                    .body3 { fill: #dcfce7; }
+                    .accent3 { fill: #22c55e; }
+                    .eyeWhite3 { fill: #ffffff; stroke: #1f2937; }
+                    .pupil3 { fill: #1f2937; }
+                  `}
+                </style>
+              </defs>
+
+              <circle cx="150" cy="110" r="92" fill="#22c55e" opacity="0.15"/>
+
+              <g id="jigglingBody">
+                <animateTransform
+                  attributeName="transform"
+                  type="translate"
+                  values="0 0;0 -20;0 -10;0 -15;0 -5;0 0"
+                  dur="1.2s"
+                  begin="3s;click"
+                />
+                
+                <g className="stroke3" strokeWidth="3" strokeLinecap="round" filter="url(#softShadow3)">
+                  <line x1="130" y1="70" x2="125" y2="55"/>
+                  <circle cx="125" cy="55" r="5" className="accent3" stroke="#334155"/>
+                  <line x1="170" y1="70" x2="175" y2="55"/>
+                  <circle cx="175" cy="55" r="5" className="accent3" stroke="#334155"/>
+                </g>
+
+                <g id="head3" filter="url(#softShadow3)">
+                  <circle cx="150" cy="90" r="40" className="body3" stroke="#334155" strokeWidth="3"/>
+                </g>
+
+                <g id="eyes3">
+                  <circle cx="135" cy="85" r="12" className="eyeWhite3" strokeWidth="3"/>
+                  <circle cx="165" cy="85" r="12" className="eyeWhite3" strokeWidth="3"/>
+                  
+                  <circle cx="135" cy="85" r="5" className="pupil3">
+                    <animate attributeName="r" values="5;8;5" dur="0.8s" begin="3s"/>
+                  </circle>
+                  <circle cx="165" cy="85" r="5" className="pupil3">
+                    <animate attributeName="r" values="5;8;5" dur="0.8s" begin="3s"/>
+                  </circle>
+                  
+                  <circle cx="140" cy="80" r="1" fill="#22c55e" opacity="0">
+                    <animate attributeName="opacity" values="0;1;0" dur="0.8s" begin="3s"/>
+                  </circle>
+                  <circle cx="160" cy="80" r="1" fill="#22c55e" opacity="0">
+                    <animate attributeName="opacity" values="0;1;0" dur="0.8s" begin="3s"/>
+                  </circle>
+                </g>
+
+                <path d="M125 100 Q150 120 175 100" fill="none" stroke="#334155" strokeWidth="4" strokeLinecap="round"/>
+
+                <ellipse cx="150" cy="150" rx="50" ry="40" className="body3" stroke="#334155" strokeWidth="3" filter="url(#softShadow3)"/>
+                <circle cx="150" cy="150" r="3" className="accent3"/>
+                <ellipse cx="100" cy="140" rx="15" ry="25" className="body3" stroke="#334155" strokeWidth="3"/>
+                <ellipse cx="200" cy="140" rx="15" ry="25" className="body3" stroke="#334155" strokeWidth="3"/>
+              </g>
+            </svg>
           </div>
         </div>
 
-        {/* Nervous Robot - Bottom Left */}
+        {/* Angular Robot - Bottom Left */}
         <div className="absolute bottom-32 left-12 md:left-20 lg:left-24 xl:left-28 z-20 opacity-75 hover:opacity-100 transition-all duration-300">
           <div className="transform hover:scale-105 hover:rotate-2 transition-all duration-500 filter drop-shadow-lg">
-            <Robot4SVG 
-              className="w-20 h-15 md:w-30 md:h-23 lg:w-40 lg:h-30 xl:w-52 xl:h-39" 
-              width={208}
-              height={156}
-            />
+            <svg 
+              id="bot4SVG" 
+              xmlns="http://www.w3.org/2000/svg" 
+              viewBox="0 0 300 220" 
+              role="img" 
+              aria-labelledby="bot4Title bot4Desc"
+              className="w-20 h-15 md:w-30 md:h-23 lg:w-40 lg:h-30 xl:w-52 xl:h-39 cursor-pointer"
+            >
+              <title id="bot4Title">Angular Robot</title>
+              <desc id="bot4Desc">Angular robot that glitches when clicked!</desc>
+
+              <defs>
+                <filter id="softShadow4" x="-20%" y="-20%" width="140%" height="140%">
+                  <feDropShadow dx="0" dy="2" stdDeviation="2" floodOpacity="0.25"/>
+                </filter>
+                <style>
+                  {`
+                    .stroke4 { stroke: #334155; }
+                    .body4 { fill: #fce7f3; }
+                    .accent4 { fill: #ec4899; }
+                    .eyeWhite4 { fill: #ffffff; stroke: #1f2937; }
+                  `}
+                </style>
+              </defs>
+
+              <circle cx="150" cy="110" r="92" fill="#ec4899" opacity="0.15"/>
+
+              <g id="glitchingBody">
+                <animateTransform
+                  attributeName="transform"
+                  type="translate"
+                  values="0 0;-2 1;3 -1;-1 2;2 -2;0 0"
+                  dur="0.3s"
+                  begin="4s;click"
+                  repeatCount="3"
+                />
+                
+                <g className="stroke4" strokeWidth="2" strokeLinecap="square" filter="url(#softShadow4)">
+                  <polyline points="140,60 135,45 130,35" fill="none"/>
+                  <rect x="128" y="33" width="4" height="4" className="accent4"/>
+                  <polyline points="160,60 165,45 170,35" fill="none"/>
+                  <rect x="168" y="33" width="4" height="4" className="accent4"/>
+                  <polyline points="150,55 150,40 155,30" fill="none"/>
+                  <rect x="153" y="28" width="4" height="4" className="accent4"/>
+                </g>
+
+                <g id="head4" filter="url(#softShadow4)">
+                  <polygon points="150,60 180,75 180,105 150,120 120,105 120,75" className="body4" stroke="#334155" strokeWidth="3"/>
+                  <line x1="125" y1="80" x2="175" y2="80" stroke="#334155" strokeWidth="1" opacity="0.35"/>
+                </g>
+
+                <g id="eyes4">
+                  <polygon points="135,85 145,80 145,90" className="eyeWhite4" strokeWidth="2"/>
+                  <polygon points="165,85 155,80 155,90" className="eyeWhite4" strokeWidth="2"/>
+                  
+                  <rect x="138" y="83" width="4" height="4" className="accent4">
+                    <animate attributeName="opacity" values="1;0;1;0;1" dur="0.3s" begin="4s" repeatCount="3"/>
+                  </rect>
+                  <rect x="158" y="83" width="4" height="4" className="accent4">
+                    <animate attributeName="opacity" values="1;0;1;0;1" dur="0.3s" begin="4s" repeatCount="3"/>
+                  </rect>
+                </g>
+
+                <rect x="140" y="95" width="20" height="3" className="accent4">
+                  <animate attributeName="width" values="20;10;20;5;20" dur="0.3s" begin="4s" repeatCount="3"/>
+                </rect>
+
+                <polygon points="150,120 190,135 185,175 115,175 110,135" className="body4" stroke="#334155" strokeWidth="3" filter="url(#softShadow4)"/>
+                
+                <g stroke="#ec4899" strokeWidth="2" fill="none" opacity="0.7">
+                  <polyline points="130,145 140,145 145,155 155,155 160,145 170,145"/>
+                  <circle cx="135" cy="160" r="3" fill="#ec4899"/>
+                  <circle cx="165" cy="160" r="3" fill="#ec4899"/>
+                </g>
+              </g>
+            </svg>
           </div>
         </div>
 
