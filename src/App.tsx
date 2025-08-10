@@ -284,7 +284,7 @@ function App() {
                 </style>
               </defs>
 
-              <circle cx="150" cy="110" r="92" fill="url(#accentGradient2)" opacity="0.12"/>
+              <circle cx="150" cy="110" r="92" fill="#67b7f7" opacity="0.18"/>
 
               <g id="sophisticatedShock">
                 <animateTransform
@@ -402,7 +402,7 @@ function App() {
                 </style>
               </defs>
 
-              <circle cx="150" cy="110" r="92" fill="#22c55e" opacity="0.15"/>
+              <circle cx="150" cy="110" r="92" fill="#67b7f7" opacity="0.18"/>
 
               <g id="jigglingBody">
                 <animateTransform
@@ -482,7 +482,7 @@ function App() {
                 </style>
               </defs>
 
-              <circle cx="150" cy="110" r="92" fill="#ec4899" opacity="0.15"/>
+              <circle cx="150" cy="110" r="92" fill="#67b7f7" opacity="0.18"/>
 
               <g id="glitchingBody">
                 <animateTransform
