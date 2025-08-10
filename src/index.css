@@ -138,53 +138,103 @@
   /* Robot Decorations */
   .robot-decoration {
     display: flex;
-    align-items: center;
-    justify-content: center;
     z-index: 5;
-    opacity: 0.8;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    position: relative;
   }
 
   .robot-decoration:hover {
     opacity: 1;
+    transform: scale(1.05);
   }
 
+  /* Robots Orbiting Around Text Content */
   .robot-top-left {
     grid-area: decoration-tl;
-    align-self: start;
+    align-self: center;
     justify-self: end;
+    margin-top: -8%;
+    margin-right: -15%;
+    opacity: 0.72;
+    transform: rotate(-12deg);
   }
 
   .robot-top-right {
     grid-area: decoration-tr;
-    align-self: start;
+    align-self: center;
     justify-self: start;
+    margin-top: -25%;
+    margin-left: -12%;
+    opacity: 0.88;
+    transform: rotate(8deg);
   }
 
   .robot-bottom-left {
     grid-area: decoration-bl;
-    align-self: end;
+    align-self: center;
     justify-self: end;
+    margin-top: 28%;
+    margin-right: -18%;
+    opacity: 0.65;
+    transform: rotate(15deg);
   }
 
   .robot-bottom-right {
     grid-area: decoration-br;
-    align-self: end;
+    align-self: center;
     justify-self: start;
+    margin-top: 12%;
+    margin-left: -20%;
+    opacity: 0.78;
+    transform: rotate(-6deg);
   }
 
   .robot-wrapper {
-    transform: scale(1);
     transition: transform 0.5s ease;
     filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
   }
 
   .robot-wrapper:hover {
-    transform: scale(1.1);
+    transform: scale(1.2) rotate(var(--hover-rotation, 5deg));
   }
 
-  .robot-svg {
-    width: clamp(3rem, 8vw, 8rem);
+  .robot-top-left .robot-wrapper {
+    --hover-rotation: -18deg;
+  }
+
+  .robot-top-right .robot-wrapper {
+    --hover-rotation: 15deg;
+  }
+
+  .robot-bottom-left .robot-wrapper {
+    --hover-rotation: 22deg;
+  }
+
+  .robot-bottom-right .robot-wrapper {
+    --hover-rotation: -12deg;
+  }
+
+  /* Highly Varied Robot Sizes - No Patterns */
+  .robot-top-left .robot-svg {
+    width: clamp(1.8rem, 4.5vw, 4.2rem);
+    height: auto;
+    cursor: pointer;
+  }
+
+  .robot-top-right .robot-svg {
+    width: clamp(5.2rem, 11vw, 11.5rem);
+    height: auto;
+    cursor: pointer;
+  }
+
+  .robot-bottom-left .robot-svg {
+    width: clamp(2.2rem, 5.8vw, 5.5rem);
+    height: auto;
+    cursor: pointer;
+  }
+
+  .robot-bottom-right .robot-svg {
+    width: clamp(3.8rem, 8.7vw, 9.2rem);
     height: auto;
     cursor: pointer;
   }
@@ -245,8 +295,24 @@
       display: none;
     }
 
-    .robot-svg {
-      width: clamp(2.5rem, 6vw, 5rem);
+    /* Adjust tablet sizes */
+    .robot-top-left .robot-svg {
+      width: clamp(2rem, 5vw, 4rem);
+    }
+
+    .robot-top-right .robot-svg {
+      width: clamp(3rem, 7vw, 6rem);
+    }
+
+    /* Adjust tablet positioning to stay centered around content */
+    .robot-top-left {
+      margin-top: -10%;
+      margin-right: 0%;
+    }
+
+    .robot-top-right {
+      margin-top: -15%;
+      margin-left: 0%;
     }
   }
 
