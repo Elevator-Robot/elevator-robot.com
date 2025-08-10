@@ -255,7 +255,15 @@ function App() {
               role="img" 
               aria-labelledby="bot2Title bot2Desc"
               className="w-20 h-15 md:w-28 md:h-21 lg:w-40 lg:h-30 xl:w-52 xl:h-39 cursor-pointer"
-
+              onClick={() => {
+                const svg = document.getElementById('bot2SVG');
+                if (svg) {
+                  const animations = svg.querySelectorAll('animate, animateTransform');
+                  animations.forEach(anim => {
+                    (anim as any).beginElement();
+                  });
+                }
+              }}
             >
               <title id="bot2Title">Premium Robot</title>
               <desc id="bot2Desc">High-quality robot with sophisticated shocked reaction!</desc>
