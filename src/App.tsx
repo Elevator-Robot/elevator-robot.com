@@ -381,8 +381,8 @@ function App() {
           </div>
         </div>
 
-        {/* Chubby Robot - Middle Right */}
-        <div className="absolute top-1/2 right-4 md:right-8 lg:right-12 xl:right-16 transform -translate-y-1/2 z-20 opacity-80 hover:opacity-100 transition-all duration-300">
+        {/* Chubby Robot - Lower Right */}
+        <div className="absolute top-[70%] right-16 md:right-24 lg:right-32 xl:right-40 transform -translate-y-1/2 z-20 opacity-80 hover:opacity-100 transition-all duration-300">
           <div className="transform hover:scale-110 hover:rotate-1 transition-all duration-500 filter drop-shadow-lg">
             <svg 
               id="bot3SVG" 
@@ -390,7 +390,7 @@ function App() {
               viewBox="0 0 300 220" 
               role="img" 
               aria-labelledby="bot3Title bot3Desc"
-              className="w-22 h-17 md:w-32 md:h-24 lg:w-44 lg:h-33 xl:w-56 xl:h-42 cursor-pointer"
+              className="w-29 h-22 md:w-43 md:h-32 lg:w-60 lg:h-44 xl:w-78 xl:h-58 cursor-pointer"
             >
               <title id="bot3Title">Round Chubby Robot</title>
               <desc id="bot3Desc">Chubby robot that jiggles when clicked!</desc>
@@ -412,58 +412,161 @@ function App() {
 
               <circle cx="150" cy="110" r="92" fill="#67b7f7" opacity="0.18"/>
 
-              <g id="jigglingBody">
+              <g id="bouncyBody">
+                {/* Continuous bouncy floating */}
                 <animateTransform
                   attributeName="transform"
                   type="translate"
-                  values="0 0;0 -20;0 -10;0 -15;0 -5;0 0"
-                  dur="1.2s"
-                  begin="3s;click"
+                  values="0 0;0 -8;0 0;0 -12;0 -4;0 0"
+                  dur="2.5s"
+                  begin="0s"
+                  repeatCount="indefinite"
+                />
+                
+                {/* Extra bounce on click */}
+                <animateTransform
+                  attributeName="transform"
+                  type="translate"
+                  values="0 0;0 -25;0 5;0 -20;0 3;0 -15;0 0"
+                  dur="1.5s"
+                  begin="click"
+                  additive="sum"
                 />
                 
                 <g className="stroke3" strokeWidth="3" strokeLinecap="round" filter="url(#softShadow3)">
-                  <line x1="130" y1="70" x2="125" y2="55"/>
-                  <circle cx="125" cy="55" r="5" className="accent3" stroke="#334155"/>
-                  <line x1="170" y1="70" x2="175" y2="55"/>
-                  <circle cx="175" cy="55" r="5" className="accent3" stroke="#334155"/>
+                  <line x1="130" y1="70" x2="125" y2="55">
+                    <animateTransform attributeName="transform" type="rotate" values="0 127.5 62.5;-15 127.5 62.5;15 127.5 62.5;0 127.5 62.5" dur="3s" begin="0s" repeatCount="indefinite"/>
+                    <animateTransform attributeName="transform" type="rotate" values="0 127.5 62.5;-30 127.5 62.5;30 127.5 62.5;-20 127.5 62.5;20 127.5 62.5;0 127.5 62.5" dur="1s" begin="click" additive="sum"/>
+                  </line>
+                  <circle cx="125" cy="55" r="5" className="accent3" stroke="#334155">
+                    <animate attributeName="r" values="5;7;5" dur="3s" begin="0s" repeatCount="indefinite"/>
+                    <animate attributeName="r" values="5;10;5" dur="0.5s" begin="click"/>
+                  </circle>
+                  
+                  <line x1="170" y1="70" x2="175" y2="55">
+                    <animateTransform attributeName="transform" type="rotate" values="0 172.5 62.5;15 172.5 62.5;-15 172.5 62.5;0 172.5 62.5" dur="3.2s" begin="0s" repeatCount="indefinite"/>
+                    <animateTransform attributeName="transform" type="rotate" values="0 172.5 62.5;30 172.5 62.5;-30 172.5 62.5;20 172.5 62.5;-20 172.5 62.5;0 172.5 62.5" dur="1s" begin="click" additive="sum"/>
+                  </line>
+                  <circle cx="175" cy="55" r="5" className="accent3" stroke="#334155">
+                    <animate attributeName="r" values="5;7;5" dur="3.2s" begin="0s" repeatCount="indefinite"/>
+                    <animate attributeName="r" values="5;10;5" dur="0.5s" begin="click"/>
+                  </circle>
                 </g>
 
                 <g id="head3" filter="url(#softShadow3)">
-                  <circle cx="150" cy="90" r="40" className="body3" stroke="#334155" strokeWidth="3"/>
+                  <circle cx="150" cy="90" r="40" className="body3" stroke="#334155" strokeWidth="3">
+                    <animate attributeName="r" values="40;42;40" dur="2.8s" begin="0s" repeatCount="indefinite"/>
+                    <animate attributeName="r" values="40;45;38;43;40" dur="1.2s" begin="click"/>
+                  </circle>
+                  
+                  {/* Cheek blush spots */}
+                  <circle cx="115" cy="95" r="0" fill="#22c55e" opacity="0">
+                    <animate attributeName="r" values="0;6;0" dur="1.2s" begin="click"/>
+                    <animate attributeName="opacity" values="0;0.6;0" dur="1.2s" begin="click"/>
+                  </circle>
+                  <circle cx="185" cy="95" r="0" fill="#22c55e" opacity="0">
+                    <animate attributeName="r" values="0;6;0" dur="1.2s" begin="click"/>
+                    <animate attributeName="opacity" values="0;0.6;0" dur="1.2s" begin="click"/>
+                  </circle>
                 </g>
 
                 <g id="eyes3">
-                  <circle cx="135" cy="85" r="12" className="eyeWhite3" strokeWidth="3"/>
-                  <circle cx="165" cy="85" r="12" className="eyeWhite3" strokeWidth="3"/>
+                  <circle cx="135" cy="85" r="12" className="eyeWhite3" strokeWidth="3">
+                    <animate attributeName="r" values="12;14;12" dur="2.6s" begin="0s" repeatCount="indefinite"/>
+                  </circle>
+                  <circle cx="165" cy="85" r="12" className="eyeWhite3" strokeWidth="3">
+                    <animate attributeName="r" values="12;14;12" dur="2.8s" begin="0s" repeatCount="indefinite"/>
+                  </circle>
                   
                   <circle cx="135" cy="85" r="5" className="pupil3">
-                    <animate attributeName="r" values="5;8;5" dur="0.8s" begin="3s;click"/>
+                    <animate attributeName="r" values="5;3;7;5" dur="2.5s" begin="0s" repeatCount="indefinite"/>
+                    <animate attributeName="r" values="5;2;8;5" dur="0.8s" begin="click"/>
+                    <animateTransform attributeName="transform" type="translate" values="0 0;-2 -1;2 1;0 0" dur="2.5s" begin="0s" repeatCount="indefinite"/>
                   </circle>
                   <circle cx="165" cy="85" r="5" className="pupil3">
-                    <animate attributeName="r" values="5;8;5" dur="0.8s" begin="3s;click"/>
+                    <animate attributeName="r" values="5;7;3;5" dur="2.7s" begin="0s" repeatCount="indefinite"/>
+                    <animate attributeName="r" values="5;2;8;5" dur="0.8s" begin="click"/>
+                    <animateTransform attributeName="transform" type="translate" values="0 0;2 -1;-2 1;0 0" dur="2.7s" begin="0s" repeatCount="indefinite"/>
                   </circle>
                   
+                  {/* Sparkle effects */}
                   <circle cx="140" cy="80" r="1" fill="#22c55e" opacity="0">
-                    <animate attributeName="opacity" values="0;1;0" dur="0.8s" begin="3s;click"/>
+                    <animate attributeName="opacity" values="0;1;0" dur="0.3s" begin="0s;3s;6s" repeatCount="indefinite"/>
+                    <animate attributeName="r" values="1;3;1" dur="0.3s" begin="0s;3s;6s" repeatCount="indefinite"/>
                   </circle>
                   <circle cx="160" cy="80" r="1" fill="#22c55e" opacity="0">
-                    <animate attributeName="opacity" values="0;1;0" dur="0.8s" begin="3s;click"/>
+                    <animate attributeName="opacity" values="0;1;0" dur="0.3s" begin="1.5s;4.5s;7.5s" repeatCount="indefinite"/>
+                    <animate attributeName="r" values="1;3;1" dur="0.3s" begin="1.5s;4.5s;7.5s" repeatCount="indefinite"/>
                   </circle>
+                  
+                  {/* Click sparkles */}
+                  <g opacity="0">
+                    <animate attributeName="opacity" values="0;1;0" dur="1s" begin="click"/>
+                    <circle cx="125" cy="75" r="2" fill="#22c55e">
+                      <animate attributeName="r" values="0;4;0" dur="1s" begin="click"/>
+                    </circle>
+                    <circle cx="175" cy="75" r="2" fill="#22c55e">
+                      <animate attributeName="r" values="0;4;0" dur="1s" begin="click"/>
+                    </circle>
+                    <circle cx="150" cy="70" r="1.5" fill="#22c55e">
+                      <animate attributeName="r" values="0;3;0" dur="1s" begin="click"/>
+                    </circle>
+                  </g>
                 </g>
 
-                <path d="M125 100 Q150 120 175 100" fill="none" stroke="#334155" strokeWidth="4" strokeLinecap="round"/>
+                {/* Animated smile */}
+                <path d="M125 100 Q150 120 175 100" fill="none" stroke="#334155" strokeWidth="4" strokeLinecap="round">
+                  <animate attributeName="d" values="M125 100 Q150 120 175 100;M125 100 Q150 125 175 100;M125 100 Q150 120 175 100" dur="3s" begin="0s" repeatCount="indefinite"/>
+                  <animate attributeName="d" values="M125 100 Q150 120 175 100;M120 95 Q150 130 180 95;M125 100 Q150 120 175 100" dur="1s" begin="click"/>
+                </path>
 
-                <ellipse cx="150" cy="150" rx="50" ry="40" className="body3" stroke="#334155" strokeWidth="3" filter="url(#softShadow3)"/>
-                <circle cx="150" cy="150" r="3" className="accent3"/>
-                <ellipse cx="100" cy="140" rx="15" ry="25" className="body3" stroke="#334155" strokeWidth="3"/>
-                <ellipse cx="200" cy="140" rx="15" ry="25" className="body3" stroke="#334155" strokeWidth="3"/>
+                {/* Body with squash and stretch */}
+                <ellipse cx="150" cy="150" rx="50" ry="40" className="body3" stroke="#334155" strokeWidth="3" filter="url(#softShadow3)">
+                  <animate attributeName="rx" values="50;52;50" dur="2.5s" begin="0s" repeatCount="indefinite"/>
+                  <animate attributeName="ry" values="40;38;40" dur="2.5s" begin="0s" repeatCount="indefinite"/>
+                  <animate attributeName="rx" values="50;45;55;50" dur="1.5s" begin="click"/>
+                  <animate attributeName="ry" values="40;45;35;40" dur="1.5s" begin="click"/>
+                </ellipse>
+                
+                {/* Belly button with pulse */}
+                <circle cx="150" cy="150" r="3" className="accent3">
+                  <animate attributeName="r" values="3;4;3" dur="2.5s" begin="0s" repeatCount="indefinite"/>
+                  <animate attributeName="r" values="3;6;3" dur="0.5s" begin="click"/>
+                </circle>
+                
+                {/* Arms with wave motion */}
+                <ellipse cx="100" cy="140" rx="15" ry="25" className="body3" stroke="#334155" strokeWidth="3">
+                  <animateTransform attributeName="transform" type="rotate" values="0 100 140;-10 100 140;10 100 140;0 100 140" dur="3s" begin="0s" repeatCount="indefinite"/>
+                  <animateTransform attributeName="transform" type="rotate" values="0 100 140;-25 100 140;25 100 140;-15 100 140;15 100 140;0 100 140" dur="1.5s" begin="click" additive="sum"/>
+                </ellipse>
+                <ellipse cx="200" cy="140" rx="15" ry="25" className="body3" stroke="#334155" strokeWidth="3">
+                  <animateTransform attributeName="transform" type="rotate" values="0 200 140;10 200 140;-10 200 140;0 200 140" dur="3.2s" begin="0s" repeatCount="indefinite"/>
+                  <animateTransform attributeName="transform" type="rotate" values="0 200 140;25 200 140;-25 200 140;15 200 140;-15 200 140;0 200 140" dur="1.5s" begin="click" additive="sum"/>
+                </ellipse>
+                
+                {/* Bouncy particles on click */}
+                <g opacity="0">
+                  <animate attributeName="opacity" values="0;1;0" dur="2s" begin="click"/>
+                  <circle cx="130" cy="120" r="2" fill="#22c55e">
+                    <animateTransform attributeName="transform" type="translate" values="0 0;-20 -30;-25 10" dur="2s" begin="click"/>
+                    <animate attributeName="r" values="2;4;0" dur="2s" begin="click"/>
+                  </circle>
+                  <circle cx="170" cy="120" r="2" fill="#22c55e">
+                    <animateTransform attributeName="transform" type="translate" values="0 0;20 -30;25 10" dur="2s" begin="click"/>
+                    <animate attributeName="r" values="2;4;0" dur="2s" begin="click"/>
+                  </circle>
+                  <circle cx="150" cy="110" r="1.5" fill="#22c55e">
+                    <animateTransform attributeName="transform" type="translate" values="0 0;0 -40;0 15" dur="2s" begin="click"/>
+                    <animate attributeName="r" values="1.5;3;0" dur="2s" begin="click"/>
+                  </circle>
+                </g>
               </g>
             </svg>
           </div>
         </div>
 
-        {/* Squid Robot - Bottom Left */}
-        <div className="absolute bottom-32 left-12 md:left-20 lg:left-24 xl:left-28 z-20 opacity-75 hover:opacity-100 transition-all duration-300">
+        {/* Squid Robot - Middle Left */}
+        <div className="absolute top-1/2 left-12 md:left-20 lg:left-24 xl:left-28 transform -translate-y-1/2 z-20 opacity-75 hover:opacity-100 transition-all duration-300">
           <div className="transform hover:scale-105 hover:rotate-2 transition-all duration-500 filter drop-shadow-lg">
             <svg 
               id="bot4SVG" 
