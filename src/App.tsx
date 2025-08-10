@@ -462,7 +462,7 @@ function App() {
           </div>
         </div>
 
-        {/* Angular Robot - Bottom Left */}
+        {/* Squid Robot - Bottom Left */}
         <div className="absolute bottom-32 left-12 md:left-20 lg:left-24 xl:left-28 z-20 opacity-75 hover:opacity-100 transition-all duration-300">
           <div className="transform hover:scale-105 hover:rotate-2 transition-all duration-500 filter drop-shadow-lg">
             <svg 
@@ -472,72 +472,158 @@ function App() {
               role="img" 
               aria-labelledby="bot4Title bot4Desc"
               className="w-20 h-15 md:w-30 md:h-23 lg:w-40 lg:h-30 xl:w-52 xl:h-39 cursor-pointer"
+              onClick={() => {
+                const svg = document.getElementById('bot4SVG');
+                if (svg) {
+                  const animations = svg.querySelectorAll('animate, animateTransform');
+                  animations.forEach(anim => {
+                    (anim as any).beginElement();
+                  });
+                }
+              }}
             >
-              <title id="bot4Title">Angular Robot</title>
-              <desc id="bot4Desc">Angular robot that glitches when clicked!</desc>
+              <title id="bot4Title">Squid Robot</title>
+              <desc id="bot4Desc">Squid robot with flowing tentacles that dance when clicked!</desc>
 
               <defs>
                 <filter id="softShadow4" x="-20%" y="-20%" width="140%" height="140%">
-                  <feDropShadow dx="0" dy="2" stdDeviation="2" floodOpacity="0.25"/>
+                  <feDropShadow dx="0" dy="3" stdDeviation="3" floodOpacity="0.3"/>
                 </filter>
+                <linearGradient id="squidGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style={{stopColor:'#e0e7ff', stopOpacity:1}} />
+                  <stop offset="50%" style={{stopColor:'#c7d2fe', stopOpacity:1}} />
+                  <stop offset="100%" style={{stopColor:'#a5b4fc', stopOpacity:1}} />
+                </linearGradient>
+                <linearGradient id="tentacleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style={{stopColor:'#6366f1', stopOpacity:1}} />
+                  <stop offset="100%" style={{stopColor:'#4f46e5', stopOpacity:1}} />
+                </linearGradient>
                 <style>
                   {`
-                    .stroke4 { stroke: #334155; }
-                    .body4 { fill: #fce7f3; }
-                    .accent4 { fill: #ec4899; }
+                    .squidBody { fill: url(#squidGradient); stroke: #374151; }
+                    .tentacle { fill: none; stroke: url(#tentacleGradient); stroke-linecap: round; }
                     .eyeWhite4 { fill: #ffffff; stroke: #1f2937; }
+                    .pupil4 { fill: #1f2937; }
+                    .highlight4 { fill: #ffffff; opacity: 0.8; }
                   `}
                 </style>
               </defs>
 
               <circle cx="150" cy="110" r="92" fill="#67b7f7" opacity="0.18"/>
 
-              <g id="glitchingBody">
+              <g id="squidRobot">
+                {/* Floating animation */}
                 <animateTransform
                   attributeName="transform"
                   type="translate"
-                  values="0 0;-2 1;3 -1;-1 2;2 -2;0 0"
-                  dur="0.3s"
-                  begin="4s;click"
-                  repeatCount="3"
+                  values="0 0;0 -8;0 0;0 -5;0 0"
+                  dur="4s"
+                  begin="0s"
+                  repeatCount="indefinite"
                 />
                 
-                <g className="stroke4" strokeWidth="2" strokeLinecap="square" filter="url(#softShadow4)">
-                  <polyline points="140,60 135,45 130,35" fill="none"/>
-                  <rect x="128" y="33" width="4" height="4" className="accent4"/>
-                  <polyline points="160,60 165,45 170,35" fill="none"/>
-                  <rect x="168" y="33" width="4" height="4" className="accent4"/>
-                  <polyline points="150,55 150,40 155,30" fill="none"/>
-                  <rect x="153" y="28" width="4" height="4" className="accent4"/>
+                {/* Main dome/head */}
+                <g filter="url(#softShadow4)">
+                  <ellipse cx="150" cy="85" rx="45" ry="35" className="squidBody" strokeWidth="3"/>
+                  <ellipse cx="150" cy="80" rx="35" ry="25" fill="none" stroke="#ffffff" strokeWidth="1" opacity="0.4"/>
+                  <ellipse cx="150" cy="75" rx="20" ry="12" className="highlight4"/>
                 </g>
 
-                <g id="head4" filter="url(#softShadow4)">
-                  <polygon points="150,60 180,75 180,105 150,120 120,105 120,75" className="body4" stroke="#334155" strokeWidth="3"/>
-                  <line x1="125" y1="80" x2="175" y2="80" stroke="#334155" strokeWidth="1" opacity="0.35"/>
-                </g>
-
-                <g id="eyes4">
-                  <polygon points="135,85 145,80 145,90" className="eyeWhite4" strokeWidth="2"/>
-                  <polygon points="165,85 155,80 155,90" className="eyeWhite4" strokeWidth="2"/>
+                {/* Antenna/sensors */}
+                <g className="tentacle" strokeWidth="2">
+                  <path d="M130 60 Q125 45 120 35">
+                    <animate attributeName="d" values="M130 60 Q125 45 120 35;M130 60 Q120 40 115 30;M130 60 Q125 45 120 35" dur="3s" begin="0s" repeatCount="indefinite"/>
+                  </path>
+                  <circle cx="120" cy="35" r="4" fill="url(#tentacleGradient)">
+                    <animate attributeName="r" values="4;6;4" dur="2.5s" begin="0s" repeatCount="indefinite"/>
+                  </circle>
                   
-                  <rect x="138" y="83" width="4" height="4" className="accent4">
-                    <animate attributeName="opacity" values="1;0;1;0;1" dur="0.3s" begin="4s;click" repeatCount="3"/>
-                  </rect>
-                  <rect x="158" y="83" width="4" height="4" className="accent4">
-                    <animate attributeName="opacity" values="1;0;1;0;1" dur="0.3s" begin="4s;click" repeatCount="3"/>
-                  </rect>
+                  <path d="M170 60 Q175 45 180 35">
+                    <animate attributeName="d" values="M170 60 Q175 45 180 35;M170 60 Q180 40 185 30;M170 60 Q175 45 180 35" dur="3.2s" begin="0s" repeatCount="indefinite"/>
+                  </path>
+                  <circle cx="180" cy="35" r="4" fill="url(#tentacleGradient)">
+                    <animate attributeName="r" values="4;6;4" dur="2.7s" begin="0s" repeatCount="indefinite"/>
+                  </circle>
                 </g>
 
-                <rect x="140" y="95" width="20" height="3" className="accent4">
-                  <animate attributeName="width" values="20;10;20;5;20" dur="0.3s" begin="4s;click" repeatCount="3"/>
-                </rect>
+                {/* Eyes */}
+                <g id="squidEyes">
+                  <ellipse cx="135" cy="80" rx="12" ry="15" className="eyeWhite4" strokeWidth="2"/>
+                  <ellipse cx="165" cy="80" rx="12" ry="15" className="eyeWhite4" strokeWidth="2"/>
+                  
+                  <ellipse cx="135" cy="82" rx="5" ry="7" className="pupil4">
+                    <animateTransform attributeName="transform" type="rotate" values="0 135 82;10 135 82;-10 135 82;0 135 82" dur="6s" begin="0s" repeatCount="indefinite"/>
+                  </ellipse>
+                  <ellipse cx="165" cy="82" rx="5" ry="7" className="pupil4">
+                    <animateTransform attributeName="transform" type="rotate" values="0 165 82;-10 165 82;10 165 82;0 165 82" dur="5.5s" begin="0s" repeatCount="indefinite"/>
+                  </ellipse>
+                  
+                  <ellipse cx="137" cy="78" rx="2" ry="3" className="highlight4"/>
+                  <ellipse cx="167" cy="78" rx="2" ry="3" className="highlight4"/>
+                </g>
 
-                <polygon points="150,120 190,135 185,175 115,175 110,135" className="body4" stroke="#334155" strokeWidth="3" filter="url(#softShadow4)"/>
-                
-                <g stroke="#ec4899" strokeWidth="2" fill="none" opacity="0.7">
-                  <polyline points="130,145 140,145 145,155 155,155 160,145 170,145"/>
-                  <circle cx="135" cy="160" r="3" fill="#ec4899"/>
-                  <circle cx="165" cy="160" r="3" fill="#ec4899"/>
+                {/* Mouth/beak */}
+                <path d="M140 95 Q150 105 160 95" fill="none" stroke="#374151" strokeWidth="3" strokeLinecap="round">
+                  <animate attributeName="d" values="M140 95 Q150 105 160 95;M145 98 Q150 108 155 98;M140 95 Q150 105 160 95" dur="4s" begin="0s" repeatCount="indefinite"/>
+                </path>
+
+                {/* Tentacles - 6 flowing tentacles */}
+                <g className="tentacle" strokeWidth="4">
+                  {/* Left tentacles */}
+                  <path d="M120 110 Q110 130 105 150 Q100 170 95 190">
+                    <animate attributeName="d" values="M120 110 Q110 130 105 150 Q100 170 95 190;M120 110 Q105 125 95 145 Q85 165 80 185;M120 110 Q115 135 110 155 Q105 175 100 195;M120 110 Q110 130 105 150 Q100 170 95 190" dur="4s" begin="0s" repeatCount="indefinite"/>
+                  </path>
+                  <path d="M130 115 Q115 135 110 155 Q105 175 100 195">
+                    <animate attributeName="d" values="M130 115 Q115 135 110 155 Q105 175 100 195;M130 115 Q120 130 115 150 Q110 170 105 190;M130 115 Q125 140 120 160 Q115 180 110 200;M130 115 Q115 135 110 155 Q105 175 100 195" dur="4.2s" begin="0s" repeatCount="indefinite"/>
+                  </path>
+                  
+                  {/* Center tentacles */}
+                  <path d="M145 120 Q140 140 135 160 Q130 180 125 200">
+                    <animate attributeName="d" values="M145 120 Q140 140 135 160 Q130 180 125 200;M145 120 Q135 135 130 155 Q125 175 120 195;M145 120 Q145 145 140 165 Q135 185 130 205;M145 120 Q140 140 135 160 Q130 180 125 200" dur="3.8s" begin="0s" repeatCount="indefinite"/>
+                  </path>
+                  <path d="M155 120 Q160 140 165 160 Q170 180 175 200">
+                    <animate attributeName="d" values="M155 120 Q160 140 165 160 Q170 180 175 200;M155 120 Q165 135 170 155 Q175 175 180 195;M155 120 Q155 145 160 165 Q165 185 170 205;M155 120 Q160 140 165 160 Q170 180 175 200" dur="3.9s" begin="0s" repeatCount="indefinite"/>
+                  </path>
+                  
+                  {/* Right tentacles */}
+                  <path d="M170 115 Q185 135 190 155 Q195 175 200 195">
+                    <animate attributeName="d" values="M170 115 Q185 135 190 155 Q195 175 200 195;M170 115 Q180 130 185 150 Q190 170 195 190;M170 115 Q175 140 180 160 Q185 180 190 200;M170 115 Q185 135 190 155 Q195 175 200 195" dur="4.1s" begin="0s" repeatCount="indefinite"/>
+                  </path>
+                  <path d="M180 110 Q190 130 195 150 Q200 170 205 190">
+                    <animate attributeName="d" values="M180 110 Q190 130 195 150 Q200 170 205 190;M180 110 Q195 125 200 145 Q205 165 210 185;M180 110 Q185 135 190 155 Q195 175 200 195;M180 110 Q190 130 195 150 Q200 170 205 190" dur="4.3s" begin="0s" repeatCount="indefinite"/>
+                  </path>
+                </g>
+
+                {/* Suction cups on tentacles */}
+                <g fill="url(#tentacleGradient)" opacity="0.7">
+                  <circle cx="100" cy="170" r="2">
+                    <animate attributeName="r" values="2;3;2" dur="2.5s" begin="0s" repeatCount="indefinite"/>
+                  </circle>
+                  <circle cx="110" cy="175" r="2">
+                    <animate attributeName="r" values="2;3;2" dur="2.7s" begin="0s" repeatCount="indefinite"/>
+                  </circle>
+                  <circle cx="130" cy="180" r="2">
+                    <animate attributeName="r" values="2;3;2" dur="2.6s" begin="0s" repeatCount="indefinite"/>
+                  </circle>
+                  <circle cx="170" cy="180" r="2">
+                    <animate attributeName="r" values="2;3;2" dur="2.8s" begin="0s" repeatCount="indefinite"/>
+                  </circle>
+                  <circle cx="190" cy="175" r="2">
+                    <animate attributeName="r" values="2;3;2" dur="2.4s" begin="0s" repeatCount="indefinite"/>
+                  </circle>
+                  <circle cx="200" cy="170" r="2">
+                    <animate attributeName="r" values="2;3;2" dur="2.9s" begin="0s" repeatCount="indefinite"/>
+                  </circle>
+                </g>
+
+                {/* Bioluminescent spots */}
+                <g fill="#6366f1" opacity="0">
+                  <animate attributeName="opacity" values="0;0.8;0.3;0.8;0" dur="5s" begin="0s" repeatCount="indefinite"/>
+                  <circle cx="125" cy="70" r="2"/>
+                  <circle cx="175" cy="70" r="2"/>
+                  <circle cx="140" cy="85" r="1.5"/>
+                  <circle cx="160" cy="85" r="1.5"/>
+                  <circle cx="150" cy="95" r="1"/>
                 </g>
               </g>
             </svg>
