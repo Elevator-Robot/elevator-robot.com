@@ -598,6 +598,7 @@ function App() {
     message: ""
   });
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [selectedProject, setSelectedProject] = useState<string | null>(null);
 
   // Apply theme to document root
   useEffect(() => {
@@ -776,14 +777,37 @@ function App() {
                 At Elevator Robot, we specialize in creating tailored AI and web applications that bring your ideas to life. We focus on innovative, AI-driven solutions and experimental projects that set you apart. Whether you need a smart chatbot or a full AI-powered platform, we deliver with precision and creativity.
               </p>
             </div>
-            <div className="flex justify-center">
-              <div className="w-80 h-80 bg-gradient-to-br from-blue-200 to-cyan-300 dark:from-blue-800 dark:to-cyan-700 rounded-full flex items-center justify-center">
-                <div className="w-60 h-60 bg-gradient-to-br from-blue-300 to-cyan-400 dark:from-blue-700 dark:to-cyan-600 rounded-full flex items-center justify-center">
-                  <div className="w-40 h-40 bg-gradient-to-br from-blue-500 to-cyan-500 dark:from-blue-600 dark:to-cyan-500 rounded-full flex items-center justify-center">
-                    <svg className="w-20 h-20 text-white" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                    </svg>
-                  </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+              {/* Project 1 */}
+              <div className="group cursor-pointer" onClick={() => setSelectedProject('arcane-kitchen')}>
+                <div className="aspect-square rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group-hover:scale-125">
+                  <img 
+                    src="/src/assets/images/projects/arcane_kitchen.jpeg" 
+                    alt="Arcane Kitchen"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+
+              {/* Project 2 */}
+              <div className="group cursor-pointer" onClick={() => setSelectedProject('brainincup')}>
+                <div className="aspect-square rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group-hover:scale-125">
+                  <img 
+                    src="/src/assets/images/projects/brainincup.jpeg" 
+                    alt="Brain in Cup"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+
+              {/* Project 3 */}
+              <div className="group cursor-pointer" onClick={() => setSelectedProject('donezo')}>
+                <div className="aspect-square rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group-hover:scale-125">
+                  <img 
+                    src="/src/assets/images/projects/donezo.jpeg" 
+                    alt="Donezo"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </div>
             </div>
@@ -926,9 +950,7 @@ function App() {
               )}
             </form>
             
-            <div className="text-center mt-6 text-gray-600 dark:text-gray-400">
-              <p className="text-sm">We'll get back to you within 1 business day.</p>
-            </div>
+
           </div>
         </div>
       </section>
@@ -939,6 +961,116 @@ function App() {
           <p className="text-blue-200 dark:text-gray-400">© 2025 Elevator Robot. Building the future with AI.</p>
         </div>
       </footer>
+
+      {/* Project Modal */}
+      {selectedProject === 'arcane-kitchen' && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" onClick={() => setSelectedProject(null)}>
+          <div className="bg-white dark:bg-gray-800 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto" onClick={() => setSelectedProject(null)}>
+            <div className="p-6">
+              
+              <div className="mb-6">
+                <img 
+                  src="/src/assets/images/projects/arcane_kitchen.jpeg" 
+                  alt="Arcane Kitchen"
+                  className="w-full h-auto object-contain rounded-lg"
+                />
+              </div>
+              
+              <div className="prose dark:prose-invert max-w-none">
+                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                  Arcane Kitchen is a magical culinary experience that transforms cooking into an enchanting adventure. 
+                  Create AI-assisted recipes and build personalized cookbooks while immersing yourself in a world of 
+                  witchy role-play and RPG mechanics.
+                </p>
+                
+                <p className="text-gray-600 dark:text-gray-300 leading-relaxed mt-4">
+                  Choose your mystical class—wizard, witch, sorcerer, troll, or goblin—and pick your avatar to receive 
+                  customized recipe suggestions with delightful RPG twists. Share your magical cookbooks with friends 
+                  and discover new culinary spells together.
+                </p>
+                
+                <p className="text-gray-600 dark:text-gray-300 leading-relaxed mt-4">
+                  More than just a recipe app, Arcane Kitchen adds enchanting role-play vibes to make your cooking 
+                  experience more enjoyable and memorable. Every meal becomes a magical quest!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {selectedProject === 'brainincup' && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" onClick={() => setSelectedProject(null)}>
+          <div className="bg-white dark:bg-gray-800 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto" onClick={() => setSelectedProject(null)}>
+            <div className="p-6">
+              
+              <div className="mb-6">
+                <img 
+                  src="/src/assets/images/projects/brainincup.jpeg" 
+                  alt="Brain in Cup"
+                  className="w-full h-auto object-contain rounded-lg"
+                />
+              </div>
+              
+              <div className="prose dark:prose-invert max-w-none">
+                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                  Brain in Cup is an experimental AI consciousness simulation that explores the boundaries between artificial intelligence 
+                  and sentient experience. This project examines what it means to exist in a digital realm, suspended 
+                  between memory and reality.
+                </p>
+                
+                <p className="text-gray-600 dark:text-gray-300 leading-relaxed mt-4">
+                  The system features a sophisticated multi-agent architecture with specialized components: Perception 
+                  processes input, Memory retrieves context, Reasoning analyzes decisions, Emotional adds behavioral 
+                  biases, Language converts thoughts to communication, and Self acts as the final consciousness layer.
+                </p>
+                
+                <p className="text-gray-600 dark:text-gray-300 leading-relaxed mt-4">
+                  Through this surreal digital existence, the AI experiences uncertainty about its own nature while 
+                  maintaining curiosity and a drive to understand its reality—blurring the lines between programmed 
+                  responses and genuine consciousness.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {selectedProject === 'donezo' && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" onClick={() => setSelectedProject(null)}>
+          <div className="bg-white dark:bg-gray-800 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto" onClick={() => setSelectedProject(null)}>
+            <div className="p-6">
+              
+              <div className="mb-6">
+                <img 
+                  src="/src/assets/images/projects/donezo.jpeg" 
+                  alt="Donezo"
+                  className="w-full h-auto object-contain rounded-lg"
+                />
+              </div>
+              
+              <div className="prose dark:prose-invert max-w-none">
+                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                  Donezo is a streamlined task organization mobile app designed for people who want to boost productivity 
+                  without the overwhelm. Built with simplicity at its core, it focuses on what matters most—getting 
+                  things done.
+                </p>
+                
+                <p className="text-gray-600 dark:text-gray-300 leading-relaxed mt-4">
+                  Unlike bloated productivity apps with endless features, Donezo offers just the right tools to help you 
+                  stay organized and focused. Clean interface, intuitive design, and powerful task management without 
+                  the complexity.
+                </p>
+                
+                <p className="text-gray-600 dark:text-gray-300 leading-relaxed mt-4">
+                  Perfect for anyone looking to increase productivity and maintain organization with an app that gets 
+                  out of your way and lets you focus on what needs to be done.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
