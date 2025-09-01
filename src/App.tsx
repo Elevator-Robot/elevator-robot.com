@@ -618,6 +618,12 @@ function App() {
     setSubmitStatus('loading');
 
     try {
+      console.log('Sending GraphQL request with variables:', {
+        name: formData.name,
+        email: formData.email,
+        message: formData.message
+      });
+
       const response = await client.graphql<SendMessageMutation>({
         query: mutations.sendMessage,
         variables: {
@@ -628,11 +634,14 @@ function App() {
         authMode: 'apiKey'
       });
 
+      console.log('Full GraphQL Response:', response);
+
       if ('data' in response && response.data?.sendMessage) {
+        console.log('Success response data:', response.data.sendMessage);
         setSubmitStatus('success');
         setFormData({ name: "", email: "", message: "" });
       } else {
-        console.error('GraphQL Response:', response);
+        console.error('GraphQL Response (no data):', response);
         throw new Error('Failed to send message - no data returned');
       }
     } catch (error: unknown) {
