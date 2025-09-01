@@ -27,6 +27,7 @@ Elevator Robot is an innovations factory focused on AI, machine learning, and au
 ## Technical Preferences
 - AWS services and infrastructure
 - **AWS Amplify Gen2 framework** (CRITICAL: Always use Gen2 methods, NOT Gen1)
+- **AWS profile** (CRITICAL: Always use AWS profile elevator-robot.com)
 - Modern AI/ML frameworks
 - Automation and tooling
 - Fast execution over perfection

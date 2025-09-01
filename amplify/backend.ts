@@ -18,12 +18,13 @@ if (process.env.AWS_BRANCH === 'main') {
 
 const sendEmailFunction = backend.sendEmail.resources.lambda;
 
-const statement = new PolicyStatement({
+// Add SES permissions for all environments
+const sesStatement = new PolicyStatement({
   sid: 'AllowSendEmail',
-  actions: ['SES:SendEmail', 'SES:SendRawEmail'],
+  actions: ['ses:SendEmail', 'ses:SendRawEmail'],
   resources: ['*'],
 });
 
-sendEmailFunction.addToRolePolicy(statement);
+sendEmailFunction.addToRolePolicy(sesStatement);
 
 export default backend;
