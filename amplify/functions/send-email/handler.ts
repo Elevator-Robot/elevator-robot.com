@@ -7,17 +7,17 @@ export const handler: Handler = async (event) => {
   const { name, email, message } = event.arguments;
 
   const params = {
-    Source: 'aphexlog@gmail.com',
+    Source: 'hello@elevator-robot.com',
     Destination: {
-      ToAddresses: ['aphexlog@gmail.com'],
+      ToAddresses: ['hello@elevator-robot.com'],
     },
     Message: {
       Subject: {
-        Data: 'New Contact Form Submission',
+        Data: `New Contact Form Submission - ${name}`,
       },
       Body: {
         Text: {
-          Data: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
+          Data: `Name: ${name}\nEmail: ${email}\nMessage: ${message}\n\nSubmitted at: ${new Date().toISOString()}`,
         },
       },
     },
@@ -26,30 +26,10 @@ export const handler: Handler = async (event) => {
   try {
     const result = await sesClient.send(new SendEmailCommand(params));
     console.log(`Email sent: ${result.MessageId}`);
-    return {
-      statusCode: 200,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "*"
-      },
-      body: JSON.stringify({
-        message: 'Email sent successfully',
-        messageId: result.MessageId
-      }),
-    };
+    return 'Email sent successfully';
   } catch (error) {
     console.error('Error sending email:', error);
-    return {
-      statusCode: 500,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "*"
-      },
-      body: JSON.stringify({
-        message: 'Failed to send email',
-        error: error instanceof Error ? error.message : 'Unknown error'
-      }),
-    };
+    throw new Error(`Failed to send email: ${error instanceof Error ? error.message : 'Unknown error'}`);
   }
 };
 
