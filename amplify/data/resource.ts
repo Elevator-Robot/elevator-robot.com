@@ -1,9 +1,5 @@
-import { a, defineData, defineFunction, ClientSchema } from '@aws-amplify/backend';
-
-const sendEmail = defineFunction({
-  name: 'sendEmail',
-  entry: '../functions/send-email/handler.ts',
-});
+import { a, defineData, ClientSchema } from '@aws-amplify/backend';
+import { sendEmail } from '../functions/send-email/resource';
 
 const schema = a
   .schema({

@@ -8,21 +8,21 @@ import { PolicyStatement } from 'aws-cdk-lib/aws-iam';
 const backend = defineBackend({ auth, data, sendEmail });
 
 // Create SES email identity for contact form
-const customResourceStack = backend.createStack('EmailResources');
+const emailStack = backend.createStack('ElevatorRobotEmail');
 
-const emailIdentity = new ses.EmailIdentity(customResourceStack, 'ContactEmailIdentity', {
+new ses.EmailIdentity(emailStack, 'ContactEmail', {
   identity: ses.Identity.email('hello@elevator-robot.com'),
 });
 
-const sendEmailFunction = backend.sendEmail.resources.lambda;
+const contactFormHandler = backend.sendEmail.resources.lambda;
 
-// Add SES permissions for all environments
-const sesStatement = new PolicyStatement({
-  sid: 'AllowSendEmail',
+// Add SES permissions
+const sesPermissions = new PolicyStatement({
+  sid: 'AllowContactFormEmails',
   actions: ['ses:SendEmail', 'ses:SendRawEmail'],
   resources: ['*'],
 });
 
-sendEmailFunction.addToRolePolicy(sesStatement);
+contactFormHandler.addToRolePolicy(sesPermissions);
 
 export default backend;
