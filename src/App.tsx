@@ -782,7 +782,7 @@ function App() {
               <div className="group cursor-pointer" onClick={() => setSelectedProject('arcane-kitchen')}>
                 <div className="aspect-square rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group-hover:scale-125">
                   <img 
-                    src="/src/assets/images/projects/arcane_kitchen.jpeg" 
+                    src="/images/projects/arcane_kitchen.jpeg" 
                     alt="Arcane Kitchen"
                     className="w-full h-full object-cover"
                   />
@@ -793,7 +793,7 @@ function App() {
               <div className="group cursor-pointer" onClick={() => setSelectedProject('brainincup')}>
                 <div className="aspect-square rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group-hover:scale-125">
                   <img 
-                    src="/src/assets/images/projects/brainincup.jpeg" 
+                    src="/images/projects/brainincup.jpeg" 
                     alt="Brain in Cup"
                     className="w-full h-full object-cover"
                   />
@@ -804,7 +804,7 @@ function App() {
               <div className="group cursor-pointer" onClick={() => setSelectedProject('donezo')}>
                 <div className="aspect-square rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group-hover:scale-125">
                   <img 
-                    src="/src/assets/images/projects/donezo.jpeg" 
+                    src="/images/projects/donezo.jpeg" 
                     alt="Donezo"
                     className="w-full h-full object-cover"
                   />
@@ -970,7 +970,7 @@ function App() {
               
               <div className="mb-6">
                 <img 
-                  src="/src/assets/images/projects/arcane_kitchen.jpeg" 
+                  src="/images/projects/arcane_kitchen.jpeg" 
                   alt="Arcane Kitchen"
                   className="w-full h-auto object-contain rounded-lg"
                 />
@@ -1006,7 +1006,7 @@ function App() {
               
               <div className="mb-6">
                 <img 
-                  src="/src/assets/images/projects/brainincup.jpeg" 
+                  src="/images/projects/brainincup.jpeg" 
                   alt="Brain in Cup"
                   className="w-full h-auto object-contain rounded-lg"
                 />
@@ -1043,7 +1043,7 @@ function App() {
               
               <div className="mb-6">
                 <img 
-                  src="/src/assets/images/projects/donezo.jpeg" 
+                  src="/images/projects/donezo.jpeg" 
                   alt="Donezo"
                   className="w-full h-auto object-contain rounded-lg"
                 />
