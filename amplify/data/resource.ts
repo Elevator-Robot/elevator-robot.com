@@ -9,6 +9,20 @@ const schema = a
       message: a.string().required(),
     }).authorization((allow) => [allow.publicApiKey()]),
 
+    Conversation: a.model({
+      title: a.string().required(),
+      userId: a.string().required(), // Will track user sessions for now
+      createdAt: a.datetime(),
+      updatedAt: a.datetime(),
+    }).authorization((allow) => [allow.publicApiKey()]),
+
+    ChatMessage: a.model({
+      conversationId: a.string().required(),
+      content: a.string().required(),
+      sender: a.string().required(), // 'user' or 'assistant'
+      timestamp: a.datetime(),
+    }).authorization((allow) => [allow.publicApiKey()]),
+
     sendMessage: a
       .mutation()
       .arguments({
