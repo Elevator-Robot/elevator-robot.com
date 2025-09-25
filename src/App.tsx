@@ -254,19 +254,28 @@ function App() {
           
           <div className="space-y-4">
             <button 
-              onClick={() => scrollToSection('about')} 
+              onClick={() => {
+                scrollToSection('about');
+                setIsMenuOpen(false);
+              }} 
               className="block w-full text-left py-4 px-4 text-lg font-medium text-white hover:bg-white hover:bg-opacity-10 rounded-lg transition-all duration-200 hover:translate-x-2"
             >
               About
             </button>
             <button 
-              onClick={() => scrollToSection('services')} 
+              onClick={() => {
+                scrollToSection('services');
+                setIsMenuOpen(false);
+              }} 
               className="block w-full text-left py-4 px-4 text-lg font-medium text-white hover:bg-white hover:bg-opacity-10 rounded-lg transition-all duration-200 hover:translate-x-2"
             >
               Services
             </button>
             <button 
-              onClick={() => scrollToSection('contact')} 
+              onClick={() => {
+                scrollToSection('contact');
+                setIsMenuOpen(false);
+              }} 
               className="block w-full text-left py-4 px-4 text-lg font-medium text-white hover:bg-white hover:bg-opacity-10 rounded-lg transition-all duration-200 hover:translate-x-2"
             >
               Contact
@@ -276,7 +285,7 @@ function App() {
       </nav>
 
       {/* Main Content Wrapper */}
-      <div className={`transition-transform duration-300 ease-in-out ${isMenuOpen ? 'md:translate-x-0 translate-x-80' : 'translate-x-0'}`}>
+      <div className={`transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-80' : 'translate-x-0'}`}>
         
         {/* Revolutionary Navigation */}
         <nav className="nav-container">
