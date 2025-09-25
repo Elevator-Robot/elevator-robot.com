@@ -367,21 +367,7 @@ function App() {
           </div>
         </div>
 
-        {/* Floating Stats */}
-        <div className="floating-stats">
-          <Card3D className="stat-card">
-            <span className="stat-number">100+</span>
-            <span className="stat-label">Projects</span>
-          </Card3D>
-          <Card3D className="stat-card">
-            <span className="stat-number">50+</span>
-            <span className="stat-label">Clients</span>
-          </Card3D>
-          <Card3D className="stat-card">
-            <span className="stat-number">5★</span>
-            <span className="stat-label">Rating</span>
-          </Card3D>
-        </div>
+
       </section>
 
       {/* Revolutionary About Section */}
@@ -517,33 +503,7 @@ function App() {
                 Let's discuss your vision and transform it into reality. 
                 Every revolutionary project starts with a single conversation.
               </p>
-              
-              <div className="mt-8 stagger-child">
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mr-4">
-                    <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z"/>
-                      <path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z"/>
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="text-white font-semibold">Email</p>
-                    <p className="text-gray-300">hello@elevator-robot.com</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-center">
-                  <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-teal-600 rounded-full flex items-center justify-center mr-4">
-                    <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/>
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="text-white font-semibold">Response Time</p>
-                    <p className="text-gray-300">Within 24 hours</p>
-                  </div>
-                </div>
-              </div>
+
             </div>
 
             <div className="contact-form-revolutionary stagger-child">
