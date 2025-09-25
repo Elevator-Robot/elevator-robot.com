@@ -26,7 +26,7 @@ const RobotDecoration: React.FC<RobotDecorationProps> = ({ type, position }) => 
               if (svg) {
                 const animations = svg.querySelectorAll('animate');
                 animations.forEach(anim => {
-                  (anim as any).beginElement();
+                  (anim as SVGAnimateElement).beginElement();
                 });
               }
             }}
@@ -112,7 +112,7 @@ const RobotDecoration: React.FC<RobotDecorationProps> = ({ type, position }) => 
               if (svg) {
                 const animations = svg.querySelectorAll('animate, animateTransform');
                 animations.forEach(anim => {
-                  (anim as any).beginElement();
+                  (anim as SVGAnimateElement).beginElement();
                 });
               }
             }}
@@ -246,7 +246,7 @@ const RobotDecoration: React.FC<RobotDecorationProps> = ({ type, position }) => 
               if (svg) {
                 const animations = svg.querySelectorAll('animate, animateTransform');
                 animations.forEach(anim => {
-                  (anim as any).beginElement();
+                  (anim as SVGAnimateElement).beginElement();
                 });
               }
             }}
@@ -427,7 +427,7 @@ const RobotDecoration: React.FC<RobotDecorationProps> = ({ type, position }) => 
               if (svg) {
                 const animations = svg.querySelectorAll('animate, animateTransform');
                 animations.forEach(anim => {
-                  (anim as any).beginElement();
+                  (anim as SVGAnimateElement).beginElement();
                 });
               }
             }}
