@@ -1,7 +1,126 @@
-import { useState, FormEvent, useEffect } from "react";
+import { useState, FormEvent, useEffect, useRef } from "react";
 import { generateClient } from 'aws-amplify/api';
 import * as mutations from './graphql/mutations';
 import { SendMessageMutation } from './graphql/API';
+
+// Custom hook for scroll animations
+const useScrollAnimation = () => {
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-in');
+        }
+      });
+    }, observerOptions);
+
+    const animateElements = document.querySelectorAll('.scroll-animate');
+    animateElements.forEach(el => observer.observe(el));
+
+    return () => {
+      animateElements.forEach(el => observer.unobserve(el));
+    };
+  }, []);
+};
+
+// Progress Bar Component
+interface ProgressBarProps {
+  label: string;
+  percentage: number;
+  delay?: number;
+}
+
+const ProgressBar: React.FC<ProgressBarProps> = ({ label, percentage, delay = 0 }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const progressRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => setIsVisible(true), delay);
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    if (progressRef.current) {
+      observer.observe(progressRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [delay]);
+
+  return (
+    <div ref={progressRef} className="mb-4">
+      <div className="flex justify-between items-center mb-2">
+        <span className="text-white font-medium">{label}</span>
+        <span className="text-green-400 font-bold">{percentage}%</span>
+      </div>
+      <div className="progress-bar">
+        <div 
+          className={`progress-fill ${isVisible ? 'animate' : ''}`}
+          style={{ width: isVisible ? `${percentage}%` : '0%' }}
+        ></div>
+      </div>
+    </div>
+  );
+};
+
+// Typewriter Effect Component
+interface TypewriterProps {
+  text: string;
+  delay?: number;
+  className?: string;
+}
+
+const Typewriter: React.FC<TypewriterProps> = ({ text, delay = 100, className = "" }) => {
+  const [displayText, setDisplayText] = useState("");
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (currentIndex < text.length) {
+      const timeout = setTimeout(() => {
+        setDisplayText(prev => prev + text[currentIndex]);
+        setCurrentIndex(prev => prev + 1);
+      }, delay);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [currentIndex, delay, text]);
+
+  return <span className={className}>{displayText}</span>;
+};
+
+// Particle System Component
+const ParticleSystem: React.FC = () => {
+  return (
+    <div className="particles">
+      {Array.from({ length: 8 }, (_, i) => (
+        <div key={i} className="particle"></div>
+      ))}
+    </div>
+  );
+};
+
+// Floating Elements Component
+const FloatingElements: React.FC = () => {
+  return (
+    <>
+      <div className="floating-element gear" style={{ top: '15%', left: '8%' }}></div>
+      <div className="floating-element triangle" style={{ top: '70%', right: '12%' }}></div>
+      <div className="floating-element diamond" style={{ top: '25%', right: '8%' }}></div>
+      <div className="floating-element gear" style={{ bottom: '20%', left: '15%' }}></div>
+      <div className="floating-element triangle" style={{ top: '45%', left: '5%' }}></div>
+      <div className="floating-element diamond" style={{ bottom: '15%', right: '20%' }}></div>
+    </>
+  );
+};
 
 // Robot Decoration Component
 interface RobotDecorationProps {
@@ -600,6 +719,9 @@ function App() {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
 
+  // Use scroll animations
+  useScrollAnimation();
+
   // Apply theme to document root
   useEffect(() => {
     if (isDarkMode) {
@@ -737,12 +859,18 @@ function App() {
 
       {/* Hero Section */}
       <section className="hero-container bg-gradient-to-br from-blue-400 via-blue-600 to-blue-800 dark:from-gray-900 dark:via-blue-900 dark:to-black overflow-hidden">
-        {/* Subtle animated background elements */}
+        {/* Enhanced animated background elements */}
         <div className="hero-background">
           <div className="bg-element bg-element-1"></div>
           <div className="bg-element bg-element-2"></div>
           <div className="bg-element bg-element-3"></div>
         </div>
+        
+        {/* Particle System */}
+        <ParticleSystem />
+        
+        {/* Floating Elements */}
+        <FloatingElements />
         
         {/* Robot Decorations */}
         <RobotDecoration type="blinking" position="top-right" />
@@ -750,10 +878,23 @@ function App() {
         <RobotDecoration type="bouncy" position="bottom-right" />
         <RobotDecoration type="squid" position="bottom-left" />
 
-        {/* Hero Content */}
+        {/* Enhanced Hero Content */}
         <div className="hero-content">
           <h2 className="hero-title">
-            We Build the Future: <span className="hero-highlight">Custom AI Solutions</span> for Your Business
+            <Typewriter 
+              text="We Build the Future: " 
+              delay={80}
+            />
+            <span className="hero-highlight">
+              <Typewriter 
+                text="Custom AI Solutions" 
+                delay={120}
+              />
+            </span>
+            <Typewriter 
+              text=" for Your Business" 
+              delay={100}
+            />
           </h2>
           <p className="hero-description">
             Tailored AI and web applications designed to deliver results.
@@ -767,17 +908,26 @@ function App() {
         </div>
       </section>
 
-      {/* About Us Section */}
+      {/* Enhanced About Us Section */}
       <section id="about" className="py-20 bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-gray-900 dark:to-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
+            <div className="scroll-animate">
               <h3 className="text-4xl font-bold text-gray-900 dark:text-white mb-6">About Us</h3>
-              <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-8">
                 At Elevator Robot, we specialize in creating tailored AI and web applications that bring your ideas to life. We focus on innovative, AI-driven solutions and experimental projects that set you apart. Whether you need a smart chatbot or a full AI-powered platform, we deliver with precision and creativity.
               </p>
+              
+              {/* Skills Progress Bars */}
+              <div className="space-y-4">
+                <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Our Expertise</h4>
+                <ProgressBar label="AI & Machine Learning" percentage={95} delay={200} />
+                <ProgressBar label="Web Development" percentage={90} delay={400} />
+                <ProgressBar label="API Development" percentage={88} delay={600} />
+                <ProgressBar label="Innovation Projects" percentage={92} delay={800} />
+              </div>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 scroll-animate stagger-animate" style={{'--stagger-delay': '0.3s'} as React.CSSProperties}>
               {/* Project 1 */}
               <div className="group cursor-pointer" onClick={() => setSelectedProject('arcane-kitchen')}>
                 <div className="aspect-square rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group-hover:scale-125">
@@ -815,10 +965,10 @@ function App() {
         </div>
       </section>
 
-      {/* Services Section */}
+      {/* Enhanced Services Section */}
       <section id="services" className="py-20 bg-gradient-to-r from-cyan-50 to-blue-100 dark:from-gray-800 dark:to-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <div className="text-center mb-16 scroll-animate">
             <h3 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Our Services</h3>
             <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
               We offer cutting-edge solutions tailored to your business needs
@@ -827,9 +977,9 @@ function App() {
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* AI-Powered Applications */}
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow border border-blue-100 dark:border-gray-700">
-              <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mb-4">
-                <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+            <div className="service-card scroll-animate stagger-animate" style={{'--stagger-delay': '0.1s'} as React.CSSProperties}>
+              <div className="service-icon">
+                <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
               </div>
@@ -838,9 +988,9 @@ function App() {
             </div>
 
             {/* Chatbots & Virtual Assistants */}
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow border border-blue-100 dark:border-gray-700">
-              <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mb-4">
-                <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+            <div className="service-card scroll-animate stagger-animate" style={{'--stagger-delay': '0.2s'} as React.CSSProperties}>
+              <div className="service-icon">
+                <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
                 </svg>
               </div>
@@ -849,9 +999,9 @@ function App() {
             </div>
 
             {/* Web & API Development */}
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow border border-blue-100 dark:border-gray-700">
-              <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mb-4">
-                <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+            <div className="service-card scroll-animate stagger-animate" style={{'--stagger-delay': '0.3s'} as React.CSSProperties}>
+              <div className="service-icon">
+                <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
                 </svg>
               </div>
@@ -860,9 +1010,9 @@ function App() {
             </div>
 
             {/* Innovation Projects */}
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow border border-blue-100 dark:border-gray-700">
-              <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mb-4">
-                <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+            <div className="service-card scroll-animate stagger-animate" style={{'--stagger-delay': '0.4s'} as React.CSSProperties}>
+              <div className="service-icon">
+                <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
                 </svg>
               </div>
@@ -876,56 +1026,58 @@ function App() {
       {/* Contact Section */}
       <section id="contact" className="py-20 bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-gray-900 dark:to-gray-800">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 scroll-animate">
             <h3 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Get in Touch</h3>
             <p className="text-lg text-gray-600 dark:text-gray-300">
               Ready to elevate your business with AI? Let's discuss your project.
             </p>
           </div>
           
-          <div className="bg-white dark:bg-gray-800 rounded-lg p-8 shadow-lg border border-blue-100 dark:border-gray-700">
+          <div className="glass-form scroll-animate">
             <form onSubmit={handleFormSubmit} className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label htmlFor="name" className="block text-sm font-medium text-white mb-2">
                   Name
                 </label>
                 <input
                   type="text"
                   id="name"
                   required
-                  className="w-full px-4 py-3 border border-blue-200 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="glass-input w-full"
+                  placeholder="Your full name"
                   value={formData.name}
                   onChange={handleInputChange}
                 />
               </div>
               
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label htmlFor="email" className="block text-sm font-medium text-white mb-2">
                   Email
                 </label>
                 <input
                   type="email"
                   id="email"
                   required
-                  className="w-full px-4 py-3 border border-blue-200 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="glass-input w-full"
+                  placeholder="your.email@example.com"
                   value={formData.email}
                   onChange={handleInputChange}
                 />
               </div>
               
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label htmlFor="message" className="block text-sm font-medium text-white mb-2">
                   Message
                 </label>
                 <textarea
                   id="message"
                   rows={5}
                   required
-                  className="w-full px-4 py-3 border border-blue-200 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors resize-vertical bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="glass-input w-full resize-none"
+                  placeholder="Tell us about your project..."
                   value={formData.message}
                   onChange={handleInputChange}
-                  placeholder="Tell us about your project..."
-                />
+                ></textarea>
               </div>
               
               <button
