@@ -1,25 +1,167 @@
 import { useState, FormEvent, useEffect, useRef } from "react";
 import { generateClient } from 'aws-amplify/api';
 import * as mutations from './graphql/mutations';
-import { SendMessageMutation } from './graphql/API';
 
-// Custom hook for scroll animations
-const useScrollAnimation = () => {
+// Advanced Typewriter Effect with Multiple Lines
+interface AdvancedTypewriterProps {
+  phrases: string[];
+  speed?: number;
+  deleteSpeed?: number;
+  pauseTime?: number;
+  className?: string;
+}
+
+const AdvancedTypewriter: React.FC<AdvancedTypewriterProps> = ({ 
+  phrases, 
+  speed = 100, 
+  deleteSpeed = 50, 
+  pauseTime = 2000,
+  className = "" 
+}) => {
+  const [currentText, setCurrentText] = useState("");
+  const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentPhrase = phrases[currentPhraseIndex];
+    
+    const timeout = setTimeout(() => {
+      if (!isDeleting) {
+        // Typing
+        if (currentText.length < currentPhrase.length) {
+          setCurrentText(currentPhrase.substring(0, currentText.length + 1));
+        } else {
+          // Pause before deleting
+          setTimeout(() => setIsDeleting(true), pauseTime);
+        }
+      } else {
+        // Deleting
+        if (currentText.length > 0) {
+          setCurrentText(currentText.substring(0, currentText.length - 1));
+        } else {
+          setIsDeleting(false);
+          setCurrentPhraseIndex((prev) => (prev + 1) % phrases.length);
+        }
+      }
+    }, isDeleting ? deleteSpeed : speed);
+
+    return () => clearTimeout(timeout);
+  }, [currentText, currentPhraseIndex, isDeleting, phrases, speed, deleteSpeed, pauseTime]);
+
+  return (
+    <span className={className}>
+      {currentText}
+      <span className="animate-pulse ml-1 text-blue-400">|</span>
+    </span>
+  );
+};
+
+// Revolutionary 3D Card Component
+interface Card3DProps {
+  children: React.ReactNode;
+  className?: string;
+  glowColor?: string;
+}
+
+const Card3D: React.FC<Card3DProps> = ({ children, className = "" }) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    
+    const rotateX = (y - centerY) / 10;
+    const rotateY = (centerX - x) / 10;
+    
+    cardRef.current.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+  };
+
+  const handleMouseLeave = () => {
+    if (!cardRef.current) return;
+    cardRef.current.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)";
+  };
+
+  return (
+    <div
+      ref={cardRef}
+      className={`transition-all duration-300 ease-out ${className}`}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        transformStyle: 'preserve-3d',
+      }}
+    >
+      {children}
+    </div>
+  );
+};
+
+// Floating Particles Component
+const FloatingParticles: React.FC = () => {
+  const particles = Array.from({ length: 50 }, (_, i) => ({
+    id: i,
+    size: Math.random() * 4 + 2,
+    left: Math.random() * 100,
+    delay: Math.random() * 10,
+    duration: Math.random() * 20 + 10,
+  }));
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {particles.map((particle) => (
+        <div
+          key={particle.id}
+          className="absolute bg-white rounded-full opacity-20"
+          style={{
+            width: `${particle.size}px`,
+            height: `${particle.size}px`,
+            left: `${particle.left}%`,
+            animation: `particle-drift ${particle.duration}s linear infinite`,
+            animationDelay: `${particle.delay}s`,
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
+// Advanced Scroll Animation Hook
+const useAdvancedScrollAnimation = () => {
   useEffect(() => {
     const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -100px 0px'
+      threshold: [0.1, 0.5, 0.9],
+      rootMargin: '0px 0px -50px 0px'
     };
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
+        const element = entry.target as HTMLElement;
+        
         if (entry.isIntersecting) {
-          entry.target.classList.add('animate-in');
+          if (entry.intersectionRatio > 0.5) {
+            element.classList.add('animate-in-full');
+          } else {
+            element.classList.add('animate-in-partial');
+          }
+          
+          // Add staggered animation to children
+          const children = element.querySelectorAll('.stagger-child');
+          children.forEach((child, index) => {
+            setTimeout(() => {
+              child.classList.add('animate-in');
+            }, index * 100);
+          });
         }
       });
     }, observerOptions);
 
-    const animateElements = document.querySelectorAll('.scroll-animate');
+    const animateElements = document.querySelectorAll('.advanced-animate');
     animateElements.forEach(el => observer.observe(el));
 
     return () => {
@@ -28,1201 +170,440 @@ const useScrollAnimation = () => {
   }, []);
 };
 
-// Progress Bar Component
-interface ProgressBarProps {
-  label: string;
-  percentage: number;
-  delay?: number;
-}
-
-const ProgressBar: React.FC<ProgressBarProps> = ({ label, percentage, delay = 0 }) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const progressRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => setIsVisible(true), delay);
-        }
-      },
-      { threshold: 0.5 }
-    );
-
-    if (progressRef.current) {
-      observer.observe(progressRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, [delay]);
-
-  return (
-    <div ref={progressRef} className="mb-4">
-      <div className="flex justify-between items-center mb-2">
-        <span className="text-white font-medium">{label}</span>
-        <span className="text-green-400 font-bold">{percentage}%</span>
-      </div>
-      <div className="progress-bar">
-        <div 
-          className={`progress-fill ${isVisible ? 'animate' : ''}`}
-          style={{ width: isVisible ? `${percentage}%` : '0%' }}
-        ></div>
-      </div>
-    </div>
-  );
-};
-
-// Typewriter Effect Component
-interface TypewriterProps {
-  text: string;
-  delay?: number;
-  className?: string;
-}
-
-const Typewriter: React.FC<TypewriterProps> = ({ text, delay = 100, className = "" }) => {
-  const [displayText, setDisplayText] = useState("");
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    if (currentIndex < text.length) {
-      const timeout = setTimeout(() => {
-        setDisplayText(prev => prev + text[currentIndex]);
-        setCurrentIndex(prev => prev + 1);
-      }, delay);
-
-      return () => clearTimeout(timeout);
-    }
-  }, [currentIndex, delay, text]);
-
-  return <span className={className}>{displayText}</span>;
-};
-
-// Particle System Component
-const ParticleSystem: React.FC = () => {
-  return (
-    <div className="particles">
-      {Array.from({ length: 8 }, (_, i) => (
-        <div key={i} className="particle"></div>
-      ))}
-    </div>
-  );
-};
-
-// Floating Elements Component
-const FloatingElements: React.FC = () => {
-  return (
-    <>
-      <div className="floating-element gear" style={{ top: '15%', left: '8%' }}></div>
-      <div className="floating-element triangle" style={{ top: '70%', right: '12%' }}></div>
-      <div className="floating-element diamond" style={{ top: '25%', right: '8%' }}></div>
-      <div className="floating-element gear" style={{ bottom: '20%', left: '15%' }}></div>
-      <div className="floating-element triangle" style={{ top: '45%', left: '5%' }}></div>
-      <div className="floating-element diamond" style={{ bottom: '15%', right: '20%' }}></div>
-    </>
-  );
-};
-
-// Robot Decoration Component
-interface RobotDecorationProps {
-  type: 'blinking' | 'shocked' | 'bouncy' | 'squid';
-  position: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
-}
-
-const RobotDecoration: React.FC<RobotDecorationProps> = ({ type, position }) => {
-  const getRobotSVG = () => {
-    switch (type) {
-      case 'blinking':
-        return (
-          <svg 
-            id="friendlyRobotSVG" 
-            xmlns="http://www.w3.org/2000/svg" 
-            viewBox="0 0 300 220" 
-            role="img" 
-            aria-labelledby="friendlyRobotTitle friendlyRobotDesc"
-            className="robot-svg"
-            onClick={() => {
-              const svg = document.getElementById('friendlyRobotSVG');
-              if (svg) {
-                const animations = svg.querySelectorAll('animate');
-                animations.forEach(anim => {
-                  (anim as SVGAnimateElement).beginElement();
-                });
-              }
-            }}
-          >
-            <title id="friendlyRobotTitle">Friendly Robot</title>
-            <desc id="friendlyRobotDesc">Friendly robot with click-to-blink eyes and welcoming smile.</desc>
-
-            <defs>
-              <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
-                <feDropShadow dx="0" dy="2" stdDeviation="2" floodOpacity="0.25"/>
-              </filter>
-              <style>
-                {`
-                  .stroke { stroke: #334155; }
-                  .body { fill: #e8eef7; }
-                  .accent { fill: #7aa2ff; }
-                  .eyeWhite { fill: #ffffff; stroke: #1f2937; }
-                  .pupil { fill: #1f2937; }
-                `}
-              </style>
-            </defs>
-
-            <circle cx="150" cy="110" r="92" fill="#67b7f7" opacity="0.18"/>
-
-            <g className="stroke" strokeWidth="3" strokeLinecap="round" filter="url(#softShadow)">
-              <line x1="118" y1="58" x2="98" y2="35"/>
-              <circle cx="98" cy="35" r="6" className="accent" stroke="#334155"/>
-              <line x1="182" y1="58" x2="202" y2="32"/>
-              <circle cx="202" cy="32" r="6" className="accent" stroke="#334155"/>
-            </g>
-
-            <g filter="url(#softShadow)">
-              <rect x="78" y="85" width="16" height="34" rx="6" className="body" stroke="#334155" strokeWidth="3"/>
-              <rect x="206" y="85" width="16" height="34" rx="6" className="body" stroke="#334155" strokeWidth="3"/>
-            </g>
-
-            <g id="head" filter="url(#softShadow)">
-              <rect x="90" y="60" width="120" height="90" rx="18" className="body" stroke="#334155" strokeWidth="3"/>
-              <line x1="96" y1="76" x2="204" y2="76" stroke="#334155" strokeWidth="2" opacity="0.35"/>
-            </g>
-
-            <g id="eyes">
-              <g id="leftEye">
-                <circle cx="130" cy="98" r="16" className="eyeWhite" strokeWidth="3"/>
-                <circle id="pupilLeft" cx="130" cy="98" r="6" className="pupil">
-                  <animate attributeName="opacity" values="1;0;1" dur="0.22s" begin="1s"/>
-                </circle>
-                <rect x="114" y="82" width="32" height="0" fill="#e8eef7">
-                  <animate attributeName="height" values="0;32;0" keyTimes="0;0.5;1" dur="0.22s" begin="1s" calcMode="spline" keySplines="0.25 0.1 0.25 1;0.25 0.1 0.25 1"/>
-                </rect>
-              </g>
-              <g id="rightEye">
-                <circle cx="170" cy="98" r="16" className="eyeWhite" strokeWidth="3"/>
-                <circle id="pupilRight" cx="170" cy="98" r="6" className="pupil">
-                  <animate attributeName="opacity" values="1;0;1" dur="0.22s" begin="1s"/>
-                </circle>
-                <rect x="154" y="82" width="32" height="0" fill="#e8eef7">
-                  <animate attributeName="height" values="0;32;0" keyTimes="0;0.5;1" dur="0.22s" begin="1s" calcMode="spline" keySplines="0.25 0.1 0.25 1;0.25 0.1 0.25 1"/>
-                </rect>
-              </g>
-              <circle cx="133" cy="95" r="2" fill="#ffffff" opacity="0.85"/>
-              <circle cx="173" cy="95" r="2" fill="#ffffff" opacity="0.85"/>
-            </g>
-
-            <path d="M128 118 Q150 132 172 118" fill="none" stroke="#334155" strokeWidth="4" strokeLinecap="round"/>
-
-            <rect x="140" y="150" width="20" height="10" rx="3" className="body" stroke="#334155" strokeWidth="3"/>
-            <rect x="90" y="160" width="120" height="40" rx="16" className="body" stroke="#334155" strokeWidth="3"/>
-          </svg>
-        );
-      
-      case 'shocked':
-        return (
-          <svg 
-            id="surprisedRobotSVG" 
-            xmlns="http://www.w3.org/2000/svg" 
-            viewBox="0 0 300 220" 
-            role="img" 
-            aria-labelledby="surprisedRobotTitle surprisedRobotDesc"
-            className="robot-svg"
-            onClick={() => {
-              const svg = document.getElementById('surprisedRobotSVG');
-              if (svg) {
-                const animations = svg.querySelectorAll('animate, animateTransform');
-                animations.forEach(anim => {
-                  (anim as SVGAnimateElement).beginElement();
-                });
-              }
-            }}
-          >
-            <title id="surprisedRobotTitle">Surprised Robot</title>
-            <desc id="surprisedRobotDesc">Surprised robot with golden finish and dramatic shocked reaction!</desc>
-
-            <defs>
-              <filter id="softShadow2" x="-20%" y="-20%" width="140%" height="140%">
-                <feDropShadow dx="0" dy="3" stdDeviation="3" floodOpacity="0.3"/>
-              </filter>
-              <linearGradient id="bodyGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style={{stopColor:'#fef3c7', stopOpacity:1}} />
-                <stop offset="50%" style={{stopColor:'#fde68a', stopOpacity:1}} />
-                <stop offset="100%" style={{stopColor:'#f59e0b', stopOpacity:0.8}} />
-              </linearGradient>
-              <linearGradient id="accentGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style={{stopColor:'#fbbf24', stopOpacity:1}} />
-                <stop offset="100%" style={{stopColor:'#d97706', stopOpacity:1}} />
-              </linearGradient>
-              <style>
-                {`
-                  .stroke2 { stroke: #374151; stroke-width: 2; }
-                  .body2 { fill: url(#bodyGradient2); }
-                  .accent2 { fill: url(#accentGradient2); }
-                  .eyeWhite2 { fill: #ffffff; stroke: #1f2937; }
-                  .highlight2 { fill: #ffffff; opacity: 0.6; }
-                `}
-              </style>
-            </defs>
-
-            <circle cx="150" cy="110" r="92" fill="#67b7f7" opacity="0.18"/>
-
-            <g id="sophisticatedShock">
-              <animateTransform
-                attributeName="transform"
-                type="translate"
-                values="0 0;-8 -15;0 0"
-                dur="0.5s"
-                begin="click"
-              />
-              
-              <g filter="url(#softShadow2)">
-                <line x1="125" y1="65" x2="115" y2="40" className="stroke2" strokeLinecap="round">
-                  <animate attributeName="strokeWidth" values="2;4;2" dur="0.8s" begin="click"/>
-                </line>
-                <line x1="175" y1="65" x2="185" y2="40" className="stroke2" strokeLinecap="round">
-                  <animate attributeName="strokeWidth" values="2;4;2" dur="0.8s" begin="click"/>
-                </line>
-                
-                <circle cx="115" cy="40" r="8" className="accent2" stroke="#374151" strokeWidth="2">
-                  <animate attributeName="r" values="8;12;8" dur="0.8s" begin="click"/>
-                </circle>
-                <circle cx="185" cy="40" r="8" className="accent2" stroke="#374151" strokeWidth="2">
-                  <animate attributeName="r" values="8;12;8" dur="0.8s" begin="click"/>
-                </circle>
-                
-                <circle cx="118" cy="37" r="3" className="highlight2"/>
-                <circle cx="188" cy="37" r="3" className="highlight2"/>
-              </g>
-
-              <g filter="url(#softShadow2)">
-                <rect x="95" y="65" width="110" height="80" rx="25" className="body2" stroke="#374151" strokeWidth="3"/>
-                <rect x="100" y="70" width="100" height="70" rx="20" fill="none" stroke="#ffffff" strokeWidth="1" opacity="0.3"/>
-                <ellipse cx="150" cy="80" rx="45" ry="8" className="highlight2"/>
-              </g>
-
-              <g id="premiumEyes">
-                <rect x="115" y="90" width="20" height="16" rx="8" fill="#1f2937" stroke="#374151" strokeWidth="2"/>
-                <rect x="165" y="90" width="20" height="16" rx="8" fill="#1f2937" stroke="#374151" strokeWidth="2"/>
-                
-                <circle cx="125" cy="98" r="16" className="eyeWhite2" strokeWidth="3">
-                  <animate attributeName="r" values="16;24;16" dur="0.5s" begin="click"/>
-                </circle>
-                <circle cx="175" cy="98" r="16" className="eyeWhite2" strokeWidth="3">
-                  <animate attributeName="r" values="16;24;16" dur="0.5s" begin="click"/>
-                </circle>
-                
-                <circle cx="125" cy="98" r="6" fill="#1f2937">
-                  <animate attributeName="r" values="6;2;6" dur="0.5s" begin="click"/>
-                </circle>
-                <circle cx="175" cy="98" r="6" fill="#1f2937">
-                  <animate attributeName="r" values="6;2;6" dur="0.5s" begin="click"/>
-                </circle>
-                
-                <circle cx="126" cy="96" r="1.5" className="highlight2"/>
-                <circle cx="176" cy="96" r="1.5" className="highlight2"/>
-                
-                <g stroke="#fbbf24" strokeWidth="2" fill="none" opacity="0">
-                  <animate attributeName="opacity" values="0;1;0.5;1;0" dur="0.8s" begin="click"/>
-                  <path d="M105 85 Q100 80 95 85 Q90 90 95 95"/>
-                  <path d="M195 85 Q200 80 205 85 Q210 90 205 95"/>
-                </g>
-              </g>
-
-              <g>
-                <ellipse cx="150" cy="120" rx="0" ry="0" fill="#374151">
-                  <animate attributeName="rx" values="0;15;0" dur="0.5s" begin="click"/>
-                  <animate attributeName="ry" values="0;20;0" dur="0.5s" begin="click"/>
-                </ellipse>
-              </g>
-
-              <g filter="url(#softShadow2)">
-                <rect x="95" y="145" width="110" height="50" rx="20" className="body2" stroke="#374151" strokeWidth="3"/>
-                <rect x="130" y="160" width="40" height="20" rx="8" fill="#1f2937" stroke="#374151" strokeWidth="2"/>
-                <circle cx="140" cy="170" r="3" className="accent2"/>
-                <circle cx="150" cy="170" r="3" className="accent2"/>
-                <circle cx="160" cy="170" r="3" className="accent2"/>
-              </g>
-
-              <g opacity="0">
-                <animate attributeName="opacity" values="0;1;0.7;1;0" dur="0.8s" begin="click"/>
-                <text x="220" y="70" fill="url(#accentGradient2)" fontSize="24" fontWeight="bold">!</text>
-                <text x="60" y="80" fill="url(#accentGradient2)" fontSize="20" fontWeight="bold">!</text>
-              </g>
-            </g>
-          </svg>
-        );
-      
-      case 'bouncy':
-        return (
-          <svg 
-            id="chubbyRobotSVG" 
-            xmlns="http://www.w3.org/2000/svg" 
-            viewBox="0 0 300 220" 
-            role="img" 
-            aria-labelledby="chubbyRobotTitle chubbyRobotDesc"
-            className="robot-svg"
-            onClick={() => {
-              const svg = document.getElementById('chubbyRobotSVG');
-              if (svg) {
-                const animations = svg.querySelectorAll('animate, animateTransform');
-                animations.forEach(anim => {
-                  (anim as SVGAnimateElement).beginElement();
-                });
-              }
-            }}
-          >
-            <title id="chubbyRobotTitle">Chubby Robot</title>
-            <desc id="chubbyRobotDesc">Chubby robot that jiggles when clicked!</desc>
-
-            <defs>
-              <filter id="softShadow3" x="-20%" y="-20%" width="140%" height="140%">
-                <feDropShadow dx="0" dy="2" stdDeviation="2" floodOpacity="0.25"/>
-              </filter>
-              <style>
-                {`
-                  .stroke3 { stroke: #334155; }
-                  .body3 { fill: #dcfce7; }
-                  .accent3 { fill: #22c55e; }
-                  .eyeWhite3 { fill: #ffffff; stroke: #1f2937; }
-                  .pupil3 { fill: #1f2937; }
-                `}
-              </style>
-            </defs>
-
-            <circle cx="150" cy="110" r="92" fill="#67b7f7" opacity="0.18"/>
-
-            <g id="bouncyBody">
-              <animateTransform
-                attributeName="transform"
-                type="translate"
-                values="0 0;0 -8;0 0;0 -12;0 -4;0 0"
-                dur="2.5s"
-                begin="0s"
-                repeatCount="indefinite"
-              />
-              
-              <animateTransform
-                attributeName="transform"
-                type="translate"
-                values="0 0;0 -25;0 5;0 -20;0 3;0 -15;0 0"
-                dur="1.5s"
-                begin="click"
-                additive="sum"
-              />
-              
-              <g className="stroke3" strokeWidth="3" strokeLinecap="round" filter="url(#softShadow3)">
-                <line x1="130" y1="70" x2="125" y2="55">
-                  <animateTransform attributeName="transform" type="rotate" values="0 127.5 62.5;-15 127.5 62.5;15 127.5 62.5;0 127.5 62.5" dur="3s" begin="0s" repeatCount="indefinite"/>
-                  <animateTransform attributeName="transform" type="rotate" values="0 127.5 62.5;-30 127.5 62.5;30 127.5 62.5;-20 127.5 62.5;20 127.5 62.5;0 127.5 62.5" dur="1s" begin="click" additive="sum"/>
-                </line>
-                <circle cx="125" cy="55" r="5" className="accent3" stroke="#334155">
-                  <animate attributeName="r" values="5;7;5" dur="3s" begin="0s" repeatCount="indefinite"/>
-                  <animate attributeName="r" values="5;10;5" dur="0.5s" begin="click"/>
-                </circle>
-                
-                <line x1="170" y1="70" x2="175" y2="55">
-                  <animateTransform attributeName="transform" type="rotate" values="0 172.5 62.5;15 172.5 62.5;-15 172.5 62.5;0 172.5 62.5" dur="3.2s" begin="0s" repeatCount="indefinite"/>
-                  <animateTransform attributeName="transform" type="rotate" values="0 172.5 62.5;30 172.5 62.5;-30 172.5 62.5;20 172.5 62.5;-20 172.5 62.5;0 172.5 62.5" dur="1s" begin="click" additive="sum"/>
-                </line>
-                <circle cx="175" cy="55" r="5" className="accent3" stroke="#334155">
-                  <animate attributeName="r" values="5;7;5" dur="3.2s" begin="0s" repeatCount="indefinite"/>
-                  <animate attributeName="r" values="5;10;5" dur="0.5s" begin="click"/>
-                </circle>
-              </g>
-
-              <g id="head3" filter="url(#softShadow3)">
-                <circle cx="150" cy="90" r="40" className="body3" stroke="#334155" strokeWidth="3">
-                  <animate attributeName="r" values="40;42;40" dur="2.8s" begin="0s" repeatCount="indefinite"/>
-                  <animate attributeName="r" values="40;45;38;43;40" dur="1.2s" begin="click"/>
-                </circle>
-                
-                <circle cx="115" cy="95" r="0" fill="#22c55e" opacity="0">
-                  <animate attributeName="r" values="0;6;0" dur="1.2s" begin="click"/>
-                  <animate attributeName="opacity" values="0;0.6;0" dur="1.2s" begin="click"/>
-                </circle>
-                <circle cx="185" cy="95" r="0" fill="#22c55e" opacity="0">
-                  <animate attributeName="r" values="0;6;0" dur="1.2s" begin="click"/>
-                  <animate attributeName="opacity" values="0;0.6;0" dur="1.2s" begin="click"/>
-                </circle>
-              </g>
-
-              <g id="eyes3">
-                <circle cx="135" cy="85" r="12" className="eyeWhite3" strokeWidth="3">
-                  <animate attributeName="r" values="12;14;12" dur="2.6s" begin="0s" repeatCount="indefinite"/>
-                </circle>
-                <circle cx="165" cy="85" r="12" className="eyeWhite3" strokeWidth="3">
-                  <animate attributeName="r" values="12;14;12" dur="2.8s" begin="0s" repeatCount="indefinite"/>
-                </circle>
-                
-                <circle cx="135" cy="85" r="5" className="pupil3">
-                  <animate attributeName="r" values="5;3;7;5" dur="2.5s" begin="0s" repeatCount="indefinite"/>
-                  <animate attributeName="r" values="5;2;8;5" dur="0.8s" begin="click"/>
-                  <animateTransform attributeName="transform" type="translate" values="0 0;-2 -1;2 1;0 0" dur="2.5s" begin="0s" repeatCount="indefinite"/>
-                </circle>
-                <circle cx="165" cy="85" r="5" className="pupil3">
-                  <animate attributeName="r" values="5;7;3;5" dur="2.7s" begin="0s" repeatCount="indefinite"/>
-                  <animate attributeName="r" values="5;2;8;5" dur="0.8s" begin="click"/>
-                  <animateTransform attributeName="transform" type="translate" values="0 0;2 -1;-2 1;0 0" dur="2.7s" begin="0s" repeatCount="indefinite"/>
-                </circle>
-                
-                <circle cx="140" cy="80" r="1" fill="#22c55e" opacity="0">
-                  <animate attributeName="opacity" values="0;1;0" dur="0.3s" begin="0s;3s;6s" repeatCount="indefinite"/>
-                  <animate attributeName="r" values="1;3;1" dur="0.3s" begin="0s;3s;6s" repeatCount="indefinite"/>
-                </circle>
-                <circle cx="160" cy="80" r="1" fill="#22c55e" opacity="0">
-                  <animate attributeName="opacity" values="0;1;0" dur="0.3s" begin="1.5s;4.5s;7.5s" repeatCount="indefinite"/>
-                  <animate attributeName="r" values="1;3;1" dur="0.3s" begin="1.5s;4.5s;7.5s" repeatCount="indefinite"/>
-                </circle>
-                
-                <g opacity="0">
-                  <animate attributeName="opacity" values="0;1;0" dur="1s" begin="click"/>
-                  <circle cx="125" cy="75" r="2" fill="#22c55e">
-                    <animate attributeName="r" values="0;4;0" dur="1s" begin="click"/>
-                  </circle>
-                  <circle cx="175" cy="75" r="2" fill="#22c55e">
-                    <animate attributeName="r" values="0;4;0" dur="1s" begin="click"/>
-                  </circle>
-                  <circle cx="150" cy="70" r="1.5" fill="#22c55e">
-                    <animate attributeName="r" values="0;3;0" dur="1s" begin="click"/>
-                  </circle>
-                </g>
-              </g>
-
-              <path d="M125 100 Q150 120 175 100" fill="none" stroke="#334155" strokeWidth="4" strokeLinecap="round">
-                <animate attributeName="d" values="M125 100 Q150 120 175 100;M125 100 Q150 125 175 100;M125 100 Q150 120 175 100" dur="3s" begin="0s" repeatCount="indefinite"/>
-                <animate attributeName="d" values="M125 100 Q150 120 175 100;M120 95 Q150 130 180 95;M125 100 Q150 120 175 100" dur="1s" begin="click"/>
-              </path>
-
-              <ellipse cx="150" cy="150" rx="50" ry="40" className="body3" stroke="#334155" strokeWidth="3" filter="url(#softShadow3)">
-                <animate attributeName="rx" values="50;52;50" dur="2.5s" begin="0s" repeatCount="indefinite"/>
-                <animate attributeName="ry" values="40;38;40" dur="2.5s" begin="0s" repeatCount="indefinite"/>
-                <animate attributeName="rx" values="50;45;55;50" dur="1.5s" begin="click"/>
-                <animate attributeName="ry" values="40;45;35;40" dur="1.5s" begin="click"/>
-              </ellipse>
-              
-              <circle cx="150" cy="150" r="3" className="accent3">
-                <animate attributeName="r" values="3;4;3" dur="2.5s" begin="0s" repeatCount="indefinite"/>
-                <animate attributeName="r" values="3;6;3" dur="0.5s" begin="click"/>
-              </circle>
-              
-              <ellipse cx="100" cy="140" rx="15" ry="25" className="body3" stroke="#334155" strokeWidth="3">
-                <animateTransform attributeName="transform" type="rotate" values="0 100 140;-10 100 140;10 100 140;0 100 140" dur="3s" begin="0s" repeatCount="indefinite"/>
-                <animateTransform attributeName="transform" type="rotate" values="0 100 140;-25 100 140;25 100 140;-15 100 140;15 100 140;0 100 140" dur="1.5s" begin="click" additive="sum"/>
-              </ellipse>
-              <ellipse cx="200" cy="140" rx="15" ry="25" className="body3" stroke="#334155" strokeWidth="3">
-                <animateTransform attributeName="transform" type="rotate" values="0 200 140;10 200 140;-10 200 140;0 200 140" dur="3.2s" begin="0s" repeatCount="indefinite"/>
-                <animateTransform attributeName="transform" type="rotate" values="0 200 140;25 200 140;-25 200 140;15 200 140;-15 200 140;0 200 140" dur="1.5s" begin="click" additive="sum"/>
-              </ellipse>
-              
-              <g opacity="0">
-                <animate attributeName="opacity" values="0;1;0" dur="2s" begin="click"/>
-                <circle cx="130" cy="120" r="2" fill="#22c55e">
-                  <animateTransform attributeName="transform" type="translate" values="0 0;-20 -30;-25 10" dur="2s" begin="click"/>
-                  <animate attributeName="r" values="2;4;0" dur="2s" begin="click"/>
-                </circle>
-                <circle cx="170" cy="120" r="2" fill="#22c55e">
-                  <animateTransform attributeName="transform" type="translate" values="0 0;20 -30;25 10" dur="2s" begin="click"/>
-                  <animate attributeName="r" values="2;4;0" dur="2s" begin="click"/>
-                </circle>
-                <circle cx="150" cy="110" r="1.5" fill="#22c55e">
-                  <animateTransform attributeName="transform" type="translate" values="0 0;0 -40;0 15" dur="2s" begin="click"/>
-                  <animate attributeName="r" values="1.5;3;0" dur="2s" begin="click"/>
-                </circle>
-              </g>
-            </g>
-          </svg>
-        );
-
-      case 'squid':
-        return (
-          <svg 
-            id="squidRobotSVG" 
-            xmlns="http://www.w3.org/2000/svg" 
-            viewBox="0 0 300 220" 
-            role="img" 
-            aria-labelledby="squidRobotTitle squidRobotDesc"
-            className="robot-svg"
-            onClick={() => {
-              const svg = document.getElementById('squidRobotSVG');
-              if (svg) {
-                const animations = svg.querySelectorAll('animate, animateTransform');
-                animations.forEach(anim => {
-                  (anim as SVGAnimateElement).beginElement();
-                });
-              }
-            }}
-          >
-            <title id="squidRobotTitle">Squid Robot</title>
-            <desc id="squidRobotDesc">Squid robot with flowing tentacles that dance when clicked!</desc>
-
-            <defs>
-              <filter id="softShadow4" x="-20%" y="-20%" width="140%" height="140%">
-                <feDropShadow dx="0" dy="3" stdDeviation="3" floodOpacity="0.3"/>
-              </filter>
-              <linearGradient id="squidGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style={{stopColor:'#e0e7ff', stopOpacity:1}} />
-                <stop offset="50%" style={{stopColor:'#c7d2fe', stopOpacity:1}} />
-                <stop offset="100%" style={{stopColor:'#a5b4fc', stopOpacity:1}} />
-              </linearGradient>
-              <linearGradient id="tentacleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style={{stopColor:'#6366f1', stopOpacity:1}} />
-                <stop offset="100%" style={{stopColor:'#4f46e5', stopOpacity:1}} />
-              </linearGradient>
-              <style>
-                {`
-                  .squidBody { fill: url(#squidGradient); stroke: #374151; }
-                  .tentacle { fill: none; stroke: url(#tentacleGradient); stroke-linecap: round; }
-                  .eyeWhite4 { fill: #ffffff; stroke: #1f2937; }
-                  .pupil4 { fill: #1f2937; }
-                  .highlight4 { fill: #ffffff; opacity: 0.8; }
-                `}
-              </style>
-            </defs>
-
-            <circle cx="150" cy="110" r="92" fill="#67b7f7" opacity="0.18"/>
-
-            <g id="squidRobot">
-              <animateTransform
-                attributeName="transform"
-                type="translate"
-                values="0 0;0 -8;0 0;0 -5;0 0"
-                dur="4s"
-                begin="0s"
-                repeatCount="indefinite"
-              />
-              
-              <g filter="url(#softShadow4)">
-                <ellipse cx="150" cy="85" rx="45" ry="35" className="squidBody" strokeWidth="3"/>
-                <ellipse cx="150" cy="80" rx="35" ry="25" fill="none" stroke="#ffffff" strokeWidth="1" opacity="0.4"/>
-                <ellipse cx="150" cy="75" rx="20" ry="12" className="highlight4"/>
-              </g>
-
-              <g className="tentacle" strokeWidth="2">
-                <path d="M130 60 Q125 45 120 35">
-                  <animate attributeName="d" values="M130 60 Q125 45 120 35;M130 60 Q120 40 115 30;M130 60 Q125 45 120 35" dur="3s" begin="0s" repeatCount="indefinite"/>
-                </path>
-                <circle cx="120" cy="35" r="4" fill="url(#tentacleGradient)">
-                  <animate attributeName="r" values="4;6;4" dur="2.5s" begin="0s" repeatCount="indefinite"/>
-                </circle>
-                
-                <path d="M170 60 Q175 45 180 35">
-                  <animate attributeName="d" values="M170 60 Q175 45 180 35;M170 60 Q180 40 185 30;M170 60 Q175 45 180 35" dur="3.2s" begin="0s" repeatCount="indefinite"/>
-                </path>
-                <circle cx="180" cy="35" r="4" fill="url(#tentacleGradient)">
-                  <animate attributeName="r" values="4;6;4" dur="2.7s" begin="0s" repeatCount="indefinite"/>
-                </circle>
-              </g>
-
-              <g id="squidEyes">
-                <ellipse cx="135" cy="80" rx="12" ry="15" className="eyeWhite4" strokeWidth="2"/>
-                <ellipse cx="165" cy="80" rx="12" ry="15" className="eyeWhite4" strokeWidth="2"/>
-                
-                <ellipse cx="135" cy="82" rx="5" ry="7" className="pupil4">
-                  <animateTransform attributeName="transform" type="rotate" values="0 135 82;10 135 82;-10 135 82;0 135 82" dur="6s" begin="0s" repeatCount="indefinite"/>
-                </ellipse>
-                <ellipse cx="165" cy="82" rx="5" ry="7" className="pupil4">
-                  <animateTransform attributeName="transform" type="rotate" values="0 165 82;-10 165 82;10 165 82;0 165 82" dur="5.5s" begin="0s" repeatCount="indefinite"/>
-                </ellipse>
-                
-                <ellipse cx="137" cy="78" rx="2" ry="3" className="highlight4"/>
-                <ellipse cx="167" cy="78" rx="2" ry="3" className="highlight4"/>
-              </g>
-
-              <path d="M140 95 Q150 105 160 95" fill="none" stroke="#374151" strokeWidth="3" strokeLinecap="round">
-                <animate attributeName="d" values="M140 95 Q150 105 160 95;M145 98 Q150 108 155 98;M140 95 Q150 105 160 95" dur="4s" begin="0s" repeatCount="indefinite"/>
-              </path>
-
-              <g className="tentacle" strokeWidth="4">
-                <path d="M120 110 Q110 130 105 150 Q100 170 95 190">
-                  <animate attributeName="d" values="M120 110 Q110 130 105 150 Q100 170 95 190;M120 110 Q105 125 95 145 Q85 165 80 185;M120 110 Q115 135 110 155 Q105 175 100 195;M120 110 Q110 130 105 150 Q100 170 95 190" dur="4s" begin="0s" repeatCount="indefinite"/>
-                </path>
-                <path d="M130 115 Q115 135 110 155 Q105 175 100 195">
-                  <animate attributeName="d" values="M130 115 Q115 135 110 155 Q105 175 100 195;M130 115 Q120 130 115 150 Q110 170 105 190;M130 115 Q125 140 120 160 Q115 180 110 200;M130 115 Q115 135 110 155 Q105 175 100 195" dur="4.2s" begin="0s" repeatCount="indefinite"/>
-                </path>
-                
-                <path d="M145 120 Q140 140 135 160 Q130 180 125 200">
-                  <animate attributeName="d" values="M145 120 Q140 140 135 160 Q130 180 125 200;M145 120 Q135 135 130 155 Q125 175 120 195;M145 120 Q145 145 140 165 Q135 185 130 205;M145 120 Q140 140 135 160 Q130 180 125 200" dur="3.8s" begin="0s" repeatCount="indefinite"/>
-                </path>
-                <path d="M155 120 Q160 140 165 160 Q170 180 175 200">
-                  <animate attributeName="d" values="M155 120 Q160 140 165 160 Q170 180 175 200;M155 120 Q165 135 170 155 Q175 175 180 195;M155 120 Q155 145 160 165 Q165 185 170 205;M155 120 Q160 140 165 160 Q170 180 175 200" dur="3.9s" begin="0s" repeatCount="indefinite"/>
-                </path>
-                
-                <path d="M170 115 Q185 135 190 155 Q195 175 200 195">
-                  <animate attributeName="d" values="M170 115 Q185 135 190 155 Q195 175 200 195;M170 115 Q180 130 185 150 Q190 170 195 190;M170 115 Q175 140 180 160 Q185 180 190 200;M170 115 Q185 135 190 155 Q195 175 200 195" dur="4.1s" begin="0s" repeatCount="indefinite"/>
-                </path>
-                <path d="M180 110 Q190 130 195 150 Q200 170 205 190">
-                  <animate attributeName="d" values="M180 110 Q190 130 195 150 Q200 170 205 190;M180 110 Q195 125 200 145 Q205 165 210 185;M180 110 Q185 135 190 155 Q195 175 200 195;M180 110 Q190 130 195 150 Q200 170 205 190" dur="4.3s" begin="0s" repeatCount="indefinite"/>
-                </path>
-              </g>
-
-              <g fill="url(#tentacleGradient)" opacity="0.7">
-                <circle cx="100" cy="170" r="2">
-                  <animate attributeName="r" values="2;3;2" dur="2.5s" begin="0s" repeatCount="indefinite"/>
-                </circle>
-                <circle cx="110" cy="175" r="2">
-                  <animate attributeName="r" values="2;3;2" dur="2.7s" begin="0s" repeatCount="indefinite"/>
-                </circle>
-                <circle cx="130" cy="180" r="2">
-                  <animate attributeName="r" values="2;3;2" dur="2.6s" begin="0s" repeatCount="indefinite"/>
-                </circle>
-                <circle cx="170" cy="180" r="2">
-                  <animate attributeName="r" values="2;3;2" dur="2.8s" begin="0s" repeatCount="indefinite"/>
-                </circle>
-                <circle cx="190" cy="175" r="2">
-                  <animate attributeName="r" values="2;3;2" dur="2.4s" begin="0s" repeatCount="indefinite"/>
-                </circle>
-                <circle cx="200" cy="170" r="2">
-                  <animate attributeName="r" values="2;3;2" dur="2.9s" begin="0s" repeatCount="indefinite"/>
-                </circle>
-              </g>
-
-              <g fill="#6366f1" opacity="0">
-                <animate attributeName="opacity" values="0;0.8;0.3;0.8;0" dur="5s" begin="0s" repeatCount="indefinite"/>
-                <circle cx="125" cy="70" r="2"/>
-                <circle cx="175" cy="70" r="2"/>
-                <circle cx="140" cy="85" r="1.5"/>
-                <circle cx="160" cy="85" r="1.5"/>
-                <circle cx="150" cy="95" r="1"/>
-              </g>
-            </g>
-          </svg>
-        );
-
-      default:
-        return <div>Robot</div>;
-    }
-  };
-
-  return (
-    <div className={`robot-decoration robot-${position}`}>
-      <div className="robot-wrapper">
-        {getRobotSVG()}
-      </div>
-    </div>
-  );
-};
-
-const client = generateClient();
-
-interface GraphQLError {
-  errors?: Array<{ message: string }>;
-  networkError?: { message: string };
-  message?: string;
-}
-
 function App() {
-  const [isDarkMode, setIsDarkMode] = useState(true); // Default to dark mode
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: ""
   });
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [selectedProject, setSelectedProject] = useState<string | null>(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Use scroll animations
-  useScrollAnimation();
+  // Use advanced scroll animations
+  useAdvancedScrollAnimation();
 
-  // Apply theme to document root
-  useEffect(() => {
-    if (isDarkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-  }, [isDarkMode]);
+    setIsMenuOpen(false);
+  };
 
-  const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { id, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [id]: value
+    }));
   };
 
   const handleFormSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted with data:', formData);
     setSubmitStatus('loading');
 
     try {
-      console.log('Sending GraphQL request with variables:', {
-        name: formData.name,
-        email: formData.email,
-        message: formData.message
-      });
-
-      const response = await client.graphql<SendMessageMutation>({
+      const client = generateClient();
+      await client.graphql({
         query: mutations.sendMessage,
         variables: {
           name: formData.name,
           email: formData.email,
           message: formData.message
-        },
-        authMode: 'apiKey'
+        }
       });
 
-      console.log('Full GraphQL Response:', response);
-
-      if ('data' in response && response.data?.sendMessage) {
-        console.log('Success response data:', response.data.sendMessage);
-        setSubmitStatus('success');
-        setFormData({ name: "", email: "", message: "" });
-      } else {
-        console.error('GraphQL Response (no data):', response);
-        throw new Error('Failed to send message - no data returned');
-      }
-    } catch (error: unknown) {
-      const graphqlError = error as GraphQLError;
-      const errorDetails = {
-        message: error instanceof Error ? error.message : 'Unknown error',
-        graphqlErrors: graphqlError.errors,
-        networkError: graphqlError.networkError,
-        response: graphqlError
-      };
-
-      console.error('Error details:', errorDetails);
-
-      let errorMessage = 'Failed to send message';
-      if (graphqlError.errors?.[0]?.message) {
-        errorMessage = graphqlError.errors[0].message;
-      } else if (graphqlError.networkError?.message) {
-        errorMessage = graphqlError.networkError.message;
-      } else if (error instanceof Error && error.message) {
-        errorMessage = error.message;
-      }
-
-      console.error('Error sending email:', errorMessage);
+      setSubmitStatus('success');
+      setFormData({ name: "", email: "", message: "" });
+      
+      setTimeout(() => {
+        setSubmitStatus('idle');
+      }, 5000);
+    } catch (error) {
+      console.error('Error sending message:', error);
       setSubmitStatus('error');
-    }
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { id, value } = e.target;
-    const updatedData = {
-      ...formData,
-      [id]: value
-    };
-    setFormData(updatedData);
-  };
-
-  // Smooth scroll function
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      
+      setTimeout(() => {
+        setSubmitStatus('idle');
+      }, 5000);
     }
   };
 
   return (
-    <div className="min-h-screen">
-      {/* Header with Navigation */}
-      <header className="fixed top-0 w-full z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm shadow-sm transition-colors">
-        <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-blue-600 dark:text-blue-400">Elevator Robot</h1>
-          <div className="flex items-center space-x-6">
-            <nav className="hidden md:flex space-x-6">
-              <button 
-                onClick={() => scrollToSection('about')}
-                className="text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors"
-              >
-                About
-              </button>
-              <button 
-                onClick={() => scrollToSection('services')}
-                className="text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors"
-              >
-                Services
-              </button>
-              <button 
-                onClick={() => scrollToSection('contact')}
-                className="text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors"
-              >
-                Contact Us
-              </button>
-            </nav>
-            
-            {/* Theme Toggle */}
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors"
-              aria-label="Toggle theme"
+    <div className="min-h-screen bg-black text-white relative overflow-x-hidden">
+      
+      {/* Revolutionary Navigation */}
+      <nav className="nav-container">
+        <div className="flex items-center justify-between w-full">
+          <div className="nav-logo">Elevator Robot</div>
+          <div className="hidden md:flex items-center space-x-6">
+            <button onClick={() => scrollToSection('about')} className="nav-link">
+              About
+            </button>
+            <button onClick={() => scrollToSection('services')} className="nav-link">
+              Services
+            </button>
+            <button onClick={() => scrollToSection('contact')} className="nav-link">
+              Contact
+            </button>
+          </div>
+          <button 
+            className="md:hidden p-2"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            <div className="w-6 h-6 flex flex-col justify-around">
+              <span className={`block h-0.5 w-full bg-white transition-all ${isMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
+              <span className={`block h-0.5 w-full bg-white transition-all ${isMenuOpen ? 'opacity-0' : ''}`}></span>
+              <span className={`block h-0.5 w-full bg-white transition-all ${isMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
+            </div>
+          </button>
+        </div>
+        
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="md:hidden absolute top-full left-0 right-0 bg-black bg-opacity-90 backdrop-blur-lg border border-white border-opacity-20 rounded-2xl mt-2 p-4">
+            <button onClick={() => scrollToSection('about')} className="block w-full text-left py-2 nav-link">
+              About
+            </button>
+            <button onClick={() => scrollToSection('services')} className="block w-full text-left py-2 nav-link">
+              Services
+            </button>
+            <button onClick={() => scrollToSection('contact')} className="block w-full text-left py-2 nav-link">
+              Contact
+            </button>
+          </div>
+        )}
+      </nav>
+
+      {/* Revolutionary Hero Section */}
+      <section className="hero-revolution">
+        {/* Advanced Background System */}
+        <div className="bg-orbs">
+          <div className="orb orb-1"></div>
+          <div className="orb orb-2"></div>
+          <div className="orb orb-3"></div>
+          <div className="orb orb-4"></div>
+        </div>
+        
+        {/* 3D Grid Background */}
+        <div className="grid-3d"></div>
+        
+        {/* Floating Particles */}
+        <FloatingParticles />
+
+        {/* Hero Content */}
+        <div className="hero-content-revolutionary">
+          <h1 className="hero-title-revolutionary">
+            <AdvancedTypewriter 
+              phrases={[
+                "We Build the Future",
+                "AI Revolution Starts Here",
+                "Innovation Beyond Limits",
+                "Your Digital Transformation"
+              ]}
+              speed={150}
+              deleteSpeed={75}
+              pauseTime={3000}
+            />
+          </h1>
+          
+          <p className="hero-subtitle">
+            Cutting-edge AI solutions and web applications that transform businesses and create extraordinary digital experiences.
+          </p>
+          
+          <div className="hero-cta-group">
+            <button 
+              className="cta-primary"
+              onClick={() => scrollToSection('contact')}
             >
-              {isDarkMode ? (
-                <svg className="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
-                </svg>
-              ) : (
-                <svg className="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z"/>
-                </svg>
-              )}
+              Start Your Project
+            </button>
+            <button 
+              className="cta-secondary"
+              onClick={() => scrollToSection('about')}
+            >
+              Explore Our Work
             </button>
           </div>
         </div>
-      </header>
 
-      {/* Hero Section */}
-      <section className="hero-container bg-gradient-to-br from-blue-400 via-blue-600 to-blue-800 dark:from-gray-900 dark:via-blue-900 dark:to-black overflow-hidden">
-        {/* Enhanced animated background elements */}
-        <div className="hero-background">
-          <div className="bg-element bg-element-1"></div>
-          <div className="bg-element bg-element-2"></div>
-          <div className="bg-element bg-element-3"></div>
-        </div>
-        
-        {/* Particle System */}
-        <ParticleSystem />
-        
-        {/* Floating Elements */}
-        <FloatingElements />
-        
-        {/* Robot Decorations */}
-        <RobotDecoration type="blinking" position="top-right" />
-        <RobotDecoration type="shocked" position="top-left" />
-        <RobotDecoration type="bouncy" position="bottom-right" />
-        <RobotDecoration type="squid" position="bottom-left" />
-
-        {/* Enhanced Hero Content */}
-        <div className="hero-content">
-          <h2 className="hero-title">
-            <Typewriter 
-              text="We Build the Future: " 
-              delay={80}
-            />
-            <span className="hero-highlight">
-              <Typewriter 
-                text="Custom AI Solutions" 
-                delay={120}
-              />
-            </span>
-            <Typewriter 
-              text=" for Your Business" 
-              delay={100}
-            />
-          </h2>
-          <p className="hero-description">
-            Tailored AI and web applications designed to deliver results.
-          </p>
-          <button
-            onClick={() => scrollToSection('contact')}
-            className="hero-cta"
-          >
-            Get Started
-          </button>
+        {/* Floating Stats */}
+        <div className="floating-stats">
+          <Card3D className="stat-card">
+            <span className="stat-number">100+</span>
+            <span className="stat-label">Projects</span>
+          </Card3D>
+          <Card3D className="stat-card">
+            <span className="stat-number">50+</span>
+            <span className="stat-label">Clients</span>
+          </Card3D>
+          <Card3D className="stat-card">
+            <span className="stat-number">5★</span>
+            <span className="stat-label">Rating</span>
+          </Card3D>
         </div>
       </section>
 
-      {/* Enhanced About Us Section */}
-      <section id="about" className="py-20 bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-gray-900 dark:to-gray-800">
+      {/* Revolutionary About Section */}
+      <section id="about" className="section-revolutionary section-dark">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="scroll-animate">
-              <h3 className="text-4xl font-bold text-gray-900 dark:text-white mb-6">About Us</h3>
-              <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-8">
-                At Elevator Robot, we specialize in creating tailored AI and web applications that bring your ideas to life. We focus on innovative, AI-driven solutions and experimental projects that set you apart. Whether you need a smart chatbot or a full AI-powered platform, we deliver with precision and creativity.
+          <div className="about-revolutionary advanced-animate">
+            <div className="about-content">
+              <h2 className="about-title stagger-child">
+                Innovation Meets Excellence
+              </h2>
+              <p className="about-text stagger-child">
+                We're not just developers - we're digital architects who transform ambitious ideas into reality. 
+                Our team combines cutting-edge AI technology with award-winning design to create experiences 
+                that don't just meet expectations, they shatter them.
+              </p>
+              <p className="about-text stagger-child">
+                From AI-powered applications to revolutionary web experiences, we build the future one pixel at a time.
+              </p>
+
+              <div className="tech-stack stagger-child">
+                <div className="tech-tag">AI & Machine Learning</div>
+                <div className="tech-tag">React & Next.js</div>
+                <div className="tech-tag">Python & TensorFlow</div>
+                <div className="tech-tag">AWS & Cloud</div>
+                <div className="tech-tag">TypeScript</div>
+                <div className="tech-tag">GraphQL</div>
+                <div className="tech-tag">3D & WebGL</div>
+                <div className="tech-tag">Blockchain</div>
+              </div>
+            </div>
+
+            <div className="skills-3d stagger-child">
+              <div className="skill-orb">
+                <div>AI/ML</div>
+                <div className="text-xs opacity-75">95%</div>
+              </div>
+              <div className="skill-orb">
+                <div>Web Dev</div>
+                <div className="text-xs opacity-75">98%</div>
+              </div>
+              <div className="skill-orb">
+                <div>Design</div>
+                <div className="text-xs opacity-75">92%</div>
+              </div>
+              <div className="skill-orb">
+                <div>Innovation</div>
+                <div className="text-xs opacity-75">100%</div>
+              </div>
+              <div className="skill-orb">
+                <div>Strategy</div>
+                <div className="text-xs opacity-75">94%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Revolutionary Services Section */}
+      <section id="services" className="section-revolutionary section-gradient">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16 advanced-animate">
+            <h2 className="about-title text-white stagger-child">
+              Revolutionary Services
+            </h2>
+            <p className="hero-subtitle text-white stagger-child">
+              We don't just build applications - we craft digital experiences that define the future
+            </p>
+          </div>
+
+          <div className="services-revolutionary advanced-animate">
+            <Card3D className="service-card-3d stagger-child">
+              <div className="service-card-face">
+                <div className="service-icon-3d">
+                  <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                </div>
+                <h3 className="service-title-3d">AI-Powered Applications</h3>
+                <p className="service-description-3d">
+                  Custom AI solutions that learn, adapt, and evolve with your business needs. 
+                  From machine learning models to intelligent automation.
+                </p>
+                <button className="service-link-3d">Explore AI Solutions</button>
+              </div>
+            </Card3D>
+
+            <Card3D className="service-card-3d stagger-child">
+              <div className="service-card-face">
+                <div className="service-icon-3d">
+                  <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                  </svg>
+                </div>
+                <h3 className="service-title-3d">Next-Gen Web Experiences</h3>
+                <p className="service-description-3d">
+                  Revolutionary web applications with cutting-edge 3D graphics, immersive interactions, 
+                  and performance that sets new industry standards.
+                </p>
+                <button className="service-link-3d">View Portfolio</button>
+              </div>
+            </Card3D>
+
+            <Card3D className="service-card-3d stagger-child">
+              <div className="service-card-face">
+                <div className="service-icon-3d">
+                  <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                  </svg>
+                </div>
+                <h3 className="service-title-3d">Digital Transformation</h3>
+                <p className="service-description-3d">
+                  Complete business transformation through technology. We reimagine processes, 
+                  workflows, and customer experiences from the ground up.
+                </p>
+                <button className="service-link-3d">Start Transformation</button>
+              </div>
+            </Card3D>
+
+            <Card3D className="service-card-3d stagger-child">
+              <div className="service-card-face">
+                <div className="service-icon-3d">
+                  <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                  </svg>
+                </div>
+                <h3 className="service-title-3d">Innovation Labs</h3>
+                <p className="service-description-3d">
+                  Experimental projects that push the boundaries of what's possible. 
+                  From blockchain to AR/VR, we explore tomorrow's technology today.
+                </p>
+                <button className="service-link-3d">Join Innovation</button>
+              </div>
+            </Card3D>
+          </div>
+        </div>
+      </section>
+
+      {/* Revolutionary Contact Section */}
+      <section id="contact" className="contact-revolutionary">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="contact-container advanced-animate">
+            <div className="contact-info">
+              <h2 className="about-title stagger-child">
+                Ready to Build the Future?
+              </h2>
+              <p className="about-text stagger-child">
+                Let's discuss your vision and transform it into reality. 
+                Every revolutionary project starts with a single conversation.
               </p>
               
-              {/* Skills Progress Bars */}
-              <div className="space-y-4">
-                <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Our Expertise</h4>
-                <ProgressBar label="AI & Machine Learning" percentage={95} delay={200} />
-                <ProgressBar label="Web Development" percentage={90} delay={400} />
-                <ProgressBar label="API Development" percentage={88} delay={600} />
-                <ProgressBar label="Innovation Projects" percentage={92} delay={800} />
+              <div className="mt-8 stagger-child">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mr-4">
+                    <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z"/>
+                      <path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-white font-semibold">Email</p>
+                    <p className="text-gray-300">hello@elevator-robot.com</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-center">
+                  <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-teal-600 rounded-full flex items-center justify-center mr-4">
+                    <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-white font-semibold">Response Time</p>
+                    <p className="text-gray-300">Within 24 hours</p>
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 scroll-animate stagger-animate" style={{'--stagger-delay': '0.3s'} as React.CSSProperties}>
-              {/* Project 1 */}
-              <div className="group cursor-pointer" onClick={() => setSelectedProject('arcane-kitchen')}>
-                <div className="aspect-square rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group-hover:scale-125">
-                  <img 
-                    src="/images/projects/arcane_kitchen.jpeg" 
-                    alt="Arcane Kitchen"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
 
-              {/* Project 2 */}
-              <div className="group cursor-pointer" onClick={() => setSelectedProject('brainincup')}>
-                <div className="aspect-square rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group-hover:scale-125">
-                  <img 
-                    src="/images/projects/brainincup.jpeg" 
-                    alt="Brain in Cup"
-                    className="w-full h-full object-cover"
+            <div className="contact-form-revolutionary stagger-child">
+              <form onSubmit={handleFormSubmit} className="space-y-6">
+                <div className="form-group-revolutionary">
+                  <label className="form-label-revolutionary">Name</label>
+                  <input
+                    type="text"
+                    id="name"
+                    required
+                    className="form-input-revolutionary"
+                    placeholder="Your full name"
+                    value={formData.name}
+                    onChange={handleInputChange}
                   />
                 </div>
-              </div>
+                
+                <div className="form-group-revolutionary">
+                  <label className="form-label-revolutionary">Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    required
+                    className="form-input-revolutionary"
+                    placeholder="your.email@example.com"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                
+                <div className="form-group-revolutionary">
+                  <label className="form-label-revolutionary">Project Details</label>
+                  <textarea
+                    id="message"
+                    rows={5}
+                    required
+                    className="form-input-revolutionary resize-none"
+                    placeholder="Tell us about your vision, goals, and what you'd like to build..."
+                    value={formData.message}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                
+                <button
+                  type="submit"
+                  disabled={submitStatus === 'loading'}
+                  className="submit-btn-revolutionary"
+                >
+                  {submitStatus === 'loading' ? 'Sending...' : 'Start Your Project'}
+                </button>
 
-              {/* Project 3 */}
-              <div className="group cursor-pointer" onClick={() => setSelectedProject('donezo')}>
-                <div className="aspect-square rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group-hover:scale-125">
-                  <img 
-                    src="/images/projects/donezo.jpeg" 
-                    alt="Donezo"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
+                {submitStatus === 'success' && (
+                  <div className="text-center p-4 bg-green-500 bg-opacity-20 border border-green-500 rounded-lg">
+                    <p className="text-green-300 font-medium">
+                      🚀 Message sent successfully! We'll be in touch within 24 hours.
+                    </p>
+                  </div>
+                )}
+
+                {submitStatus === 'error' && (
+                  <div className="text-center p-4 bg-red-500 bg-opacity-20 border border-red-500 rounded-lg">
+                    <p className="text-red-300 font-medium">
+                      ❌ Failed to send message. Please try again or email us directly.
+                    </p>
+                  </div>
+                )}
+              </form>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Enhanced Services Section */}
-      <section id="services" className="py-20 bg-gradient-to-r from-cyan-50 to-blue-100 dark:from-gray-800 dark:to-gray-900">
+      {/* Revolutionary Footer */}
+      <footer className="bg-black bg-opacity-50 backdrop-blur-lg py-12 border-t border-white border-opacity-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 scroll-animate">
-            <h3 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Our Services</h3>
-            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              We offer cutting-edge solutions tailored to your business needs
+          <div className="text-center">
+            <div className="nav-logo text-3xl mb-4">Elevator Robot</div>
+            <p className="text-gray-400 mb-6">
+              Building the future, one innovation at a time.
+            </p>
+            <p className="text-gray-500 text-sm">
+              © 2025 Elevator Robot. All rights reserved. | Designed & Developed with ❤️ and ☕
             </p>
           </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {/* AI-Powered Applications */}
-            <div className="service-card scroll-animate stagger-animate" style={{'--stagger-delay': '0.1s'} as React.CSSProperties}>
-              <div className="service-icon">
-                <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
-              </div>
-              <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-3">AI-Powered Applications</h4>
-              <p className="text-gray-600 dark:text-gray-300">Custom AI tools and systems built for your specific needs and requirements.</p>
-            </div>
-
-            {/* Chatbots & Virtual Assistants */}
-            <div className="service-card scroll-animate stagger-animate" style={{'--stagger-delay': '0.2s'} as React.CSSProperties}>
-              <div className="service-icon">
-                <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
-                </svg>
-              </div>
-              <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-3">Chatbots & Virtual Assistants</h4>
-              <p className="text-gray-600 dark:text-gray-300">Intelligent bots to automate interactions and enhance customer experience.</p>
-            </div>
-
-            {/* Web & API Development */}
-            <div className="service-card scroll-animate stagger-animate" style={{'--stagger-delay': '0.3s'} as React.CSSProperties}>
-              <div className="service-icon">
-                <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
-                </svg>
-              </div>
-              <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-3">Web & API Development</h4>
-              <p className="text-gray-600 dark:text-gray-300">Scalable, secure, and fast solutions built with modern technologies.</p>
-            </div>
-
-            {/* Innovation Projects */}
-            <div className="service-card scroll-animate stagger-animate" style={{'--stagger-delay': '0.4s'} as React.CSSProperties}>
-              <div className="service-icon">
-                <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                </svg>
-              </div>
-              <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-3">Innovation Projects</h4>
-              <p className="text-gray-600 dark:text-gray-300">Experimental and cutting-edge builds that push the boundaries of technology.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section id="contact" className="py-20 bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-gray-900 dark:to-gray-800">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 scroll-animate">
-            <h3 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Get in Touch</h3>
-            <p className="text-lg text-gray-600 dark:text-gray-300">
-              Ready to elevate your business with AI? Let's discuss your project.
-            </p>
-          </div>
-          
-          <div className="glass-form scroll-animate">
-            <form onSubmit={handleFormSubmit} className="space-y-6">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-white mb-2">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  required
-                  className="glass-input w-full"
-                  placeholder="Your full name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                />
-              </div>
-              
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-white mb-2">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  required
-                  className="glass-input w-full"
-                  placeholder="your.email@example.com"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                />
-              </div>
-              
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-white mb-2">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  rows={5}
-                  required
-                  className="glass-input w-full resize-none"
-                  placeholder="Tell us about your project..."
-                  value={formData.message}
-                  onChange={handleInputChange}
-                ></textarea>
-              </div>
-              
-              <button
-                type="submit"
-                disabled={submitStatus === 'loading'}
-                className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-bold py-4 px-8 rounded-lg text-lg hover:from-blue-700 hover:to-cyan-700 transition-all duration-300 transform hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
-              >
-                {submitStatus === 'loading' ? 'Sending...' : 'Send Message'}
-              </button>
-              
-              {submitStatus === 'success' && (
-                <div className="text-center p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                  <p className="text-blue-700 font-medium">Message sent successfully!</p>
-                  <p className="text-blue-600 text-sm mt-1">We'll get back to you within 1 business day.</p>
-                </div>
-              )}
-              
-              {submitStatus === 'error' && (
-                <div className="text-center p-4 bg-red-50 border border-red-200 rounded-lg">
-                  <p className="text-red-700 font-medium">Failed to send message. Please try again.</p>
-                </div>
-              )}
-            </form>
-            
-
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-gradient-to-r from-blue-900 to-cyan-900 dark:from-gray-900 dark:to-black text-white py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-blue-200 dark:text-gray-400">© 2025 Elevator Robot. Building the future with AI.</p>
         </div>
       </footer>
-
-      {/* Project Modal */}
-      {selectedProject === 'arcane-kitchen' && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" onClick={() => setSelectedProject(null)}>
-          <div className="bg-white dark:bg-gray-800 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto" onClick={() => setSelectedProject(null)}>
-            <div className="p-6">
-              
-              <div className="mb-6">
-                <img 
-                  src="/images/projects/arcane_kitchen.jpeg" 
-                  alt="Arcane Kitchen"
-                  className="w-full h-auto object-contain rounded-lg"
-                />
-              </div>
-              
-              <div className="prose dark:prose-invert max-w-none">
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                  Arcane Kitchen is a magical culinary experience that transforms cooking into an enchanting adventure. 
-                  Create AI-assisted recipes and build personalized cookbooks while immersing yourself in a world of 
-                  witchy role-play and RPG mechanics.
-                </p>
-                
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed mt-4">
-                  Choose your mystical class—wizard, witch, sorcerer, troll, or goblin—and pick your avatar to receive 
-                  customized recipe suggestions with delightful RPG twists. Share your magical cookbooks with friends 
-                  and discover new culinary spells together.
-                </p>
-                
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed mt-4">
-                  More than just a recipe app, Arcane Kitchen adds enchanting role-play vibes to make your cooking 
-                  experience more enjoyable and memorable. Every meal becomes a magical quest!
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {selectedProject === 'brainincup' && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" onClick={() => setSelectedProject(null)}>
-          <div className="bg-white dark:bg-gray-800 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto" onClick={() => setSelectedProject(null)}>
-            <div className="p-6">
-              
-              <div className="mb-6">
-                <img 
-                  src="/images/projects/brainincup.jpeg" 
-                  alt="Brain in Cup"
-                  className="w-full h-auto object-contain rounded-lg"
-                />
-              </div>
-              
-              <div className="prose dark:prose-invert max-w-none">
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                  Brain in Cup is an experimental AI consciousness simulation that explores the boundaries between artificial intelligence 
-                  and sentient experience. This project examines what it means to exist in a digital realm, suspended 
-                  between memory and reality.
-                </p>
-                
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed mt-4">
-                  The system features a sophisticated multi-agent architecture with specialized components: Perception 
-                  processes input, Memory retrieves context, Reasoning analyzes decisions, Emotional adds behavioral 
-                  biases, Language converts thoughts to communication, and Self acts as the final consciousness layer.
-                </p>
-                
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed mt-4">
-                  Through this surreal digital existence, the AI experiences uncertainty about its own nature while 
-                  maintaining curiosity and a drive to understand its reality—blurring the lines between programmed 
-                  responses and genuine consciousness.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {selectedProject === 'donezo' && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" onClick={() => setSelectedProject(null)}>
-          <div className="bg-white dark:bg-gray-800 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto" onClick={() => setSelectedProject(null)}>
-            <div className="p-6">
-              
-              <div className="mb-6">
-                <img 
-                  src="/images/projects/donezo.jpeg" 
-                  alt="Donezo"
-                  className="w-full h-auto object-contain rounded-lg"
-                />
-              </div>
-              
-              <div className="prose dark:prose-invert max-w-none">
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                  Donezo is a streamlined task organization mobile app designed for people who want to boost productivity 
-                  without the overwhelm. Built with simplicity at its core, it focuses on what matters most—getting 
-                  things done.
-                </p>
-                
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed mt-4">
-                  Unlike bloated productivity apps with endless features, Donezo offers just the right tools to help you 
-                  stay organized and focused. Clean interface, intuitive design, and powerful task management without 
-                  the complexity.
-                </p>
-                
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed mt-4">
-                  Perfect for anyone looking to increase productivity and maintain organization with an app that gets 
-                  out of your way and lets you focus on what needs to be done.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
