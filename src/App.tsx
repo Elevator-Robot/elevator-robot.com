@@ -230,50 +230,81 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white relative overflow-x-hidden">
-      
-      {/* Revolutionary Navigation */}
-      <nav className="nav-container">
-        <div className="flex items-center justify-between w-full">
-          <div className="nav-logo">Elevator Robot</div>
-          <div className="hidden md:flex items-center space-x-6">
-            <button onClick={() => scrollToSection('about')} className="nav-link">
+    <div className="min-h-screen bg-black text-white relative">
+      {/* Mobile Navigation Overlay */}
+      <div className={`fixed inset-0 z-40 transition-opacity duration-300 md:hidden ${isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+        <div className="absolute inset-0 bg-black bg-opacity-50" onClick={() => setIsMenuOpen(false)}></div>
+      </div>
+
+      {/* Side Navigation */}
+      <nav className={`fixed top-0 left-0 z-50 h-full w-80 bg-black bg-opacity-95 backdrop-blur-lg border-r border-white border-opacity-20 transform transition-transform duration-300 ease-in-out md:hidden ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+        <div className="p-6">
+          <div className="flex items-center justify-between mb-8">
+            <div className="nav-logo text-xl">Elevator Robot</div>
+            <button 
+              onClick={() => setIsMenuOpen(false)}
+              className="p-2 hover:bg-white hover:bg-opacity-10 rounded-lg transition-colors"
+            >
+              <div className="w-6 h-6 flex flex-col justify-center items-center">
+                <span className="block h-0.5 w-full bg-white rotate-45 translate-y-0"></span>
+                <span className="block h-0.5 w-full bg-white -rotate-45 -translate-y-0"></span>
+              </div>
+            </button>
+          </div>
+          
+          <div className="space-y-4">
+            <button 
+              onClick={() => scrollToSection('about')} 
+              className="block w-full text-left py-4 px-4 text-lg font-medium text-white hover:bg-white hover:bg-opacity-10 rounded-lg transition-all duration-200 hover:translate-x-2"
+            >
               About
             </button>
-            <button onClick={() => scrollToSection('services')} className="nav-link">
+            <button 
+              onClick={() => scrollToSection('services')} 
+              className="block w-full text-left py-4 px-4 text-lg font-medium text-white hover:bg-white hover:bg-opacity-10 rounded-lg transition-all duration-200 hover:translate-x-2"
+            >
               Services
             </button>
-            <button onClick={() => scrollToSection('contact')} className="nav-link">
+            <button 
+              onClick={() => scrollToSection('contact')} 
+              className="block w-full text-left py-4 px-4 text-lg font-medium text-white hover:bg-white hover:bg-opacity-10 rounded-lg transition-all duration-200 hover:translate-x-2"
+            >
               Contact
             </button>
           </div>
-          <button 
-            className="md:hidden p-2"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            <div className="w-6 h-6 flex flex-col justify-around">
-              <span className={`block h-0.5 w-full bg-white transition-all ${isMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
-              <span className={`block h-0.5 w-full bg-white transition-all ${isMenuOpen ? 'opacity-0' : ''}`}></span>
-              <span className={`block h-0.5 w-full bg-white transition-all ${isMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
-            </div>
-          </button>
         </div>
+      </nav>
+
+      {/* Main Content Wrapper */}
+      <div className={`transition-transform duration-300 ease-in-out ${isMenuOpen ? 'md:translate-x-0 translate-x-80' : 'translate-x-0'}`}>
         
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 right-0 bg-black bg-opacity-90 backdrop-blur-lg border border-white border-opacity-20 rounded-2xl mt-2 p-4">
-            <button onClick={() => scrollToSection('about')} className="block w-full text-left py-2 nav-link">
-              About
-            </button>
-            <button onClick={() => scrollToSection('services')} className="block w-full text-left py-2 nav-link">
-              Services
-            </button>
-            <button onClick={() => scrollToSection('contact')} className="block w-full text-left py-2 nav-link">
-              Contact
+        {/* Revolutionary Navigation */}
+        <nav className="nav-container">
+          <div className="flex items-center justify-between w-full">
+            <div className="nav-logo">Elevator Robot</div>
+            <div className="hidden md:flex items-center space-x-6">
+              <button onClick={() => scrollToSection('about')} className="nav-link">
+                About
+              </button>
+              <button onClick={() => scrollToSection('services')} className="nav-link">
+                Services
+              </button>
+              <button onClick={() => scrollToSection('contact')} className="nav-link">
+                Contact
+              </button>
+            </div>
+            <button 
+              className="md:hidden p-2"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              <div className="w-6 h-6 flex flex-col justify-around">
+                <span className={`block h-0.5 w-full bg-white transition-all ${isMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
+                <span className={`block h-0.5 w-full bg-white transition-all ${isMenuOpen ? 'opacity-0' : ''}`}></span>
+                <span className={`block h-0.5 w-full bg-white transition-all ${isMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
+              </div>
             </button>
           </div>
-        )}
-      </nav>
+        </nav>
 
       {/* Revolutionary Hero Section */}
       <section className="hero-revolution">
@@ -604,6 +635,8 @@ function App() {
           </div>
         </div>
       </footer>
+
+      </div> {/* End Main Content Wrapper */}
     </div>
   );
 }
