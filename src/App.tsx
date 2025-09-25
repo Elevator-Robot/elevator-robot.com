@@ -401,38 +401,24 @@ function App() {
                 From AI-powered applications to revolutionary web experiences, we build the future one pixel at a time.
               </p>
 
-              <div className="tech-stack stagger-child">
-                <div className="tech-tag">AI & Machine Learning</div>
-                <div className="tech-tag">React & Next.js</div>
-                <div className="tech-tag">Python & TensorFlow</div>
-                <div className="tech-tag">AWS & Cloud</div>
-                <div className="tech-tag">TypeScript</div>
-                <div className="tech-tag">GraphQL</div>
-                <div className="tech-tag">3D & WebGL</div>
-                <div className="tech-tag">Blockchain</div>
-              </div>
+
             </div>
 
             <div className="skills-3d stagger-child">
               <div className="skill-orb">
                 <div>AI/ML</div>
-                <div className="text-xs opacity-75">95%</div>
               </div>
               <div className="skill-orb">
                 <div>Web Dev</div>
-                <div className="text-xs opacity-75">98%</div>
               </div>
               <div className="skill-orb">
                 <div>Design</div>
-                <div className="text-xs opacity-75">92%</div>
               </div>
               <div className="skill-orb">
                 <div>Innovation</div>
-                <div className="text-xs opacity-75">100%</div>
               </div>
               <div className="skill-orb">
                 <div>Strategy</div>
-                <div className="text-xs opacity-75">94%</div>
               </div>
             </div>
           </div>
@@ -563,7 +549,6 @@ function App() {
             <div className="contact-form-revolutionary stagger-child">
               <form onSubmit={handleFormSubmit} className="space-y-6">
                 <div className="form-group-revolutionary">
-                  <label className="form-label-revolutionary">Name</label>
                   <input
                     type="text"
                     id="name"
@@ -576,7 +561,6 @@ function App() {
                 </div>
                 
                 <div className="form-group-revolutionary">
-                  <label className="form-label-revolutionary">Email</label>
                   <input
                     type="email"
                     id="email"
@@ -589,7 +573,6 @@ function App() {
                 </div>
                 
                 <div className="form-group-revolutionary">
-                  <label className="form-label-revolutionary">Project Details</label>
                   <textarea
                     id="message"
                     rows={5}
