@@ -362,7 +362,7 @@ function App() {
               className="cta-secondary"
               onClick={() => scrollToSection('about')}
             >
-              Explore Our Work
+              Explore Our Services
             </button>
           </div>
         </div>
@@ -436,7 +436,6 @@ function App() {
                   Custom AI solutions that learn, adapt, and evolve with your business needs. 
                   From machine learning models to intelligent automation.
                 </p>
-                <button className="service-link-3d">Explore AI Solutions</button>
               </div>
             </Card3D>
 
@@ -452,7 +451,6 @@ function App() {
                   Revolutionary web applications with cutting-edge 3D graphics, immersive interactions, 
                   and performance that sets new industry standards.
                 </p>
-                <button className="service-link-3d">View Portfolio</button>
               </div>
             </Card3D>
 
@@ -468,7 +466,6 @@ function App() {
                   Complete business transformation through technology. We reimagine processes, 
                   workflows, and customer experiences from the ground up.
                 </p>
-                <button className="service-link-3d">Start Transformation</button>
               </div>
             </Card3D>
 
@@ -484,7 +481,6 @@ function App() {
                   Experimental projects that push the boundaries of what's possible. 
                   From blockchain to AR/VR, we explore tomorrow's technology today.
                 </p>
-                <button className="service-link-3d">Join Innovation</button>
               </div>
             </Card3D>
           </div>
