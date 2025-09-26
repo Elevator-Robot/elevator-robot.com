@@ -17,7 +17,7 @@ export const useRUM = () => {
       const APPLICATION_VERSION = '1.0.0';
       const APPLICATION_REGION = 'us-east-1';
 
-      const awsRum = new AwsRum(
+      new AwsRum(
         APPLICATION_ID,
         APPLICATION_VERSION,
         APPLICATION_REGION,
