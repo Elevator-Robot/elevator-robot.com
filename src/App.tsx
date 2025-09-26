@@ -379,11 +379,12 @@ function App() {
                 Innovation Meets Excellence
               </h2>
               <p className="about-text stagger-child">
-                We build digital solutions that matter. Our team combines modern AI technology with thoughtful design 
-                to create experiences that solve real problems and deliver genuine value.
+                We build digital solutions that matter. Whether you need a stunning website to sell your products, 
+                a custom web application, or advanced AI integration, we'll work with you to bring your vision to life.
               </p>
               <p className="about-text stagger-child">
-                From AI-powered applications to dynamic web experiences, we focus on creating tools that work.
+                As both developers and web designers, we create everything from e-commerce sites and business websites 
+                to cutting-edge AI applications. We focus on building solutions that drive real results for your business.
               </p>
 
 
