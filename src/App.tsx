@@ -379,12 +379,11 @@ function App() {
                 Innovation Meets Excellence
               </h2>
               <p className="about-text stagger-child">
-                We're not just developers - we're digital architects who transform ambitious ideas into reality. 
-                Our team combines cutting-edge AI technology with award-winning design to create experiences 
-                that don't just meet expectations, they shatter them.
+                We build digital solutions that matter. Our team combines modern AI technology with thoughtful design 
+                to create experiences that solve real problems and deliver genuine value.
               </p>
               <p className="about-text stagger-child">
-                From AI-powered applications to revolutionary web experiences, we build the future one pixel at a time.
+                From AI-powered applications to dynamic web experiences, we focus on creating tools that work.
               </p>
 
 
