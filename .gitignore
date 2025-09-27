@@ -29,4 +29,8 @@ amplify_outputs*
 amplifyconfiguration*
 .aider*
 .env
+.env.local
 .serena
+
+# public amplify config (generated during development)
+public/amplify_outputs.json

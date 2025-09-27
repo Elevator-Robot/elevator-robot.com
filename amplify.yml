@@ -10,12 +10,26 @@ backend:
     postBuild:
       commands:
         - echo "Backend deployed successfully"
+        - echo "Checking for amplify_outputs.json"
+        - ls -la amplify_outputs* || echo "amplify_outputs.json not found"
 
 frontend:
   phases:
-    build:
+    preBuild:
       commands:
         - npm ci --cache .npm --prefer-offline
+        - echo "Setting up amplify configuration for frontend"
+        - |
+          if [ -f "amplify_outputs.json" ]; then
+            echo "✅ Found amplify_outputs.json, copying to public directory"
+            cp amplify_outputs.json public/
+          else
+            echo "⚠️  amplify_outputs.json not found"
+            echo "Creating placeholder file to avoid 404 errors"
+            echo '{"error": "Configuration not available"}' > public/amplify_outputs.json
+          fi
+    build:
+      commands:
         - npm run build
   artifacts:
     baseDirectory: dist
