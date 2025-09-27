@@ -227,9 +227,17 @@ function App() {
     } catch (error) {
       console.error('Error sending message:', error);
       
-      // Check if it's a credentials issue
-      if (error && typeof error === 'object' && 'name' in error && error.name === 'NoCredentials') {
-        console.error('AWS credentials not configured. Make sure amplify_outputs.json is properly configured.');
+      // Enhanced error handling for different scenarios
+      if (error && typeof error === 'object') {
+        if ('name' in error && error.name === 'NoCredentials') {
+          console.error('❌ AWS credentials not configured. Make sure amplify_outputs.json is properly configured.');
+          console.error('For local development: Run "npx ampx sandbox --outputs-format json --outputs-out-dir ."');
+        } else if ('message' in error && typeof error.message === 'string') {
+          console.error('❌ GraphQL Error:', error.message);
+          if (error.message.includes('Network error') || error.message.includes('fetch')) {
+            console.error('This might be due to missing AWS configuration or network connectivity issues.');
+          }
+        }
       }
       
       setSubmitStatus('error');
