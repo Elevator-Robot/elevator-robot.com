@@ -204,7 +204,11 @@ function App() {
 
     try {
       const client = generateClient();
-      await client.graphql({
+      
+      console.log('Sending message with client:', client);
+      console.log('Form data:', { name: formData.name, email: formData.email, message: formData.message });
+      
+      const response = await client.graphql({
         query: mutations.sendMessage,
         variables: {
           name: formData.name,
@@ -213,6 +217,7 @@ function App() {
         }
       });
 
+      console.log('Message sent successfully:', response);
       setSubmitStatus('success');
       setFormData({ name: "", email: "", message: "" });
       
@@ -221,6 +226,12 @@ function App() {
       }, 5000);
     } catch (error) {
       console.error('Error sending message:', error);
+      
+      // Check if it's a credentials issue
+      if (error && typeof error === 'object' && 'name' in error && error.name === 'NoCredentials') {
+        console.error('AWS credentials not configured. Make sure amplify_outputs.json is properly configured.');
+      }
+      
       setSubmitStatus('error');
       
       setTimeout(() => {
