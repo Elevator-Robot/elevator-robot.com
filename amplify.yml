@@ -10,9 +10,25 @@ backend:
     postBuild:
       commands:
         - echo "Backend deployed successfully"
+        # Copy amplify outputs to the frontend public directory if it exists
+        - |
+          if [ -f amplify_outputs.json ]; then
+            echo "Copying amplify_outputs.json to public directory"
+            cp amplify_outputs.json public/
+          else
+            echo "amplify_outputs.json not found after backend deployment"
+          fi
 
 frontend:
   phases:
+    preBuild:
+      commands:
+        # Ensure the public directory has the amplify outputs from backend deployment
+        - |
+          if [ -f amplify_outputs.json ]; then
+            echo "Found amplify_outputs.json, copying to public directory"
+            cp amplify_outputs.json public/
+          fi
     build:
       commands:
         - npm ci --cache .npm --prefer-offline

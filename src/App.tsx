@@ -227,9 +227,20 @@ function App() {
     } catch (error) {
       console.error('Error sending message:', error);
       
-      // Check if it's a credentials issue
-      if (error && typeof error === 'object' && 'name' in error && error.name === 'NoCredentials') {
-        console.error('AWS credentials not configured. Make sure amplify_outputs.json is properly configured.');
+      // Enhanced error handling for common configuration issues
+      if (error && typeof error === 'object') {
+        const errorObj = error as {name?: string; message?: string};
+        
+        if (errorObj.name === 'NoCredentials' || 
+            errorObj.message?.includes('No credentials') ||
+            errorObj.message?.includes('amplify_outputs')) {
+          console.error('AWS configuration missing. Contact form requires proper backend setup.');
+        } else if (errorObj.message?.includes('GraphQL endpoint') || 
+                   errorObj.message?.includes('Network Error')) {
+          console.error('Backend service unavailable. Please try again later.');
+        } else if (errorObj.message?.includes('API key')) {
+          console.error('API authentication failed. Backend configuration may be incomplete.');
+        }
       }
       
       setSubmitStatus('error');
