@@ -7,12 +7,15 @@ import { PolicyStatement } from 'aws-cdk-lib/aws-iam';
 
 const backend = defineBackend({ auth, data, sendEmail });
 
-// Create SES email identity for contact form
+// Create SES email identity only for production (main branch)
 const emailStack = backend.createStack('ElevatorRobotEmail');
 
-new ses.EmailIdentity(emailStack, 'ContactEmail', {
-  identity: ses.Identity.email('hello@elevator-robot.com'),
-});
+// Only create email identity if not in sandbox mode
+if (backend.stack.stackName.includes('main-branch')) {
+  new ses.EmailIdentity(emailStack, 'ContactEmail', {
+    identity: ses.Identity.email('hello@elevator-robot.com'),
+  });
+}
 
 const contactFormHandler = backend.sendEmail.resources.lambda;
 
