@@ -427,7 +427,7 @@ function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16 advanced-animate">
             <h2 className="about-title text-white stagger-child">
-              Revolutionary Services
+              Our Services
             </h2>
             <p className="hero-subtitle text-white stagger-child">
               We don't just build applications - we craft digital experiences that define the future
