@@ -9,7 +9,7 @@ backend:
         - "npx ampx pipeline-deploy --branch $AWS_BRANCH --app-id $AWS_APP_ID"
     postBuild:
       commands:
-        - "npx ampx generate outputs --branch $AWS_BRANCH --app-id $AWS_APP_ID"
+        - "npx ampx generate outputs --branch $AWS_BRANCH --app-id $AWS_APP_ID --format json"
         - echo "Backend deployed successfully"
 
 frontend:
@@ -19,8 +19,11 @@ frontend:
         - npm ci
     build:
       commands:
-        - cp amplify_outputs.json dist/ || echo "amplify_outputs.json not found"
+        - echo "Copying amplify_outputs.json to public directory..."
+        - cp amplify_outputs.json public/ || echo "amplify_outputs.json not found, will be generated during build"
         - npm run build
+        - echo "Ensuring amplify_outputs.json is in dist..."
+        - cp amplify_outputs.json dist/ || echo "amplify_outputs.json not available for dist copy"
   artifacts:
     baseDirectory: dist
     files:
