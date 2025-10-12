@@ -521,7 +521,7 @@ function App() {
                   </div>
                   <div>
                     <p className="text-white font-semibold">Email</p>
-                    <p className="text-gray-300">hello@elevator-robot.com</p>
+                    <p className="text-gray-300">hello@elevatorrobot.com</p>
                     <p className="text-gray-400 text-sm mt-1">We'll respond within 24 hours</p>
                   </div>
                 </div>

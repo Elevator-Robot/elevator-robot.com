@@ -1,4 +1,4 @@
-const CACHE_NAME = 'elevator-robot-v1';
+const CACHE_NAME = 'elevatorrobot-v1';
 const urlsToCache = [
   '/',
   '/static/js/bundle.js',
