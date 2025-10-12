@@ -13,7 +13,7 @@ const emailStack = backend.createStack('ElevatorRobotEmail');
 // Only create email identity if not in sandbox mode
 if (backend.stack.stackName.includes('main-branch')) {
   new ses.EmailIdentity(emailStack, 'ContactEmail', {
-    identity: ses.Identity.email('hello@elevator-robot.com'),
+    identity: ses.Identity.email('hello@elevatorrobot.com'),
   });
 }
 

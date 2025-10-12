@@ -36,7 +36,7 @@ We're not a traditional agency. We're a band of builders with a bias toward acti
 
 We're available for freelance engagements and project partnerships. If you're building something ambitious in AI/ML, and you want people who can execute fast and smart—reach out.
 
-📬 **Contact:** hello@elevator-robot.com
+📬 **Contact:** hello@elevatorrobot.com
 
 ---
 

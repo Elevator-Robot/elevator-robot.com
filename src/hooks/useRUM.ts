@@ -13,7 +13,7 @@ export const useRUM = () => {
         enableXRay: true
       };
 
-      const APPLICATION_ID = 'elevator-robot-monitor';
+      const APPLICATION_ID = 'elevatorrobot-monitor';
       const APPLICATION_VERSION = '1.0.0';
       const APPLICATION_REGION = 'us-east-1';
 

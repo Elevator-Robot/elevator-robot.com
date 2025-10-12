@@ -7,9 +7,9 @@ export const handler: Handler = async (event) => {
   const { name, email, message } = event.arguments;
 
   const params = {
-    Source: 'hello@elevator-robot.com',
+    Source: 'hello@elevatorrobot.com',
     Destination: {
-      ToAddresses: ['hello@elevator-robot.com'],
+      ToAddresses: ['hello@elevatorrobot.com'],
     },
     Message: {
       Subject: {

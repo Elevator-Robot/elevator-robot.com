@@ -8,7 +8,7 @@ async function associateDomain() {
   try {
     const params = {
       appId: 'dh6e4d2mc0nxp',
-      domainName: 'elevator-robot.com',
+      domainName: 'elevatorrobot.com',
       subDomainSettings: [
         {
           prefix: 'www',
