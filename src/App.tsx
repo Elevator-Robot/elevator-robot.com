@@ -97,7 +97,6 @@ function App() {
 
   const toggleContact = () => {
     setIsContactOpen(!isContactOpen);
-    setIsMenuOpen(false);
   };
 
   const handleSubmit = async (e: FormEvent) => {
@@ -237,6 +236,88 @@ function App() {
             <button onClick={() => scrollToSection('tools')} className="hover:text-blue-400 transition-colors">Tools</button>
             <button onClick={toggleContact} className="hover:text-blue-400 transition-colors">Contact</button>
           </div>
+
+          {/* Mobile Contact Form */}
+          {isContactOpen && (
+            <div className="absolute inset-0 flex items-center justify-center p-6 bg-black/95 backdrop-blur-xl">
+              <div className="w-full max-w-md">
+                <div className="flex justify-between items-center mb-6">
+                  <h3 className="text-2xl font-bold gradient-text">Get in Touch</h3>
+                  <button 
+                    onClick={() => setIsContactOpen(false)}
+                    className="text-gray-400 hover:text-white transition-colors"
+                  >
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <input
+                    type="text"
+                    required
+                    placeholder="Your name"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-blue-500 transition-all text-white placeholder-gray-500"
+                  />
+                  
+                  <input
+                    type="email"
+                    required
+                    placeholder="your.email@example.com"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-blue-500 transition-all text-white placeholder-gray-500"
+                  />
+                  
+                  <textarea
+                    rows={4}
+                    required
+                    placeholder="Your message..."
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-blue-500 transition-all resize-none text-white placeholder-gray-500"
+                  />
+                  
+                  <button
+                    type="submit"
+                    disabled={submitStatus === 'loading'}
+                    className="w-full px-4 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl hover:scale-105 transition-transform font-semibold"
+                  >
+                    {submitStatus === 'loading' ? 'Sending...' : 'Send Message'}
+                  </button>
+
+                  {submitStatus === 'success' && (
+                    <div className="text-center p-3 bg-green-500/20 border border-green-500 rounded-xl">
+                      <p className="text-green-300">✅ Message sent successfully!</p>
+                    </div>
+                  )}
+
+                  {submitStatus === 'error' && (
+                    <div className="text-center p-3 bg-red-500/20 border border-red-500 rounded-xl">
+                      <p className="text-red-300">❌ Failed to send</p>
+                    </div>
+                  )}
+                </form>
+
+                <div className="flex justify-center gap-6 mt-6 pt-6 border-t border-white/10">
+                  <a href="mailto:hello@elevatorrobot.com" className="text-gray-400 hover:text-blue-400 transition-colors text-sm">
+                    Email
+                  </a>
+                  <a 
+                    href="https://github.com/Elevator-Robot"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-blue-400 transition-colors text-sm"
+                  >
+                    GitHub
+                  </a>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </nav>
 
