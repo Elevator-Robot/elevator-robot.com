@@ -130,7 +130,11 @@ function App() {
       {/* Navigation */}
       <nav className={`nav-modern ${scrolled ? 'scrolled' : ''}`}>
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-          <div className="text-2xl font-bold gradient-text">Elevator Robot</div>
+          <div className="flex items-center gap-3">
+            <div className="text-2xl font-bold gradient-text">Elevator Robot</div>
+            <span className="text-gray-500 text-sm">|</span>
+            <div className="text-sm text-gray-400">AI Tools for Creators</div>
+          </div>
           
           <div className="hidden md:flex items-center gap-8">
             <div className="relative">
@@ -416,27 +420,97 @@ function App() {
         </div>
       </nav>
 
-      {/* Hero - Full Screen */}
-      <section className="hero-modern">
-        <div className="floating-orb orb-1"></div>
-        <div className="floating-orb orb-2"></div>
-        <div className="floating-orb orb-3"></div>
-        
-        <div className="relative z-10 px-6 max-w-7xl mx-auto h-full flex flex-col justify-center">
-          {/* Hero Content - Centered */}
-          <div className="text-center">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 stagger-item tracking-tight">
-              <AnimatedText phrases={[
-                "AI Tools for Creators",
-                "Write Better Content",
-                "Generate Precise Images",
-                "Empower Creativity"
-              ]} />
-            </h1>
+      {/* Split-Screen Hero Section */}
+      <section className="relative h-screen flex overflow-hidden">
+        {/* Left Side - Text Studio */}
+        <div className="relative w-1/2 flex items-center justify-center bg-gradient-to-br from-blue-950/20 to-purple-950/20 border-r border-white/5">
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5"></div>
+          <div className="floating-orb orb-1" style={{ left: '10%', top: '20%' }}></div>
+          
+          <div className="relative z-10 text-center px-8 max-w-lg">
+            <div className="mb-8">
+              <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-blue-500/10 backdrop-blur-sm border border-blue-500/20 mb-6">
+                <svg className="w-10 h-10 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                </svg>
+              </div>
+            </div>
             
-            <p className="text-lg md:text-xl text-gray-400 stagger-item max-w-2xl mx-auto">
-              Build amazing things with our suite of AI-powered creative tools
-            </p>
+            <h2 className="text-4xl font-bold mb-4 text-white">Text Studio</h2>
+            <p className="text-lg text-gray-400 mb-6">Write better content with AI-powered assistance</p>
+            
+            {/* Animated Text Preview */}
+            <div className="bg-black/20 backdrop-blur-sm rounded-xl p-6 border border-white/5">
+              <div className="text-left text-sm space-y-2">
+                <div className="text-gray-500">Original:</div>
+                <div className="text-gray-300 line-through">The quick brown fox jumps</div>
+                <div className="text-gray-500 mt-4">Enhanced:</div>
+                <div className="text-white font-medium">
+                  <AnimatedText phrases={[
+                    "The swift amber fox leaps gracefully",
+                    "A nimble russet fox bounds elegantly",
+                    "The agile copper fox springs fluidly"
+                  ]} />
+                </div>
+              </div>
+            </div>
+            
+            <button className="mt-8 px-8 py-3 bg-blue-500/20 hover:bg-blue-500/30 text-white rounded-lg border border-blue-500/30 transition-all">
+              <span>Coming Soon</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Right Side - Image Studio */}
+        <div className="relative w-1/2 flex items-center justify-center bg-gradient-to-br from-purple-950/20 to-pink-950/20">
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5"></div>
+          <div className="floating-orb orb-2" style={{ right: '10%', top: '30%' }}></div>
+          
+          <div className="relative z-10 text-center px-8 max-w-lg">
+            <div className="mb-8">
+              <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-purple-500/10 backdrop-blur-sm border border-purple-500/20 mb-6">
+                <svg className="w-10 h-10 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </div>
+            </div>
+            
+            <h2 className="text-4xl font-bold mb-4 text-white">Image Studio</h2>
+            <p className="text-lg text-gray-400 mb-6">Generate images with precision and control</p>
+            
+            {/* Animated Image Preview */}
+            <div className="bg-black/20 backdrop-blur-sm rounded-xl p-6 border border-white/5">
+              <div className="aspect-video bg-gradient-to-br from-purple-900/30 to-pink-900/30 rounded-lg flex items-center justify-center border border-white/10 overflow-hidden">
+                <div className="text-center">
+                  <div className="text-gray-400 text-sm mb-2">Base Image + AI</div>
+                  <div className="flex items-center gap-2 justify-center">
+                    <div className="w-12 h-12 rounded bg-gradient-to-br from-purple-600 to-pink-600 animate-pulse"></div>
+                    <span className="text-gray-500">→</span>
+                    <div className="w-16 h-16 rounded bg-gradient-to-br from-purple-400 to-pink-400"></div>
+                  </div>
+                  <div className="text-gray-500 text-xs mt-2">Precise control</div>
+                </div>
+              </div>
+            </div>
+            
+            <button className="mt-8 px-8 py-3 bg-purple-500/20 hover:bg-purple-500/30 text-white rounded-lg border border-purple-500/30 transition-all">
+              <span>Coming Soon</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Spotify Vibe Radio - Bottom Right */}
+        <div className="absolute bottom-8 right-8 z-20">
+          <div className="bg-black/40 backdrop-blur-md rounded-xl px-6 py-4 border border-white/10 flex items-center gap-3 hover:bg-black/50 transition-all cursor-pointer group">
+            <div className="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center group-hover:bg-green-500/30 transition-all">
+              <svg className="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+              </svg>
+            </div>
+            <div className="text-left">
+              <div className="text-xs text-gray-400">Now Playing</div>
+              <div className="text-sm font-medium text-white">Vibe Radio 🎵</div>
+            </div>
           </div>
         </div>
       </section>
