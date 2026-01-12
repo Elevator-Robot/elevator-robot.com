@@ -348,8 +348,8 @@ function App() {
             <AdvancedTypewriter 
               phrases={[
                 "AI Tools for Creators",
-                "Built for You",
-                "Ship Great Software",
+                "Write Better Content",
+                "Generate Precise Images",
                 "Empower Creativity"
               ]}
               speed={150}
@@ -470,7 +470,7 @@ function App() {
                 <h3 className="service-title-3d">Image Studio</h3>
                 <p className="service-description-3d">
                   Collaborative AI image generation with spaces, galleries, and real-time updates. 
-                  Create, organize, and share AI-generated art with a beautiful, intuitive interface.
+                  Use base images for precise control over your AI-generated art.
                 </p>
                 <a 
                   href="https://studio.elevatorrobot.com" 
@@ -493,7 +493,7 @@ function App() {
                 <h3 className="service-title-3d">Text Studio</h3>
                 <p className="service-description-3d">
                   Context-aware AI writing with document upload and web research capabilities. 
-                  Generate content that understands your context and sources information intelligently.
+                  Write better content with intelligent context understanding and research integration.
                 </p>
                 <a 
                   href="https://studio.elevatorrobot.com" 

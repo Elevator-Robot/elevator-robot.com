@@ -32,10 +32,10 @@ We're here to ship great software.
 A comprehensive AI workspace for image generation, text generation, and chat—all in one place. Built with React, AWS Amplify, and integrated with Anthropic, OpenAI, and Stability AI.
 
 ### [Image Studio](https://studio.elevatorrobot.com)
-Collaborative AI image generation with spaces, galleries, and real-time updates.
+Collaborative AI image generation with spaces, galleries, and real-time updates. Use base images for precise control over your AI-generated art.
 
 ### [Text Studio](https://studio.elevatorrobot.com)
-Context-aware AI writing with document upload and web research capabilities.
+Context-aware AI writing with document upload and web research capabilities. Write better content with intelligent context understanding.
 
 Check out our [GitHub](https://github.com/Elevator-Robot) to explore the code and contribute.
 
