@@ -87,7 +87,7 @@ This project is licensed under the [Creative Commons Attribution-NonCommercial 4
 
 ## 🚘 Who We Are
 
-We're developers, tinkerers, builders, dreamers.  
+We're a product-focused studio of developers, tinkerers, and dreamers.  
 We believe in shipping early, experimenting often, and sharing everything we build.
 
 Elevator Robot is a studio for creating software that matters—tools we're excited to use and share.
