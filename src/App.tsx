@@ -186,42 +186,6 @@ function App() {
         </div>
       </section>
 
-      {/* Brain In Cup Section */}
-      <section id="about" className="section-modern relative bg-gradient-to-b from-black to-gray-900">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center reveal">
-            <a 
-              href="https://brainincup.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="logo-orb-modern mx-auto mb-8"
-            >
-              <img 
-                src="/images/brainincup-logo.png"
-                alt="Brain In Cup"
-                className="w-full h-full object-cover rounded-full p-3"
-              />
-            </a>
-            
-            <h2 className="text-4xl md:text-6xl font-bold mb-6 gradient-text">
-              Brain In Cup
-            </h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto mb-8">
-              Our flagship AI workspace—bringing together image generation, text generation, and chat in one powerful platform. 
-              Built with React, AWS Amplify, integrated with Anthropic, OpenAI, and Stability AI.
-            </p>
-            <a 
-              href="https://brainincup.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-magnetic"
-            >
-              <span>Try Brain In Cup →</span>
-            </a>
-          </div>
-        </div>
-      </section>
-
       {/* Tools Section */}
       <section id="tools" className="section-modern relative">
         <div className="max-w-7xl mx-auto px-6">
@@ -280,6 +244,34 @@ function App() {
                 </a>
               </div>
             </div>
+          </div>
+
+          <div className="text-center mt-12 reveal">
+            <a 
+              href="https://brainincup.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-6 p-6 glass-card hover:scale-105 transition-all max-w-2xl"
+            >
+              <div className="logo-orb-modern" style={{ width: '80px', height: '80px' }}>
+                <img 
+                  src="/images/brainincup-logo.png"
+                  alt="Brain In Cup"
+                  className="w-full h-full object-cover rounded-full p-2"
+                />
+              </div>
+              
+              <div className="text-left flex-1">
+                <h4 className="text-xl font-bold mb-2">Brain In Cup</h4>
+                <p className="text-gray-400 text-sm">
+                  All-in-one AI workspace combining image generation, text generation, and chat
+                </p>
+              </div>
+              
+              <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </a>
           </div>
 
           <div className="text-center mt-16 reveal">
