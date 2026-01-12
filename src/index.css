@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+@import './modern-dark.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -335,6 +336,48 @@
     padding: 8rem 0;
     position: relative;
     overflow: hidden;
+  }
+
+  /* Futuristic Section Dividers */
+  .section-revolutionary::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(59, 130, 246, 0.5) 20%, 
+      rgba(147, 51, 234, 0.8) 50%, 
+      rgba(59, 130, 246, 0.5) 80%, 
+      transparent 100%
+    );
+    box-shadow: 0 0 20px rgba(147, 51, 234, 0.5);
+  }
+
+  .section-revolutionary::before {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(147, 51, 234, 0.3) 0%, transparent 70%);
+    transform: translateX(-50%);
+    animation: pulse-glow 3s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      opacity: 0.5;
+      transform: translateX(-50%) scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: translateX(-50%) scale(1.2);
+    }
   }
 
   .section-dark {
