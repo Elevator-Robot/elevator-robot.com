@@ -275,12 +275,12 @@ function App() {
             </button>
             <button 
               onClick={() => {
-                scrollToSection('services');
+                scrollToSection('projects');
                 setIsMenuOpen(false);
               }} 
               className="block w-full text-left py-4 px-4 text-lg font-medium text-white hover:bg-white hover:bg-opacity-10 rounded-lg transition-all duration-200 hover:translate-x-2"
             >
-              Services
+              Projects
             </button>
             <button 
               onClick={() => {
@@ -306,8 +306,8 @@ function App() {
               <button onClick={() => scrollToSection('about')} className="nav-link">
                 About
               </button>
-              <button onClick={() => scrollToSection('services')} className="nav-link">
-                Services
+              <button onClick={() => scrollToSection('projects')} className="nav-link">
+                Projects
               </button>
               <button onClick={() => scrollToSection('contact')} className="nav-link">
                 Contact
@@ -347,10 +347,10 @@ function App() {
           <h1 className="hero-title-revolutionary">
             <AdvancedTypewriter 
               phrases={[
-                "We Build the Future",
-                "AI Revolution Starts Here",
-                "Innovation Beyond Limits",
-                "Your Digital Transformation"
+                "AI Tools for Creators",
+                "Built for You",
+                "Ship Great Software",
+                "Empower Creativity"
               ]}
               speed={150}
               deleteSpeed={75}
@@ -359,21 +359,23 @@ function App() {
           </h1>
           
           <p className="hero-subtitle">
-            Cutting-edge AI solutions and web applications that transform businesses and create extraordinary digital experiences.
+            A software studio creating AI-integrated applications for creators.
           </p>
           
           <div className="hero-cta-group">
-            <button 
+            <a 
+              href="https://brainincup.com"
+              target="_blank"
+              rel="noopener noreferrer"
               className="cta-primary"
-              onClick={() => scrollToSection('contact')}
             >
-              Start Your Project
-            </button>
+              Try Brain In Cup
+            </a>
             <button 
               className="cta-secondary"
               onClick={() => scrollToSection('about')}
             >
-              Explore Our Services
+              Explore Our Projects
             </button>
           </div>
         </div>
@@ -387,15 +389,15 @@ function App() {
           <div className="about-revolutionary advanced-animate">
             <div className="about-content">
               <h2 className="about-title stagger-child">
-                Innovation Meets Excellence
+                A Software Studio
               </h2>
               <p className="about-text stagger-child">
-                We build digital solutions that matter. Whether you need a stunning website to sell your products, 
-                a custom web application, or advanced AI integration, we'll work with you to bring your vision to life.
+                We create AI-integrated applications for creators. 
+                Our tools combine cutting-edge technology with thoughtful design.
               </p>
               <p className="about-text stagger-child">
-                As both developers and web designers, we create everything from e-commerce sites and business websites 
-                to cutting-edge AI applications. We focus on building solutions that drive real results for your business.
+                From AI workspaces to creative tools, we build products that empower people to create amazing things. 
+                We're building for creators, developers, and anyone who wants powerful tools.
               </p>
 
 
@@ -406,31 +408,31 @@ function App() {
                 <div>AI/ML</div>
               </div>
               <div className="skill-orb">
-                <div>Web Dev</div>
+                <div>React</div>
+              </div>
+              <div className="skill-orb">
+                <div>AWS</div>
               </div>
               <div className="skill-orb">
                 <div>Design</div>
               </div>
               <div className="skill-orb">
-                <div>Innovation</div>
-              </div>
-              <div className="skill-orb">
-                <div>Strategy</div>
+                <div>UX</div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Revolutionary Services Section */}
-      <section id="services" className="section-revolutionary section-gradient">
+      {/* Projects Section */}
+      <section id="projects" className="section-revolutionary section-gradient">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16 advanced-animate">
             <h2 className="about-title text-white stagger-child">
-              Our Services
+              Our Projects
             </h2>
             <p className="hero-subtitle text-white stagger-child">
-              We don't just build applications - we craft digital experiences that define the future
+              Tools and applications built for creators and developers
             </p>
           </div>
 
@@ -439,76 +441,99 @@ function App() {
               <div className="service-card-face">
                 <div className="service-icon-3d">
                   <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                  </svg>
-                </div>
-                <h3 className="service-title-3d">AI-Powered Applications</h3>
-                <p className="service-description-3d">
-                  Custom AI solutions that learn, adapt, and evolve with your business needs. 
-                  From machine learning models to intelligent automation.
-                </p>
-              </div>
-            </Card3D>
-
-            <Card3D className="service-card-3d stagger-child">
-              <div className="service-card-face">
-                <div className="service-icon-3d">
-                  <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
-                  </svg>
-                </div>
-                <h3 className="service-title-3d">Next-Gen Web Experiences</h3>
-                <p className="service-description-3d">
-                  Revolutionary web applications with cutting-edge 3D graphics, immersive interactions, 
-                  and performance that sets new industry standards.
-                </p>
-              </div>
-            </Card3D>
-
-            <Card3D className="service-card-3d stagger-child">
-              <div className="service-card-face">
-                <div className="service-icon-3d">
-                  <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
-                  </svg>
-                </div>
-                <h3 className="service-title-3d">Digital Transformation</h3>
-                <p className="service-description-3d">
-                  Complete business transformation through technology. We reimagine processes, 
-                  workflows, and customer experiences from the ground up.
-                </p>
-              </div>
-            </Card3D>
-
-            <Card3D className="service-card-3d stagger-child">
-              <div className="service-card-face">
-                <div className="service-icon-3d">
-                  <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
                   </svg>
                 </div>
-                <h3 className="service-title-3d">Innovation Labs</h3>
+                <h3 className="service-title-3d">Brain In Cup</h3>
                 <p className="service-description-3d">
-                  Experimental projects that push the boundaries of what's possible. 
-                  From blockchain to AR/VR, we explore tomorrow's technology today.
+                  Your all-in-one AI workspace. Generate images, write with AI, and chat with advanced models—all in one place. 
+                  Built with React, AWS Amplify, and integrated with Anthropic, OpenAI, and Stability AI.
                 </p>
+                <a 
+                  href="https://brainincup.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-block mt-4 px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:scale-105 transition-transform"
+                >
+                  Try It Now →
+                </a>
               </div>
             </Card3D>
+
+            <Card3D className="service-card-3d stagger-child">
+              <div className="service-card-face">
+                <div className="service-icon-3d">
+                  <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                  </svg>
+                </div>
+                <h3 className="service-title-3d">Image Studio</h3>
+                <p className="service-description-3d">
+                  Collaborative AI image generation with spaces, galleries, and real-time updates. 
+                  Create, organize, and share AI-generated art with a beautiful, intuitive interface.
+                </p>
+                <a 
+                  href="https://studio.elevatorrobot.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-block mt-4 px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:scale-105 transition-transform"
+                >
+                  Try It Now →
+                </a>
+              </div>
+            </Card3D>
+
+            <Card3D className="service-card-3d stagger-child">
+              <div className="service-card-face">
+                <div className="service-icon-3d">
+                  <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                  </svg>
+                </div>
+                <h3 className="service-title-3d">Text Studio</h3>
+                <p className="service-description-3d">
+                  Context-aware AI writing with document upload and web research capabilities. 
+                  Generate content that understands your context and sources information intelligently.
+                </p>
+                <a 
+                  href="https://studio.elevatorrobot.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-block mt-4 px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:scale-105 transition-transform"
+                >
+                  Try It Now →
+                </a>
+              </div>
+            </Card3D>
+          </div>
+
+          <div className="text-center mt-12 advanced-animate stagger-child">
+            <a 
+              href="https://github.com/Elevator-Robot" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-white hover:text-blue-400 transition-colors"
+            >
+              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+              View on GitHub
+            </a>
           </div>
         </div>
       </section>
 
-      {/* Revolutionary Contact Section */}
+      {/* Community Contact Section */}
       <section id="contact" className="contact-revolutionary">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="contact-container advanced-animate">
             <div className="contact-info">
               <h2 className="about-title stagger-child">
-                Ready to Build the Future?
+                Get in Touch
               </h2>
               <p className="about-text stagger-child">
-                Let's discuss your vision and transform it into reality. 
-                Every revolutionary project starts with a single conversation.
+                Have questions, feedback, or ideas? We'd love to hear from you. 
+                Whether you've found a bug or want to contribute, reach out to us.
               </p>
               
               <div className="mt-8 stagger-child">
@@ -522,7 +547,27 @@ function App() {
                   <div>
                     <p className="text-white font-semibold">Email</p>
                     <p className="text-gray-300">hello@elevatorrobot.com</p>
-                    <p className="text-gray-400 text-sm mt-1">We'll respond within 24 hours</p>
+                    <p className="text-gray-400 text-sm mt-1">We typically respond within 24-48 hours</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center">
+                  <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mr-4">
+                    <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-white font-semibold">GitHub</p>
+                    <a 
+                      href="https://github.com/Elevator-Robot" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-blue-400 hover:text-blue-300 transition-colors"
+                    >
+                      github.com/Elevator-Robot
+                    </a>
+                    <p className="text-gray-400 text-sm mt-1">Contributions welcome</p>
                   </div>
                 </div>
               </div>
@@ -537,7 +582,7 @@ function App() {
                     id="name"
                     required
                     className="form-input-revolutionary"
-                    placeholder="Your full name"
+                    placeholder="Your name"
                     value={formData.name}
                     onChange={handleInputChange}
                   />
@@ -561,7 +606,7 @@ function App() {
                     rows={5}
                     required
                     className="form-input-revolutionary resize-none"
-                    placeholder="Tell us about your vision, goals, and what you'd like to build..."
+                    placeholder="Your message, feedback, or questions..."
                     value={formData.message}
                     onChange={handleInputChange}
                   />
@@ -572,13 +617,13 @@ function App() {
                   disabled={submitStatus === 'loading'}
                   className="submit-btn-revolutionary"
                 >
-                  {submitStatus === 'loading' ? 'Sending...' : 'Start Your Project'}
+                  {submitStatus === 'loading' ? 'Sending...' : 'Send Message'}
                 </button>
 
                 {submitStatus === 'success' && (
                   <div className="text-center p-4 bg-green-500 bg-opacity-20 border border-green-500 rounded-lg">
                     <p className="text-green-300 font-medium">
-                      🚀 Message sent successfully! We'll be in touch within 24 hours.
+                      ✅ Message sent successfully! We'll get back to you soon.
                     </p>
                   </div>
                 )}
@@ -596,16 +641,42 @@ function App() {
         </div>
       </section>
 
-      {/* Revolutionary Footer */}
+      {/* Footer */}
       <footer className="bg-black bg-opacity-50 backdrop-blur-lg py-12 border-t border-white border-opacity-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="nav-logo text-3xl mb-4">Elevator Robot</div>
             <p className="text-gray-400 mb-6">
-              Building the future, one innovation at a time.
+              Building AI tools for creators.
             </p>
+            <div className="flex justify-center gap-6 mb-6">
+              <a 
+                href="https://brainincup.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-blue-400 hover:text-blue-300 transition-colors"
+              >
+                Brain In Cup
+              </a>
+              <a 
+                href="https://github.com/Elevator-Robot" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-blue-400 hover:text-blue-300 transition-colors"
+              >
+                GitHub
+              </a>
+              <a 
+                href="https://twitter.com/elevatorrobot" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-blue-400 hover:text-blue-300 transition-colors"
+              >
+                Twitter
+              </a>
+            </div>
             <p className="text-gray-500 text-sm">
-              © 2025 Elevator Robot. All rights reserved. | Designed & Developed with ❤️ and ☕
+              © 2025 Elevator Robot. All rights reserved. | Built with ❤️ and ☕
             </p>
           </div>
         </div>

@@ -7,15 +7,15 @@
 
 ## 🧠 What is Elevator Robot?
 
-**Elevator Robot** is an innovations factory run by a team of independent, highly technical engineers and creators. We work at the bleeding edge of **AI**, **machine learning**, and **automation**—and we do it because we love it.
+**Elevator Robot** is a software studio creating AI-integrated applications for creators. We build tools we want to use, then share them with the community.
 
-We're not a traditional agency. We're a band of builders with a bias toward action, driven by curiosity and experimentation. Most of our projects begin with a question, not a client.
+We're here to ship great software.
 
-## 🛠️ What We Do
+## 🛠️ What We Build
 
-- **Freelance Engineering** — Select freelance work with clients pushing the envelope
-- **Incubation Projects** — Tools, platforms, and prototypes we believe should exist
-- **Open Source & Community** — Contributing and creating open source tooling
+- **AI-Integrated Apps** — Practical tools powered by modern AI
+- **Creative Tools** — Applications that empower creators
+- **Developer Tools** — Software that makes building easier
 
 ## 🔍 Areas of Interest
 
@@ -26,13 +26,18 @@ We're not a traditional agency. We're a band of builders with a bias toward acti
 - Cloud Infrastructure & DevOps (AWS specialists)
 - Tooling for developers and creatives
 
-## 🎨 Studio
+## 🎨 Our Projects
 
-We're building [studio.elevatorrobot.com](https://studio.elevatorrobot.com) — a collection of AI-powered creative tools:
-- **Image Generation Studio** — AI image generation with spaces and collaboration
-- **Text Generation Studio** — Context-aware AI writing with document upload and web research
+### [Brain In Cup](https://brainincup.com)
+A comprehensive AI workspace for image generation, text generation, and chat—all in one place. Built with React, AWS Amplify, and integrated with Anthropic, OpenAI, and Stability AI.
 
-Learn more: [Studio Issues](https://github.com/Elevator-Robot/elevator-robot.com/issues?q=is%3Aissue+label%3Aenhancement+studio)
+### [Image Studio](https://studio.elevatorrobot.com)
+Collaborative AI image generation with spaces, galleries, and real-time updates.
+
+### [Text Studio](https://studio.elevatorrobot.com)
+Context-aware AI writing with document upload and web research capabilities.
+
+Check out our [GitHub](https://github.com/Elevator-Robot) to explore the code and contribute.
 
 ## 💻 Tech Stack
 
@@ -62,16 +67,17 @@ npm run lint
 
 See [AGENTS.md](./AGENTS.md) for detailed development guidelines.
 
-## 💼 Work With Us
+## 🚀 Our Tools
 
-We're available for freelance engagements and project partnerships. If you're building something ambitious in AI/ML, and you want people who can execute fast and smart—reach out.
+- 🧠 [Brain In Cup](https://brainincup.com) — Your AI workspace
+- 🎨 [Image Studio](https://studio.elevatorrobot.com) — Create with AI
+- ✍️ [Text Studio](https://studio.elevatorrobot.com) — Write with AI
 
-📬 **Contact:** hello@elevatorrobot.com
+## 📢 Join the Community
 
-## 📢 Stay in the Loop
-
-We're building in public.  
-🐦 [@ElevatorRobot](https://twitter.com/elevatorrobot)
+We're building in public and love feedback.  
+🐦 [@ElevatorRobot](https://twitter.com/elevatorrobot)  
+💬 hello@elevatorrobot.com
 
 ## 📄 License
 
@@ -81,7 +87,7 @@ This project is licensed under the [Creative Commons Attribution-NonCommercial 4
 
 ## 🚘 Who We Are
 
-We're developers, tinkerers, consultants, dreamers.  
-We believe in shipping early, experimenting often, and solving hard problems with smart tools.
+We're developers, tinkerers, builders, dreamers.  
+We believe in shipping early, experimenting often, and sharing everything we build.
 
-Elevator Robot is a platform for our best ideas—and yours too, if you want to build with us.
+Elevator Robot is a studio for creating software that matters—tools we're excited to use and share.
