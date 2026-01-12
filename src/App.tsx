@@ -72,13 +72,35 @@ const useMouseFollower = (ref: React.RefObject<HTMLElement>) => {
   }, [ref]);
 };
 
+// Grid Icon Component
+const GridIcon: React.FC<{ size?: number }> = ({ size = 3 }) => {
+  const boxes = Array(size * size).fill(0);
+  return (
+    <div 
+      className="grid gap-1" 
+      style={{ 
+        gridTemplateColumns: `repeat(${size}, 1fr)`,
+        width: '20px',
+        height: '20px'
+      }}
+    >
+      {boxes.map((_, i) => (
+        <div key={i} className="bg-current rounded-sm"></div>
+      ))}
+    </div>
+  );
+};
+
 function App() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
-  const [isToolsOpen, setIsToolsOpen] = useState(false);
+  const [showToolsGrid, setShowToolsGrid] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const gridSize = 2; // Change this number to adjust grid size
+  const showContact = false; // Feature flag for contact button
+  const toolsGridRef = useRef<HTMLDivElement>(null);
   
   const cardRefs = [useRef<HTMLDivElement>(null), useRef<HTMLDivElement>(null)];
   
@@ -91,17 +113,28 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-    setIsMenuOpen(false);
-  };
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (toolsGridRef.current && !toolsGridRef.current.contains(event.target as Node)) {
+        setShowToolsGrid(false);
+      }
+    };
+
+    if (showToolsGrid) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showToolsGrid]);
 
   const toggleContact = () => {
     setIsContactOpen(!isContactOpen);
   };
 
   const toggleTools = () => {
-    setIsToolsOpen(!isToolsOpen);
+    setShowToolsGrid(!showToolsGrid);
     setIsContactOpen(false);
   };
 
@@ -137,13 +170,21 @@ function App() {
           </div>
           
           <div className="hidden md:flex items-center gap-8">
-            <div className="relative">
-              <button onClick={toggleTools} className="link-underline">Tools</button>
+            <div className="relative" ref={toolsGridRef}>
+              <button 
+                onClick={toggleTools} 
+                className={`flex items-center gap-2 text-white/80 hover:text-white transition-all duration-150 group ${
+                  showToolsGrid ? 'scale-90 -rotate-12' : 'scale-100 rotate-0'
+                }`}
+                aria-label="Open tools menu"
+              >
+                <GridIcon size={gridSize} />
+              </button>
               
               {/* Tools Grid Popup */}
               <div 
                 className={`absolute top-full right-0 mt-4 w-[500px] bg-black/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl overflow-hidden transition-all duration-300 origin-top-right ${
-                  isToolsOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-0 pointer-events-none'
+                  showToolsGrid ? 'scale-100 opacity-100' : 'scale-95 opacity-0 pointer-events-none'
                 }`}
                 style={{ zIndex: 1002 }}
               >
@@ -153,14 +194,6 @@ function App() {
                 <div className="p-6">
                   <div className="flex justify-between items-center mb-4">
                     <h3 className="text-lg font-bold gradient-text">Creative Suite</h3>
-                    <button 
-                      onClick={() => setIsToolsOpen(false)}
-                      className="text-gray-400 hover:text-white transition-colors"
-                    >
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                      </svg>
-                    </button>
                   </div>
 
                   {/* Tools Grid */}
@@ -227,16 +260,17 @@ function App() {
               </div>
             </div>
 
-            <div className="relative">
-              <button onClick={toggleContact} className="link-underline">Contact</button>
-              
-              {/* Contact Form Popup Bubble */}
-              <div 
-                className={`absolute top-full right-0 mt-4 w-[400px] bg-black/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl overflow-hidden transition-all duration-300 origin-top-right ${
-                  isContactOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-0 pointer-events-none'
-                }`}
-                style={{ zIndex: 1002 }}
-              >
+            {showContact && (
+              <div className="relative">
+                <button onClick={toggleContact} className="link-underline">Contact</button>
+                
+                {/* Contact Form Popup Bubble */}
+                <div 
+                  className={`absolute top-full right-0 mt-4 w-[400px] bg-black/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl overflow-hidden transition-all duration-300 origin-top-right ${
+                    isContactOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-0 pointer-events-none'
+                  }`}
+                  style={{ zIndex: 1002 }}
+                >
                 {/* Arrow */}
                 <div className="absolute -top-2 right-6 w-4 h-4 bg-black/95 border-l border-t border-white/10 transform rotate-45"></div>
                 
@@ -318,6 +352,7 @@ function App() {
                 </div>
               </div>
             </div>
+            )}
           </div>
 
           <button 
@@ -333,11 +368,13 @@ function App() {
         <div className={`mobile-menu ${isMenuOpen ? 'open' : ''}`}>
           <div className="flex flex-col items-center justify-center h-full gap-8 text-2xl">
             <button onClick={toggleTools} className="hover:text-blue-400 transition-colors">Tools</button>
-            <button onClick={toggleContact} className="hover:text-blue-400 transition-colors">Contact</button>
+            {showContact && (
+              <button onClick={toggleContact} className="hover:text-blue-400 transition-colors">Contact</button>
+            )}
           </div>
 
           {/* Mobile Contact Form */}
-          {isContactOpen && (
+          {showContact && isContactOpen && (
             <div className="absolute inset-0 flex items-center justify-center p-6 bg-black/95 backdrop-blur-xl">
               <div className="w-full max-w-md">
                 <div className="flex justify-between items-center mb-6">
