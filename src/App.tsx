@@ -116,14 +116,25 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden">
+    <div className="min-h-screen bg-black text-white overflow-x-hidden relative">
+      {/* Background image with overlay */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: 'url(/background.png)' }}
+        ></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80"></div>
+      </div>
+
+      {/* Content wrapper with z-index */}
+      <div className="relative z-10">
       {/* Navigation */}
       <nav className={`nav-modern ${scrolled ? 'scrolled' : ''}`}>
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="text-2xl font-bold gradient-text">Elevator Robot</div>
             <span className="text-gray-500 text-sm">|</span>
-            <div className="text-sm text-gray-400">AI Tools for Creators</div>
+            <div className="text-sm text-gray-400">Software Studio</div>
           </div>
           
           <div className="hidden md:flex items-center gap-8">
@@ -325,19 +336,17 @@ function App() {
 
       {/* Hero Section with Animated Background */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        {/* Animated Gradient Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-950 via-purple-950 to-pink-950"></div>
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: 'url(/background.png)',
+            filter: 'brightness(0.6)'
+          }}
+        ></div>
         
-        {/* Floating Orbs */}
-        <div className="floating-orb orb-1" style={{ left: '10%', top: '20%', background: 'radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%)' }}></div>
-        <div className="floating-orb orb-2" style={{ right: '15%', top: '40%', background: 'radial-gradient(circle, rgba(168, 85, 247, 0.3) 0%, transparent 70%)' }}></div>
-        <div className="floating-orb" style={{ left: '20%', bottom: '15%', background: 'radial-gradient(circle, rgba(236, 72, 153, 0.3) 0%, transparent 70%)', width: '400px', height: '400px' }}></div>
-        
-        {/* Grid Pattern Overlay */}
-        <div className="absolute inset-0 opacity-10" style={{
-          backgroundImage: 'linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)',
-          backgroundSize: '50px 50px'
-        }}></div>
+        {/* Dark overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/20"></div>
         
         {/* Content */}
         <div className="relative z-10 text-center px-6 max-w-4xl">
@@ -345,15 +354,15 @@ function App() {
             <h1 className="text-6xl md:text-7xl font-bold mb-6">
               <span className="gradient-text">
                 <AnimatedText phrases={[
-                  "Building the Future",
-                  "Creating Innovation",
-                  "Crafting Solutions"
+                  "Building Software",
+                  "Creating Experiences",
+                  "Crafting Products"
                 ]} />
               </span>
             </h1>
             
             <p className="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto">
-              We create AI-powered tools and applications that push the boundaries of what's possible
+              A software studio building innovative products and experiences
             </p>
           </div>
 
@@ -377,7 +386,7 @@ function App() {
               
               <div className="text-left flex-1">
                 <h3 className="text-3xl font-bold mb-2 gradient-text">Brain In Cup</h3>
-                <p className="text-gray-400">All-in-one AI workspace for creators</p>
+                <p className="text-gray-400">AI-powered workspace and productivity platform</p>
               </div>
               
               <svg className="w-8 h-8 text-blue-400 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -432,6 +441,7 @@ function App() {
           />
         </div>
       </div>
+      </div> {/* Close content wrapper */}
     </div>
   );
 }
