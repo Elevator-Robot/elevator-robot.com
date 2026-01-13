@@ -6,12 +6,11 @@ type StudioMode = 'image' | 'text';
 
 export default function Studio() {
   const [mode, setMode] = useState<StudioMode>('image');
-  const [sidebarOpen, setSidebarOpen] = useState(true);
 
   return (
     <div className="flex h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-cyan-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
       {/* Left Sidebar */}
-      <aside className={`${sidebarOpen ? 'w-72' : 'w-20'} bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl border-r border-gray-200/50 dark:border-gray-700/50 flex flex-col transition-all duration-300 shadow-xl`}>
+      <aside className="w-72 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl border-r border-gray-200/50 dark:border-gray-700/50 flex flex-col transition-all duration-300 shadow-xl">
         {/* Logo/Brand */}
         <div className="p-6 border-b border-gray-200/50 dark:border-gray-700/50">
           <Link to="/" className="flex items-center gap-3 text-gray-900 dark:text-white hover:text-cyan-600 dark:hover:text-cyan-400 transition-all group">

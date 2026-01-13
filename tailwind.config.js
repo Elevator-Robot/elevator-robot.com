@@ -10,6 +10,13 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'neo': ['NeoBold', 'sans-serif'],
+        'bin': ['BIN Bold', 'sans-serif'],
+        'ide': ['IDEBold', 'monospace'],
+        'kobold': ['Kobold', 'sans-serif'],
+        'modular': ['Modular', 'sans-serif'],
+      },
       colors: {
         primary: {
           light: '#3B82F6', // Bright blue
