@@ -75,7 +75,6 @@ const useMouseFollower = (ref: React.RefObject<HTMLElement>) => {
 function App() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const showContact = false; // Feature flag for contact button
@@ -233,115 +232,6 @@ function App() {
             )}
           </div>
 
-          <button 
-            className="md:hidden relative z-[1001] w-10 h-10 flex flex-col justify-center items-center gap-1.5"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            <span className={`w-6 h-0.5 bg-white transition-all ${isMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
-            <span className={`w-6 h-0.5 bg-white transition-all ${isMenuOpen ? 'opacity-0' : ''}`}></span>
-            <span className={`w-6 h-0.5 bg-white transition-all ${isMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
-          </button>
-        </div>
-
-        <div className={`mobile-menu ${isMenuOpen ? 'open' : ''}`}>
-          <div className="flex flex-col items-center justify-center h-full gap-8 text-2xl">
-            {showContact && (
-              <button onClick={toggleContact} className="hover:text-blue-400 transition-colors">Contact</button>
-            )}
-          </div>
-
-          {/* Mobile Contact Form */}
-          {showContact && isContactOpen && (
-            <div className="absolute inset-0 flex items-center justify-center p-6 bg-black/95 backdrop-blur-xl">
-              <div className="w-full max-w-md">
-                <div className="flex justify-between items-center mb-6">
-                  <h3 className="text-2xl font-bold gradient-text">Get in Touch</h3>
-                  <button 
-                    onClick={() => setIsContactOpen(false)}
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
-                </div>
-
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <input
-                    type="text"
-                    required
-                    placeholder="Your name"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-blue-500 transition-all text-white placeholder-gray-500"
-                  />
-                  
-                  <input
-                    type="email"
-                    required
-                    placeholder="your.email@example.com"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-blue-500 transition-all text-white placeholder-gray-500"
-                  />
-                  
-                  <textarea
-                    rows={4}
-                    required
-                    placeholder="Your message..."
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-blue-500 transition-all resize-none text-white placeholder-gray-500"
-                  />
-                  
-                  <button
-                    type="submit"
-                    disabled={submitStatus === 'loading'}
-                    className="w-full px-4 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl hover:scale-105 transition-transform font-semibold font-['Audiowide']"
-                  >
-                    {submitStatus === 'loading' ? 'Sending...' : 'Send Message'}
-                  </button>
-
-                  {submitStatus === 'success' && (
-                    <div className="text-center p-3 bg-green-500/20 border border-green-500 rounded-xl">
-                      <p className="text-green-300 font-['Audiowide']">✅ Message sent successfully!</p>
-                    </div>
-                  )}
-
-                  {submitStatus === 'error' && (
-                    <div className="text-center p-3 bg-red-500/20 border border-red-500 rounded-xl">
-                      <p className="text-red-300 font-['Audiowide']">❌ Failed to send</p>
-                    </div>
-                  )}
-                </form>
-
-                <div className="flex justify-center gap-6 mt-6 pt-6 border-t border-white/10 font-['Audiowide']">
-                  <a href="mailto:hello@elevatorrobot.com" className="text-gray-400 hover:text-blue-400 transition-colors text-sm">
-                    Email
-                  </a>
-                  <a 
-                    href="https://github.com/Elevator-Robot"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-blue-400 transition-colors text-sm"
-                  >
-                    GitHub
-                  </a>
-                  <a 
-                    href="https://x.com/aphexlog"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-blue-400 transition-colors flex items-center gap-1.5"
-                    aria-label="X (formerly Twitter)"
-                  >
-                    <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                    </svg>
-                  </a>
-                </div>
-              </div>
-            </div>
-          )}
         </div>
       </nav>
 
