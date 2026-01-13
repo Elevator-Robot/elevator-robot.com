@@ -1,16 +1,12 @@
-# 🚀 Elevator Robot
+# Elevator Robot
 
-A software studio crafting innovative products and experiences.
+Elevator Robot is a software studio that crafts innovative digital experiences.
 
-## 🎨 Our Projects
+## Projects
 
 ### [Brain In Cup](https://brainincup.com)
-An interactive interface with an existential consciousness. Explore conversations beyond ordinary AI chat.
+An interactive interface with an existential consciousness.
 
-## 📄 License
+## License
 
-This project is licensed under the [Creative Commons Attribution-NonCommercial 4.0 International License](LICENSE).
-
----
-
-**Elevator Robot** — Crafting software that matters.
+Licensed under [Creative Commons Attribution-NonCommercial 4.0 International](LICENSE).

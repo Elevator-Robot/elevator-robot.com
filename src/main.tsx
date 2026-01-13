@@ -1,8 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App.tsx";
-import Studio from "./pages/Studio.tsx";
 import "./fonts.css";
 import "./index.css";
 import '@aws-amplify/ui-react/styles.css';
@@ -37,11 +35,6 @@ configureAmplify();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/studio" element={<Studio />} />
-      </Routes>
-    </BrowserRouter>
+    <App />
   </React.StrictMode>
 );
