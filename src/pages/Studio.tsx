@@ -17,18 +17,16 @@ export default function Studio() {
             <div className="p-2 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg group-hover:scale-110 transition-transform shadow-lg">
               <HiHome className="w-5 h-5 text-white" />
             </div>
-            {sidebarOpen && (
-              <div>
-                <span className="font-bold text-lg block">Elevator Robot</span>
-                <span className="text-xs text-gray-500 dark:text-gray-400">Creative Studio</span>
-              </div>
-            )}
+            <div>
+              <span className="font-bold text-lg block">Elevator Robot</span>
+              <span className="text-xs text-gray-500 dark:text-gray-400">Creative Studio</span>
+            </div>
           </Link>
         </div>
 
         {/* Navigation */}
         <nav className="flex-1 p-4">
-          {sidebarOpen && <p className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider px-3 mb-4">Studio Tools</p>}
+          <p className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider px-3 mb-4">Studio Tools</p>
           <div className="space-y-2">
             <button
               onClick={() => setMode('image')}
@@ -39,8 +37,8 @@ export default function Studio() {
               }`}
             >
               <HiPhotograph className="w-6 h-6 flex-shrink-0" />
-              {sidebarOpen && <span>Image Studio</span>}
-              {sidebarOpen && mode === 'image' && <HiSparkles className="w-4 h-4 ml-auto" />}
+              <span>Image Studio</span>
+              {mode === 'image' && <HiSparkles className="w-4 h-4 ml-auto" />}
             </button>
             <button
               onClick={() => setMode('text')}
@@ -51,20 +49,18 @@ export default function Studio() {
               }`}
             >
               <HiDocumentText className="w-6 h-6 flex-shrink-0" />
-              {sidebarOpen && <span>Text Studio</span>}
-              {sidebarOpen && mode === 'text' && <HiSparkles className="w-4 h-4 ml-auto" />}
+              <span>Text Studio</span>
+              {mode === 'text' && <HiSparkles className="w-4 h-4 ml-auto" />}
             </button>
           </div>
         </nav>
 
         {/* Footer */}
         <div className="p-4 border-t border-gray-200/50 dark:border-gray-700/50">
-          {sidebarOpen && (
-            <div className="bg-gradient-to-r from-cyan-50 to-blue-50 dark:from-cyan-900/20 dark:to-blue-900/20 rounded-xl p-4 border border-cyan-200 dark:border-cyan-800">
-              <p className="text-xs font-semibold text-gray-900 dark:text-white mb-1">✨ Studio Beta</p>
-              <p className="text-xs text-gray-600 dark:text-gray-400">Tools are in development</p>
-            </div>
-          )}
+          <div className="bg-gradient-to-r from-cyan-50 to-blue-50 dark:from-cyan-900/20 dark:to-blue-900/20 rounded-xl p-4 border border-cyan-200 dark:border-cyan-800">
+            <p className="text-xs font-semibold text-gray-900 dark:text-white mb-1">✨ Studio Beta</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400">Tools are in development</p>
+          </div>
         </div>
       </aside>
 
