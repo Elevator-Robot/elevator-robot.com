@@ -132,6 +132,7 @@ function App() {
       <nav className={`nav-modern ${scrolled ? 'scrolled' : ''}`}>
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           <div className="flex items-center gap-3">
+            <img src="/logo.svg" alt="Elevator Robot" className="h-8 w-8" />
             <div className="text-2xl font-bold gradient-text">Elevator Robot</div>
             <span className="text-gray-500 text-sm">|</span>
             <div className="text-sm text-gray-400">Software Studio</div>
