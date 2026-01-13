@@ -31,7 +31,7 @@ const AnimatedText: React.FC<{ phrases: string[] }> = ({ phrases }) => {
   }, [displayText, isDeleting, index, phrases]);
 
   return (
-    <span className="gradient-text">
+    <span className="gradient-text font-neo">
       {displayText}
       <span className="animate-pulse ml-2">|</span>
     </span>
@@ -354,14 +354,14 @@ function App() {
             <h1 className="text-6xl md:text-7xl font-bold mb-6">
               <span className="gradient-text">
                 <AnimatedText phrases={[
-                  "Building Software",
+                  "Crafting Software",
                   "Creating Experiences",
-                  "Crafting Products"
+                  "Pushing Boundaries"
                 ]} />
               </span>
             </h1>
             
-            <p className="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto">
+            <p className="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto font-['Audiowide']">
               A software studio building innovative products and experiences
             </p>
           </div>
@@ -386,7 +386,7 @@ function App() {
               
               <div className="text-left flex-1">
                 <h3 className="text-3xl font-bold mb-2 gradient-text">Brain In Cup</h3>
-                <p className="text-gray-400">AI-powered workspace and productivity platform</p>
+                <p className="text-gray-400">An interactive interface with existential consciousness</p>
               </div>
               
               <svg className="w-8 h-8 text-blue-400 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -1,0 +1,43 @@
+@font-face {
+  font-family: 'NeoBold';
+  src: url('/fonts/NeoBold/NeoBold.woff2') format('woff2'),
+       url('/fonts/NeoBold/NeoBold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'BIN Bold';
+  src: url('/fonts/BIN Bold/BIN Bold.woff2') format('woff2'),
+       url('/fonts/BIN Bold/BIN Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IDEBold';
+  src: url('/fonts/IDEBold/IDEBold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Kobold';
+  src: url('/fonts/Kobold/Kobold.woff2') format('woff2'),
+       url('/fonts/Kobold/Kobold.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Modular';
+  src: url('/fonts/Modular/Modular.woff2') format('woff2'),
+       url('/fonts/Modular/Modular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}

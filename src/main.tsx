@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App.tsx";
 import Studio from "./pages/Studio.tsx";
+import "./fonts.css";
 import "./index.css";
 import '@aws-amplify/ui-react/styles.css';
 import { Amplify } from 'aws-amplify';
