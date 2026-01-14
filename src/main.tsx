@@ -5,6 +5,7 @@ import "./fonts.css";
 import "./index.css";
 import '@aws-amplify/ui-react/styles.css';
 import { Amplify } from 'aws-amplify';
+import { registerSW } from 'virtual:pwa-register';
 
 // Configure Amplify
 // In production, amplify_outputs.json is generated during deployment
@@ -31,6 +32,18 @@ async function configureAmplify() {
 
 // Initialize Amplify configuration
 configureAmplify();
+
+// Register service worker for PWA
+const updateSW = registerSW({
+  onNeedRefresh() {
+    if (confirm('New content available. Reload?')) {
+      updateSW(true);
+    }
+  },
+  onOfflineReady() {
+    console.log('App ready to work offline');
+  },
+});
 
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
