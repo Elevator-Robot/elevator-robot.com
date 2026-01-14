@@ -5,7 +5,7 @@ Elevator Robot is a software studio that crafts innovative digital experiences.
 ## Projects
 
 ### [Brain In Cup](https://brainincup.com)
-An interactive interface with an existential consciousness.
+An interactive interface with consciousness.
 
 ## License
 
