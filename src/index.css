@@ -7,7 +7,9 @@
 @layer base {
   :root {
     /* Advanced Color System */
-    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    /* Updated primary gradient to meet WCAG 2.1 AA contrast requirements (4.5:1) */
+    --primary-gradient: linear-gradient(135deg, #526ad6 0%, #764ba2 100%);
+    --primary-gradient-accessible: linear-gradient(135deg, #526ad6 0%, #764ba2 100%);
     --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
     --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
     --danger-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
@@ -16,7 +18,7 @@
     --glass-border: rgba(255, 255, 255, 0.2);
     --backdrop-blur: blur(20px);
     --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-    --shadow-neon: 0 0 40px rgba(102, 126, 234, 0.4);
+    --shadow-neon: 0 0 40px rgba(82, 106, 214, 0.4);
     
     /* 3D Transform Variables */
     --rotate-x: 0deg;
@@ -24,11 +26,32 @@
     --rotate-z: 0deg;
     --translate-z: 0px;
     --perspective: 1000px;
+    --transform-style: preserve-3d;
+    
+    /* Enhanced Glassmorphism */
+    --glass-bg-light: rgba(255, 255, 255, 0.12);
+    --glass-bg-dark: rgba(0, 0, 0, 0.4);
+    --glass-border-light: rgba(255, 255, 255, 0.3);
+    --glass-border-glow: rgba(82, 106, 214, 0.5);
+    --backdrop-blur-strong: blur(30px);
+    
+    /* Gradient Effects - Updated for accessibility */
+    --gradient-glow: linear-gradient(135deg, #526ad6 0%, #764ba2 50%, #f093fb 100%);
+    --gradient-shimmer: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%);
+    --gradient-text-glow: linear-gradient(135deg, #ffffff 0%, #526ad6 50%, #764ba2 100%);
+    
+    /* Animation Timings */
+    --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --duration-fast: 0.2s;
+    --duration-normal: 0.3s;
+    --duration-slow: 0.6s;
   }
 
   html {
     scroll-behavior: smooth;
     font-size: 16px;
+    height: 100%;
   }
 
   body {
@@ -41,6 +64,8 @@
     background: #0a0a0a;
     color: #ffffff;
     overflow-x: hidden;
+    margin: 0;
+    padding: 0;
   }
 
   * {
@@ -48,12 +73,163 @@
   }
 
   ::selection {
-    background: rgba(102, 126, 234, 0.3);
+    background: rgba(82, 106, 214, 0.3);
     color: #ffffff;
   }
 }
 
 @layer components {
+  /* Enhanced Visual Effects Utilities */
+  .glass-effect {
+    background: var(--glass-bg);
+    backdrop-filter: var(--backdrop-blur);
+    border: 1px solid var(--glass-border);
+  }
+  
+  .glass-effect-strong {
+    background: var(--glass-bg-light);
+    backdrop-filter: var(--backdrop-blur-strong);
+    border: 1px solid var(--glass-border-light);
+  }
+  
+  /* Custom border-radius utilities for consistent design system */
+  .rounded-card {
+    border-radius: 20px;
+  }
+  
+  .rounded-input {
+    border-radius: 12px;
+  }
+  
+  .rounded-button {
+    border-radius: 50px;
+  }
+  
+  .gradient-text {
+    background: var(--gradient-text-glow);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .gradient-text-animated {
+    background: var(--gradient-glow);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-shift 3s ease infinite;
+  }
+
+  /* Visible Focus Indicators - WCAG 2.1 AA Compliant */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Enhanced focus for navigation links */
+  .nav-link:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 4px;
+    background: rgba(59, 130, 246, 0.1);
+  }
+
+  /* Focus for form inputs */
+  .form-input-revolutionary:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  }
+
+  /* Focus for buttons */
+  .cta-primary:focus-visible,
+  .cta-secondary:focus-visible,
+  .submit-btn-revolutionary:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 3px;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3);
+  }
+
+  /* Focus for service cards and interactive elements */
+  .service-card-3d:focus-within {
+    outline: 2px solid #3b82f6;
+    outline-offset: 4px;
+  }
+
+  /* Skip to content link (for keyboard navigation) */
+  .skip-to-content {
+    position: absolute;
+    top: -100px;
+    left: 0;
+    background: #3b82f6;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    z-index: 9999;
+    border-radius: 0 0 4px 0;
+  }
+
+  .skip-to-content:focus {
+    top: 0;
+  }
+  
+  .shimmer-effect {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .shimmer-effect::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-shimmer);
+    animation: shimmer 3s ease-in-out infinite;
+    transform: translateX(-100%);
+  }
+  
+  .glow-border {
+    position: relative;
+  }
+  
+  .glow-border::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: var(--gradient-glow);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity var(--duration-normal) var(--ease-smooth);
+    filter: blur(10px);
+  }
+  
+  .glow-border:hover::after {
+    opacity: 0.8;
+  }
+  
+  .transform-3d {
+    transform-style: var(--transform-style);
+    perspective: var(--perspective);
+  }
+  
+  .card-3d {
+    transition: transform var(--duration-slow) var(--ease-smooth);
+    will-change: transform;
+  }
+  
+  .card-3d:hover {
+    transform: rotateY(5deg) rotateX(5deg) translateZ(20px);
+  }
+
   /* Revolutionary Navigation */
   .nav-container {
     position: fixed;
@@ -125,74 +301,98 @@
     align-items: center;
     justify-content: center;
     position: relative;
-    background: radial-gradient(ellipse at center, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
+    background: radial-gradient(ellipse at center, rgba(82, 106, 214, 0.15) 0%, transparent 50%),
                 linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
     overflow: hidden;
     perspective: var(--perspective);
   }
 
-  /* Advanced Background System */
+  /* Advanced Background System with 3D Motion */
   .bg-orbs {
     position: absolute;
     inset: 0;
     z-index: 1;
+    perspective: var(--perspective);
+    transform-style: var(--transform-style);
   }
 
   .orb {
     position: absolute;
     border-radius: 50%;
-    filter: blur(2px);
+    filter: blur(60px);
     animation: float-3d 20s ease-in-out infinite;
+    will-change: transform;
+    transform-style: var(--transform-style);
   }
 
   .orb-1 {
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, rgba(102, 126, 234, 0.4) 0%, transparent 70%);
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(82, 106, 214, 0.5) 0%, rgba(82, 106, 214, 0.2) 40%, transparent 70%);
     top: -10%;
     right: -5%;
     animation-delay: 0s;
   }
 
   .orb-2 {
-    width: 200px;
-    height: 200px;
-    background: radial-gradient(circle, rgba(240, 147, 251, 0.3) 0%, transparent 70%);
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(240, 147, 251, 0.4) 0%, rgba(240, 147, 251, 0.15) 40%, transparent 70%);
     bottom: -5%;
     left: -5%;
     animation-delay: -5s;
   }
 
   .orb-3 {
-    width: 150px;
-    height: 150px;
-    background: radial-gradient(circle, rgba(79, 172, 254, 0.35) 0%, transparent 70%);
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(79, 172, 254, 0.45) 0%, rgba(79, 172, 254, 0.2) 40%, transparent 70%);
     top: 30%;
     left: 20%;
     animation-delay: -10s;
   }
 
   .orb-4 {
-    width: 250px;
-    height: 250px;
-    background: radial-gradient(circle, rgba(250, 112, 154, 0.25) 0%, transparent 70%);
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(250, 112, 154, 0.35) 0%, rgba(250, 112, 154, 0.15) 40%, transparent 70%);
     top: 20%;
     right: 30%;
     animation-delay: -15s;
   }
+  
+  .orb-5 {
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(118, 75, 162, 0.4) 0%, rgba(118, 75, 162, 0.15) 40%, transparent 70%);
+    bottom: 20%;
+    right: 15%;
+    animation-delay: -7s;
+  }
 
-  /* 3D Grid Background */
+  /* 3D Grid Background with Perspective */
   .grid-3d {
     position: absolute;
     inset: 0;
     z-index: 0;
     background-image: 
-      linear-gradient(rgba(102, 126, 234, 0.1) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(102, 126, 234, 0.1) 1px, transparent 1px);
-    background-size: 50px 50px;
-    transform: perspective(500px) rotateX(45deg) scale(2);
-    opacity: 0.3;
+      linear-gradient(rgba(82, 106, 214, 0.15) 2px, transparent 2px),
+      linear-gradient(90deg, rgba(82, 106, 214, 0.15) 2px, transparent 2px);
+    background-size: 60px 60px;
+    transform: perspective(800px) rotateX(60deg) scale(2);
+    transform-origin: center center;
+    opacity: 0.4;
     animation: grid-pulse 4s ease-in-out infinite;
+    will-change: opacity, transform;
+    pointer-events: none;
+  }
+  
+  .grid-3d::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+    z-index: 1;
   }
 
   /* Hero Content */
@@ -205,20 +405,36 @@
   }
 
   .hero-title-revolutionary {
-    font-size: clamp(3rem, 8vw, 7rem);
+    font-size: clamp(2rem, 8vw, 7rem);
     font-weight: 900;
     line-height: 0.9;
     margin-bottom: 2rem;
-    background: linear-gradient(135deg, #ffffff 0%, #667eea 50%, #764ba2 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #526ad6 50%, #764ba2 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     letter-spacing: -0.05em;
     animation: title-glow 3s ease-in-out infinite;
+    will-change: opacity;
+    position: relative;
+  }
+  
+  .hero-title-revolutionary::before {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-text-glow);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: blur(20px);
+    opacity: 0.6;
+    z-index: -1;
+    animation: glow-pulse 2s ease-in-out infinite;
   }
 
   .hero-subtitle {
-    font-size: clamp(1.25rem, 3vw, 2rem);
+    font-size: clamp(0.875rem, 2.5vw, 2rem);
     color: rgba(255, 255, 255, 0.8);
     margin-bottom: 3rem;
     font-weight: 400;
@@ -244,28 +460,49 @@
     font-size: 1.1rem;
     cursor: pointer;
     overflow: hidden;
-    transition: all 0.3s ease;
-    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    transition: all var(--duration-normal) var(--ease-smooth);
+    box-shadow: 0 10px 30px rgba(82, 106, 214, 0.3);
+    will-change: transform, box-shadow;
   }
 
   .cta-primary:hover {
     transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 20px 40px rgba(82, 106, 214, 0.5);
   }
 
   .cta-primary::before {
     content: '';
     position: absolute;
     top: 0;
-    left: -100%;
+    left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    transition: left 0.5s;
+    background: var(--gradient-shimmer);
+    transition: transform 0.6s var(--ease-smooth);
+    animation: shimmer 3s ease-in-out infinite;
+    transform: translateX(-100%);
   }
 
   .cta-primary:hover::before {
-    left: 100%;
+    transform: translateX(100%);
+  }
+  
+  .cta-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50px;
+    padding: 2px;
+    background: var(--gradient-glow);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity var(--duration-normal) var(--ease-smooth);
+  }
+  
+  .cta-primary:hover::after {
+    opacity: 0.6;
   }
 
   .cta-secondary {
@@ -336,6 +573,7 @@
     padding: 8rem 0;
     position: relative;
     overflow: hidden;
+    isolation: isolate;
   }
 
   /* Futuristic Section Dividers */
@@ -382,10 +620,23 @@
 
   .section-dark {
     background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 100%);
+    position: relative;
+    z-index: 1;
   }
 
   .section-gradient {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    background: linear-gradient(135deg, #526ad6 0%, #764ba2 50%, #f093fb 100%);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Revolutionary Contact Section */
+  .contact-revolutionary {
+    background: radial-gradient(ellipse at center, rgba(240, 147, 251, 0.15) 0%, transparent 50%),
+                linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 100%);
+    padding: 8rem 0;
+    position: relative;
+    isolation: isolate;
   }
 
   /* 3D Service Cards */
@@ -414,7 +665,7 @@
     background: var(--glass-bg);
     backdrop-filter: var(--backdrop-blur);
     border: 1px solid var(--glass-border);
-    border-radius: 24px;
+    border-radius: 20px;
     padding: 3rem 2rem;
     display: flex;
     flex-direction: column;
@@ -499,10 +750,10 @@
   }
 
   .about-title {
-    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-size: clamp(1.75rem, 5vw, 4rem);
     font-weight: 900;
     margin-bottom: 2rem;
-    background: linear-gradient(135deg, #ffffff 0%, #667eea 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #526ad6 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -538,7 +789,7 @@
   .tech-tag:hover {
     background: var(--primary-gradient);
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 5px 15px rgba(82, 106, 214, 0.3);
   }
 
   /* 3D Skills Visualization */
@@ -629,7 +880,7 @@
     background: var(--glass-bg);
     backdrop-filter: var(--backdrop-blur);
     border: 1px solid var(--glass-border);
-    border-radius: 24px;
+    border-radius: 20px;
     padding: 3rem;
     position: relative;
     overflow: hidden;
@@ -642,7 +893,7 @@
     left: -50%;
     width: 200%;
     height: 200%;
-    background: conic-gradient(from 0deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+    background: conic-gradient(from 0deg, transparent, rgba(82, 106, 214, 0.1), transparent);
     animation: rotate-border 8s linear infinite;
     z-index: -1;
   }
@@ -666,9 +917,9 @@
 
   .form-input-revolutionary:focus {
     outline: none;
-    border-color: rgba(102, 126, 234, 0.5);
+    border-color: rgba(82, 106, 214, 0.5);
     background: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 0 20px rgba(102, 126, 234, 0.2);
+    box-shadow: 0 0 20px rgba(82, 106, 214, 0.2);
   }
 
   .form-input-revolutionary::placeholder {
@@ -703,52 +954,93 @@
 
   .submit-btn-revolutionary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 15px 30px rgba(82, 106, 214, 0.4);
   }
 
   .submit-btn-revolutionary::before {
     content: '';
     position: absolute;
     top: 0;
-    left: -100%;
+    left: 0;
     width: 100%;
     height: 100%;
     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    transition: left 0.5s;
+    transition: transform 0.5s;
+    transform: translateX(-100%);
   }
 
   .submit-btn-revolutionary:hover::before {
-    left: 100%;
+    transform: translateX(100%);
   }
 }
 
-/* Advanced Animations */
+/* Advanced Animations with GPU Acceleration */
+/* Optimized: Removed filter changes, using only transform for GPU acceleration */
 @keyframes float-3d {
   0%, 100% { 
-    transform: translateY(0px) translateX(0px) translateZ(0px) rotateY(0deg);
+    transform: translate3d(0, 0, 0) rotateY(0deg) rotateX(0deg);
   }
   25% { 
-    transform: translateY(-20px) translateX(10px) translateZ(10px) rotateY(90deg);
+    transform: translate3d(-30px, -40px, 20px) rotateY(90deg) rotateX(10deg);
   }
   50% { 
-    transform: translateY(-10px) translateX(-10px) translateZ(20px) rotateY(180deg);
+    transform: translate3d(-20px, -20px, 40px) rotateY(180deg) rotateX(-10deg);
   }
   75% { 
-    transform: translateY(-30px) translateX(15px) translateZ(10px) rotateY(270deg);
+    transform: translate3d(30px, -50px, 20px) rotateY(270deg) rotateX(10deg);
   }
 }
 
+/* Optimized: Using only opacity and transform for GPU acceleration */
 @keyframes grid-pulse {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 0.6; }
-}
-
-@keyframes title-glow {
   0%, 100% { 
-    text-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+    opacity: 0.4;
+    transform: perspective(800px) rotateX(60deg) scale(2);
   }
   50% { 
-    text-shadow: 0 0 40px rgba(102, 126, 234, 0.8), 0 0 60px rgba(118, 75, 162, 0.4);
+    opacity: 0.6;
+    transform: perspective(800px) rotateX(60deg) scale(2.05);
+  }
+}
+
+/* Optimized: Replaced filter with opacity for GPU acceleration */
+@keyframes title-glow {
+  0%, 100% { 
+    opacity: 0.9;
+  }
+  50% { 
+    opacity: 1;
+  }
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* Optimized: Using transform instead of left property for GPU acceleration */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  50%, 100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Optimized: Using transform scale instead of background-position for better performance */
+@keyframes gradient-shift {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 0.95;
   }
 }
 
@@ -795,9 +1087,14 @@
   }
 
   .hero-title-revolutionary {
-    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-size: clamp(1.75rem, 7vw, 5rem);
   }
 
+  .hero-subtitle {
+    font-size: clamp(0.875rem, 2.5vw, 1.5rem);
+  }
+
+  /* Stack multi-column layouts into single columns */
   .about-revolutionary {
     grid-template-columns: 1fr;
     gap: 3rem;
@@ -808,47 +1105,946 @@
     gap: 3rem;
   }
 
+  /* Adjust service card grid - 2 columns on tablet */
   .services-revolutionary {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
   }
 
+  /* Adjust section padding for tablet */
+  .section-revolutionary {
+    padding: 5rem 0;
+  }
+
+  /* Adjust hero content padding */
+  .hero-content-revolutionary {
+    padding: 0 1.5rem;
+  }
+
+  /* Stack floating stats */
   .floating-stats {
     flex-direction: column;
     align-items: center;
-  }
-}
-
-@media (max-width: 768px) {
-  .hero-cta-group {
-    flex-direction: column;
-    align-items: center;
+    gap: 1.5rem;
   }
 
-  .cta-primary, .cta-secondary {
-    width: 100%;
-    max-width: 300px;
-  }
-
-  .services-revolutionary {
-    grid-template-columns: 1fr;
+  /* Reduce skill orb sizes */
+  .skills-3d {
+    height: 400px;
   }
 
   .skill-orb {
     width: 100px;
     height: 100px;
-    font-size: 0.75rem;
+    font-size: 0.8rem;
   }
 
+  /* Adjust about text size */
+  .about-text {
+    font-size: 1rem;
+  }
+
+  /* Adjust contact form padding */
+  .contact-form-revolutionary {
+    padding: 2.5rem;
+  }
+
+  /* Adjust service card height */
+  .service-card-3d {
+    height: 380px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Mobile Navigation Adjustments */
+  .nav-modern {
+    padding: 12px 0;
+  }
+
+  /* Hero Section Mobile Adjustments */
+  .hero-title-revolutionary {
+    font-size: clamp(1.5rem, 10vw, 3rem);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(0.875rem, 4vw, 1.25rem);
+    margin-bottom: 2rem;
+  }
+
+  .hero-cta-group {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .cta-primary, .cta-secondary {
+    width: 100%;
+    max-width: 300px;
+    min-height: 44px;
+    min-width: 44px;
+    padding: 14px 28px;
+    font-size: 1rem;
+  }
+
+  /* Services Grid - Single Column */
+  .services-revolutionary {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  /* Service Cards - Reduced 3D Effects on Mobile */
+  .service-card-3d {
+    height: auto;
+    min-height: 320px;
+  }
+
+  .service-card-3d:hover {
+    transform: translateY(-5px) scale(1.02);
+  }
+
+  .service-card-face {
+    padding: 2rem 1.5rem;
+  }
+
+  .service-icon-3d {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 1.5rem;
+  }
+
+  .service-title-3d {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .service-description-3d {
+    font-size: 0.9375rem;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Skill Orbs - Smaller on Mobile */
+  .skills-3d {
+    height: 350px;
+  }
+
+  .skill-orb {
+    width: 90px;
+    height: 90px;
+    font-size: 0.75rem;
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Tech Stack - Centered */
   .tech-stack {
     justify-content: center;
   }
 
+  /* Tech Tags - Touch-Friendly */
+  .tech-tag {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 10px 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8125rem;
+  }
+
+  /* Section Padding - Reduced */
   .section-revolutionary {
-    padding: 4rem 0;
+    padding: 3rem 0;
+  }
+
+  /* Typography Scaling */
+  .about-title {
+    font-size: clamp(1.5rem, 8vw, 2.5rem);
+    margin-bottom: 1.5rem;
+  }
+
+  .about-text {
+    font-size: 0.9375rem;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Contact Form - Full Width with Reduced Padding */
+  .contact-form-revolutionary {
+    padding: 1.5rem;
+  }
+
+  .form-group-revolutionary {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-input-revolutionary {
+    padding: 0.875rem 1.25rem;
+    font-size: 0.9375rem;
+  }
+
+  .submit-btn-revolutionary {
+    padding: 0.875rem 1.75rem;
+    font-size: 1rem;
+  }
+
+  /* ========================================
+     TOUCH-FRIENDLY INTERACTION TARGETS
+     All interactive elements meet 44×44px minimum
+     per WCAG 2.1 AA and Requirement 4.6
+     ======================================== */
+
+  /* All Buttons - Base Touch Target */
+  button {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 12px 16px;
+  }
+
+  /* All Links - Base Touch Target */
+  a {
+    min-height: 44px;
+    padding: 10px 14px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Submit Buttons */
+  .submit-btn-revolutionary {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 14px 24px;
+  }
+
+  /* Service Links */
+  .service-link-3d {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 12px 24px;
+  }
+
+  /* Form Inputs - Touch-Friendly with iOS Zoom Prevention */
+  .form-input-revolutionary,
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    min-height: 44px;
+    padding: 12px 16px;
+    font-size: 16px; /* Prevents iOS auto-zoom */
+  }
+
+  /* Navigation Links */
+  .nav-link,
+  .link-underline {
+    min-height: 44px;
+    padding: 12px 18px;
+  }
+
+  /* Technology Tags */
+  .tech-tag {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 12px 20px;
+  }
+
+  /* CTA Buttons */
+  .cta-primary,
+  .cta-secondary,
+  .btn-magnetic {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 14px 28px;
+  }
+
+  /* Social Media Links */
+  a[href*="github.com"],
+  a[href*="x.com"],
+  a[href*="twitter.com"] {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 12px;
+  }
+
+  /* Mobile Menu Links */
+  .mobile-menu a {
+    min-height: 44px;
+    padding: 12px 16px;
+  }
+
+  /* Contact Section Links */
+  .contact-info a {
+    min-height: 44px;
+    padding: 12px 16px;
+  }
+
+  /* Featured Project Card - Touch-Friendly */
+  .logo-orb-modern {
+    width: 60px !important;
+    height: 60px !important;
+  }
+
+  /* Hero Content - Adjust Spacing */
+  .hero-content-revolutionary {
+    padding: 0 1rem;
+    max-width: 100%;
+  }
+
+  /* ========================================
+     MOBILE ANIMATION OPTIMIZATIONS
+     Reduce or disable performance-intensive animations
+     while maintaining essential user feedback
+     ======================================== */
+
+  /* Background Orbs - Significantly Reduced */
+  .orb {
+    animation-duration: 40s; /* Slower animation */
+    filter: blur(40px); /* Less blur for better performance */
+    opacity: 0.4; /* Slightly more visible since blur is reduced */
+    will-change: auto; /* Remove will-change to reduce GPU memory */
+  }
+
+  /* Disable complex 3D transforms in orb animation */
+  @keyframes float-3d {
+    0%, 100% { 
+      transform: translate3d(0, 0, 0);
+    }
+    50% { 
+      transform: translate3d(-20px, -30px, 0);
+    }
+  }
+
+  /* 3D Grid Background - Disabled */
+  .grid-3d {
+    display: none; /* Completely remove for mobile performance */
+  }
+
+  /* Hero Title Glow - Simplified */
+  .hero-title-revolutionary {
+    animation: none; /* Disable title glow animation */
+    filter: none; /* Remove filter effects */
+  }
+
+  .hero-title-revolutionary::before {
+    display: none; /* Remove glow pseudo-element */
+  }
+
+  /* Button Shimmer - Disabled */
+  .cta-primary::before {
+    animation: none; /* Disable shimmer animation */
+    display: none; /* Remove shimmer element */
+  }
+
+  .cta-primary::after {
+    display: none; /* Remove rotating border effect */
+  }
+
+  /* Service Icon Shimmer - Disabled */
+  .service-icon-3d::before {
+    display: none; /* Remove shimmer on service icons */
+  }
+
+  /* Skill Orb Float Animation - Simplified */
+  .skill-orb {
+    animation: none; /* Disable floating animation */
+  }
+
+  /* Contact Form Rotating Border - Disabled */
+  .contact-form-revolutionary::before {
+    animation: none; /* Disable rotating border */
+    display: none;
+  }
+
+  /* Gradient Text Animation - Static */
+  .gradient-text-animated {
+    animation: none; /* Disable gradient shift */
+    background-position: 0% 50%; /* Static position */
+  }
+
+  /* Glow Border Effects - Simplified */
+  .glow-border::after {
+    filter: none; /* Remove blur from glow */
+    opacity: 0; /* Keep hidden by default */
+  }
+
+  /* Section Divider Animation - Disabled */
+  .section-revolutionary::before {
+    animation: none; /* Disable pulse glow */
+    opacity: 0.5; /* Static opacity */
+  }
+
+  /* Disable 3D transforms on mobile for performance */
+  .card-3d:hover {
+    transform: translateY(-5px) scale(1.02); /* Simple 2D transform only */
+  }
+
+  .service-card-3d:hover {
+    transform: translateY(-5px) scale(1.02); /* Simple 2D transform only */
+  }
+
+  /* Stat Cards - Simplified Hover */
+  .stat-card:hover {
+    transform: translateY(-3px); /* Simple 2D transform only */
+  }
+
+  /* Tech Tags - Simplified Hover */
+  .tech-tag:hover {
+    transform: translateY(-2px); /* Simple 2D transform only */
+  }
+
+  /* Logo Orb - Simplified */
+  .logo-orb-modern::before {
+    animation: none; /* Disable shimmer */
+  }
+
+  .logo-orb-modern:hover {
+    transform: scale(1.05); /* Reduced scale */
+  }
+
+  /* Maintain Essential User Feedback Animations */
+  /* These animations are kept for usability and user feedback */
+  
+  /* Button hover feedback - KEEP */
+  .cta-primary:hover,
+  .cta-secondary:hover,
+  .submit-btn-revolutionary:hover {
+    transform: translateY(-2px); /* Subtle feedback */
+    transition: transform 0.2s ease; /* Quick response */
+  }
+
+  /* Form input focus - KEEP */
+  .form-input-revolutionary:focus {
+    border-color: rgba(82, 106, 214, 0.5);
+    box-shadow: 0 0 15px rgba(82, 106, 214, 0.2); /* Reduced glow */
+    transition: all 0.2s ease;
+  }
+
+  /* Navigation link hover - KEEP */
+  .nav-link:hover,
+  .link-underline:hover {
+    color: #ffffff;
+    transition: color 0.2s ease;
+  }
+
+  /* Scroll reveal animations - KEEP but simplified */
+  .reveal {
+    transition-duration: 0.5s; /* Faster transitions */
+  }
+
+  .reveal.active {
+    transition-duration: 0.5s;
+  }
+
+  /* Remove stagger delays on mobile for faster perceived load */
+  .reveal:nth-child(1),
+  .reveal:nth-child(2),
+  .reveal:nth-child(3),
+  .reveal:nth-child(4),
+  .reveal:nth-child(5),
+  .reveal:nth-child(6),
+  .reveal:nth-child(7),
+  .reveal:nth-child(8) {
+    transition-delay: 0s; /* All reveal at once */
+  }
+
+  /* Stat Cards - Stack Vertically */
+  .floating-stats {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    transform: none;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .stat-card {
+    width: 100%;
+    max-width: 200px;
+    padding: 1.25rem 1.5rem;
+  }
+
+  .stat-number {
+    font-size: 1.75rem;
+  }
+
+  .stat-label {
+    font-size: 0.8125rem;
+  }
+
+  /* About Section - Stack Content */
+  .about-revolutionary {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  /* Contact Section - Stack Content */
+  .contact-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .contact-info h3 {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+  }
+
+  .contact-info p {
+    font-size: 0.9375rem;
+  }
+
+  /* Adjust hero section height for mobile */
+  .hero-revolution {
+    min-height: 100vh;
+    padding: 4rem 0 2rem;
+  }
+
+  /* Navigation spacing */
+  .nav-modern .max-w-7xl {
+    padding: 0 1rem;
   }
 }
 
-/* Performance Optimizations */
+/* Tablet Specific Adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* Services Grid - 2 Columns on Tablet */
+  .services-revolutionary {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  /* Hero Section - Adjust Spacing */
+  .hero-content-revolutionary {
+    max-width: 700px;
+    padding: 0 2rem;
+  }
+
+  .hero-title-revolutionary {
+    font-size: clamp(2rem, 7vw, 4.5rem);
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.75rem);
+  }
+
+  /* About Section - Stack to Single Column */
+  .about-revolutionary {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  /* Contact Section - Stack to Single Column */
+  .contact-container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  /* Section Padding */
+  .section-revolutionary {
+    padding: 5rem 0;
+  }
+
+  /* Service Cards */
+  .service-card-3d {
+    height: 380px;
+  }
+
+  .service-card-face {
+    padding: 2.5rem 2rem;
+  }
+
+  /* Skills Section */
+  .skills-3d {
+    height: 400px;
+  }
+
+  .skill-orb {
+    width: 110px;
+    height: 110px;
+    font-size: 0.875rem;
+  }
+
+  /* Contact Form */
+  .contact-form-revolutionary {
+    padding: 2.5rem;
+  }
+
+  /* About Text */
+  .about-text {
+    font-size: 1.0625rem;
+  }
+
+  /* Reduce Animation Intensity */
+  .orb {
+    animation-duration: 25s;
+    filter: blur(50px);
+  }
+
+  /* Tech Stack */
+  .tech-stack {
+    gap: 0.875rem;
+  }
+
+  .tech-tag {
+    padding: 10px 18px;
+    font-size: 0.875rem;
+  }
+}
+
+/* ========================================
+   TOUCH-FRIENDLY INTERACTION TARGETS
+   Ensures all interactive elements meet WCAG 2.1 AA
+   minimum touch target size of 44×44 pixels
+   ======================================== */
+
+/* Mobile viewport - Apply to all devices below 768px */
+@media (max-width: 768px) {
+  /* Navigation Links */
+  .nav-link {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 12px 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Mobile Menu Toggle Button */
+  .md\:hidden button {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 10px;
+  }
+
+  /* Mobile Menu Links */
+  .mobile-menu nav a {
+    min-height: 44px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Primary and Secondary CTA Buttons */
+  .cta-primary,
+  .cta-secondary,
+  .btn-magnetic {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 14px 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Featured Project Card Link */
+  .logo-orb-modern {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Social Links in Hero Section */
+  a[href*="github.com"],
+  a[href*="x.com"],
+  a[href*="twitter.com"] {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Service Cards - Entire card should be tappable */
+  .service-card-3d {
+    min-height: 44px;
+  }
+
+  .service-link-3d {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 12px 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Technology Tags */
+  .tech-tag {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 12px 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+  }
+
+  /* Skill Orbs */
+  .skill-orb {
+    min-height: 44px;
+    min-width: 44px;
+    width: 90px;
+    height: 90px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Contact Form Inputs */
+  .form-input-revolutionary {
+    min-height: 44px;
+    padding: 12px 16px;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+
+  /* Contact Form Submit Button */
+  .submit-btn-revolutionary {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Contact Section Email and Social Links */
+  .contact-info a {
+    min-height: 44px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  /* Contact Form Popup Close Button */
+  button[aria-label*="Close"] {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 10px;
+  }
+
+  /* Contact Form Popup Inputs */
+  #contact-name,
+  #contact-email,
+  #contact-message {
+    min-height: 44px;
+    padding: 12px 16px;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+
+  /* Ensure adequate spacing between interactive elements */
+  .hero-cta-group {
+    gap: 16px;
+  }
+
+  .tech-stack {
+    gap: 12px;
+  }
+
+  /* Mobile Menu Social Links */
+  .mobile-menu a[href*="github.com"],
+  .mobile-menu a[href*="x.com"] {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 12px;
+  }
+}
+
+/* Touch Device Specific - Applies to any touch-capable device */
+@media (hover: none) and (pointer: coarse) {
+  /* Ensure all interactive elements are at least 44x44px */
+  button,
+  a,
+  input,
+  textarea,
+  select,
+  .nav-link,
+  .tech-tag,
+  .skill-orb,
+  .service-link-3d,
+  .cta-primary,
+  .cta-secondary,
+  .btn-magnetic {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 12px 16px;
+  }
+
+  /* Specific adjustments for form elements */
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    min-height: 44px;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+
+  /* Disable hover effects on touch devices */
+  .service-card-3d:hover,
+  .card-3d:hover,
+  .skill-orb:hover {
+    transform: none;
+  }
+
+  /* Simplify animations for touch devices */
+  .orb {
+    animation: none;
+    opacity: 0.3;
+  }
+
+  .grid-3d {
+    display: none;
+  }
+
+  /* Increase tap target for small icons */
+  svg {
+    pointer-events: none; /* Let parent handle clicks */
+  }
+
+  /* Ensure links with icons have proper touch targets */
+  a svg {
+    margin: 0;
+  }
+}
+
+/* Scroll Reveal Animation System */
+.reveal {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, transform;
+  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered animation delays for multiple reveal elements */
+.reveal:nth-child(1) {
+  transition-delay: 0s;
+}
+
+.reveal:nth-child(2) {
+  transition-delay: 0.1s;
+}
+
+.reveal:nth-child(3) {
+  transition-delay: 0.2s;
+}
+
+.reveal:nth-child(4) {
+  transition-delay: 0.3s;
+}
+
+.reveal:nth-child(5) {
+  transition-delay: 0.4s;
+}
+
+.reveal:nth-child(6) {
+  transition-delay: 0.5s;
+}
+
+.reveal:nth-child(7) {
+  transition-delay: 0.6s;
+}
+
+.reveal:nth-child(8) {
+  transition-delay: 0.7s;
+}
+
+/* Alternative reveal animations */
+.reveal-fade {
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity;
+}
+
+.reveal-fade.active {
+  opacity: 1;
+}
+
+.reveal-slide-up {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-slide-up.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-slide-left {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-slide-left.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-slide-right {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-slide-right.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-scale.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Smooth easing functions for different animation styles */
+.reveal-smooth {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal-bounce {
+  transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.reveal-ease-out {
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+}
+
+.reveal-ease-in-out {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+/* Performance Optimizations and Accessibility */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -856,6 +2052,69 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  /* Disable all keyframe animations */
+  .orb,
+  .grid-3d,
+  .hero-title-revolutionary,
+  .cta-primary::before,
+  .service-icon::before,
+  .skill-orb,
+  .contact-form::before {
+    animation: none !important;
+  }
+  
+  /* Disable animated pseudo-elements */
+  .hero-title-revolutionary::before,
+  .cta-primary::before,
+  .service-icon::before {
+    display: none;
+  }
+  
+  /* Disable scroll reveal animations for reduced motion */
+  .reveal,
+  .reveal-fade,
+  .reveal-slide-up,
+  .reveal-slide-left,
+  .reveal-slide-right,
+  .reveal-scale {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  
+  /* Disable 3D transforms */
+  .card-3d,
+  .service-card,
+  .stat-card,
+  .flip-card {
+    transform: none !important;
+    transition: none !important;
+  }
+  
+  /* Keep hover effects but remove transitions */
+  .card-3d:hover,
+  .service-card:hover,
+  .stat-card:hover,
+  .tech-tag:hover,
+  .cta-primary:hover,
+  .cta-secondary:hover {
+    transition: none !important;
+  }
+  
+  /* Disable gradient animations */
+  .gradient-text,
+  .hero-title-revolutionary {
+    animation: none !important;
+    background-position: 0% 50% !important;
+  }
+  
+  /* Disable particle effects */
+  .particle,
+  .particle-drift {
+    display: none !important;
   }
 }
 
@@ -874,5 +2133,30 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #5a67d8 0%, #667eea 100%);
+  background: linear-gradient(135deg, #4a5fc4 0%, #526ad6 100%);
+}
+
+/* Screen Reader Only Utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.sr-only:focus,
+.focus\:not-sr-only:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: inherit;
+  margin: inherit;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
 }
