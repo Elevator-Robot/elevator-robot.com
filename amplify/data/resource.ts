@@ -9,6 +9,12 @@ const schema = a
       message: a.string().required(),
     }).authorization((allow) => [allow.publicApiKey()]),
 
+    SendMessageResponse: a.customType({
+      success: a.boolean().required(),
+      message: a.string(),
+      messageId: a.string(),
+    }),
+
     sendMessage: a
       .mutation()
       .arguments({
@@ -16,7 +22,7 @@ const schema = a
         email: a.string().required(),
         message: a.string().required(),
       })
-      .returns(a.string())
+      .returns(a.ref('SendMessageResponse'))
       .handler(a.handler.function(sendEmail))
       .authorization((allow) => [allow.publicApiKey()]),
   })

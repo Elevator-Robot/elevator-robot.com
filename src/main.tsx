@@ -6,6 +6,8 @@ import "./index.css";
 import '@aws-amplify/ui-react/styles.css';
 import { Amplify } from 'aws-amplify';
 import { registerSW } from 'virtual:pwa-register';
+import { useRUM } from './hooks/useRUM';
+import { RUMErrorBoundary } from './components/RUMErrorBoundary';
 
 // Configure Amplify
 // In production, amplify_outputs.json is generated during deployment
@@ -45,9 +47,19 @@ const updateSW = registerSW({
   },
 });
 
+// AppWrapper component to initialize RUM and provide error boundary
+function AppWrapper() {
+  const { recordError } = useRUM();
+
+  return (
+    <RUMErrorBoundary recordError={recordError}>
+      <App />
+    </RUMErrorBoundary>
+  );
+}
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <App />
+    <AppWrapper />
   </React.StrictMode>
 );
