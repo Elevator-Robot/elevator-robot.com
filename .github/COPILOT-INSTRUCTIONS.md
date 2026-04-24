@@ -234,3 +234,8 @@ Before completing any code changes:
 - Include license badge in README
 - Contact hello@elevatorrobot.com for commercial licensing
 </BrandProtection>
+
+<!-- SPECKIT START -->
+For additional context about technologies to be used, project structure,
+shell commands, and other important information, read the current plan
+<!-- SPECKIT END -->

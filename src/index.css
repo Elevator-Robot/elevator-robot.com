@@ -928,13 +928,18 @@
 
   .form-label-revolutionary {
     position: absolute;
-    top: -8px;
+    top: -10px;
     left: 12px;
     background: #0a0a0a;
-    padding: 0 8px;
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 0.875rem;
-    font-weight: 500;
+    padding: 2px 12px;
+    color: #ffffff;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+    background: linear-gradient(to bottom, #0a0a0a 0%, #0a0a0a 100%);
+    border-radius: 4px;
+    text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+    z-index: 10;
   }
 
   .submit-btn-revolutionary {

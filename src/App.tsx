@@ -185,6 +185,7 @@ function App() {
           <div className="hidden md:flex items-center gap-8">
             <a href="#services" className="link-underline font-['Audiowide']" aria-label="Navigate to Services section">Services</a>
             <a href="#about" className="link-underline font-['Audiowide']" aria-label="Navigate to About section">About</a>
+            <a href="#contact" className="link-underline font-['Audiowide']" aria-label="Navigate to Contact section">Let's Talk</a>
             {showContact && (
               <div className="relative">
                 <button onClick={toggleContact} className="link-underline font-['Audiowide']" aria-label="Open contact form" aria-expanded={isContactOpen}>Contact</button>
@@ -473,7 +474,7 @@ function App() {
               </h2>
               <p className="about-text">
                 Elevator Robot is a boutique software studio specializing in custom API development, 
-                cloud infrastructure, and automation solutions for enterprise clients.
+                cloud infrastructure, and automation solutions for forward-thinking businesses.
               </p>
               <p className="about-text">
                 We push boundaries with cutting-edge technology and innovative approaches to 

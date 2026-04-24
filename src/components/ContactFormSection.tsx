@@ -27,11 +27,11 @@ export const ContactFormSection: React.FC = () => {
   };
 
   return (
-    <section className="contact-revolutionary reveal" role="region" aria-labelledby="contact-heading">
+    <section id="contact" className="contact-revolutionary reveal" role="region" aria-labelledby="contact-heading">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 id="contact-heading" className="text-5xl md:text-6xl font-bold mb-6 gradient-text font-['Audiowide']">
-            Let's Build Something
+            Let's Talk
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
             Ready to start your next project? Get in touch and let's discuss how we can help.
