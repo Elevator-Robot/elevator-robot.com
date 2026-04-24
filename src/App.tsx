@@ -431,7 +431,6 @@ function App() {
                 }
                 title="API Development"
                 description="Custom REST and GraphQL APIs built for scale, performance, and reliability"
-                technologies={["Node.js", "GraphQL", "REST"]}
               />
 
               {/* Service Card 2 - Cloud Infrastructure */}
@@ -444,7 +443,6 @@ function App() {
                 }
                 title="Cloud Infrastructure"
                 description="Scalable cloud architecture on AWS with infrastructure as code"
-                technologies={["AWS", "CDK", "Lambda"]}
               />
 
               {/* Service Card 3 - Automation */}
@@ -457,7 +455,6 @@ function App() {
                 }
                 title="Automation"
                 description="Streamline workflows with intelligent automation and CI/CD pipelines"
-                technologies={["GitHub Actions", "CI/CD", "DevOps"]}
               />
             </Suspense>
           </div>
@@ -480,37 +477,37 @@ function App() {
                 We push boundaries with cutting-edge technology and innovative approaches to 
                 software development, creating scalable digital solutions that drive business growth.
               </p>
-              <div className="tech-stack" role="list" aria-label="Technology stack">
-                <span className="tech-tag" role="listitem">React</span>
-                <span className="tech-tag" role="listitem">TypeScript</span>
-                <span className="tech-tag" role="listitem">Node.js</span>
-                <span className="tech-tag" role="listitem">AWS</span>
-                <span className="tech-tag" role="listitem">GraphQL</span>
-                <span className="tech-tag" role="listitem">Python</span>
-                <span className="tech-tag" role="listitem">Docker</span>
-                <span className="tech-tag" role="listitem">Kubernetes</span>
-              </div>
             </div>
-            <div className="skills-3d reveal" aria-label="Core competencies">
-              <div className="skill-orb">
-                <span aria-hidden="true">☁️</span>
-                <span>Cloud</span>
+            <div className="terminal-window reveal" aria-label="Code demonstration">
+              <div className="terminal-header">
+                <div className="terminal-buttons">
+                  <span className="terminal-button close"></span>
+                  <span className="terminal-button minimize"></span>
+                  <span className="terminal-button maximize"></span>
+                </div>
+                <div className="terminal-title">~/elevator-robot</div>
               </div>
-              <div className="skill-orb">
-                <span aria-hidden="true">⚡</span>
-                <span>Performance</span>
-              </div>
-              <div className="skill-orb">
-                <span aria-hidden="true">🔒</span>
-                <span>Security</span>
-              </div>
-              <div className="skill-orb">
-                <span aria-hidden="true">📈</span>
-                <span>Scalability</span>
-              </div>
-              <div className="skill-orb">
-                <span aria-hidden="true">🚀</span>
-                <span>Innovation</span>
+              <div className="terminal-body">
+                <div className="terminal-line">
+                  <span className="terminal-prompt">$</span>
+                  <span className="terminal-command">npm run build</span>
+                </div>
+                <div className="terminal-line">
+                  <span className="terminal-output">✓ Building production bundle...</span>
+                </div>
+                <div className="terminal-line">
+                  <span className="terminal-output">✓ Optimizing assets...</span>
+                </div>
+                <div className="terminal-line">
+                  <span className="terminal-output">✓ Running tests...</span>
+                </div>
+                <div className="terminal-line">
+                  <span className="terminal-output success">✓ Build successful!</span>
+                </div>
+                <div className="terminal-line">
+                  <span className="terminal-prompt">$</span>
+                  <span className="terminal-cursor"></span>
+                </div>
               </div>
             </div>
           </div>

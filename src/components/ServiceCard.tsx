@@ -5,7 +5,7 @@ interface ServiceCardProps {
   icon: ReactNode;
   title: string;
   description: string;
-  technologies: string[];
+  technologies?: string[];
   titleId: string;
 }
 
@@ -41,11 +41,13 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
         <p className="service-description-3d">
           {description}
         </p>
-        <div className="flex flex-wrap gap-2 justify-center" role="list" aria-label="Technologies used">
-          {technologies.map((tech, index) => (
-            <span key={index} className="tech-tag" role="listitem">{tech}</span>
-          ))}
-        </div>
+        {technologies && technologies.length > 0 && (
+          <div className="flex flex-wrap gap-2 justify-center" role="list" aria-label="Technologies used">
+            {technologies.map((tech, index) => (
+              <span key={index} className="tech-tag" role="listitem">{tech}</span>
+            ))}
+          </div>
+        )}
       </div>
     </article>
   );
