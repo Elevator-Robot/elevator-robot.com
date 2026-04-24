@@ -326,15 +326,17 @@ function App() {
         {/* Content */}
         <div className="relative z-10 text-center px-6 max-w-4xl">
           <div className="mb-12 space-y-6">
-            <h1 className="text-6xl md:text-7xl font-bold mb-6" style={{ fontSize: 'clamp(2rem, 8vw, 7rem)' }}>
-              <span className="gradient-text">
-                <AnimatedText phrases={[
-                  "Crafting Software",
-                  "Creating Experiences",
-                  "Pushing Boundaries"
-                ]} />
-              </span>
-            </h1>
+            <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+              <h1 className="text-6xl md:text-7xl font-bold mb-6" style={{ fontSize: 'clamp(2rem, 8vw, 7rem)', minHeight: '1.2em', whiteSpace: 'nowrap' }}>
+                <span className="gradient-text">
+                  <AnimatedText phrases={[
+                    "Crafting Software",
+                    "Creating Experiences",
+                    "Pushing Boundaries"
+                  ]} />
+                </span>
+              </h1>
+            </div>
             
             <p className="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto font-['Audiowide']" style={{ fontSize: 'clamp(0.875rem, 2.5vw, 2rem)' }}>
               A software studio building innovative products and experiences
