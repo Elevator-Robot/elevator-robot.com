@@ -87,12 +87,11 @@ describe('Touch Target Size Validation', () => {
     it('should define touch targets for social media links', () => {
       const socialSelectors = [
         'a[href*="github.com"]',
-        'a[href*="x.com"]',
-        'a[href*="twitter.com"]'
+        'a[href*="linkedin.com"]'
       ];
 
       expect(socialSelectors).toContain('a[href*="github.com"]');
-      expect(socialSelectors).toContain('a[href*="x.com"]');
+      expect(socialSelectors).toContain('a[href*="linkedin.com"]');
     });
   });
 
@@ -183,7 +182,7 @@ describe('Touch Target Implementation Checklist', () => {
   it('should cover all social media links', () => {
     const elements = [
       'GitHub links',
-      'X/Twitter links',
+      'LinkedIn links',
       'Email links'
     ];
     expect(elements.length).toBe(3);
