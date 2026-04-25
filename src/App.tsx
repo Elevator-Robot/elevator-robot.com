@@ -80,6 +80,7 @@ function App() {
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true); // Start with dark mode
   const showContact = false; // Feature flag for contact button
   const { recordEvent } = useRUM();
   
@@ -141,6 +142,28 @@ function App() {
     recordEvent('mobile_menu_close', {});
   };
 
+  const toggleTheme = () => {
+    const newMode = !isDarkMode;
+    setIsDarkMode(newMode);
+    document.documentElement.classList.toggle('light-mode', newMode === false);
+    // Track theme toggle
+    recordEvent('theme_toggle', { mode: newMode ? 'dark' : 'light' });
+  };
+
+  // Initialize theme on mount
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const shouldBeDark = savedTheme ? savedTheme === 'dark' : prefersDark;
+    setIsDarkMode(shouldBeDark);
+    document.documentElement.classList.toggle('light-mode', !shouldBeDark);
+  }, []);
+
+  // Save theme preference
+  useEffect(() => {
+    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+  }, [isDarkMode]);
+
   // Show monitoring test page if requested
   if (showMonitoringTest) {
     return (
@@ -186,6 +209,41 @@ function App() {
             <a href="#services" className="link-underline font-['Audiowide']" aria-label="Navigate to Services section">Services</a>
             <a href="#about" className="link-underline font-['Audiowide']" aria-label="Navigate to About section">About</a>
             <a href="#contact" className="link-underline font-['Audiowide']" aria-label="Navigate to Contact section">Let's Talk</a>
+            
+            {/* Theme Toggle Button */}
+            <button
+              onClick={toggleTheme}
+              className="p-2 text-white hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded transition-all duration-300"
+              aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+              aria-pressed={!isDarkMode}
+            >
+              <div className="relative w-6 h-6">
+                {/* Moon Icon (Dark Mode) */}
+                <svg
+                  className={`absolute inset-0 transition-all duration-500 ${
+                    isDarkMode ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-90 scale-0'
+                  }`}
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"/>
+                </svg>
+                
+                {/* Sun Icon (Light Mode) */}
+                <svg
+                  className={`absolute inset-0 transition-all duration-500 ${
+                    !isDarkMode ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 rotate-90 scale-0'
+                  }`}
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path d="M12,17c-2.76,0-5-2.24-5-5s2.24-5,5-5,5,2.24,5,5-2.24,5-5,5Zm0-8c-1.65,0-3,1.35-3,3s1.35,3,3,3,3-1.35,3-3-1.35-3-3-3Zm0-4c-.55,0-1-.45-1-1V1c0-.55.45-1,1-1s1,.45,1,1v3c0,.55-.45,1-1,1Zm0,19c-.55,0-1-.45-1-1v-3c0-.55.45-1,1-1s1,.45,1,1v3c0,.55-.45,1-1,1ZM5,12c0-.55-.45-1-1-1H1c-.55,0-1,.45-1,1s.45,1,1,1h3c.55,0,1-.45,1-1Zm19,0c0-.55-.45-1-1-1h-3c-.55,0-1,.45-1,1s.45,1,1,1h3c.55,0,1-.45,1-1ZM6.71,6.71c-.39-.39-1.02-.39-1.41,0l-2.12,2.12c-.39.39-.39,1.02,0,1.41.39.39,1.02.39,1.41,0l2.12-2.12c.39-.39.39-1.02,0-1.41Zm14.14,9.17c-.39-.39-1.02-.39-1.41,0-.39.39-.39,1.02,0,1.41l2.12,2.12c.39.39,1.02.39,1.41,0,.39-.39.39-1.02,0-1.41l-2.12-2.12Zm-2.12-12.71c.39-.39.39-1.02,0-1.41-.39-.39-1.02-.39-1.41,0l-2.12,2.12c-.39.39-.39,1.02,0,1.41.39.39,1.02.39,1.41,0l2.12-2.12ZM6.71,17.29l-2.12,2.12c-.39.39-.39,1.02,0,1.41.39.39,1.02.39,1.41,0l2.12-2.12c.39-.39.39-1.02,0-1.41-.39-.39-1.02-.39-1.41,0Z"/>
+                </svg>
+              </div>
+            </button>
+            
             {showContact && (
               <div className="relative">
                 <button onClick={toggleContact} className="link-underline font-['Audiowide']" aria-label="Open contact form" aria-expanded={isContactOpen}>Contact</button>
@@ -199,22 +257,58 @@ function App() {
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            onClick={toggleMobileMenu}
-            className="md:hidden p-2 text-white hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded transition-colors"
-            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={mobileMenuOpen}
-          >
-            {mobileMenuOpen ? (
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            ) : (
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            )}
-          </button>
+          <div className="md:hidden flex items-center gap-3">
+            {/* Theme Toggle for Mobile */}
+            <button
+              onClick={toggleTheme}
+              className="p-2 text-white hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded transition-all duration-300"
+              aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+              aria-pressed={!isDarkMode}
+            >
+              <div className="relative w-6 h-6">
+                {/* Moon Icon (Dark Mode) */}
+                <svg
+                  className={`absolute inset-0 transition-all duration-500 ${
+                    isDarkMode ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-90 scale-0'
+                  }`}
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"/>
+                </svg>
+                
+                {/* Sun Icon (Light Mode) */}
+                <svg
+                  className={`absolute inset-0 transition-all duration-500 ${
+                    !isDarkMode ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 rotate-90 scale-0'
+                  }`}
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path d="M12,17c-2.76,0-5-2.24-5-5s2.24-5,5-5,5,2.24,5,5-2.24,5-5,5Zm0-8c-1.65,0-3,1.35-3,3s1.35,3,3,3,3-1.35,3-3-1.35-3-3-3Zm0-4c-.55,0-1-.45-1-1V1c0-.55.45-1,1-1s1,.45,1,1v3c0,.55-.45,1-1,1Zm0,19c-.55,0-1-.45-1-1v-3c0-.55.45-1,1-1s1,.45,1,1v3c0,.55-.45,1-1,1ZM5,12c0-.55-.45-1-1-1H1c-.55,0-1,.45-1,1s.45,1,1,1h3c.55,0,1-.45,1-1Zm19,0c0-.55-.45-1-1-1h-3c-.55,0-1,.45-1,1s.45,1,1,1h3c.55,0,1-.45,1-1ZM6.71,6.71c-.39-.39-1.02-.39-1.41,0l-2.12,2.12c-.39.39-.39,1.02,0,1.41.39.39,1.02.39,1.41,0l2.12-2.12c.39-.39.39-1.02,0-1.41Zm14.14,9.17c-.39-.39-1.02-.39-1.41,0-.39.39-.39,1.02,0,1.41l2.12,2.12c.39.39,1.02.39,1.41,0,.39-.39.39-1.02,0-1.41l-2.12-2.12Zm-2.12-12.71c.39-.39.39-1.02,0-1.41-.39-.39-1.02-.39-1.41,0l-2.12,2.12c-.39.39-.39,1.02,0,1.41.39.39,1.02.39,1.41,0l2.12-2.12ZM6.71,17.29l-2.12,2.12c-.39.39-.39,1.02,0,1.41.39.39,1.02.39,1.41,0l2.12-2.12c.39-.39.39-1.02,0-1.41-.39-.39-1.02-.39-1.41,0Z"/>
+                </svg>
+              </div>
+            </button>
+            
+            <button
+              onClick={toggleMobileMenu}
+              className="p-2 text-white hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded transition-colors"
+              aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={mobileMenuOpen}
+            >
+              {mobileMenuOpen ? (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              )}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu Slide-in */}
@@ -268,6 +362,43 @@ function App() {
             </nav>
 
             <div className="mt-auto pt-6 border-t border-white/10">
+              {/* Theme Toggle in Mobile Menu */}
+              <button
+                onClick={toggleTheme}
+                className="w-full flex items-center justify-center gap-3 mb-4 py-3 px-4 bg-white/5 hover:bg-white/10 rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+                aria-pressed={!isDarkMode}
+              >
+                <div className="relative w-6 h-6">
+                  {/* Moon Icon (Dark Mode) */}
+                  <svg
+                    className={`absolute inset-0 transition-all duration-500 ${
+                      isDarkMode ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-90 scale-0'
+                    }`}
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"/>
+                  </svg>
+                  
+                  {/* Sun Icon (Light Mode) */}
+                  <svg
+                    className={`absolute inset-0 transition-all duration-500 ${
+                      !isDarkMode ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 rotate-90 scale-0'
+                    }`}
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path d="M12,17c-2.76,0-5-2.24-5-5s2.24-5,5-5,5,2.24,5,5-2.24,5-5,5Zm0-8c-1.65,0-3,1.35-3,3s1.35,3,3,3,3-1.35,3-3-1.35-3-3-3Zm0-4c-.55,0-1-.45-1-1V1c0-.55.45-1,1-1s1,.45,1,1v3c0,.55-.45,1-1,1Zm0,19c-.55,0-1-.45-1-1v-3c0-.55.45-1,1-1s1,.45,1,1v3c0,.55-.45,1-1,1ZM5,12c0-.55-.45-1-1-1H1c-.55,0-1,.45-1,1s.45,1,1,1h3c.55,0,1-.45,1-1Zm19,0c0-.55-.45-1-1-1h-3c-.55,0-1,.45-1,1s.45,1,1,1h3c.55,0,1-.45,1-1ZM6.71,6.71c-.39-.39-1.02-.39-1.41,0l-2.12,2.12c-.39.39-.39,1.02,0,1.41.39.39,1.02.39,1.41,0l2.12-2.12c.39-.39.39-1.02,0-1.41Zm14.14,9.17c-.39-.39-1.02-.39-1.41,0-.39.39-.39,1.02,0,1.41l2.12,2.12c.39.39,1.02.39,1.41,0,.39-.39.39-1.02,0-1.41l-2.12-2.12Zm-2.12-12.71c.39-.39.39-1.02,0-1.41-.39-.39-1.02-.39-1.41,0l-2.12,2.12c-.39.39-.39,1.02,0,1.41.39.39,1.02.39,1.41,0l2.12-2.12ZM6.71,17.29l-2.12,2.12c-.39.39-.39,1.02,0,1.41.39.39,1.02.39,1.41,0l2.12-2.12c.39-.39.39-1.02,0-1.41-.39-.39-1.02-.39-1.41,0Z"/>
+                  </svg>
+                </div>
+                <span className="text-sm font-['Audiowide']">
+                  {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+                </span>
+              </button>
+              
               <div className="flex gap-4 justify-center">
                 <a
                   href="https://github.com/Elevator-Robot"
