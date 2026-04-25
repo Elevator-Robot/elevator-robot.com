@@ -10,7 +10,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['Logo.svg', 'background.png', 'offline.html'],
+      includeAssets: ['logo.svg', 'background-optimized.png', 'offline.html'],
       manifest: {
         name: 'Elevator Robot',
         short_name: 'Elevator Robot',
@@ -20,7 +20,7 @@ export default defineConfig({
         display: 'standalone',
         icons: [
           {
-            src: '/Logo.svg',
+            src: '/logo.svg',
             sizes: '512x512',
             type: 'image/svg+xml',
             purpose: 'any maskable'
