@@ -1568,8 +1568,7 @@
 
   /* Social Media Links */
   a[href*="github.com"],
-  a[href*="x.com"],
-  a[href*="twitter.com"] {
+  a[href*="linkedin.com"] {
     min-height: 44px;
     min-width: 44px;
     padding: 12px;
@@ -1952,8 +1951,7 @@
 
   /* Social Links in Hero Section */
   a[href*="github.com"],
-  a[href*="x.com"],
-  a[href*="twitter.com"] {
+  a[href*="linkedin.com"] {
     min-height: 44px;
     min-width: 44px;
     padding: 12px;
@@ -2052,7 +2050,7 @@
 
   /* Mobile Menu Social Links */
   .mobile-menu a[href*="github.com"],
-  .mobile-menu a[href*="x.com"] {
+  .mobile-menu a[href*="linkedin.com"] {
     min-height: 44px;
     min-width: 44px;
     padding: 12px;
