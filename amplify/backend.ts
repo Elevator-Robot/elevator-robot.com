@@ -22,15 +22,18 @@ const graphqlApi = backend.data.resources.graphqlApi;
 const dataStack = backend.data.resources.cfnResources.cfnGraphqlApi.stack;
 
 // Only create email identity if not in sandbox mode
-if (backend.stack.stackName.includes('main-branch')) {
-  new ses.EmailIdentity(dataStack, 'ContactEmail', {
-    identity: ses.Identity.email('hello@elevatorrobot.com'),
-  });
-}
+// SES email identity already deployed - commenting out to avoid conflicts
+// Email hello@elevatorrobot.com is already verified at the account level
+// if (backend.stack.stackName.includes('main-branch')) {
+//   new ses.EmailIdentity(dataStack, 'ContactEmail', {
+//     identity: ses.Identity.email('hello@elevatorrobot.com'),
+//   });
+// }
 
 // Create DynamoDB table for rate limiting in data stack
+// Using dynamic table name to avoid conflicts across deployments
 const rateLimitTable = new dynamodb.Table(dataStack, 'RateLimitTable', {
-  tableName: 'contact-form-rate-limits',
+  // Don't specify tableName - let CDK generate unique name
   partitionKey: {
     name: 'ipAddress',
     type: dynamodb.AttributeType.STRING,
@@ -88,7 +91,8 @@ new MonitoringAlarms(dataStack, 'MonitoringAlarms', {
   graphqlApiId: graphqlApi.apiId,
   rumAppName: 'elevator-robot-website',
   adminEmail: 'hello@elevatorrobot.com',
-  snsTopicName: 'elevator-robot-alarms',
+  // Remove hardcoded SNS topic name to avoid conflicts
+  // snsTopicName: 'elevator-robot-alarms',
 });
 
 export default backend;
