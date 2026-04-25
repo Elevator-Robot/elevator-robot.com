@@ -2020,7 +2020,9 @@
     padding: 12px 16px;
     display: flex;
     align-items: center;
+    justify-content: flex-start; /* Explicitly left-align */
     gap: 12px;
+    width: fit-content; /* Shrink to content width */
   }
 
   /* Contact Form Popup Close Button */
