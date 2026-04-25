@@ -68,7 +68,7 @@ export class MonitoringAlarms extends Construct {
     // SNS Topic for Alarm Notifications
     // ========================================
     this.alarmTopic = new sns.Topic(this, 'AlarmTopic', {
-      topicName: snsTopicName,
+      // Don't specify topicName to allow CDK to generate unique names
       displayName: 'Elevator Robot Website Alarms',
     });
 
@@ -105,7 +105,7 @@ export class MonitoringAlarms extends Construct {
     });
 
     this.lambdaErrorAlarm = new cloudwatch.Alarm(this, 'LambdaErrorRateAlarm', {
-      alarmName: 'elevator-robot-lambda-error-rate',
+      // Remove hardcoded alarmName to allow CDK to generate unique names
       alarmDescription: 'Lambda function error rate exceeded 5% threshold',
       metric: lambdaErrorRateMetric,
       threshold: 5,
@@ -136,7 +136,7 @@ export class MonitoringAlarms extends Construct {
     });
 
     this.apiLatencyAlarm = new cloudwatch.Alarm(this, 'ApiLatencyAlarm', {
-      alarmName: 'elevator-robot-api-latency',
+      // Remove hardcoded alarmName to allow CDK to generate unique names
       alarmDescription: 'API Gateway P95 latency exceeded 1000ms threshold',
       metric: apiLatencyP95Metric,
       threshold: 1000,
@@ -182,7 +182,7 @@ export class MonitoringAlarms extends Construct {
     });
 
     this.sesBounceRateAlarm = new cloudwatch.Alarm(this, 'SesBounceRateAlarm', {
-      alarmName: 'elevator-robot-ses-bounce-rate',
+      // Remove hardcoded alarmName to allow CDK to generate unique names
       alarmDescription: 'SES bounce rate exceeded 5% threshold',
       metric: sesBounceRateMetric,
       threshold: 5,
@@ -223,7 +223,7 @@ export class MonitoringAlarms extends Construct {
     });
 
     this.rumJsErrorAlarm = new cloudwatch.Alarm(this, 'RumJsErrorAlarm', {
-      alarmName: 'elevator-robot-rum-js-errors',
+      // Remove hardcoded alarmName to allow CDK to generate unique names
       alarmDescription: 'RUM JavaScript error rate exceeded 10 errors per minute',
       metric: rumJsErrorRateMetric,
       threshold: 10,
