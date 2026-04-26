@@ -1,8 +1,24 @@
+<Philosophy>
+**Bias toward action and experimentation**
+- Ship early, iterate fast
+- Minimal viable implementations over perfection
+- Practical solutions over theoretical ideals
+- Fast execution is paramount
+
+**Communication Style:**
+- Direct and technical
+- Focus on actionable solutions
+- Assume high technical competency
+- Prioritize speed and efficiency
+- No hand-holding or over-explanation
+</Philosophy>
+
 <Goals>
-- Minimize build and test failures by providing clear project context and validated build steps
-- Reduce pull request rejections by ensuring code follows established patterns and passes validation
-- Allow faster task completion by minimizing exploration time with comprehensive project documentation
-- Ensure consistent quality across Elevator Robot projects and studio applications
+- Deliver working code quickly with minimal friction
+- Minimize build and test failures through clear context
+- Enable rapid iteration and experimentation
+- Ensure consistency across Elevator Robot projects
+- Support AI/ML and automation workflows
 </Goals>
 
 <Limitations>
@@ -11,15 +27,38 @@
 </Limitations>
 
 <ProjectOverview>
-Elevator Robot is an innovations factory focused on AI, ML, and automation. This repository contains the main website (elevatorrobot.com) and studio applications (studio.elevatorrobot.com) including Image Generation and Text Generation studios built with AWS Amplify Gen2.
+Elevator Robot is an innovations factory focused on AI, ML, and automation. We're independent engineers building at the bleeding edge of technology.
+
+**Core Focus Areas:**
+- Generative AI & Large Language Models
+- Applied Machine Learning
+- Conversational Interfaces & Chatbots
+- Autonomous Agents
+- AWS Cloud Infrastructure & DevOps
+- Developer and creative tooling
+
+**Project Types:**
+- Freelance client work (AI/ML focused)
+- Internal incubation projects
+- Open source contributions
+- Prototypes and proof-of-concepts
+
+This repository contains the main website (elevatorrobot.com) and studio applications (studio.elevatorrobot.com) including Image Generation and Text Generation studios built with AWS Amplify Gen2.
 
 **Tech Stack:**
 - Frontend: React 18, TypeScript, Vite, TailwindCSS
 - Backend: AWS Amplify Gen2 (NOT Gen1), Lambda, DynamoDB, SES
 - Infrastructure: AWS CDK
 - Deployment: AWS Amplify Hosting
+- Modern AI/ML frameworks (AWS Bedrock, Textract, etc.)
 
-**AWS Profile:** Always use `elevator-robot.com` profile for all AWS operations.
+**Technical Approach:**
+- AWS-first cloud solutions
+- Open source friendly
+- Automation and tooling focused
+- Fast execution over perfection
+
+**CRITICAL AWS Profile:** Always use `elevator-robot.com` profile for all AWS operations.
 </ProjectOverview>
 
 <BuildInstructions>
