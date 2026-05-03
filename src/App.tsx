@@ -13,6 +13,9 @@ const AnimatedText: React.FC<{ phrases: string[] }> = ({ phrases }) => {
   const [index, setIndex] = useState(0);
   const [displayText, setDisplayText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
+  const longestPhrase = phrases.reduce((longest, phrase) => (
+    phrase.length > longest.length ? phrase : longest
+  ), phrases[0] || "");
 
   useEffect(() => {
     const currentPhrase = phrases[index];
@@ -37,9 +40,15 @@ const AnimatedText: React.FC<{ phrases: string[] }> = ({ phrases }) => {
   }, [displayText, isDeleting, index, phrases]);
 
   return (
-    <span className="gradient-text font-neo">
-      {displayText}
-      <span className="animate-pulse ml-2">|</span>
+    <span className="animated-text-shell gradient-text font-neo">
+      <span className="animated-text-sizer" aria-hidden="true">
+        {longestPhrase}
+        <span className="ml-2">|</span>
+      </span>
+      <span className="animated-text-live">
+        {displayText}
+        <span className="animate-pulse ml-2">|</span>
+      </span>
     </span>
   );
 };
@@ -100,6 +109,34 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    let ticking = false;
+
+    const updateScrollProgress = () => {
+      const scrollableHeight = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+      const progress = Math.min(Math.max(window.scrollY / scrollableHeight, 0), 1);
+
+      document.documentElement.style.setProperty("--elevator-progress", `${progress}`);
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateScrollProgress);
+        ticking = true;
+      }
+    };
+
+    updateScrollProgress();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
+
   // Smooth scroll behavior for navigation links
   useEffect(() => {
     const handleSmoothScroll = (e: MouseEvent) => {
@@ -139,7 +176,7 @@ function App() {
   }
 
   return (
-    <div className="bg-black text-white relative">
+    <div className="bg-black text-white relative site-shell">
       {/* Skip to main content link for keyboard users */}
       <a 
         href="#main-content" 
@@ -155,7 +192,7 @@ function App() {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
           style={{ backgroundImage: 'url(/background-optimized.png)' }}
         ></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-[#080811]/70 to-black/90"></div>
       </div>
 
       {/* Content wrapper with z-index */}
@@ -163,7 +200,7 @@ function App() {
       {/* Navigation */}
       <nav className={`nav-modern ${scrolled ? 'scrolled' : ''}`} role="navigation" aria-label="Main navigation">
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 min-w-0">
             <div className="text-2xl font-bold gradient-text font-['Audiowide']" role="heading" aria-level={1}>Elevator Robot</div>
             <span className="text-gray-500 text-sm font-['Audiowide']" aria-hidden="true">|</span>
             <div className="text-sm text-gray-400 font-['Audiowide']">Software Studio</div>
@@ -197,49 +234,60 @@ function App() {
       {/* Main Content */}
       <main id="main-content">
       {/* Hero Section with Animated Background */}
-      <section className="relative min-h-screen flex items-center justify-center" role="banner" aria-label="Hero section">
+      <section className="hero-elevator relative min-h-screen flex items-center justify-center" role="banner" aria-label="Hero section">
         {/* Background Image */}
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat hero-image-layer"
           style={{
             backgroundImage: 'url(/background-optimized.png)',
-            filter: 'brightness(0.6)'
+            filter: 'brightness(0.58) saturate(1.2)'
           }}
           aria-hidden="true"
         ></div>
         
         {/* Dark overlay for better text readability */}
-        <div className="absolute inset-0 bg-black/20" aria-hidden="true"></div>
+        <div className="absolute inset-0 hero-overlay" aria-hidden="true"></div>
         
         {/* Content */}
-        <div className="relative z-10 text-center px-6 max-w-4xl">
+        <div className="relative z-10 px-6 max-w-7xl w-full hero-grid">
+          <div className="hero-copy">
           <div className="mb-12 space-y-6">
-            <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-              <h1 className="text-6xl md:text-7xl font-bold mb-6" style={{ fontSize: 'clamp(2rem, 8vw, 7rem)', minHeight: '1.2em', whiteSpace: 'nowrap' }}>
+            <div className="hero-title-wrap">
+              <h1 className="hero-title-flash font-['Audiowide']">
+                <span className="hero-static">Elevate Your</span>
                 <span className="gradient-text">
                   <AnimatedText phrases={[
-                    "Crafting Software",
-                    "Creating Experiences",
-                    "Pushing Boundaries"
+                    "Software",
+                    "Automation",
+                    "Client Experience"
                   ]} />
                 </span>
               </h1>
             </div>
             
-            <p className="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto font-['Audiowide']" style={{ fontSize: 'clamp(0.875rem, 2.5vw, 2rem)' }}>
-              A software studio building innovative products and experiences
+            <p className="hero-lede font-['Audiowide']">
+              We build polished web products, APIs, cloud systems, and automation that make your company look sharper, move faster, and win better clients.
             </p>
           </div>
 
+          <div className="hero-cta-row">
+            <a href="#contact" className="cta-primary font-['Audiowide']" onClick={() => recordEvent('hero_cta_click', { destination: 'contact' })}>
+              Start a Project
+            </a>
+            <a href="#services" className="cta-secondary font-['Audiowide']" onClick={() => recordEvent('hero_cta_click', { destination: 'services' })}>
+              See Capabilities
+            </a>
+          </div>
+
           {/* Featured Project - Brain In Cup */}
-          <div className="mt-16">
-            <p className="text-sm text-gray-400 mb-6 uppercase tracking-wider font-['Audiowide']">Featured Project</p>
+          <div className="mt-14 featured-project-wrap">
+            <p className="text-sm text-gray-400 mb-4 uppercase tracking-wider font-['Audiowide']">Featured Project</p>
             
             <a
               href="https://brainincup.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-6 px-8 py-6 bg-white/5 hover:bg-white/10 backdrop-blur-xl border border-white/20 rounded-card transition-all hover:scale-105 hover:border-blue-400/50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-black"
+              className="group featured-project-card"
               aria-label="Visit Brain In Cup project (opens in new tab)"
               onClick={() => recordEvent('external_link_click', { destination: 'brainincup', location: 'hero' })}
             >
@@ -254,9 +302,9 @@ function App() {
                 />
               </div>
               
-              <div className="text-left flex-1">
+              <div className="text-left flex-1 min-w-0">
                 <h3 className="text-3xl font-bold mb-2 gradient-text font-['Audiowide']">Brain In Cup</h3>
-                <p className="text-gray-400 font-['Audiowide']">An interactive interface with consciousness</p>
+                <p className="text-gray-300 font-['Audiowide']">A vivid interactive product experience built to be remembered</p>
               </div>
               
               <svg className="w-8 h-8 text-blue-400 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -295,6 +343,8 @@ function App() {
               <span className="font-['Audiowide']">LinkedIn</span>
             </a>
           </div>
+          </div>
+
         </div>
       </section>
 
@@ -312,7 +362,6 @@ function App() {
 
           <div className="services-revolutionary">
             <Suspense fallback={<div className="text-center text-gray-400">Loading services...</div>}>
-              {/* Service Card 1 - API Development */}
               <ServiceCard
                 titleId="service-api-title"
                 icon={
@@ -320,11 +369,21 @@ function App() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
                 }
-                title="API Development"
-                description="Custom REST and GraphQL APIs built for scale, performance, and reliability"
+                title="Revenue-Ready Web Apps"
+                description="Polished interfaces, customer portals, and product experiences that help clients trust your business from the first click"
               />
 
-              {/* Service Card 2 - Cloud Infrastructure */}
+              <ServiceCard
+                titleId="service-ai-workflows-title"
+                icon={
+                  <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 7a3 3 0 106 0 3 3 0 00-6 0zM15 17a3 3 0 106 0 3 3 0 00-6 0zM3 17a3 3 0 106 0 3 3 0 00-6 0zM11 8.5l4 6M9 16h6" />
+                  </svg>
+                }
+                title="AI Workflow Automation"
+                description="Agent chains, graph-based workflows, and AI-assisted operations designed around real business steps instead of demos"
+              />
+
               <ServiceCard
                 titleId="service-cloud-title"
                 icon={
@@ -332,11 +391,10 @@ function App() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
                   </svg>
                 }
-                title="Cloud Infrastructure"
-                description="Scalable cloud architecture on AWS with infrastructure as code"
+                title="Cloud Systems"
+                description="Fast APIs, secure AWS infrastructure, observability, and deployment pipelines built to support real growth"
               />
 
-              {/* Service Card 3 - Automation */}
               <ServiceCard
                 titleId="service-automation-title"
                 icon={
@@ -344,8 +402,8 @@ function App() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                 }
-                title="Automation"
-                description="Streamline workflows with intelligent automation and CI/CD pipelines"
+                title="Internal Tools"
+                description="Dashboards, admin panels, and operational systems that replace manual handoffs and give teams a cleaner way to work"
               />
             </Suspense>
           </div>
@@ -358,16 +416,20 @@ function App() {
           <div className="about-revolutionary">
             <div className="about-content reveal">
               <h2 id="about-heading" className="about-title font-['Audiowide']">
-                Building the Future
+                From first impression to launch floor
               </h2>
               <p className="about-text">
-                Elevator Robot is a boutique software studio specializing in custom API development, 
-                cloud infrastructure, and automation solutions for forward-thinking businesses.
+                Elevator Robot is a boutique software studio for businesses that need their digital presence to sell trust immediately. We turn rough ideas, dated workflows, and underwhelming websites into sharp systems clients can believe in.
               </p>
               <p className="about-text">
-                We push boundaries with cutting-edge technology and innovative approaches to 
-                software development, creating scalable digital solutions that drive business growth.
+                The work is equal parts product strategy, engineering, and showmanship: clear UX, reliable infrastructure, memorable motion, and pragmatic automation that keeps paying off after launch.
               </p>
+              <div className="tech-stack">
+                <span className="tech-tag">Discovery</span>
+                <span className="tech-tag">Prototype</span>
+                <span className="tech-tag">Build</span>
+                <span className="tech-tag">Launch</span>
+              </div>
             </div>
             <div className="terminal-window reveal" aria-label="Code demonstration">
               <div className="terminal-header">
