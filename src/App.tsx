@@ -1,4 +1,5 @@
 import { useState, useEffect, lazy, Suspense } from "react";
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { useRUM } from './hooks/useRUM';
 
 // Lazy load non-critical components
@@ -88,8 +89,51 @@ const useScrollReveal = () => {
 function App() {
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeFeaturedProject, setActiveFeaturedProject] = useState(0);
   const showContact = false; // Feature flag for contact button
+  const prefersReducedMotion = useReducedMotion();
   const { recordEvent } = useRUM();
+
+  const featuredProjects = [
+    {
+      name: 'Arcane Kitchen',
+      href: 'https://arcane.kitchen',
+      destination: 'arcane-kitchen',
+      description: 'Create and share recipes in a social cooking community',
+      logoType: 'image',
+      logoSrc: '/images/arcane-kitchen-logo.svg',
+      logoAlt: 'Arcane Kitchen logo',
+      logoScale: 1.26,
+      logoPadding: '0.46rem',
+      initials: 'AK'
+    },
+    {
+      name: 'Brain In Cup',
+      href: 'https://brainincup.com',
+      destination: 'brainincup',
+      description: 'An interactive story telling experience',
+      logoType: 'image',
+      logoSrc: '/images/brainincup-logo-optimized.png',
+      logoAlt: 'Brain In Cup logo',
+      logoScale: 1,
+      logoPadding: '0.82rem',
+      initials: 'BC'
+    }
+  ] as const;
+
+  const currentFeaturedProject = featuredProjects[activeFeaturedProject];
+
+  useEffect(() => {
+    if (featuredProjects.length <= 1 || prefersReducedMotion) {
+      return;
+    }
+
+    const rotation = window.setInterval(() => {
+      setActiveFeaturedProject((prev) => (prev + 1) % featuredProjects.length);
+    }, 5500);
+
+    return () => window.clearInterval(rotation);
+  }, [featuredProjects.length, prefersReducedMotion]);
   
   // Check if monitoring test page should be shown (development only)
   const [showMonitoringTest, setShowMonitoringTest] = useState(false);
@@ -251,70 +295,40 @@ function App() {
         {/* Content */}
         <div className="relative z-10 px-6 max-w-7xl w-full hero-grid">
           <div className="hero-copy">
-          <div className="mb-12 space-y-6">
-            <div className="hero-title-wrap">
-              <h1 className="hero-title-flash font-['Audiowide']">
-                <span className="hero-static">Elevate Your</span>
-                <span className="gradient-text">
-                  <AnimatedText phrases={[
-                    "Software",
-                    "Automation",
-                    "Client Experience"
-                  ]} />
-                </span>
-              </h1>
+            <div className="hero-layout">
+              <div className="hero-main">
+                <div className="mb-12 space-y-6">
+                  <div className="hero-title-wrap">
+                    <h1 className="hero-title-flash font-['Audiowide']">
+                      <span className="hero-static">Elevate Your</span>
+                      <span className="gradient-text">
+                        <AnimatedText phrases={[
+                          "Software",
+                          "Automation",
+                          "Client Experience"
+                        ]} />
+                      </span>
+                    </h1>
+                  </div>
+
+                  <p className="hero-lede font-['Audiowide']">
+                    We build polished web products, APIs, cloud systems, and automation that make your company look sharper, move faster, and win better clients.
+                  </p>
+                </div>
+
+                <div className="hero-cta-row">
+                  <a href="#contact" className="cta-primary font-['Audiowide']" onClick={() => recordEvent('hero_cta_click', { destination: 'contact' })}>
+                    Start a Project
+                  </a>
+                  <a href="#services" className="cta-secondary font-['Audiowide']" onClick={() => recordEvent('hero_cta_click', { destination: 'services' })}>
+                    See Capabilities
+                  </a>
+                </div>
+              </div>
             </div>
-            
-            <p className="hero-lede font-['Audiowide']">
-              We build polished web products, APIs, cloud systems, and automation that make your company look sharper, move faster, and win better clients.
-            </p>
-          </div>
-
-          <div className="hero-cta-row">
-            <a href="#contact" className="cta-primary font-['Audiowide']" onClick={() => recordEvent('hero_cta_click', { destination: 'contact' })}>
-              Start a Project
-            </a>
-            <a href="#services" className="cta-secondary font-['Audiowide']" onClick={() => recordEvent('hero_cta_click', { destination: 'services' })}>
-              See Capabilities
-            </a>
-          </div>
-
-          {/* Featured Project - Brain In Cup */}
-          <div className="mt-14 featured-project-wrap">
-            <p className="text-sm text-gray-400 mb-4 uppercase tracking-wider font-['Audiowide']">Featured Project</p>
-            
-            <a
-              href="https://brainincup.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group featured-project-card"
-              aria-label="Visit Brain In Cup project (opens in new tab)"
-              onClick={() => recordEvent('external_link_click', { destination: 'brainincup', location: 'hero' })}
-            >
-              <div className="logo-orb-modern" style={{ width: '80px', height: '80px', flexShrink: 0 }} aria-hidden="true">
-                <img 
-                  src="/images/brainincup-logo-optimized.png"
-                  alt="Brain In Cup logo"
-                  className="w-full h-full object-cover rounded-full p-2"
-                  width="80"
-                  height="80"
-                  loading="lazy"
-                />
-              </div>
-              
-              <div className="text-left flex-1 min-w-0">
-                <h3 className="text-3xl font-bold mb-2 gradient-text font-['Audiowide']">Brain In Cup</h3>
-                <p className="text-gray-300 font-['Audiowide']">A vivid interactive product experience built to be remembered</p>
-              </div>
-              
-              <svg className="w-8 h-8 text-blue-400 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </a>
-          </div>
 
           {/* Additional Links */}
-          <div className="mt-12 flex justify-center gap-6">
+          <div className="mt-8 flex justify-center gap-6">
             <a 
               href="https://github.com/Elevator-Robot"
               target="_blank"
@@ -431,35 +445,62 @@ function App() {
                 <span className="tech-tag">Launch</span>
               </div>
             </div>
-            <div className="terminal-window reveal" aria-label="Code demonstration">
-              <div className="terminal-header">
-                <div className="terminal-buttons">
-                  <span className="terminal-button close"></span>
-                  <span className="terminal-button minimize"></span>
-                  <span className="terminal-button maximize"></span>
-                </div>
-                <div className="terminal-title">~/elevator-robot</div>
+            <div className="featured-project-wrap featured-project-about reveal" aria-label="Featured projects">
+              <div className="featured-carousel-heading-wrap">
+                <p className="featured-carousel-heading font-['Audiowide']">Featured Projects</p>
+                <span className="featured-carousel-heading-underline" aria-hidden="true"></span>
               </div>
-              <div className="terminal-body">
-                <div className="terminal-line">
-                  <span className="terminal-prompt">$</span>
-                  <span className="terminal-command">npm run build</span>
-                </div>
-                <div className="terminal-line">
-                  <span className="terminal-output">✓ Building production bundle...</span>
-                </div>
-                <div className="terminal-line">
-                  <span className="terminal-output">✓ Optimizing assets...</span>
-                </div>
-                <div className="terminal-line">
-                  <span className="terminal-output">✓ Running tests...</span>
-                </div>
-                <div className="terminal-line">
-                  <span className="terminal-output success">✓ Build successful!</span>
-                </div>
-                <div className="terminal-line">
-                  <span className="terminal-prompt">$</span>
-                  <span className="terminal-cursor"></span>
+              <div className="featured-carousel-shell">
+                <div className="featured-carousel-glow" aria-hidden="true"></div>
+                <div className="featured-carousel-fade-wrap">
+                  <AnimatePresence mode="wait">
+                    <motion.a
+                      key={currentFeaturedProject.destination}
+                      href={currentFeaturedProject.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group featured-project-card featured-carousel-card featured-carousel-fade-card"
+                      aria-label={`Visit ${currentFeaturedProject.name} project (opens in new tab)`}
+                      onClick={() => recordEvent('external_link_click', { destination: currentFeaturedProject.destination, location: 'about' })}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.45, ease: 'easeOut' }}
+                      whileHover={{ y: -2 }}
+                    >
+                      <div className="featured-carousel-meta" aria-hidden="true">
+                        <span>{activeFeaturedProject + 1} / {featuredProjects.length}</span>
+                      </div>
+
+                      <div className="featured-carousel-body">
+                        {currentFeaturedProject.logoType === 'image' ? (
+                          <div className="logo-orb-modern" style={{ width: '82px', height: '82px', flexShrink: 0 }} aria-hidden="true">
+                            <img
+                              src={currentFeaturedProject.logoSrc}
+                              alt={currentFeaturedProject.logoAlt}
+                              className="featured-project-logo"
+                              style={{
+                                transform: `scale(${currentFeaturedProject.logoScale})`,
+                                padding: currentFeaturedProject.logoPadding
+                              }}
+                              width="82"
+                              height="82"
+                              loading="lazy"
+                            />
+                          </div>
+                        ) : (
+                          <div className="logo-orb-modern flex items-center justify-center" style={{ width: '82px', height: '82px', flexShrink: 0 }} aria-hidden="true">
+                            <span className="text-2xl font-bold text-white font-['Audiowide']">{currentFeaturedProject.initials}</span>
+                          </div>
+                        )}
+
+                        <div className="featured-carousel-copy text-left flex-1 min-w-0">
+                          <h3 className="text-3xl font-bold mb-2 gradient-text font-['Audiowide']">{currentFeaturedProject.name}</h3>
+                          <p className="featured-carousel-description text-gray-300 font-['Audiowide']">{currentFeaturedProject.description}</p>
+                        </div>
+                      </div>
+                    </motion.a>
+                  </AnimatePresence>
                 </div>
               </div>
             </div>
