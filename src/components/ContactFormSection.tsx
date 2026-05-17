@@ -40,14 +40,29 @@ export const ContactFormSection: React.FC = () => {
 
         <div className="contact-container">
           <div className="contact-info reveal">
-            <h3 className="text-3xl font-bold mb-6 font-['Audiowide']">Get In Touch</h3>
-            <p className="text-gray-400 mb-8 text-lg">
-              We're always interested in hearing about new projects and opportunities.
+            <div className="contact-kicker font-['Audiowide']">Start a Project</div>
+            <h3 className="contact-info-title font-['Audiowide']">Bring the idea. We'll shape the build.</h3>
+            <p className="contact-info-copy">
+              Share what you are trying to launch, automate, or improve. We will turn the rough shape into a practical build plan.
             </p>
-            <div className="space-y-4">
+            <div className="contact-proof-grid" aria-label="What to expect">
+              <div>
+                <strong>01</strong>
+                <span>Scope</span>
+              </div>
+              <div>
+                <strong>02</strong>
+                <span>Plan</span>
+              </div>
+              <div>
+                <strong>03</strong>
+                <span>Build</span>
+              </div>
+            </div>
+            <div className="contact-links">
               <a 
                 href="mailto:hello@elevatorrobot.com" 
-                className="flex items-center gap-4 text-gray-300 hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-black rounded transition-colors"
+                className="contact-link"
                 aria-label="Email Elevator Robot at hello@elevatorrobot.com"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -59,7 +74,7 @@ export const ContactFormSection: React.FC = () => {
                 href="https://github.com/Elevator-Robot"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-4 text-gray-300 hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-black rounded transition-colors"
+                className="contact-link"
                 aria-label="Visit Elevator Robot on GitHub (opens in new tab)"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -71,6 +86,12 @@ export const ContactFormSection: React.FC = () => {
           </div>
 
           <div className="contact-form-revolutionary reveal">
+            <div className="contact-form-header">
+              <div>
+                <span className="contact-form-eyebrow font-['Audiowide']">Project Details</span>
+                <h3 className="contact-form-title font-['Audiowide']">Tell us what you want to make</h3>
+              </div>
+            </div>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="form-group-revolutionary">
                 <label htmlFor="contact-form-name" className="form-label-revolutionary font-['Audiowide']">Name</label>
@@ -124,14 +145,14 @@ export const ContactFormSection: React.FC = () => {
               </button>
 
               {submitStatus === 'success' && (
-                <div className="text-center p-4 bg-green-500/20 border border-green-500 rounded-xl" role="alert" aria-live="polite">
-                  <p className="text-green-300 font-['Audiowide']">✅ Message sent successfully!</p>
+                <div className="contact-alert contact-alert-success" role="alert" aria-live="polite">
+                  <p className="font-['Audiowide']">Message sent successfully.</p>
                 </div>
               )}
 
               {submitStatus === 'error' && (
-                <div className="text-center p-4 bg-red-500/20 border border-red-500 rounded-xl" role="alert" aria-live="polite">
-                  <p className="text-red-300 font-['Audiowide']">❌ Failed to send message. Please try again.</p>
+                <div className="contact-alert contact-alert-error" role="alert" aria-live="polite">
+                  <p className="font-['Audiowide']">Failed to send message. Please try again.</p>
                 </div>
               )}
             </form>
