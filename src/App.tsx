@@ -99,22 +99,24 @@ function App() {
       name: 'Arcane Kitchen',
       href: 'https://arcane.kitchen',
       destination: 'arcane-kitchen',
-      description: 'A bold digital experience for a modern culinary brand',
+      description: 'Create and share recipes in a social cooking community',
       logoType: 'image',
       logoSrc: '/images/arcane-kitchen-logo.svg',
       logoAlt: 'Arcane Kitchen logo',
       logoScale: 1.26,
+      logoPadding: '0.46rem',
       initials: 'AK'
     },
     {
       name: 'Brain In Cup',
       href: 'https://brainincup.com',
       destination: 'brainincup',
-      description: 'A vivid interactive product experience built to be remembered',
+      description: 'An interactive story telling experience',
       logoType: 'image',
       logoSrc: '/images/brainincup-logo-optimized.png',
       logoAlt: 'Brain In Cup logo',
       logoScale: 1,
+      logoPadding: '0.82rem',
       initials: 'BC'
     }
   ] as const;
@@ -444,6 +446,10 @@ function App() {
               </div>
             </div>
             <div className="featured-project-wrap featured-project-about reveal" aria-label="Featured projects">
+              <div className="featured-carousel-heading-wrap">
+                <p className="featured-carousel-heading font-['Audiowide']">Featured Projects</p>
+                <span className="featured-carousel-heading-underline" aria-hidden="true"></span>
+              </div>
               <div className="featured-carousel-shell">
                 <div className="featured-carousel-glow" aria-hidden="true"></div>
                 <div className="featured-carousel-fade-wrap">
@@ -473,7 +479,10 @@ function App() {
                               src={currentFeaturedProject.logoSrc}
                               alt={currentFeaturedProject.logoAlt}
                               className="featured-project-logo"
-                              style={{ transform: `scale(${currentFeaturedProject.logoScale})` }}
+                              style={{
+                                transform: `scale(${currentFeaturedProject.logoScale})`,
+                                padding: currentFeaturedProject.logoPadding
+                              }}
                               width="82"
                               height="82"
                               loading="lazy"
@@ -485,9 +494,9 @@ function App() {
                           </div>
                         )}
 
-                        <div className="text-left flex-1 min-w-0">
+                        <div className="featured-carousel-copy text-left flex-1 min-w-0">
                           <h3 className="text-3xl font-bold mb-2 gradient-text font-['Audiowide']">{currentFeaturedProject.name}</h3>
-                          <p className="text-gray-300 font-['Audiowide']">{currentFeaturedProject.description}</p>
+                          <p className="featured-carousel-description text-gray-300 font-['Audiowide']">{currentFeaturedProject.description}</p>
                         </div>
                       </div>
                     </motion.a>
